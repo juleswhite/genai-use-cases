@@ -1,0 +1,316 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
+---
+
+<Layout title="Error Troubleshooting | Live Knowledge" description="Screenshot error messages and get instant diagnoses with step-by-step solutions">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-orange-50 via-slate-50 to-red-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="w-16 h-16 bg-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Error Troubleshooting
+        </h1>
+        <p class="text-xl text-slate-600 leading-relaxed">
+          Transform error screenshots into instant diagnoses with step-by-step solutions. 
+          From cryptic error codes to system crashes, get expert-level troubleshooting in seconds.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Case Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <!-- Scenario -->
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-8">The Scenario</h2>
+          <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-8 border border-red-200">
+            <h3 class="text-xl font-semibold text-red-900 mb-4">Production Database Error</h3>
+            <p class="text-red-800 mb-6">
+              It's Friday at 4:30 PM, and your production application just started throwing 
+              database connection errors. The error message is cryptic, your senior developer 
+              is unreachable, and customers are starting to complain. You take a screenshot 
+              of the error and need immediate guidance.
+            </p>
+            
+            <div class="bg-white rounded-xl p-6 border border-red-200">
+              <div class="flex items-center mb-4">
+                <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+                <span class="font-medium text-slate-900">Context you have:</span>
+              </div>
+              <ul class="text-slate-700 space-y-2 text-sm">
+                <li>• Error screenshot from application logs</li>
+                <li>• System was working fine this morning</li>
+                <li>• Recent deployment happened 2 hours ago</li>
+                <li>• Database server appears to be running</li>
+                <li>• Error affects all users, not just specific ones</li>
+                <li>• Previous similar issues resolved with connection pool adjustment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern In Action -->
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-8">Pattern in Action</h2>
+          <ChatConversation 
+            messages={[
+              {
+                id: '1',
+                message: 'URGENT: Our production app is down with database errors. I\'m attaching the error screenshot. This started after a deployment 2 hours ago. System was fine this morning. All users affected. Need immediate help!',
+                sender: 'user',
+                documents: [
+                  {
+                    name: 'database-error-screenshot.png',
+                    type: 'image',
+                    url: getUrl('/computer_error.jpg')
+                  }
+                ]
+              },
+              {
+                id: '2',
+                sender: 'ai', 
+                message: `# 🚨 IMMEDIATE ACTION REQUIRED
+
+## Error Analysis
+**Root Cause:** Connection pool exhaustion due to new deployment
+**Error Type:** \`ConnectionPoolTimeoutException\`
+**Severity:** Critical - All users affected
+
+---
+
+## IMMEDIATE FIXES (Do these NOW)
+
+### 1. Restart Application (2 minutes)
+\`\`\`bash
+# If using Docker
+docker restart your-app-container
+
+# If using systemd
+sudo systemctl restart your-app-service
+
+# If using PM2
+pm2 restart your-app
+\`\`\`
+
+### 2. Increase Connection Pool (If restart doesn't work)
+**Update your database config:**
+\`\`\`yaml
+database:
+  pool:
+    min: 5
+    max: 50  # Increase from current 20
+    acquire: 60000
+    idle: 10000
+\`\`\`
+
+### 3. Monitor Connection Usage
+\`\`\`sql
+-- Check active connections (PostgreSQL)
+SELECT count(*) FROM pg_stat_activity;
+
+-- Check max connections allowed
+SHOW max_connections;
+
+-- Kill long-running queries if needed
+SELECT pg_terminate_backend(pid) 
+FROM pg_stat_activity 
+WHERE state = 'active' AND query_start < now() - interval '5 minutes';
+\`\`\`
+
+---
+
+## LIKELY DEPLOYMENT ISSUE
+
+**What probably happened:**
+- New deployment increased database queries
+- Connection pool settings weren't updated for new load
+- Connections aren't being properly released
+
+**Quick fixes to try:**
+1. **Check for connection leaks** in recent code changes
+2. **Review new database queries** - are they properly using transactions?
+3. **Verify connection string** hasn't changed
+
+---
+
+## MONITORING STEPS
+
+### Check These Immediately:
+- [ ] Application logs for connection leak patterns
+- [ ] Database performance metrics (CPU, memory)
+- [ ] Recent code changes involving database queries
+- [ ] Load balancer health checks passing
+
+### Emergency Contacts:
+- Database team: Alert them to check for locks
+- DevOps: Scale up database if needed
+- Product team: Prepare customer communication
+
+---
+
+## PREVENTION FOR NEXT TIME
+
+1. **Database connection monitoring** alerts
+2. **Pre-deployment load testing** with realistic data
+3. **Connection pool auto-scaling** configuration
+4. **Circuit breaker pattern** for database failures
+
+---
+
+## ESTIMATED RECOVERY TIME
+- **Option 1:** Application restart - 2-3 minutes
+- **Option 2:** Config change + restart - 5-10 minutes  
+- **Option 3:** Code hotfix if connection leak - 20-30 minutes
+
+**Status:** \`ACTIVELY_RESOLVING\` | **Next Update:** 10 minutes
+
+*Start with Option 1 (restart) while investigating the deployment changes.*`
+              }
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Benefits -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Why This Works</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Instant Analysis</h3>
+          <p class="text-slate-600 text-sm">
+            No need to research error codes or wait for senior developers. Get immediate expert-level diagnosis.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Actionable Steps</h3>
+          <p class="text-slate-600 text-sm">
+            Get specific commands, code fixes, and configuration changes you can implement immediately.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Learn & Prevent</h3>
+          <p class="text-slate-600 text-sm">
+            Understand root causes and get prevention strategies to avoid similar issues in the future.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Error Types -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Error Types We Handle</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Database Errors</h3>
+          <p class="text-slate-600 text-sm">Connection timeouts, deadlocks, migration failures, performance issues, and constraint violations.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Application Crashes</h3>
+          <p class="text-slate-600 text-sm">Memory leaks, null pointer exceptions, stack overflows, and dependency injection failures.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Deployment Issues</h3>
+          <p class="text-slate-600 text-sm">Build failures, environment mismatches, configuration errors, and rollback procedures.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Infrastructure Problems</h3>
+          <p class="text-slate-600 text-sm">Server errors, network connectivity, SSL certificate issues, and cloud service failures.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">User Interface Bugs</h3>
+          <p class="text-slate-600 text-sm">JavaScript errors, CSS layout issues, browser compatibility problems, and accessibility failures.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">API Integration Failures</h3>
+          <p class="text-slate-600 text-sm">Authentication errors, rate limiting, malformed requests, and third-party service outages.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pro Tips -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Troubleshooting Tips</h2>
+      
+      <div class="space-y-6">
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">1</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Include Full Context</h3>
+            <p class="text-slate-600">Screenshot the entire error message including timestamps, stack traces, and surrounding log entries.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">2</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Mention Recent Changes</h3>
+            <p class="text-slate-600">Always include what changed recently: deployments, configuration updates, or system maintenance.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">3</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Specify Urgency</h3>
+            <p class="text-slate-600">Indicate if it's production, affects all users, or has customer impact to get prioritized solutions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

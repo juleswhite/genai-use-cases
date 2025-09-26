@@ -1,0 +1,399 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
+---
+
+<Layout title="Staff Fellows Use Cases | GenAI Patterns" description="Targeted AI use cases for staff roles across university departments">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-indigo-50 via-slate-50 to-purple-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
+          Staff Fellows
+          <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            Use Cases
+          </span>
+        </h1>
+        <p class="text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+          Discover AI applications tailored to your specific role and daily challenges. 
+          See how generative AI can transform your work, no matter your department or function.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div class="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full px-6 py-3 text-slate-600">
+            <span class="text-sm font-medium">Your Role</span>
+            <span class="mx-2">+</span>
+            <span class="text-sm font-medium">AI Patterns</span>
+            <span class="mx-2">=</span>
+            <span class="text-sm font-medium">Efficiency & Innovation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Role Categories -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Use Cases by Role Type</h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <!-- Administrative & Operations -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Administrative & Operations</h3>
+            <p class="text-slate-600 mb-6">
+              Streamline scheduling, document workflows, process improvements, and administrative coordination.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Calendar management & coordination</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Document approval workflows</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Travel & event coordination</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Process automation</span>
+              </div>
+            </div>
+            <a href={getUrl('/staff-fellows/administrative')} class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+              Explore Admin Use Cases
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Data & Analytics -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-2xl border border-emerald-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Data & Analytics</h3>
+            <p class="text-slate-600 mb-6">
+              Transform unstructured data, build APIs, create reporting systems, and analyze complex datasets.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                <span>API documentation parsing</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                <span>Automated reporting workflows</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                <span>Data pipeline creation</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                <span>Unstructured data analysis</span>
+              </div>
+            </div>
+            <a href={getUrl('/staff-fellows/data-analytics')} class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+              Explore Data Use Cases
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Legal & Compliance -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-2xl border border-red-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Legal & Compliance</h3>
+            <p class="text-slate-600 mb-6">
+              Contract lifecycle management, risk assessment, eDiscovery, and legal spend optimization.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+                <span>Contract review automation</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+                <span>Risk assessment workflows</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+                <span>eDiscovery processing</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+                <span>Legal spend insights</span>
+              </div>
+            </div>
+            <a href={getUrl('/staff-fellows/legal-compliance')} class="inline-flex items-center text-red-600 font-semibold hover:text-red-700 transition-colors">
+              Explore Legal Use Cases
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Academic & Research -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl border border-purple-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Academic & Research</h3>
+            <p class="text-slate-600 mb-6">
+              Grant management, research administration, proposal routing, faculty evaluation, and assessment.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                <span>Grant proposal automation</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                <span>Faculty evaluation synthesis</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                <span>Research report generation</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                <span>Assessment data analysis</span>
+              </div>
+            </div>
+            <a href={getUrl('/staff-fellows/academic-research')} class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-700 transition-colors">
+              Explore Academic Use Cases
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Finance & Procurement -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-2xl border border-yellow-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-yellow-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Finance & Procurement</h3>
+            <p class="text-slate-600 mb-6">
+              Invoice processing, budget analysis, vendor evaluation, and financial workflow automation.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                <span>Invoice scanning & validation</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                <span>Budget burn rate analysis</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                <span>Vendor quote comparison</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                <span>Travel exception workflows</span>
+              </div>
+            </div>
+            <a href={getUrl('/staff-fellows/finance-procurement')} class="inline-flex items-center text-yellow-600 font-semibold hover:text-yellow-700 transition-colors">
+              Explore Finance Use Cases
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Communications & Marketing -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-8 rounded-2xl border border-teal-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-teal-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Communications & Marketing</h3>
+            <p class="text-slate-600 mb-6">
+              Content strategy, website optimization, brand compliance, and digital asset management.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+                <span>Website content auditing</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+                <span>SEO optimization agents</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+                <span>Design prototype QA</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+                <span>Component library automation</span>
+              </div>
+            </div>
+            <a href={getUrl('/staff-fellows/communications-marketing')} class="inline-flex items-center text-teal-600 font-semibold hover:text-teal-700 transition-colors">
+              Explore Marketing Use Cases
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Student Services & Educational Technology -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl border border-green-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Student Services & Educational Technology</h3>
+            <p class="text-slate-600 mb-6">
+              Student engagement platforms, course automation systems, and responsible AI adoption in education.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+                <span>Student belonging analytics</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+                <span>Brightspace course automation</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+                <span>AI ethics governance</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+                <span>Cross-department collaboration</span>
+              </div>
+            </div>
+            <a href={getUrl('/staff-fellows/student-services-technology')} class="inline-flex items-center text-green-600 font-semibold hover:text-green-700 transition-colors">
+              Explore Student Services Use Cases
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Development & Strategic Leadership -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-8 rounded-2xl border border-indigo-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H9m0 0H5m0 0H3m2 0v-3m14 3v-3M9 7h6m-6 4h6m-2 4h2M9 15h2"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Development & Strategic Leadership</h3>
+            <p class="text-slate-600 mb-6">
+              Fundraising intelligence, dean-level AI governance, and faculty recruitment automation systems.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-indigo-400 rounded-full mr-3"></div>
+                <span>Donor analytics & stewardship</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-indigo-400 rounded-full mr-3"></div>
+                <span>Strategic AI governance</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-indigo-400 rounded-full mr-3"></div>
+                <span>Faculty recruitment pipeline</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-indigo-400 rounded-full mr-3"></div>
+                <span>Cross-institutional frameworks</span>
+              </div>
+            </div>
+            <a href={getUrl('/staff-fellows/development-strategic-leadership')} class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700 transition-colors">
+              Explore Leadership Use Cases
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight Section -->
+  <section class="py-20 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-4xl font-bold text-white mb-8">
+        Your Role, Amplified by AI
+      </h2>
+      <p class="text-xl text-slate-300 leading-relaxed">
+        <span class="text-indigo-400 font-semibold">AI doesn't replace expertise—it amplifies it.</span>
+        Every use case here builds on your existing knowledge and processes, 
+        making you more efficient, more accurate, and more innovative in your role.
+      </p>
+      <div class="mt-12 bg-slate-800 rounded-2xl p-8 border border-slate-700">
+        <div class="flex items-center justify-center space-x-4 text-slate-400">
+          <div class="text-center">
+            <div class="w-3 h-3 bg-indigo-400 rounded-full mx-auto mb-2"></div>
+            <span class="text-sm">Your Expertise</span>
+          </div>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5-5 5M6 12h12"></path>
+          </svg>
+          <div class="text-center">
+            <div class="w-3 h-3 bg-purple-400 rounded-full mx-auto mb-2"></div>
+            <span class="text-sm">AI Patterns</span>
+          </div>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5-5 5M6 12h12"></path>
+          </svg>
+          <div class="text-center">
+            <div class="w-3 h-3 bg-emerald-400 rounded-full mx-auto mb-2"></div>
+            <span class="text-sm">Enhanced Impact</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
