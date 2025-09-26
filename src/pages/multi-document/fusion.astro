@@ -1,0 +1,322 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const tenurePacketConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to create a comprehensive tenure packet for Dr. Sarah Chen. I have her CV, teaching evaluations from the last 5 years, and peer review letters. Can you help me compile this into a structured evaluation document?',
+    timestamp: '2:15 PM'
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll help you create a comprehensive tenure packet by analyzing and synthesizing all the materials. Let me start by examining each component:\n\n<strong>📋 Document Analysis:</strong>\n\n<strong>CV Analysis:</strong>\n• 47 peer-reviewed publications\n• $2.3M in external funding\n• 15 conference presentations\n• Editorial board member (2 journals)\n\n<strong>Teaching Evaluations (5 years):</strong>\n• Average rating: 4.7/5.0\n• Consistent excellence in course design\n• Strong student mentorship record\n• Innovative pedagogy implementations',
+    timestamp: '2:16 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Great start! Now can you cross-reference the peer review letters with her research accomplishments to create a unified narrative about her scholarly impact?',
+    timestamp: '2:17 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🔍 Cross-Document Synthesis - Scholarly Impact:</strong>\n\n<strong>Research Excellence (Peer Letters + CV Validation):</strong>\n\n1. <strong>Groundbreaking Work in Neural Networks:</strong>\n   • Peer reviewers specifically cite her 2019 Nature paper\n   • 847 citations (top 1% in field)\n   • Dr. Martinez: "Fundamentally changed how we approach..."\n\n2. <strong>Consistent Innovation:</strong>\n   • 3 patents derived from publications\n   • Letters mention "consistent high-quality output"\n   • Funding success rate: 73% (field average: 31%)\n\n3. <strong>International Recognition:</strong>\n   • Letters from 4 countries\n   • Prof. Liu (Cambridge): "Among the top 5 researchers globally in this area"',
+    timestamp: '2:18 PM'
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'Perfect! Now generate the executive summary section that a tenure committee would need, pulling the strongest elements from all documents.',
+    timestamp: '2:19 PM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>📊 EXECUTIVE SUMMARY - TENURE EVALUATION</strong>\n\n<strong>Candidate:</strong> Dr. Sarah Chen, Associate Professor Track\n<strong>Department:</strong> Computer Science\n<strong>Evaluation Period:</strong> 2019-2024\n\n<strong>🏆 KEY STRENGTHS:</strong>\n\n<strong>Research (Outstanding):</strong>\n• 47 publications, 2,100+ total citations\n• $2.3M external funding (NSF, NIH, Industry)\n• Top 1% researcher in neural networks field\n• 3 patents with commercial applications\n\n<strong>Teaching (Excellent):</strong>\n• 4.7/5.0 average evaluation across 5 years\n• Mentored 12 PhD students (8 graduated successfully)\n• Curriculum innovation: AI Ethics course (now department standard)\n\n<strong>Service (Strong):</strong>\n• Editorial board: Journal of AI Research, Neural Computing\n• Program chair: ICML 2023\n• 15 peer review activities annually\n\n<strong>💫 RECOMMENDATION:</strong> <em>Strong candidate for tenure based on exceptional research impact, excellent teaching record, and meaningful service contributions.</em>',
+    timestamp: '2:20 PM'
+  }
+];
+---
+
+<Layout title="Document Fusion | Multi-Document Patterns" description="See how AI combines multiple sources into unified, comprehensive outputs">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/multi-document" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Multi-Document Workflows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Document Fusion
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-blue-50 via-slate-50 to-blue-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Document Fusion
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Watch AI combine multiple distinct inputs to create unified, comprehensive outputs that 
+          no single document could provide. This is synthesis at its finest.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">How Fusion Works</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              Document fusion goes beyond simple combination—it creates <em>new value</em> by finding 
+              connections, patterns, and complementary information across disparate sources. The AI acts 
+              as an intelligent synthesizer, understanding context and creating coherent narratives.
+            </p>
+            <p class="leading-relaxed">
+              Unlike basic concatenation, fusion involves cross-referencing, validation, and strategic 
+              organization. The AI identifies which elements from each document support or enhance others, 
+              creating a result that's more valuable than the sum of its parts.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-blue-50 rounded-xl p-6 border border-blue-100">
+            <h3 class="font-semibold text-blue-900 mb-4">The Fusion Process</h3>
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-blue-200 text-blue-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">1</div>
+                <div>
+                  <h4 class="font-medium text-blue-900">Individual Analysis</h4>
+                  <p class="text-blue-700 text-sm">Each document analyzed for key themes, data points, and unique contributions</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-blue-200 text-blue-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">2</div>
+                <div>
+                  <h4 class="font-medium text-blue-900">Cross-Reference Mapping</h4>
+                  <p class="text-blue-700 text-sm">AI identifies relationships, contradictions, and complementary information</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-blue-200 text-blue-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">3</div>
+                <div>
+                  <h4 class="font-medium text-blue-900">Strategic Synthesis</h4>
+                  <p class="text-blue-700 text-sm">Information combined with hierarchical structure and narrative flow</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-blue-200 text-blue-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">4</div>
+                <div>
+                  <h4 class="font-medium text-blue-900">Quality Validation</h4>
+                  <p class="text-blue-700 text-sm">Cross-checking facts and ensuring consistency across the fused document</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Common Fusion Scenarios</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Academic tenure portfolios from CV + evaluations + letters</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Product evaluations from vendor specs + user feedback + technical reviews</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Grant proposals from research plans + budget + institutional support</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Investment reports from financial data + market analysis + risk assessments</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Compliance documents from policies + audit results + remediation plans</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Academic Tenure Packet Fusion</h2>
+        <p class="text-slate-600 leading-relaxed">
+          See how AI combines a CV, teaching evaluations, and peer review letters into a comprehensive tenure evaluation
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={tenurePacketConversation}
+        title="Multi-Document Academic Portfolio Creation"
+        description="Academic committee creating comprehensive tenure evaluation from multiple sources"
+      />
+    </div>
+  </section>
+
+  <!-- Deep Dive Analysis -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">The Magic of Fusion</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Left: What Happened -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6">What Just Happened?</h3>
+          <div class="space-y-6">
+            <div class="border-l-4 border-blue-400 pl-6">
+              <h4 class="font-semibold text-slate-900 mb-2">Multi-Source Intelligence</h4>
+              <p class="text-slate-600 text-sm">
+                The AI didn't just read three documents—it <em>understood their relationships</em>. 
+                It validated peer review claims against CV achievements and connected teaching excellence 
+                to research impact.
+              </p>
+            </div>
+            <div class="border-l-4 border-green-400 pl-6">
+              <h4 class="font-semibold text-slate-900 mb-2">Cross-Validation Process</h4>
+              <p class="text-slate-600 text-sm">
+                Notice how the AI cited specific papers from the CV when peer reviewers mentioned them, 
+                and quantified teaching success with actual evaluation scores. This creates credible, 
+                evidence-based narratives.
+              </p>
+            </div>
+            <div class="border-l-4 border-purple-400 pl-6">
+              <h4 class="font-semibold text-slate-900 mb-2">Strategic Synthesis</h4>
+              <p class="text-slate-600 text-sm">
+                The final executive summary wasn't just a list—it was strategically organized to match 
+                tenure committee needs, with quantified achievements and clear recommendations.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right: The Value -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6">Why This Creates Value</h3>
+          <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 mb-6">
+            <h4 class="font-semibold text-slate-900 mb-4">Before AI Fusion:</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-3"></div>
+                <span>Hours of manual cross-referencing</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-3"></div>
+                <span>Risk of missing key connections</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-3"></div>
+                <span>Inconsistent evaluation criteria</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-3"></div>
+                <span>Subjective narrative construction</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-green-50 rounded-xl p-6 border border-green-200">
+            <h4 class="font-semibold text-slate-900 mb-4">With AI Fusion:</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>
+                <span>Automatic cross-document validation</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>
+                <span>Comprehensive pattern recognition</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>
+                <span>Consistent evaluation framework</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>
+                <span>Evidence-based narrative construction</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insights -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">The Fusion Advantage</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-blue-400 font-semibold">Fusion creates exponential value.</span>
+        When AI combines documents intelligently, it doesn't just save time—it discovers insights 
+        that humans would miss and creates more comprehensive, reliable outputs.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-400 mb-2">1+1+1</div>
+          <div class="text-slate-400 mb-2">=</div>
+          <div class="text-3xl font-bold text-blue-400 mb-2">7</div>
+          <div class="text-slate-400 text-sm">Multiplicative Value Creation</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-400 mb-2">90%</div>
+          <div class="text-slate-400">Time Reduction</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-400 mb-2">0</div>
+          <div class="text-slate-400">Missed Connections</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

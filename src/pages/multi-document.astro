@@ -1,0 +1,269 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+---
+
+<Layout title="Multi-Document Workflows | GenAI Patterns" description="Scale conversations to work across multiple documents for unified insights">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-purple-50 via-slate-50 to-purple-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14-4H9m4 8H5m10-4h4"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Multi-Document Workflows
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Scale the power of conversation to work across multiple inputs. Unify, normalize, 
+          and compare documents to create comprehensive insights that no single document could provide.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-8 border border-purple-200 shadow-lg">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">The Evolution</h2>
+        <p class="text-slate-700 leading-relaxed mb-6">
+          While single-document patterns handle individual files, multi-document workflows tackle the 
+          real-world challenge: <strong>making sense of scattered information across multiple sources</strong>. 
+          This is where AI truly shines—seeing patterns and connections that humans would miss.
+        </p>
+        <div class="bg-purple-50 rounded-xl p-6 border border-purple-100">
+          <h3 class="font-semibold text-purple-900 mb-3">The Challenge</h3>
+          <div class="grid md:grid-cols-3 gap-4 text-purple-800 text-sm">
+            <div class="text-center">
+              <div class="w-12 h-12 bg-purple-200 rounded-xl flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <span class="font-medium">Different Formats</span>
+            </div>
+            <div class="text-center">
+              <div class="w-12 h-12 bg-purple-200 rounded-xl flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="8 7V3a4 4 0 118 0v4m-4 8a4 4 0 11-8 0v-1h8v1z"></path>
+                </svg>
+              </div>
+              <span class="font-medium">Inconsistent Structure</span>
+            </div>
+            <div class="text-center">
+              <div class="w-12 h-12 bg-purple-200 rounded-xl flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="font-medium">Manual Correlation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patterns Grid -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Five Key Patterns</h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <!-- Pattern 1: Fusion -->
+        <div class="group cursor-pointer lg:col-span-1">
+          <a href="/multi-document/fusion" class="block">
+            <div class="bg-slate-50 hover:bg-purple-50 border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">1. Fusion</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Combine multiple inputs to create new unified outputs, like building tenure packets from CVs and evaluations.
+              </p>
+              <div class="flex items-center text-purple-600 text-sm font-medium">
+                <span>See Examples</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 2: Normalization -->
+        <div class="group cursor-pointer lg:col-span-1">
+          <a href="/multi-document/normalization" class="block">
+            <div class="bg-slate-50 hover:bg-purple-50 border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">2. Normalization</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Align different formats into consistent structures, like creating evaluation matrices from varied résumés.
+              </p>
+              <div class="flex items-center text-purple-600 text-sm font-medium">
+                <span>See Examples</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 3: Cross-Document Analysis -->
+        <div class="group cursor-pointer lg:col-span-1">
+          <a href="/multi-document/cross-analysis" class="block">
+            <div class="bg-slate-50 hover:bg-purple-50 border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">3. Cross-Document Analysis</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Detect discrepancies, overlaps, and commonalities across multiple documents automatically.
+              </p>
+              <div class="flex items-center text-purple-600 text-sm font-medium">
+                <span>See Examples</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 4: Organization -->
+        <div class="group cursor-pointer lg:col-span-1">
+          <a href="/multi-document/organization" class="block">
+            <div class="bg-slate-50 hover:bg-purple-50 border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="19 11H5m14-4H9m4 8H5m10-4h4"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">4. Organization</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Sort, categorize, and cluster documents and their content by themes, topics, or criteria.
+              </p>
+              <div class="flex items-center text-purple-600 text-sm font-medium">
+                <span>See Examples</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 5: Synthesis -->
+        <div class="group cursor-pointer lg:col-span-2">
+          <a href="/multi-document/synthesis" class="block">
+            <div class="bg-slate-50 hover:bg-purple-50 border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">5. Synthesis</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Build unified reports, dashboards, and comprehensive analyses from scattered data sources across departments and systems.
+              </p>
+              <div class="flex items-center text-purple-600 text-sm font-medium">
+                <span>See Examples</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Real-World Impact -->
+      <div class="bg-gradient-to-br from-purple-900 to-slate-900 rounded-2xl p-8 text-white">
+        <h3 class="text-2xl font-bold mb-6 text-center">Real-World Impact</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-purple-600/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h4 class="font-semibold mb-2">HR & Recruitment</h4>
+            <p class="text-sm text-purple-200">
+              Compare 100+ candidate résumés, extract key qualifications, and create standardized evaluation matrices in minutes.
+            </p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-purple-600/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h4 class="font-semibold mb-2">Vendor Evaluation</h4>
+            <p class="text-sm text-purple-200">
+              Analyze proposals from multiple vendors, normalize pricing structures, and identify the best fit automatically.
+            </p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 bg-purple-600/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path>
+              </svg>
+            </div>
+            <h4 class="font-semibold mb-2">Research & Analysis</h4>
+            <p class="text-sm text-purple-200">
+              Synthesize findings from multiple research papers, surveys, and reports into coherent insights and recommendations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight Section -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">
+        The Scaling Principle
+      </h2>
+      <p class="text-xl text-slate-600 leading-relaxed mb-8">
+        Multi-document workflows don't change the fundamental pattern—they scale it. 
+        <span class="text-purple-600 font-semibold">Each document still gets the same conversational treatment</span>, 
+        but now the AI can see connections and patterns across the entire corpus.
+      </p>
+      
+      <div class="bg-white rounded-2xl p-8 border border-purple-200 shadow-lg">
+        <div class="flex items-center justify-center space-x-6 text-slate-600">
+          <div class="text-center">
+            <div class="w-4 h-4 bg-blue-400 rounded-full mx-auto mb-2"></div>
+            <span class="text-sm font-medium">Single Conversation</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
+            <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
+            <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
+          </div>
+          <div class="text-center">
+            <div class="w-4 h-4 bg-purple-400 rounded-full mx-auto mb-2"></div>
+            <span class="text-sm font-medium">Multiple Conversations</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
+            <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
+            <div class="w-2 h-2 bg-slate-400 rounded-full"></div>
+          </div>
+          <div class="text-center">
+            <div class="w-4 h-4 bg-emerald-400 rounded-full mx-auto mb-2"></div>
+            <span class="text-sm font-medium">Unified Insights</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
