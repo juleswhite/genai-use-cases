@@ -1,6 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
 ---
 
 <Layout title="Generative AI Use Case Patterns" description="Explore how AI transforms from simple conversations to complex automation workflows">
@@ -66,7 +75,7 @@ import '../styles/global.css';
                 <span>Propose edits & questions</span>
               </div>
             </div>
-            <a href="/conversation" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+            <a href={getUrl('/conversation')} class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors">
               Explore Patterns
               <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -106,7 +115,7 @@ import '../styles/global.css';
                 <span>Unified reporting</span>
               </div>
             </div>
-            <a href="/multi-document" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-700 transition-colors">
+            <a href={getUrl('/multi-document')} class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-700 transition-colors">
               Explore Workflows
               <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -147,7 +156,7 @@ import '../styles/global.css';
                 <span>Automated data pipelines</span>
               </div>
             </div>
-            <a href="/computation" class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+            <a href={getUrl('/computation')} class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
               Explore Automation
               <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>

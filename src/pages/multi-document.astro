@@ -1,6 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
 ---
 
 <Layout title="Multi-Document Workflows | GenAI Patterns" description="Scale conversations to work across multiple documents for unified insights">
@@ -70,7 +79,7 @@ import '../styles/global.css';
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
         <!-- Pattern 1: Fusion -->
         <div class="group cursor-pointer lg:col-span-1">
-          <a href="/multi-document/fusion" class="block">
+          <a href={getUrl('/multi-document/fusion')} class="block">
             <div class="bg-slate-50 hover:bg-purple-50 border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,7 +102,7 @@ import '../styles/global.css';
 
         <!-- Pattern 2: Normalization -->
         <div class="group cursor-pointer lg:col-span-1">
-          <a href="/multi-document/normalization" class="block">
+          <a href={getUrl('/multi-document/normalization')} class="block">
             <div class="bg-slate-50 hover:bg-purple-50 border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,7 +125,7 @@ import '../styles/global.css';
 
         <!-- Pattern 3: Cross-Document Analysis -->
         <div class="group cursor-pointer lg:col-span-1">
-          <a href="/multi-document/cross-analysis" class="block">
+          <a href={getUrl('/multi-document/cross-analysis')} class="block">
             <div class="bg-slate-50 hover:bg-purple-50 border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,7 +148,7 @@ import '../styles/global.css';
 
         <!-- Pattern 4: Organization -->
         <div class="group cursor-pointer lg:col-span-1">
-          <a href="/multi-document/organization" class="block">
+          <a href={getUrl('/multi-document/organization')} class="block">
             <div class="bg-slate-50 hover:bg-purple-50 border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -162,7 +171,7 @@ import '../styles/global.css';
 
         <!-- Pattern 5: Synthesis -->
         <div class="group cursor-pointer lg:col-span-2">
-          <a href="/multi-document/synthesis" class="block">
+          <a href={getUrl('/multi-document/synthesis')} class="block">
             <div class="bg-slate-50 hover:bg-purple-50 border border-slate-200 hover:border-purple-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

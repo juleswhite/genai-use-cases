@@ -1,6 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
 ---
 
 <Layout title="Conversation + Single Document | GenAI Patterns" description="Explore how simple conversations with AI can transform single document workflows">
@@ -51,7 +60,7 @@ import '../styles/global.css';
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
         <!-- Pattern 1: Identify Issues -->
         <div class="group cursor-pointer">
-          <a href="/conversation/identify-issues" class="block">
+          <a href={getUrl('/conversation/identify-issues')} class="block">
             <div class="bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -74,7 +83,7 @@ import '../styles/global.css';
 
         <!-- Pattern 2: Extract Structured Information -->
         <div class="group cursor-pointer">
-          <a href="/conversation/extract-structured" class="block">
+          <a href={getUrl('/conversation/extract-structured')} class="block">
             <div class="bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,7 +106,7 @@ import '../styles/global.css';
 
         <!-- Pattern 3: Transform Format -->
         <div class="group cursor-pointer">
-          <a href="/conversation/transform-format" class="block">
+          <a href={getUrl('/conversation/transform-format')} class="block">
             <div class="bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -120,7 +129,7 @@ import '../styles/global.css';
 
         <!-- Pattern 4: Propose Edits -->
         <div class="group cursor-pointer">
-          <a href="/conversation/propose-edits" class="block">
+          <a href={getUrl('/conversation/propose-edits')} class="block">
             <div class="bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,7 +152,7 @@ import '../styles/global.css';
 
         <!-- Pattern 5: Generate Follow-up Questions -->
         <div class="group cursor-pointer">
-          <a href="/conversation/generate-questions" class="block">
+          <a href={getUrl('/conversation/generate-questions')} class="block">
             <div class="bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -166,7 +175,7 @@ import '../styles/global.css';
 
         <!-- Pattern 6: Analyze Structured Data -->
         <div class="group cursor-pointer">
-          <a href="/conversation/analyze-data" class="block">
+          <a href={getUrl('/conversation/analyze-data')} class="block">
             <div class="bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-2xl p-6 transition-all duration-300 h-full">
               <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,6 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
 ---
 
 <Layout title="Computation + Automation | GenAI Patterns" description="See how LLMs become the interface to computation and automated workflows">
@@ -71,7 +80,7 @@ import '../styles/global.css';
       <div class="grid md:grid-cols-2 gap-8 mb-16">
         <!-- Pattern 1: Exploratory Analysis -->
         <div class="group cursor-pointer">
-          <a href="/computation/exploratory-analysis" class="block">
+          <a href={getUrl('/computation/exploratory-analysis')} class="block">
             <div class="bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 rounded-2xl p-8 transition-all duration-300 h-full">
               <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,7 +118,7 @@ import '../styles/global.css';
 
         <!-- Pattern 2: Budget & Grant Analysis -->
         <div class="group cursor-pointer">
-          <a href="/computation/budget-analysis" class="block">
+          <a href={getUrl('/computation/budget-analysis')} class="block">
             <div class="bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 rounded-2xl p-8 transition-all duration-300 h-full">
               <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-6">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,7 +156,7 @@ import '../styles/global.css';
 
         <!-- Pattern 3: Script Generation -->
         <div class="group cursor-pointer">
-          <a href="/computation/script-generation" class="block">
+          <a href={getUrl('/computation/script-generation')} class="block">
             <div class="bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 rounded-2xl p-8 transition-all duration-300 h-full">
               <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-6">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -185,7 +194,7 @@ import '../styles/global.css';
 
         <!-- Pattern 4: Data Pipelines -->
         <div class="group cursor-pointer">
-          <a href="/computation/data-pipelines" class="block">
+          <a href={getUrl('/computation/data-pipelines')} class="block">
             <div class="bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 rounded-2xl p-8 transition-all duration-300 h-full">
               <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
