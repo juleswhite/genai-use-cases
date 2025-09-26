@@ -2,6 +2,15 @@
 import Layout from '../../layouts/Layout.astro';
 import ChatConversation from '../../components/ChatConversation.astro';
 import '../../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
 ---
 
 <Layout title="Error Troubleshooting | Live Knowledge" description="Screenshot error messages and get instant diagnoses with step-by-step solutions">
@@ -71,7 +80,7 @@ import '../../styles/global.css';
                   {
                     name: 'database-error-screenshot.png',
                     type: 'image',
-                    url: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&crop=center'
+                    url: getUrl('/computer_error.jpg')
                   }
                 ]
               },

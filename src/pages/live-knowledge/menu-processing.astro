@@ -2,6 +2,15 @@
 import Layout from '../../layouts/Layout.astro';
 import ChatConversation from '../../components/ChatConversation.astro';
 import '../../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
 ---
 
 <Layout title="Menu Processing | Live Knowledge" description="Transform catering menus into optimized group orders with dietary restrictions">
@@ -71,7 +80,7 @@ import '../../styles/global.css';
                   {
                     name: 'catering-menu.jpg',
                     type: 'image',
-                    url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop&crop=center'
+                    url: getUrl('/menu.jpg')
                   }
                 ]
               },

@@ -2,6 +2,15 @@
 import Layout from '../../layouts/Layout.astro';
 import ChatConversation from '../../components/ChatConversation.astro';
 import '../../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
 ---
 
 <Layout title="Diagram Interpretation | Live Knowledge" description="Convert flowcharts, wireframes, and technical diagrams into actionable specifications">
@@ -70,7 +79,7 @@ import '../../styles/global.css';
                   {
                     name: 'mobile-app-wireframes.jpg',
                     type: 'image',
-                    url: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop&crop=center'
+                    url: getUrl('/diagram.jpg')
                   }
                 ]
               },
