@@ -1,0 +1,302 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
+---
+
+<Layout title="Diagram Interpretation | Live Knowledge" description="Convert flowcharts, wireframes, and technical diagrams into actionable specifications">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-orange-50 via-slate-50 to-purple-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Diagram Interpretation
+        </h1>
+        <p class="text-xl text-slate-600 leading-relaxed">
+          Transform flowcharts, wireframes, system architecture diagrams, and technical sketches 
+          into detailed specifications, user stories, and implementation plans.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Case Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <!-- Scenario -->
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-8">The Scenario</h2>
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8 border border-purple-200">
+            <h3 class="text-xl font-semibold text-purple-900 mb-4">Mobile App Wireframe Review</h3>
+            <p class="text-purple-800 mb-6">
+              Your design team created hand-drawn wireframes for a new mobile app feature during 
+              a client workshop. The sketches show user flows, screen layouts, and interaction 
+              patterns, but you need detailed technical specifications for the development team.
+            </p>
+            
+            <div class="bg-white rounded-xl p-6 border border-purple-200">
+              <div class="flex items-center mb-4">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                <span class="font-medium text-slate-900">What's in the wireframes:</span>
+              </div>
+              <ul class="text-slate-700 space-y-2 text-sm">
+                <li>• Login screen with social auth options</li>
+                <li>• Dashboard with personalized content cards</li>
+                <li>• Navigation flow between 5 main sections</li>
+                <li>• Form layouts with validation states</li>
+                <li>• Search functionality with filters</li>
+                <li>• User profile settings screen</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern In Action -->
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-8">Pattern in Action</h2>
+          <ChatConversation 
+            messages={[
+              {
+                id: '1',
+                message: 'I\'m attaching wireframes from our mobile app design session. Can you analyze these and create detailed technical specifications for our development team? Focus on user flows, component requirements, and API needs.',
+                sender: 'user',
+                documents: [
+                  {
+                    name: 'mobile-app-wireframes.jpg',
+                    type: 'image',
+                    url: getUrl('/diagram.jpg')
+                  }
+                ]
+              },
+              {
+                id: '2',
+                sender: 'ai', 
+                message: `# Mobile App Technical Specifications
+
+## Screen Architecture Overview
+The wireframes show a **5-screen core application** with social authentication and personalized dashboard functionality.
+
+---
+
+## Screen 1: Authentication
+**Layout:** Centered login form with social options
+**Components Needed:**
+- \`LoginForm\` component with email/password fields
+- \`SocialAuthButtons\` (Google, Apple, Facebook)
+- \`ForgotPasswordLink\`
+- \`SignUpRedirect\`
+
+**API Requirements:**
+- \`POST /auth/login\` - Standard authentication
+- \`POST /auth/social\` - OAuth integration
+- \`POST /auth/reset-password\`
+
+**Validation Rules:**
+- Email format validation
+- Password minimum 8 characters
+- Social auth error handling
+
+---
+
+## Screen 2: Dashboard 
+**Layout:** Card-based personalized content grid
+**Components Needed:**
+- \`DashboardHeader\` with user avatar & notifications
+- \`ContentCard\` (reusable for different content types)
+- \`QuickActions\` floating button set
+- \`RefreshIndicator\` for pull-to-refresh
+
+**API Requirements:**
+- \`GET /dashboard/content\` - Personalized feed
+- \`GET /user/notifications\` - Badge counts
+- \`POST /content/interaction\` - Like/share/save actions
+
+**State Management:**
+- User preferences for card ordering
+- Infinite scroll pagination
+- Offline content caching
+
+---
+
+## Screen 3: Navigation Hub
+**Layout:** Bottom tab navigation with 5 primary sections
+**Sections Identified:**
+1. **Home** (Dashboard) 
+2. **Discover** (Content browsing)
+3. **Search** (With advanced filters)
+4. **Activity** (User history/stats)
+5. **Profile** (Settings & account)
+
+**Implementation Notes:**
+- Tab badges for notifications
+- Deep linking support for each section
+- Smooth transitions between tabs
+
+---
+
+## Screen 4: Search & Filters
+**Layout:** Search bar + expandable filter panel
+**Components Needed:**
+- \`SearchInput\` with autocomplete
+- \`FilterPanel\` (collapsible)
+- \`ResultsList\` with pagination
+- \`SortingOptions\` dropdown
+
+**Filter Categories (from wireframe):**
+- Date range picker
+- Category multi-select
+- Location radius selector
+- Price range slider
+
+**API Requirements:**
+- \`GET /search/suggestions\` - Autocomplete
+- \`POST /search/results\` - Filtered results
+- \`GET /search/filters\` - Available filter options
+
+---
+
+## Screen 5: Profile & Settings
+**Layout:** User info card + settings list
+**Components Needed:**
+- \`UserProfileCard\` (editable)
+- \`SettingsList\` with toggle switches
+- \`DataExportButton\`
+- \`LogoutConfirmation\`
+
+**Settings Categories:**
+- Notification preferences (push, email, SMS)
+- Privacy controls (profile visibility, data sharing)
+- Account management (password, 2FA, delete account)
+- App preferences (theme, language, accessibility)
+
+---
+
+## Cross-Screen Requirements
+
+### **Data Flow:**
+- User authentication state managed globally
+- Content preferences sync across all screens  
+- Search history persists between sessions
+
+### **Performance Considerations:**
+- Image lazy loading for content cards
+- Search debouncing (300ms delay)
+- Background data refresh for dashboard
+
+### **Accessibility:**
+- Screen reader support for all interactive elements
+- High contrast mode compatibility
+- Voice navigation for search functionality
+
+---
+
+## Development Phases
+
+**Phase 1:** Authentication + Dashboard (2 weeks)
+**Phase 2:** Navigation + Search (2 weeks)  
+**Phase 3:** Profile + Polish (1 week)
+
+**Testing Priority:**
+1. Authentication flow end-to-end
+2. Dashboard content loading performance
+3. Search functionality accuracy
+4. Cross-platform navigation consistency
+
+*Next Step: Create detailed component wireframes for development team review.*`
+              }
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Benefits -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Why This Works</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Bridge Design & Development</h3>
+          <p class="text-slate-600 text-sm">
+            Translates visual concepts into technical requirements developers can act on immediately.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Accelerate Development</h3>
+          <p class="text-slate-600 text-sm">
+            Skip lengthy specification meetings by automatically generating detailed technical documents.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Ensure Completeness</h3>
+          <p class="text-slate-600 text-sm">
+            Identifies components, APIs, and requirements that might be overlooked in manual reviews.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Applications -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">More Applications</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">System Architecture</h3>
+          <p class="text-slate-600 text-sm">Convert whiteboard system diagrams into infrastructure specifications, API documentation, and deployment plans.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Process Flowcharts</h3>
+          <p class="text-slate-600 text-sm">Transform business process diagrams into workflow automation requirements and user acceptance criteria.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Database Schemas</h3>
+          <p class="text-slate-600 text-sm">Turn entity relationship diagrams into SQL schemas, migration scripts, and API endpoint specifications.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Network Diagrams</h3>
+          <p class="text-slate-600 text-sm">Convert network topology sketches into configuration files, security policies, and monitoring requirements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

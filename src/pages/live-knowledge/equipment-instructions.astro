@@ -1,0 +1,338 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
+---
+
+<Layout title="Equipment Instructions | Live Knowledge" description="Take a photo of any device and get personalized step-by-step usage instructions">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-orange-50 via-slate-50 to-indigo-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Equipment Instructions
+        </h1>
+        <p class="text-xl text-slate-600 leading-relaxed">
+          Take a photo of any device and get personalized, step-by-step usage instructions. 
+          From coffee makers to complex lab equipment, unlock the potential of any tool instantly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Case Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <!-- Scenario -->
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-8">The Scenario</h2>
+          <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl p-8 border border-indigo-200">
+            <h3 class="text-xl font-semibold text-indigo-900 mb-4">New Office Coffee Machine</h3>
+            <p class="text-indigo-800 mb-6">
+              Your office just got a high-end espresso machine, but the manual is nowhere 
+              to be found and everyone's looking at you to figure it out. The machine has 
+              dozens of buttons, displays, and settings. You take a photo and need to become 
+              the office coffee expert in the next 5 minutes.
+            </p>
+            
+            <div class="bg-white rounded-xl p-6 border border-indigo-200">
+              <div class="flex items-center mb-4">
+                <div class="w-2 h-2 bg-indigo-400 rounded-full mr-3"></div>
+                <span class="font-medium text-slate-900">What you see:</span>
+              </div>
+              <ul class="text-slate-700 space-y-2 text-sm">
+                <li>• Digital display showing various icons</li>
+                <li>• Multiple buttons with cryptic symbols</li>
+                <li>• Steam wand with adjustment knobs</li>
+                <li>• Bean hopper with grind settings</li>
+                <li>• Water reservoir and drip tray</li>
+                <li>• Several small containers and accessories</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern In Action -->
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-8">Pattern in Action</h2>
+          <ChatConversation 
+            messages={[
+              {
+                id: '1',
+                message: 'Help! New espresso machine just arrived at the office and I need to figure out how to use it ASAP. Everyone wants coffee and I\'m the designated "tech person." No manual in sight. Photo attached!',
+                sender: 'user',
+                documents: [
+                  {
+                    name: 'office-espresso-machine.jpg',
+                    type: 'image',
+                    url: getUrl('/espresso_machine.jpg')
+                  }
+                ]
+              },
+              {
+                id: '2',
+                sender: 'ai', 
+                message: `# ☕ Your Ultimate Coffee Machine Guide
+
+## QUICK START (Coffee in 3 minutes!)
+
+### ✅ FIRST TIME SETUP
+1. **Fill water reservoir** (back right) - use filtered water if possible
+2. **Add beans to hopper** (top left) - medium roast works great
+3. **Turn on machine** - large power button (bottom right)
+4. **Wait for green "ready" light** (~2 minutes for heating)
+
+---
+
+## 🚀 MAKING YOUR FIRST ESPRESSO
+
+### Step 1: Prepare the Portafilter
+- Remove the **metal handle** (portafilter) from the group head
+- Press the **single shot button** (☕ symbol, left side)
+- This will grind beans directly into the portafilter
+
+### Step 2: Perfect the Grind
+- **Grind setting dial** (small wheel by bean hopper): Start at "5"
+- **Too coarse?** → Turn dial toward "8" 
+- **Too fine?** → Turn dial toward "2"
+- You want **fine powder texture**, not chunks
+
+### Step 3: Lock & Extract
+- **Tamp the grounds** (use the flat tool in the drawer)
+- **Lock portafilter** into group head (twist right until snug)
+- **Place cup underneath** 
+- **Press espresso button** (large ☕ button, center left)
+
+---
+
+## ☕ COFFEE TYPES MADE EASY
+
+### **Americano** (Most Popular)
+1. Make espresso (steps above)
+2. Press **hot water button** (💧 symbol)
+3. Fill cup to desired strength
+
+### **Latte/Cappuccino** 
+1. Make espresso
+2. **Steam milk**: 
+   - Fill metal pitcher 1/3 with cold milk
+   - Insert steam wand (right side)
+   - Turn **steam knob** (clockwise)
+   - Keep wand just below milk surface
+   - Turn off when milk reaches 150°F (hot to touch)
+
+### **Regular Coffee** (If available)
+- Press **brew button** (☕ with lines, top right)
+- Adjusts water amount automatically
+
+---
+
+## 🎛️ CONTROL PANEL DECODER
+
+**Left Side:**
+- ☕ **Single Shot**: 1 espresso
+- ☕☕ **Double Shot**: 2 espressos  
+- ⚙️ **Grind Adjust**: Changes coffee strength
+
+**Center:**
+- 🔄 **Program**: Customize shot volumes
+- 🧹 **Clean Cycle**: Daily maintenance
+
+**Right Side:**
+- 💧 **Hot Water**: For Americanos/tea
+- 🥛 **Steam**: For milk frothing
+- 📊 **Display**: Shows temperature/status
+
+---
+
+## ⚠️ TROUBLESHOOTING
+
+**Coffee too weak?**
+→ Turn grind dial to higher number (finer grind)
+
+**Coffee too bitter?** 
+→ Turn grind dial to lower number (coarser grind)
+
+**No coffee coming out?**
+→ Grind might be too fine, or machine needs priming
+
+**Loud grinding noise?**
+→ Check bean hopper isn't empty
+
+**Steam wand not working?**
+→ Purge it first (turn steam on briefly without milk)
+
+---
+
+## 🏆 PRO TIPS FOR OFFICE HERO STATUS
+
+1. **Pre-heat cups** with hot water for better coffee temperature
+2. **Clean steam wand** after each use (wipe with damp cloth)
+3. **Adjust grind throughout day** - humidity affects it
+4. **Keep extra beans** in sealed container
+5. **Run clean cycle** weekly (usually automatic prompt)
+
+---
+
+## 📱 QUICK REFERENCE CARD
+
+**Perfect Espresso Recipe:**
+- Grind: Setting 5-6
+- Time: 25-30 seconds
+- Color: Dark brown with light crema
+- Volume: Fill 1/3 of espresso cup
+
+**Daily Maintenance:**
+- [ ] Empty drip tray
+- [ ] Refill water reservoir  
+- [ ] Wipe steam wand
+- [ ] Check bean level
+
+*You've got this! Start with Americanos - they're forgiving and everyone loves them.*`
+              }
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Benefits -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Why This Works</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Instant Expertise</h3>
+          <p class="text-slate-600 text-sm">
+            No manual hunting or YouTube searching. Get immediate, device-specific instructions.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-indigo-900 mb-2">Visual Recognition</h3>
+          <p class="text-slate-600 text-sm">
+            Identifies specific models, buttons, and features from photos alone.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Contextual Guidance</h3>
+          <p class="text-slate-600 text-sm">
+            Provides beginner-friendly or advanced instructions based on your needs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Device Categories -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Equipment We Handle</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Kitchen Appliances</h3>
+          <p class="text-slate-600 text-sm">Coffee makers, blenders, food processors, ovens, pressure cookers, and specialty cooking equipment.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Office Equipment</h3>
+          <p class="text-slate-600 text-sm">Printers, projectors, conference systems, phone systems, and office machinery setup.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Lab Instruments</h3>
+          <p class="text-slate-600 text-sm">Microscopes, centrifuges, spectrometers, testing equipment, and scientific measurement tools.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Workshop Tools</h3>
+          <p class="text-slate-600 text-sm">Power tools, measuring instruments, CNC machines, and specialized manufacturing equipment.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Medical Devices</h3>
+          <p class="text-slate-600 text-sm">Diagnostic equipment, monitoring devices, therapy machines, and patient care instruments.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Exercise Equipment</h3>
+          <p class="text-slate-600 text-sm">Treadmills, weight machines, fitness trackers, and rehabilitation equipment setup and usage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best Practices -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Best Practices</h2>
+      
+      <div class="space-y-6">
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">1</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Take Multiple Angles</h3>
+            <p class="text-slate-600">Capture the control panel, side views, and any model numbers or labels for complete identification.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">2</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Specify Your Goal</h3>
+            <p class="text-slate-600">Mention what you want to accomplish: "make espresso," "set up new user," or "troubleshoot error."</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">3</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Include Experience Level</h3>
+            <p class="text-slate-600">Say if you're a beginner or have experience to get appropriately detailed instructions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,212 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  // Ensure base ends with slash and path starts without slash
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
+---
+
+<Layout title="Live Knowledge | GenAI Patterns" description="Transform visual information into actionable insights with multimodal AI">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-orange-50 via-slate-50 to-orange-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <div class="w-16 h-16 bg-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Live Knowledge
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Transform visual information into actionable insights. From whiteboards to menus, 
+          diagrams to error screens—turn any visual input into structured knowledge.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-8 border border-orange-200 shadow-lg">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">The Visual Revolution</h2>
+        <p class="text-slate-700 leading-relaxed mb-6">
+          While conversations handle text, <strong>Live Knowledge captures the world around us</strong>. 
+          Multimodal AI can now see, interpret, and act on visual information—from handwritten notes 
+          to complex diagrams to real-world scenarios.
+        </p>
+        <div class="bg-orange-50 rounded-xl p-6 border border-orange-100">
+          <h3 class="font-semibold text-orange-900 mb-3">The Breakthrough</h3>
+          <div class="flex items-center text-orange-800">
+            <span class="bg-orange-200 px-3 py-1 rounded-full text-sm font-medium">Visual Input</span>
+            <span class="mx-4">+</span>
+            <span class="bg-orange-200 px-3 py-1 rounded-full text-sm font-medium">Context</span>
+            <span class="mx-4">=</span>
+            <span class="bg-orange-600 text-white px-3 py-1 rounded-full text-sm font-medium">Instant Understanding</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patterns Grid -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Six Live Knowledge Patterns</h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <!-- Pattern 1: Whiteboard Analysis -->
+        <div class="group cursor-pointer">
+          <a href={getUrl('/live-knowledge/whiteboard-analysis')} class="block">
+            <div class="bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">1. Whiteboard Analysis</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Turn brainstorming sessions into structured notes, action items, and follow-up plans.
+              </p>
+              <div class="flex items-center text-orange-600 text-sm font-medium">
+                <span>See in Action</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 2: Menu Processing -->
+        <div class="group cursor-pointer">
+          <a href={getUrl('/live-knowledge/menu-processing')} class="block">
+            <div class="bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">2. Menu Processing</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Read catering menus and create optimized orders for groups with dietary restrictions.
+              </p>
+              <div class="flex items-center text-orange-600 text-sm font-medium">
+                <span>See in Action</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 3: Diagram Interpretation -->
+        <div class="group cursor-pointer">
+          <a href={getUrl('/live-knowledge/diagram-interpretation')} class="block">
+            <div class="bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">3. Diagram Interpretation</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Convert flowcharts, wireframes, and technical diagrams into actionable specifications.
+              </p>
+              <div class="flex items-center text-orange-600 text-sm font-medium">
+                <span>See in Action</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 4: Error Troubleshooting -->
+        <div class="group cursor-pointer">
+          <a href={getUrl('/live-knowledge/error-troubleshooting')} class="block">
+            <div class="bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">4. Error Troubleshooting</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Screenshot error messages and get instant diagnoses with step-by-step solutions.
+              </p>
+              <div class="flex items-center text-orange-600 text-sm font-medium">
+                <span>See in Action</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 5: Equipment Instructions -->
+        <div class="group cursor-pointer">
+          <a href={getUrl('/live-knowledge/equipment-instructions')} class="block">
+            <div class="bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">5. Equipment Instructions</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Take a photo of any device and get personalized step-by-step usage instructions.
+              </p>
+              <div class="flex items-center text-orange-600 text-sm font-medium">
+                <span>See in Action</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 6: Visual Data Extraction -->
+        <div class="group cursor-pointer">
+          <a href={getUrl('/live-knowledge/visual-data-extraction')} class="block">
+            <div class="bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-200 rounded-2xl p-6 transition-all duration-300 h-full">
+              <div class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-4">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-slate-900 mb-3">6. Visual Data Extraction</h3>
+              <p class="text-slate-600 text-sm mb-4">
+                Extract tables, charts, and data from images into structured formats like CSV or JSON.
+              </p>
+              <div class="flex items-center text-orange-600 text-sm font-medium">
+                <span>See in Action</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Key Insight -->
+      <div class="bg-slate-900 rounded-2xl p-8 text-center">
+        <h3 class="text-2xl font-bold text-white mb-4">The Visual Advantage</h3>
+        <p class="text-slate-300 leading-relaxed max-w-3xl mx-auto">
+          Live Knowledge breaks the text barrier. While conversations handle documents and computation automates workflows, 
+          <span class="text-orange-400 font-semibold">multimodal AI transforms the entire visual world into actionable intelligence</span>. 
+          From handwritten notes to complex diagrams, no visual information is beyond reach.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
