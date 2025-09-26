@@ -35,7 +35,94 @@ const dataPipelinesConversation = [
   {
     id: '2',
     sender: 'ai' as const,
-    message: 'I\'ll build a comprehensive data pipeline that can ingest vendor proposals in any format and automatically populate your comparison matrix. Let me create a system that handles document parsing, data extraction, and structured output generation.\\n\\n<strong>🔄 VENDOR PROPOSAL DATA PIPELINE</strong>\\n\\n```python\\n#!/usr/bin/env python3\\n"""\\nVendor Proposal Processing Pipeline\\nAuthor: AI Assistant\\nDescription: Automated extraction and comparison of vendor proposals\\n"""\\n\\nimport pandas as pd\\nimport numpy as np\\nfrom pathlib import Path\\nimport json\\nimport logging\\nfrom typing import Dict, List, Any\\nfrom dataclasses import dataclass\\nfrom datetime import datetime\\n\\n# Document processing imports\\nimport PyPDF2\\nfrom pptx import Presentation\\nfrom openpyxl import load_workbook\\nimport openai\\nfrom PIL import Image\\nimport pytesseract  # For OCR of images in presentations\\n\\n@dataclass\\nclass VendorProposal:\\n    vendor_name: str\\n    document_type: str\\n    pricing_model: str\\n    monthly_cost: float\\n    setup_fees: float\\n    compute_specs: Dict[str, Any]\\n    storage_options: Dict[str, Any]\\n    sla_guarantees: Dict[str, Any]\\n    support_tier: str\\n    contract_terms: Dict[str, Any]\\n    compliance_certifications: List[str]\\n    \\nclass VendorProposalProcessor:\\n    def __init__(self, config_file=\\'pipeline_config.json\\'):\\n        self.config = self.load_config(config_file)\\n        self.extraction_schema = self.define_extraction_schema()\\n        self.processed_proposals = {}\\n        \\n        # Setup logging\\n        logging.basicConfig(level=logging.INFO)\\n        self.logger = logging.getLogger(__name__)\\n\\n    def define_extraction_schema(self):\\n        \"\"\"Define the standardized schema for vendor comparison\"\"\"\\n        return {\\n            \\'pricing\\': {\\n                \\'monthly_base_cost\\': \\'number\\',\\n                \\'per_gb_storage_cost\\': \\'number\\',\\n                \\'data_transfer_cost\\': \\'number\\',\\n                \\'setup_fees\\': \\'number\\'\\n            },\\n            \\'technical_specs\\': {\\n                \\'cpu_cores\\': \\'number\\',\\n                \\'ram_gb\\': \\'number\\',\\n                \\'storage_type\\': \\'string\\',\\n                \\'network_bandwidth\\': \\'string\\'\\n            },\\n            \\'service_levels\\': {\\n                \\'uptime_sla\\': \\'percentage\\',\\n                \\'support_response_time\\': \\'string\\',\\n                \\'backup_frequency\\': \\'string\\'\\n            },\\n            \\'compliance\\': {\\n                \\'certifications\\': \\'list\\',\\n                \\'data_residency\\': \\'string\\',\\n                \\'encryption_standards\\': \\'list\\'\\n            }\\n        }\\n```\\n\\n**📄 MULTI-FORMAT DOCUMENT PROCESSING:**\\n\\n**Phase 1: Document Ingestion**\\n• **PDF Processing:** Extract text, tables, and embedded images\\n• **Excel Analysis:** Parse multiple sheets, formulas, and charts\\n• **PowerPoint Parsing:** Extract slide content, speaker notes, and images\\n• **OCR Integration:** Handle scanned documents and image-based content',
+    message: `I'll build a comprehensive data pipeline that can ingest vendor proposals in any format and automatically populate your comparison matrix. Let me create a system that handles document parsing, data extraction, and structured output generation.
+
+<strong>🔄 VENDOR PROPOSAL DATA PIPELINE</strong>
+
+\`\`\`python
+#!/usr/bin/env python3
+"""
+Vendor Proposal Processing Pipeline
+Author: AI Assistant
+Description: Automated extraction and comparison of vendor proposals
+"""
+
+import pandas as pd
+import numpy as np
+from pathlib import Path
+import json
+import logging
+from typing import Dict, List, Any
+from dataclasses import dataclass
+from datetime import datetime
+
+# Document processing imports
+import PyPDF2
+from pptx import Presentation
+from openpyxl import load_workbook
+import openai
+from PIL import Image
+import pytesseract  # For OCR of images in presentations
+
+@dataclass
+class VendorProposal:
+    vendor_name: str
+    document_type: str
+    pricing_model: str
+    monthly_cost: float
+    setup_fees: float
+    compute_specs: Dict[str, Any]
+    storage_options: Dict[str, Any]
+    sla_guarantees: Dict[str, Any]
+    support_tier: str
+    contract_terms: Dict[str, Any]
+    compliance_certifications: List[str]
+    
+class VendorProposalProcessor:
+    def __init__(self, config_file="pipeline_config.json"):
+        self.config = self.load_config(config_file)
+        self.extraction_schema = self.define_extraction_schema()
+        self.processed_proposals = {}
+        
+        # Setup logging
+        logging.basicConfig(level=logging.INFO)
+        self.logger = logging.getLogger(__name__)
+
+    def define_extraction_schema(self):
+        """Define the standardized schema for vendor comparison"""
+        return {
+            "pricing": {
+                "monthly_base_cost": "number",
+                "per_gb_storage_cost": "number", 
+                "data_transfer_cost": "number",
+                "setup_fees": "number"
+            },
+            "technical_specs": {
+                "cpu_cores": "number",
+                "ram_gb": "number",
+                "storage_type": "string",
+                "network_bandwidth": "string"
+            },
+            "service_levels": {
+                "uptime_sla": "percentage",
+                "support_response_time": "string",
+                "backup_frequency": "string"
+            },
+            "compliance": {
+                "certifications": "list",
+                "data_residency": "string",
+                "encryption_standards": "list"
+            }
+        }
+\`\`\`
+
+**📄 MULTI-FORMAT DOCUMENT PROCESSING:**
+
+**Phase 1: Document Ingestion**
+• **PDF Processing:** Extract text, tables, and embedded images
+• **Excel Analysis:** Parse multiple sheets, formulas, and charts
+• **PowerPoint Parsing:** Extract slide content, speaker notes, and images
+• **OCR Integration:** Handle scanned documents and image-based content`,
     timestamp: '11:32 AM'
   },
   {
@@ -47,7 +134,145 @@ const dataPipelinesConversation = [
   {
     id: '4',
     sender: 'ai' as const,
-    message: '<strong>🔍 INTELLIGENT EXTRACTION ENGINE</strong>\\n\\n```python\\ndef process_pdf_proposal(self, pdf_path: str) -> Dict[str, Any]:\\n    \"\"\"Extract structured data from PDF proposals\"\"\"\\n    \\n    # Extract text from PDF\\n    with open(pdf_path, \\'rb\\') as file:\\n        pdf_reader = PyPDF2.PdfReader(file)\\n        text_content = \\"\\"\\n        for page in pdf_reader.pages:\\n            text_content += page.extract_text()\\n    \\n    # Use AI to extract structured information\\n    extraction_prompt = f\"\"\"\\n    Extract vendor proposal information from this PDF content:\\n    \\n    {text_content[:8000]}  # Truncate for token limits\\n    \\n    Please extract and structure as JSON matching this schema:\\n    {{\\n      \"vendor_name\": \"string\",\\n      \"pricing\": {{\\n        \"monthly_base_cost\": \"number (USD)\",\\n        \"per_gb_storage_cost\": \"number (USD)\",\\n        \"data_transfer_cost\": \"number (USD per GB)\",\\n        \"setup_fees\": \"number (USD)\"\\n      }},\\n      \"technical_specs\": {{\\n        \"cpu_cores\": \"number\",\\n        \"ram_gb\": \"number\",\\n        \"storage_type\": \"SSD/HDD/NVMe\",\\n        \"network_bandwidth\": \"string\"\\n      }},\\n      \"service_levels\": {{\\n        \"uptime_sla\": \"percentage as decimal\",\\n        \"support_response_time\": \"string\",\\n        \"backup_frequency\": \"string\"\\n      }},\\n      \"compliance\": {{\\n        \"certifications\": [\"list of certifications\"],\\n        \"data_residency\": \"string\",\\n        \"encryption_standards\": [\"list of encryption methods\"]\\n      }}\\n    }}\\n    \\n    Handle variations in terminology (e.g., \\'compute units\\' vs \\'CPU cores\\').\\n    Convert all pricing to monthly USD equivalents.\\n    If information is missing, use null values.\\n    \"\"\"\\n    \\n    response = openai.ChatCompletion.create(\\n        model=\"gpt-4-1106-preview\",\\n        messages=[{\"role\": \"user\", \"content\": extraction_prompt}]\\n    )\\n    \\n    return json.loads(response.choices[0].message.content)\\n\\ndef process_excel_proposal(self, excel_path: str) -> Dict[str, Any]:\\n    \"\"\"Extract structured data from Excel proposals\"\"\"\\n    \\n    workbook = load_workbook(excel_path)\\n    extracted_data = {}\\n    \\n    # Process each worksheet\\n    for sheet_name in workbook.sheetnames:\\n        sheet = workbook[sheet_name]\\n        \\n        # Convert sheet to pandas DataFrame\\n        data = []\\n        for row in sheet.iter_rows(values_only=True):\\n            data.append(row)\\n        \\n        df = pd.DataFrame(data)\\n        \\n        # Use AI to understand and extract from tabular data\\n        sheet_summary = self.analyze_excel_sheet(df, sheet_name)\\n        extracted_data[sheet_name] = sheet_summary\\n    \\n    # Combine and normalize across sheets\\n    return self.normalize_excel_data(extracted_data)\\n\\ndef process_powerpoint_proposal(self, pptx_path: str) -> Dict[str, Any]:\\n    \"\"\"Extract structured data from PowerPoint proposals\"\"\"\\n    \\n    presentation = Presentation(pptx_path)\\n    slide_contents = []\\n    \\n    for i, slide in enumerate(presentation.slides):\\n        slide_text = \\\"\\\"\\n        \\n        # Extract text from shapes\\n        for shape in slide.shapes:\\n            if hasattr(shape, \\'text\\'):\\n                slide_text += shape.text + \"\\\\n\"\\n        \\n        # Extract text from tables\\n        for shape in slide.shapes:\\n            if shape.has_table:\\n                table = shape.table\\n                for row in table.rows:\\n                    row_text = []\\n                    for cell in row.cells:\\n                        row_text.append(cell.text)\\n                    slide_text += \" | \".join(row_text) + \"\\\\n\"\\n        \\n        # Process images with OCR if needed\\n        for shape in slide.shapes:\\n            if shape.shape_type == 13:  # Picture\\n                try:\\n                    image = Image.open(io.BytesIO(shape.image.blob))\\n                    ocr_text = pytesseract.image_to_string(image)\\n                    slide_text += f\"[Image text: {ocr_text}]\\\\n\"\\n                except:\\n                    self.logger.warning(f\"Could not process image in slide {i}\")\\n        \\n        slide_contents.append({\\n            \\'slide_number\\': i + 1,\\n            \\'content\\': slide_text\\n        })\\n    \\n    # Use AI to extract structured information from presentation\\n    return self.extract_from_presentation_content(slide_contents)\\n```\\n\\n**🔧 INTELLIGENT NORMALIZATION:**\\n\\n```python\\ndef normalize_extracted_data(self, raw_data: Dict[str, Any], vendor_name: str) -> VendorProposal:\\n    \"\"\"Normalize extracted data into standardized format\"\"\"\\n    \\n    normalization_prompt = f\"\"\"\\n    Normalize this vendor proposal data into a standardized format:\\n    \\n    Raw Data: {json.dumps(raw_data, indent=2)}\\n    Vendor: {vendor_name}\\n    \\n    Please normalize and return in this exact structure:\\n    {{\\n      \"monthly_cost_usd\": <number>,\\n      \"setup_fees_usd\": <number>,\\n      \"compute_vcpus\": <number>,\\n      \"memory_gb\": <number>,\\n      \"storage_type\": \"SSD|HDD|NVMe\",\\n      \"uptime_sla_percent\": <decimal 0-1>,\\n      \"support_tier\": \"Basic|Standard|Premium|Enterprise\",\\n      \"certifications\": [<list of compliance certs>],\\n      \"contract_length_months\": <number>,\\n      \"data_centers_regions\": [<list of regions>],\\n      \"backup_included\": <boolean>,\\n      \"monitoring_included\": <boolean>\\n    }}\\n    \\n    Conversion rules:\\n    - Convert all currencies to USD\\n    - Normalize CPU specs (cores, vCPUs, etc.) to vCPU count\\n    - Convert storage sizes to GB\\n    - Standardize region names (us-east-1, eu-west-1, etc.)\\n    - Map support tiers to standard categories\\n    - Convert SLA percentages to decimals (99.9% = 0.999)\\n    \"\"\"\\n    \\n    response = openai.ChatCompletion.create(\\n        model=\"gpt-4\",\\n        messages=[{\"role\": \"user\", \"content\": normalization_prompt}]\\n    )\\n    \\n    normalized = json.loads(response.choices[0].message.content)\\n    \\n    return VendorProposal(\\n        vendor_name=vendor_name,\\n        document_type=raw_data.get(\\'document_type\\', \\'unknown\\'),\\n        monthly_cost=normalized[\\'monthly_cost_usd\\'],\\n        setup_fees=normalized[\\'setup_fees_usd\\'],\\n        compute_specs={\\n            \\'vcpus\\': normalized[\\'compute_vcpus\\'],\\n            \\'memory_gb\\': normalized[\\'memory_gb\\'],\\n            \\'storage_type\\': normalized[\\'storage_type\\']\\n        },\\n        sla_guarantees={\\'uptime\\': normalized[\\'uptime_sla_percent\\']},\\n        support_tier=normalized[\\'support_tier\\'],\\n        compliance_certifications=normalized[\\'certifications\\'],\\n        contract_terms={\\'length_months\\': normalized[\\'contract_length_months\\']},\\n        # ... additional fields\\n    )\\n```\\n\\n**📊 KEY NORMALIZATION CHALLENGES SOLVED:**\\n\\n**Pricing Variations:**\\n• **AWS:** \"$0.096/hour\" → Converts to $69.12/month\\n• **Azure:** \"$2,100/month\" → Direct monthly cost\\n• **GCP:** \"$0.00014/second\" → Converts to $365.04/month\\n\\n**Technical Specifications:**\\n• **CPU:** \"4 cores\", \"4 vCPUs\", \"4 compute units\" → Normalized to 4 vCPUs\\n• **Storage:** \"500GB SSD\", \"0.5TB solid state\" → Normalized to 500GB SSD\\n• **Memory:** \"8192MB\", \"8GB RAM\" → Normalized to 8GB\\n\\n**Service Levels:**\\n• **Uptime:** \"99.95%\", \"four nines\" → Normalized to 0.9995\\n• **Support:** \"24x7\", \"Premium\", \"Enterprise\" → Mapped to standard tiers',
+    message: `<strong>🔍 INTELLIGENT EXTRACTION ENGINE</strong>
+
+\`\`\`python
+def process_pdf_proposal(self, pdf_path: str) -> Dict[str, Any]:
+    """Extract structured data from PDF proposals"""
+    
+    # Extract text from PDF
+    with open(pdf_path, 'rb') as file:
+        pdf_reader = PyPDF2.PdfReader(file)
+        text_content = ""
+        for page in pdf_reader.pages:
+            text_content += page.extract_text()
+    
+    # Use AI to extract structured information
+    extraction_prompt = f"""
+    Extract vendor proposal information from this PDF content:
+    
+    {text_content[:8000]}  # Truncate for token limits
+    
+    Please extract and structure as JSON matching this schema:
+    {{
+      "vendor_name": "string",
+      "pricing": {{
+        "monthly_base_cost": "number (USD)",
+        "per_gb_storage_cost": "number (USD)",
+        "data_transfer_cost": "number (USD per GB)",
+        "setup_fees": "number (USD)"
+      }},
+      "technical_specs": {{
+        "cpu_cores": "number",
+        "ram_gb": "number", 
+        "storage_type": "SSD/HDD/NVMe",
+        "network_bandwidth": "string"
+      }},
+      "service_levels": {{
+        "uptime_sla": "percentage as decimal",
+        "support_response_time": "string",
+        "backup_frequency": "string"
+      }},
+      "compliance": {{
+        "certifications": ["list of certifications"],
+        "data_residency": "string",
+        "encryption_standards": ["list of encryption methods"]
+      }}
+    }}
+    
+    Handle variations in terminology (e.g., 'compute units' vs 'CPU cores').
+    Convert all pricing to monthly USD equivalents.
+    If information is missing, use null values.
+    """
+    
+    response = openai.ChatCompletion.create(
+        model="gpt-4-1106-preview",
+        messages=[{"role": "user", "content": extraction_prompt}]
+    )
+    
+    return json.loads(response.choices[0].message.content)
+
+def process_excel_proposal(self, excel_path: str) -> Dict[str, Any]:
+    """Extract structured data from Excel proposals"""
+    
+    workbook = load_workbook(excel_path)
+    extracted_data = {}
+    
+    # Process each worksheet
+    for sheet_name in workbook.sheetnames:
+        sheet = workbook[sheet_name]
+        
+        # Convert sheet to pandas DataFrame
+        data = []
+        for row in sheet.iter_rows(values_only=True):
+            data.append(row)
+        
+        df = pd.DataFrame(data)
+        
+        # Use AI to understand and extract from tabular data
+        sheet_summary = self.analyze_excel_sheet(df, sheet_name)
+        extracted_data[sheet_name] = sheet_summary
+    
+    # Combine and normalize across sheets
+    return self.normalize_excel_data(extracted_data)
+
+def normalize_extracted_data(self, raw_data: Dict[str, Any], vendor_name: str):
+    """Normalize extracted data into standardized format"""
+    
+    normalization_prompt = f"""
+    Normalize this vendor proposal data into a standardized format:
+    
+    Raw Data: {json.dumps(raw_data, indent=2)}
+    Vendor: {vendor_name}
+    
+    Please normalize and return in this exact structure:
+    {{
+      "monthly_cost_usd": <number>,
+      "setup_fees_usd": <number>,
+      "compute_vcpus": <number>,
+      "memory_gb": <number>,
+      "storage_type": "SSD|HDD|NVMe",
+      "uptime_sla_percent": <decimal 0-1>,
+      "support_tier": "Basic|Standard|Premium|Enterprise",
+      "certifications": [<list of compliance certs>],
+      "contract_length_months": <number>,
+      "data_centers_regions": [<list of regions>],
+      "backup_included": <boolean>,
+      "monitoring_included": <boolean>
+    }}
+    
+    Conversion rules:
+    - Convert all currencies to USD
+    - Normalize CPU specs (cores, vCPUs, etc.) to vCPU count
+    - Convert storage sizes to GB
+    - Standardize region names (us-east-1, eu-west-1, etc.)
+    - Map support tiers to standard categories
+    - Convert SLA percentages to decimals (99.9% = 0.999)
+    """
+    
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": normalization_prompt}]
+    )
+    
+    return json.loads(response.choices[0].message.content)
+\`\`\`
+
+**📊 KEY NORMALIZATION CHALLENGES SOLVED:**
+
+**Pricing Variations:**
+• **AWS:** "$0.096/hour" → Converts to $69.12/month
+• **Azure:** "$2,100/month" → Direct monthly cost
+• **GCP:** "$0.00014/second" → Converts to $365.04/month
+
+**Technical Specifications:**
+• **CPU:** "4 cores", "4 vCPUs", "4 compute units" → Normalized to 4 vCPUs
+• **Storage:** "500GB SSD", "0.5TB solid state" → Normalized to 500GB SSD
+• **Memory:** "8192MB", "8GB RAM" → Normalized to 8GB
+
+**Service Levels:**
+• **Uptime:** "99.95%", "four nines" → Normalized to 0.9995
+• **Support:** "24x7", "Premium", "Enterprise" → Mapped to standard tiers`,
     timestamp: '11:35 AM'
   },
   {
@@ -59,7 +284,98 @@ const dataPipelinesConversation = [
   {
     id: '6',
     sender: 'ai' as const,
-    message: '<strong>📈 AUTOMATED COMPARISON MATRIX GENERATION</strong>\\n\\n```python\\ndef generate_comparison_matrix(self) -> pd.DataFrame:\\n    \"\"\"Generate comprehensive vendor comparison matrix\"\"\"\\n    \\n    # Create comparison DataFrame\\n    comparison_data = []\\n    \\n    for vendor, proposal in self.processed_proposals.items():\\n        row = {\\n            \\'Vendor\\': proposal.vendor_name,\\n            \\'Monthly Cost (USD)\\': proposal.monthly_cost,\\n            \\'Setup Fees (USD)\\': proposal.setup_fees,\\n            \\'vCPUs\\': proposal.compute_specs.get(\\'vcpus\\', \\'N/A\\'),\\n            \\'Memory (GB)\\': proposal.compute_specs.get(\\'memory_gb\\', \\'N/A\\'),\\n            \\'Storage Type\\': proposal.compute_specs.get(\\'storage_type\\', \\'N/A\\'),\\n            \\'Uptime SLA (%)\\': f\"{proposal.sla_guarantees.get(\\'uptime\\', 0) * 100:.2f}%\",\\n            \\'Support Tier\\': proposal.support_tier,\\n            \\'SOC 2 Certified\\': \\'SOC 2\\' in proposal.compliance_certifications,\\n            \\'HIPAA Compliant\\': \\'HIPAA\\' in proposal.compliance_certifications,\\n            \\'Contract Length\\': f\"{proposal.contract_terms.get(\\'length_months\\', \\'TBD\\')} months\"\\n        }\\n        comparison_data.append(row)\\n    \\n    df = pd.DataFrame(comparison_data)\\n    \\n    # Add calculated columns\\n    df[\\'Cost per vCPU\\'] = df[\\'Monthly Cost (USD)\\'] / df[\\'vCPUs\\'].replace(\\'N/A\\', np.nan)\\n    df[\\'Total First Year Cost\\'] = df[\\'Monthly Cost (USD)\\'] * 12 + df[\\'Setup Fees (USD)\\']\\n    \\n    return df\\n\\ndef create_executive_summary(self, comparison_df: pd.DataFrame) -> str:\\n    \"\"\"Generate executive summary with recommendations\"\"\"\\n    \\n    analysis_prompt = f\"\"\"\\n    Create an executive summary for vendor selection based on this comparison data:\\n    \\n    {comparison_df.to_string()}\\n    \\n    Please provide:\\n    \\n    1. TOP 3 RECOMMENDATIONS with rationale\\n    2. KEY DIFFERENTIATORS between vendors\\n    3. RISK ASSESSMENT for each option\\n    4. COST-BENEFIT ANALYSIS summary\\n    5. DECISION CRITERIA recommendations\\n    \\n    Format as professional executive summary for procurement decision.\\n    Focus on business value, not just technical specs.\\n    \"\"\"\\n    \\n    response = openai.ChatCompletion.create(\\n        model=\"gpt-4\",\\n        messages=[{\"role\": \"user\", \"content\": analysis_prompt}]\\n    )\\n    \\n    return response.choices[0].message.content\\n\\ndef export_results(self, comparison_df: pd.DataFrame, summary: str):\\n    \"\"\"Export results to Excel with multiple sheets\"\"\"\\n    \\n    timestamp = datetime.now().strftime(\"%Y%m%d_%H%M%S\")\\n    filename = f\\'vendor_comparison_{timestamp}.xlsx\\'\\n    \\n    with pd.ExcelWriter(filename, engine=\\'openpyxl\\') as writer:\\n        # Main comparison sheet\\n        comparison_df.to_excel(writer, sheet_name=\\'Vendor Comparison\\', index=False)\\n        \\n        # Executive summary sheet\\n        summary_df = pd.DataFrame({\\'Executive Summary\\': [summary]})\\n        summary_df.to_excel(writer, sheet_name=\\'Executive Summary\\', index=False)\\n        \\n        # Detailed analysis sheets\\n        for vendor, proposal in self.processed_proposals.items():\\n            detail_data = {\\n                \\'Category\\': [],\\n                \\'Specification\\': [],\\n                \\'Value\\': []\\n            }\\n            \\n            # Add detailed specs for each vendor\\n            for category, specs in proposal.__dict__.items():\\n                if isinstance(specs, dict):\\n                    for key, value in specs.items():\\n                        detail_data[\\'Category\\'].append(category)\\n                        detail_data[\\'Specification\\'].append(key)\\n                        detail_data[\\'Value\\'].append(str(value))\\n                else:\\n                    detail_data[\\'Category\\'].append(\\'General\\')\\n                    detail_data[\\'Specification\\'].append(category)\\n                    detail_data[\\'Value\\'].append(str(specs))\\n            \\n            detail_df = pd.DataFrame(detail_data)\\n            sheet_name = f\\'{vendor} Details\\'[:31]  # Excel sheet name limit\\n            detail_df.to_excel(writer, sheet_name=sheet_name, index=False)\\n    \\n    return filename\\n```\\n\\n**📊 GENERATED COMPARISON MATRIX:**\\n\\n| Vendor | Monthly Cost | vCPUs | Memory | Storage | Uptime SLA | Support | SOC 2 | Total 1st Year |\\n|--------|-------------|--------|---------|---------|------------|---------|-------|----------------|\\n| **AWS** | $2,340 | 16 | 64GB | NVMe SSD | 99.95% | Enterprise | ✅ | $28,080 |\\n| **Azure** | $2,100 | 14 | 56GB | Premium SSD | 99.9% | Premium | ✅ | $26,200 |\\n| **GCP** | $1,890 | 16 | 64GB | SSD | 99.95% | Standard | ✅ | $23,180 |\\n\\n**🎯 EXECUTIVE SUMMARY HIGHLIGHTS:**\\n\\n**TOP RECOMMENDATION: Google Cloud Platform**\\n• **Cost Advantage:** 19% lower than AWS, 11% lower than Azure\\n• **Performance:** Matches AWS specs at lower cost\\n• **Risk:** Standard support tier may require upgrade for production\\n\\n**KEY DIFFERENTIATORS:**\\n• **AWS:** Premium support, extensive compliance, highest cost\\n• **Azure:** Balanced offering, strong enterprise integration\\n• **GCP:** Best price-performance ratio, newer infrastructure\\n\\n**DECISION FRAMEWORK:**\\n• **Cost-Optimized:** Choose GCP (save $4,900+ annually)\\n• **Risk-Minimized:** Choose AWS (proven enterprise track record)\\n• **Balanced Approach:** Choose Azure (middle ground on cost/features)\\n\\n**📋 AUTOMATED PIPELINE BENEFITS:**\\n• **Processing Time:** 3 proposals analyzed in 15 minutes (vs 8+ hours manual)\\n• **Accuracy:** Eliminates transcription errors and missed details\\n• **Consistency:** Standardized comparison across all vendors\\n• **Scalability:** Can handle unlimited proposal volume\\n• **Auditability:** Complete extraction and normalization trail',
+    message: `<strong>📈 AUTOMATED COMPARISON MATRIX GENERATION</strong>
+
+\`\`\`python
+def generate_comparison_matrix(self) -> pd.DataFrame:
+    """Generate comprehensive vendor comparison matrix"""
+    
+    # Create comparison DataFrame
+    comparison_data = []
+    
+    for vendor, proposal in self.processed_proposals.items():
+        row = {
+            "Vendor": proposal.vendor_name,
+            "Monthly Cost (USD)": proposal.monthly_cost,
+            "Setup Fees (USD)": proposal.setup_fees,
+            "vCPUs": proposal.compute_specs.get("vcpus", "N/A"),
+            "Memory (GB)": proposal.compute_specs.get("memory_gb", "N/A"),
+            "Storage Type": proposal.compute_specs.get("storage_type", "N/A"),
+            "Uptime SLA (%)": f"{proposal.sla_guarantees.get('uptime', 0) * 100:.2f}%",
+            "Support Tier": proposal.support_tier,
+            "SOC 2 Certified": "SOC 2" in proposal.compliance_certifications,
+            "HIPAA Compliant": "HIPAA" in proposal.compliance_certifications,
+            "Contract Length": f"{proposal.contract_terms.get('length_months', 'TBD')} months"
+        }
+        comparison_data.append(row)
+    
+    df = pd.DataFrame(comparison_data)
+    
+    # Add calculated columns
+    df["Cost per vCPU"] = df["Monthly Cost (USD)"] / df["vCPUs"].replace("N/A", np.nan)
+    df["Total First Year Cost"] = df["Monthly Cost (USD)"] * 12 + df["Setup Fees (USD)"]
+    
+    return df
+
+def create_executive_summary(self, comparison_df: pd.DataFrame) -> str:
+    """Generate executive summary with recommendations"""
+    
+    analysis_prompt = f"""
+    Create an executive summary for vendor selection based on this comparison data:
+    
+    {comparison_df.to_string()}
+    
+    Please provide:
+    
+    1. TOP 3 RECOMMENDATIONS with rationale
+    2. KEY DIFFERENTIATORS between vendors
+    3. RISK ASSESSMENT for each option
+    4. COST-BENEFIT ANALYSIS summary
+    5. DECISION CRITERIA recommendations
+    
+    Format as professional executive summary for procurement decision.
+    Focus on business value, not just technical specs.
+    """
+    
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": analysis_prompt}]
+    )
+    
+    return response.choices[0].message.content
+\`\`\`
+
+**📊 GENERATED COMPARISON MATRIX:**
+
+| Vendor | Monthly Cost | vCPUs | Memory | Storage | Uptime SLA | Support | SOC 2 | Total 1st Year |
+|--------|-------------|--------|---------|---------|------------|---------|-------|----------------|
+| **AWS** | $2,340 | 16 | 64GB | NVMe SSD | 99.95% | Enterprise | ✅ | $28,080 |
+| **Azure** | $2,100 | 14 | 56GB | Premium SSD | 99.9% | Premium | ✅ | $26,200 |
+| **GCP** | $1,890 | 16 | 64GB | SSD | 99.95% | Standard | ✅ | $23,180 |
+
+**🎯 EXECUTIVE SUMMARY HIGHLIGHTS:**
+
+**TOP RECOMMENDATION: Google Cloud Platform**
+• **Cost Advantage:** 19% lower than AWS, 11% lower than Azure
+• **Performance:** Matches AWS specs at lower cost
+• **Risk:** Standard support tier may require upgrade for production
+
+**KEY DIFFERENTIATORS:**
+• **AWS:** Premium support, extensive compliance, highest cost
+• **Azure:** Balanced offering, strong enterprise integration
+• **GCP:** Best price-performance ratio, newer infrastructure
+
+**DECISION FRAMEWORK:**
+• **Cost-Optimized:** Choose GCP (save $4,900+ annually)
+• **Risk-Minimized:** Choose AWS (proven enterprise track record)
+• **Balanced Approach:** Choose Azure (middle ground on cost/features)
+
+**📋 AUTOMATED PIPELINE BENEFITS:**
+• **Processing Time:** 3 proposals analyzed in 15 minutes (vs 8+ hours manual)
+• **Accuracy:** Eliminates transcription errors and missed details
+• **Consistency:** Standardized comparison across all vendors
+• **Scalability:** Can handle unlimited proposal volume
+• **Auditability:** Complete extraction and normalization trail`,
     timestamp: '11:38 AM',
     documents: [
       {
