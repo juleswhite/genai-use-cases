@@ -3,6 +3,51 @@ import Layout from '../../layouts/Layout.astro';
 import ChatConversation from '../../components/ChatConversation.astro';
 import '../../styles/global.css';
 
+const researchIntelligenceConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need a comprehensive research intelligence platform that can track faculty research performance, identify collaboration opportunities, and automatically generate reports for promotion committees. Can you show me what this system would look like?',
+    timestamp: '10:15 AM',
+    documents: []
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve built a complete Research Intelligence Platform that aggregates data from multiple sources. Here\'s the live dashboard:\\n\\n<strong>🔬 RESEARCH INTELLIGENCE HUB</strong>\\n\\n<strong>📊 FACULTY RESEARCH OVERVIEW:</strong>\\n\\n<strong>Publication Metrics (Last 12 months):</strong>\\n• Total publications: 847 (↑23% from previous year)\\n• Peer-reviewed articles: 623\\n• High-impact journals (IF >5): 156\\n• International collaborations: 34%\\n• Open access compliance: 78%\\n\\n<strong>Grant Performance:</strong>\\n• Active grants: $12.7M across 89 projects\\n• Success rate: 31.2% (above national average)\\n• New awards this year: $4.1M\\n• Pending proposals: 23 ($6.8M requested)\\n\\n<strong>⚡ AI-POWERED INSIGHTS:</strong>\\n\\n<strong>Collaboration Opportunities Identified:</strong>\\n• Dr. Martinez (Chemistry) + Dr. Chen (Engineering): Shared nanomaterials interest\\n• Dr. Johnson (Psychology) + Dr. Williams (Computer Science): AI ethics overlap\\n• Cross-department potential: 15 new partnerships suggested\\n\\n<strong>🚨 PRIORITY ALERTS:</strong>\\n• 3 faculty approaching promotion deadline need documentation\\n• NSF proposal deadline in 2 weeks: 4 faculty eligible\\n• Research misconduct training: 12 faculty overdue',
+    timestamp: '10:17 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Excellent! Can you show me how the automated promotion dossier generation works?',
+    timestamp: '10:18 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📋 AUTOMATED PROMOTION DOSSIER SYSTEM</strong>\\n\\n<strong>Case Study: Dr. Sarah Martinez - Associate to Full Professor</strong>\\n\\n<strong>⚡ AUTO-GENERATED RESEARCH PORTFOLIO:</strong>\\n\\n<strong>Publication Analysis (2019-2024):</strong>\\n• Total publications: 34 peer-reviewed articles\\n• Citation impact: 1,247 citations (h-index: 18)\\n• Journal quality: 67% in Q1 journals\\n• Research trajectory: 15% annual increase in citations\\n• International reach: Published in 12 countries\\n\\n<strong>Grant Success Record:</strong>\\n• Total funding secured: $2.8M as PI, $1.4M as Co-PI\\n• Success rate: 42% (significantly above discipline average)\\n• Funding agencies: NSF (3), NIH (2), Industry (4)\\n• Project leadership: 6 multi-PI grants coordinated\\n\\n<strong>🎯 COMPARATIVE BENCHMARKING:</strong>\\n\\n<strong>Peer Institution Analysis:</strong>\\n• Publications vs peers: 89th percentile\\n• Citation impact vs field: 91st percentile\\n• Grant funding vs discipline: 85th percentile\\n• Teaching evaluation: 4.7/5.0 (top 15%)\\n\\n<strong>📊 AUTO-COMPILED EVIDENCE:</strong>\\n\\n<strong>Research Excellence Documentation:</strong>\\n✅ Bibliography auto-formatted (34 publications)\\n✅ Citation report generated with trends\\n✅ Grant timeline with impact statements\\n✅ Collaboration network visualization\\n✅ Media coverage compilation (8 articles)\\n\\n<strong>Service & Leadership:</strong>\\n✅ Editorial board memberships (3 journals)\\n✅ Conference organization roles\\n✅ Peer review activity (47 manuscripts)\\n✅ University committee service record\\n\\n<strong>🤖 AI-GENERATED NARRATIVE:</strong>\\n\\n<em>"Dr. Martinez has established herself as a leading researcher in sustainable chemistry, with a publication record that places her in the top 10% of researchers in her field. Her research program has attracted $2.8M in external funding and produced breakthrough discoveries in green catalysis that have been cited 1,247 times..."</em>\\n\\n<strong>📋 PROMOTION COMMITTEE PACKAGE:</strong>\\n• Executive summary (2 pages)\\n• Detailed CV with impact metrics\\n• Research narrative with trajectory analysis\\n• External letter writer suggestions (AI-recommended)\\n• Comparative analysis with successful cases\\n• Timeline and next steps checklist\\n\\n<strong>⏱️ GENERATION TIME:</strong> 23 minutes vs 6-8 weeks manual compilation\\n\\n<em>💡 All data verified against original sources. Committee can drill down into any metric for detailed supporting evidence.</em>',
+    timestamp: '10:20 AM',
+    documents: [
+      {
+        name: 'Martinez_Promotion_Dossier.pdf',
+        type: 'pdf' as const,
+        size: '4.2 MB'
+      },
+      {
+        name: 'Research_Intelligence_Dashboard.html',
+        type: 'html' as const,
+        size: '2.8 MB'
+      },
+      {
+        name: 'Faculty_Performance_Analytics.xlsx',
+        type: 'xlsx' as const,
+        size: '1.1 MB'
+      }
+    ]
+  }
+];
+
 const grantProposalConversation = [
   {
     id: '1',
@@ -293,6 +338,38 @@ const facultyEvaluationConversation = [
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- End-to-End AI Application: Research Intelligence Platform -->
+  <section class="py-16 bg-gradient-to-br from-purple-50 via-white to-indigo-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-900 mb-6">Research Intelligence Platform</h2>
+        <p class="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          Experience a comprehensive research intelligence system that tracks faculty performance, 
+          identifies collaboration opportunities, and automatically generates promotion dossiers 
+          by analyzing publications, grants, and impact metrics.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">AI-Powered Faculty Analytics Hub</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch an intelligent platform analyze research data, identify collaboration opportunities, 
+          and automatically generate comprehensive promotion documentation
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={researchIntelligenceConversation}
+        title="Research Intelligence & Analytics"
+        description="Research platform: data aggregation → performance analysis → automated documentation"
+      />
     </div>
   </section>
 

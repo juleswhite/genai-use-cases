@@ -3,6 +3,97 @@ import Layout from '../../layouts/Layout.astro';
 import ChatConversation from '../../components/ChatConversation.astro';
 import '../../styles/global.css';
 
+const documentPipelineConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I just received 50+ vendor contracts that need review and approval. Usually this takes our legal team 3-4 weeks to process manually. Can you show me how the automated document pipeline would handle this?',
+    timestamp: '9:00 AM',
+    documents: [
+      {
+        name: 'Contract_Upload_Notification.pdf',
+        type: 'pdf' as const,
+        size: '12 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve detected 52 new contracts in your vendor folder. The AI pipeline is now processing them automatically:\\n\\n<strong>📂 DOCUMENT PIPELINE STATUS:</strong>\\n\\n<strong>Step 1: Intelligent Classification (Completed - 2 minutes)</strong>\\n• Software licenses: 23 contracts\\n• Service agreements: 18 contracts\\n• Purchase orders: 8 contracts\\n• NDAs: 3 contracts\\n\\n<strong>Step 2: Risk Analysis (In Progress - 15 minutes)</strong>\\n🔍 Currently analyzing liability clauses...\\n\\n<strong>🚨 IMMEDIATE ALERTS:</strong>\\n• HIGH RISK: DataCorp contract - $2.3M, unusual termination clause\\n• MEDIUM RISK: CloudService Inc - Missing data breach notification requirements\\n• URGENT: 3 contracts expire this month\\n\\n<strong>Step 3: Auto-Routing</strong>\\n• 31 low-risk contracts → Auto-approved (standard terms)\\n• 15 medium-risk contracts → Legal review queue\\n• 6 high-risk contracts → Director approval required',
+    timestamp: '9:02 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Amazing! What happens next with the high-risk contracts that need director approval?',
+    timestamp: '9:03 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🎯 HIGH-RISK CONTRACT AUTOMATION:</strong>\\n\\n<strong>Director Notification Sent:</strong>\\n• Email with risk summary and recommendations\\n• Calendar block created for review meeting tomorrow 2 PM\\n• Comparison analysis with similar past contracts\\n\\n<strong>📋 AUTO-GENERATED REVIEW PACKAGE:</strong>\\n\\n<strong>DataCorp Contract Analysis:</strong>\\n• Risk Score: 85/100\\n• Key Issues: Unusual 30-day termination without cause\\n• Financial Impact: $2.3M annually\\n• Recommended Action: Negotiate standard 90-day terms\\n• Similar Cases: 3 previous negotiations (successful)\\n\\n<strong>⚡ NEXT STEPS AUTOMATED:</strong>\\n• Draft negotiation points created\\n• Legal precedent research compiled\\n• Vendor contact information prepared\\n• Meeting agenda auto-generated\\n\\n<strong>📊 PIPELINE EFFICIENCY:</strong>\\n• Total processing time: 47 minutes vs 3-4 weeks\\n• Auto-approved: 31 contracts (ready for signature)\\n• Director review needed: 6 contracts (streamlined packets ready)\\n• Estimated time savings: 89% reduction\\n\\n<strong>🔄 CONTINUOUS MONITORING:</strong>\\n• Vendor performance tracking activated\\n• Contract milestone reminders set\\n• Renewal notifications scheduled\\n• Compliance monitoring initiated',
+    timestamp: '9:05 AM',
+    documents: [
+      {
+        name: 'Director_Review_Package.pdf',
+        type: 'pdf' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'Auto_Approved_Contracts_Summary.xlsx',
+        type: 'xlsx' as const,
+        size: '456 KB'
+      }
+    ]
+  }
+];
+
+const executiveDashboardConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to prepare for the weekly leadership meeting in 30 minutes. Can you pull together a comprehensive dashboard showing our operational performance across all departments?',
+    timestamp: '1:30 PM',
+    documents: []
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve generated your real-time executive dashboard by pulling data from 8 campus systems:\\n\\n<strong>🎛️ LIVE OPERATIONS DASHBOARD</strong>\\n\\n<strong>📊 KEY METRICS (Last 7 Days):</strong>\\n\\n<strong>Financial Performance:</strong>\\n• Budget utilization: 73% (on track)\\n• Vendor payments processed: $1.2M\\n• Purchase orders pending: 23 (down from 45)\\n• Cost savings identified: $67K\\n\\n<strong>HR & Staffing:</strong>\\n• Employee satisfaction: 87% (↑3%)\\n• Open positions: 12 (critical: 2)\\n• Training completion rate: 94%\\n• Time-off coverage: 98% staffed\\n\\n<strong>Project Portfolio:</strong>\\n• On-time delivery: 89% (↑12%)\\n• Budget variance: +2.1% (within range)\\n• Risk items requiring attention: 4\\n• Milestone completions: 15 this week',
+    timestamp: '1:32 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Perfect! Can you identify the top 3 items that need leadership attention and prepare talking points?',
+    timestamp: '1:33 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🚨 TOP 3 LEADERSHIP PRIORITIES:</strong>\\n\\n<strong>1. IT Infrastructure Upgrade (CRITICAL)</strong>\\n• Status: 2 weeks behind schedule\\n• Impact: May delay 3 other projects worth $890K\\n• Root cause: Vendor delivery issues\\n• Recommended action: Activate backup vendor by Friday\\n• Talking points: "Need approval for $45K expedite fee to get back on track"\\n\\n<strong>2. Finance Department Staffing Gap</strong>\\n• Status: Senior analyst position open 6 weeks\\n• Impact: Manual processes causing 3-day payment delays\\n• Current mitigation: Contractor covering 60% capacity\\n• Recommended action: Approve salary increase to attract talent\\n• Talking points: "Recommend 8% salary bump - will save $2K/month vs contractor"\\n\\n<strong>3. Student Information System Integration</strong>\\n• Status: 94% complete, final testing phase\\n• Opportunity: Early launch could save $15K in legacy system costs\\n• Risk: Rushing could cause registration issues\\n• Recommended action: Proceed with planned December launch\\n• Talking points: "On track for major win - stay the course for December"\\n\\n<strong>📈 SUCCESS HIGHLIGHTS TO MENTION:</strong>\\n• Contract processing time reduced 89%\\n• Employee satisfaction up 3 points\\n• Project delivery improvements exceeding goals\\n• Cost savings ahead of annual target by $67K\\n\\n<strong>📋 PRE-MEETING ACTIONS COMPLETED:</strong>\\n• Vendor backup quotes obtained\\n• HR salary analysis prepared\\n• Project timeline scenarios modeled\\n• Financial impact calculations verified',
+    timestamp: '1:35 PM',
+    documents: [
+      {
+        name: 'Executive_Dashboard_Live.html',
+        type: 'html' as const,
+        size: '1.8 MB'
+      },
+      {
+        name: 'Leadership_Talking_Points.docx',
+        type: 'docx' as const,
+        size: '89 KB'
+      },
+      {
+        name: 'Priority_Action_Items.pdf',
+        type: 'pdf' as const,
+        size: '234 KB'
+      }
+    ]
+  }
+];
+
 const calendarCoordinationConversation = [
   {
     id: '1',
@@ -335,6 +426,116 @@ const documentWorkflowConversation = [
               <span>Strategic planning support</span>
             </li>
           </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End AI Applications -->
+  <section class="py-16 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-900 mb-6">Complete AI Applications</h2>
+        <p class="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          See full end-to-end AI systems in action: automated document pipelines that process contracts 
+          from upload to approval, and real-time executive dashboards that pull data from multiple 
+          campus systems to prepare leadership briefings.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End Application 1: Document Pipeline -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Automated Contract Processing Pipeline</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch a complete document workflow: from 50+ vendor contracts dropped in a folder 
+          to automated classification, risk analysis, and intelligent routing in under an hour
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={documentPipelineConversation}
+        title="Document-Triggered AI Pipeline"
+        description="End-to-end contract processing: folder upload → AI analysis → automated routing → director briefing"
+      />
+    </div>
+  </section>
+
+  <!-- End-to-End Application 2: Executive Dashboard -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Real-Time Executive Operations Dashboard</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Experience an AI-powered web application that pulls live data from 8+ campus systems 
+          to generate executive summaries and leadership talking points in minutes
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={executiveDashboardConversation}
+        title="Multi-System Executive Intelligence"
+        description="Live dashboard application: data fusion → priority analysis → leadership brief generation"
+      />
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">Application Architecture</h2>
+      <div class="grid md:grid-cols-2 gap-8 mt-12">
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">📂 Document Pipeline System</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Folder monitoring triggers</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Multi-format document processing</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Risk scoring algorithms</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Intelligent workflow routing</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Automated notifications & follow-ups</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">🎛️ Executive Dashboard App</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Real-time API integrations</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Cross-system data fusion</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Priority ranking algorithms</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Automated brief generation</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Interactive web interface</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

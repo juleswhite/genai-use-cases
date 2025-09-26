@@ -3,6 +3,51 @@ import Layout from '../../layouts/Layout.astro';
 import ChatConversation from '../../components/ChatConversation.astro';
 import '../../styles/global.css';
 
+const financialIntelligenceConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need a complete financial intelligence dashboard that can analyze spend patterns, predict budget variances, and automatically generate reports from our Oracle ERP, PeopleSoft HR, and procurement systems. Can you show me what this looks like?',
+    timestamp: '9:30 AM',
+    documents: []
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve built a comprehensive Financial Intelligence Platform connecting all your systems. Here\'s the real-time dashboard:\\n\\n<strong>💰 FINANCIAL INTELLIGENCE HUB - LIVE VIEW</strong>\\n\\n<strong>🔍 REAL-TIME FINANCIAL OVERVIEW:</strong>\\n\\n<strong>Budget Performance (FY2024):</strong>\\n• Total budget utilization: 76.3% (on track)\\n• Departments over budget: 3 of 24\\n• Projected variance: +2.1% (within tolerance)\\n• Cash flow forecast: Strong through Q4\\n\\n<strong>Oracle ERP Integration:</strong>\\n✅ 1,247 transactions processed today\\n✅ Invoice approval queue: 23 pending\\n✅ Purchase orders: 156 active\\n✅ Vendor payments: $2.3M scheduled this week\\n\\n<strong>PeopleSoft HR Connection:</strong>\\n✅ Payroll data: $4.2M monthly\\n✅ Benefits costs: 31.2% of salary\\n✅ Overtime tracking: 4.7% above normal\\n✅ Position budget vs actual: 94% filled\\n\\n<strong>🚨 PREDICTIVE ALERTS:</strong>\\n• IT Department projected 12% over budget by March\\n• Facilities maintenance costs trending up 8%\\n• Research grants underspend risk: $340K\\n\\n<strong>⚡ AUTOMATED ANALYSIS:</strong>\\n• Vendor spend consolidation opportunities: $67K savings\\n• Duplicate payment risks: 2 flagged for review\\n• Contract renewal optimization: 15 contracts due\\n• Budget reallocation recommendations: 4 departments',
+    timestamp: '9:32 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Impressive! Can you show me how the predictive budget variance analysis works and what automated actions it takes?',
+    timestamp: '9:33 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🔮 PREDICTIVE BUDGET INTELLIGENCE</strong>\\n\\n<strong>AI Model Analysis Results:</strong>\\n\\n<strong>IT Department Overspend Prediction:</strong>\\n• Current spend rate: $89K/month (budget: $78K)\\n• Trend analysis: 14% monthly increase\\n• Root causes identified: Unplanned software licenses + consultant costs\\n• Projected overage: $47K by fiscal year end\\n• Confidence level: 87%\\n\\n<strong>⚡ AUTOMATED INTERVENTIONS TRIGGERED:</strong>\\n\\n<strong>Immediate Actions (Already Executed):</strong>\\n✅ IT Director notified via priority email\\n✅ Spending freeze recommendations generated\\n✅ Alternative vendor analysis completed\\n✅ Budget transfer options identified from underspending departments\\n\\n<strong>📊 SMART RECOMMENDATIONS:</strong>\\n\\n<strong>Option 1: Budget Reallocation</strong>\\n• Source: Research dept underspend ($89K available)\\n• Process: Automated transfer request drafted\\n• Approval workflow: Initiated with CFO\\n• Timeline: 3-5 days\\n\\n<strong>Option 2: Vendor Renegotiation</strong>\\n• Target: Software licensing costs (32% of overage)\\n• AI analysis: Similar institutions pay 18% less\\n• Negotiation points: Auto-generated\\n• Potential savings: $23K annually\\n\\n<strong>🎯 CROSS-SYSTEM OPTIMIZATION:</strong>\\n\\n<strong>PeopleSoft + Oracle Integration:</strong>\\n• Staff overtime patterns linked to external consultant spend\\n• Recommendation: Hire 1 FTE vs continuing consultants\\n• Savings calculation: $45K annually\\n• Position requisition: Auto-drafted for HR\\n\\n<strong>📈 ONGOING MONITORING:</strong>\\n• Daily spend rate tracking activated\\n• Department milestone alerts configured\\n• Vendor performance scorecards updating\\n• ROI calculations running continuously\\n\\n<strong>🔄 AUTOMATED REPORTING:</strong>\\n• CFO briefing: Generated and scheduled (weekly)\\n• Department scorecards: Updated (daily)\\n• Board financial packet: Auto-compiled (monthly)\\n• Audit trail documentation: Maintained (continuous)\\n\\n<em>💡 System learns from each budget cycle to improve predictions and recommendations. All interventions logged for compliance and audit purposes.</em>',
+    timestamp: '9:35 AM',
+    documents: [
+      {
+        name: 'Financial_Intelligence_Dashboard.html',
+        type: 'html' as const,
+        size: '3.8 MB'
+      },
+      {
+        name: 'Budget_Variance_Analysis.pdf',
+        type: 'pdf' as const,
+        size: '1.2 MB'
+      },
+      {
+        name: 'Automated_Recommendations.xlsx',
+        type: 'xlsx' as const,
+        size: '456 KB'
+      }
+    ]
+  }
+];
+
 const invoiceProcessingConversation = [
   {
     id: '1',
@@ -349,6 +394,38 @@ const vendorEvaluationConversation = [
           </p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- End-to-End AI Application: Financial Intelligence Platform -->
+  <section class="py-16 bg-gradient-to-br from-yellow-50 via-white to-orange-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-900 mb-6">Complete Financial Intelligence System</h2>
+        <p class="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          Experience a comprehensive financial intelligence platform that connects Oracle ERP, PeopleSoft HR, 
+          and procurement systems to predict budget variances, automate interventions, and optimize spending 
+          across the entire university.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">AI-Powered Financial Intelligence Hub</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch a unified platform analyze spend patterns, predict budget issues, and automatically 
+          trigger interventions across Oracle ERP, PeopleSoft HR, and procurement systems
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={financialIntelligenceConversation}
+        title="Multi-System Financial Intelligence"
+        description="Intelligence platform: data fusion → predictive analysis → automated interventions"
+      />
     </div>
   </section>
 

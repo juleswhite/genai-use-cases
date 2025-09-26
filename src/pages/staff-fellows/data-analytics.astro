@@ -3,6 +3,102 @@ import Layout from '../../layouts/Layout.astro';
 import ChatConversation from '../../components/ChatConversation.astro';
 import '../../styles/global.css';
 
+const aiAnalystConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to investigate why our student retention rates dropped 4% this semester. Can the AI analyst help me pull data from multiple systems and identify the root causes?',
+    timestamp: '10:00 AM',
+    documents: []
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'m connecting to multiple campus systems to investigate the retention drop. Let me pull comprehensive data:\\n\\n<strong>🔍 MULTI-SYSTEM DATA COLLECTION:</strong>\\n\\n<strong>Systems Connected:</strong>\\n• Student Information System: 15,247 student records\\n• Financial Aid Database: Aid status & changes\\n• Learning Management System: Course engagement\\n• Campus Housing: Residence & meal plan data\\n• Counseling Services: Support interactions\\n• Academic Success Center: Tutoring & interventions\\n\\n<strong>📊 INITIAL DATA ANALYSIS:</strong>\\n\\n<strong>Retention Rate Breakdown:</strong>\\n• Fall 2024: 87.2% (↓4.1% from Fall 2023: 91.3%)\\n• Most affected: First-year students (↓6.8%)\\n• Least affected: Upperclassmen (↓1.2%)\\n\\n<strong>🚨 CORRELATION PATTERNS DETECTED:</strong>\\n• Financial aid delays correlated with 23% of departures\\n• Course engagement scores 34% lower in departed students\\n• Housing satisfaction scores significantly down\\n\\n<strong>⚡ AI HYPOTHESIS GENERATION:</strong>\\n1. Financial aid processing delays (new system implementation)\\n2. Reduced in-person engagement post-COVID adjustments\\n3. Housing assignment algorithm changes\\n4. Academic support service capacity constraints',
+    timestamp: '10:02 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Can you drill deeper into the financial aid hypothesis? And what specific interventions should we consider?',
+    timestamp: '10:03 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>💰 FINANCIAL AID DEEP DIVE ANALYSIS:</strong>\\n\\n<strong>Aid Processing Timeline Impact:</strong>\\n• Average processing delay: 18 days (vs 7 days last year)\\n• Students with delayed aid: 34% more likely to leave\\n• Peak departure timing: 3-4 weeks after aid delay\\n• Financial stress indicators: 67% increase in emergency fund requests\\n\\n<strong>📈 PREDICTIVE MODEL RESULTS:</strong>\\n\\nHigh-Risk Students Identified: 247 currently enrolled\\n• Aid delayed >14 days: 89 students\\n• Below 2.5 GPA + aid issues: 43 students\\n• First-generation + financial stress: 78 students\\n• Multiple risk factors: 37 students (CRITICAL)\\n\\n<strong>🎯 RECOMMENDED INTERVENTIONS:</strong>\\n\\n<strong>Immediate (This Week):</strong>\\n• Contact 37 critical-risk students personally\\n• Fast-track remaining delayed aid applications\\n• Deploy emergency micro-grants ($500-1500) for 89 students\\n\\n<strong>Short-term (Next Month):</strong>\\n• Implement AI-powered aid application triage\\n• Create proactive outreach system for at-risk students\\n• Expand emergency financial assistance program\\n\\n<strong>Long-term (Next Semester):</strong>\\n• Redesign aid processing workflow (target: 5-day turnaround)\\n• Develop real-time retention risk dashboard\\n• Integrate early warning systems across all platforms\\n\\n<strong>📊 PROJECTED IMPACT:</strong>\\n• Estimated retention recovery: 2.8 percentage points\\n• Student intervention success rate: 73% (historical data)\\n• ROI on interventions: $2.40 per $1 invested\\n• Implementation timeline: 2-4 weeks for full deployment',
+    timestamp: '10:05 AM',
+    documents: [
+      {
+        name: 'Retention_Analysis_Report.pdf',
+        type: 'pdf' as const,
+        size: '2.3 MB'
+      },
+      {
+        name: 'High_Risk_Students_List.xlsx',
+        type: 'xlsx' as const,
+        size: '67 KB'
+      },
+      {
+        name: 'Intervention_Strategy_Plan.docx',
+        type: 'docx' as const,
+        size: '245 KB'
+      }
+    ]
+  }
+];
+
+const dataFusionAppConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to create our annual institutional research report. Can you help me build a web application that automatically pulls data from all our key systems and generates the comprehensive report?',
+    timestamp: '2:15 PM',
+    documents: [
+      {
+        name: 'Previous_Annual_Report_Template.pdf',
+        type: 'pdf' as const,
+        size: '4.2 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll build a comprehensive data fusion web application for your annual report. Let me show you the real-time interface:\\n\\n<strong>🌐 ANNUAL REPORT DATA FUSION APP</strong>\\n\\n<strong>Live Data Sources Connected (12 systems):</strong>\\n✅ Student Information System - 15,247 records\\n✅ Financial Systems - Budget & expenditure data\\n✅ HR Information System - Faculty & staff metrics\\n✅ Research Administration - Grant & publication data\\n✅ Alumni Database - Engagement & giving data\\n✅ Facilities Management - Space utilization\\n✅ Library Systems - Resource usage statistics\\n✅ IT Infrastructure - Technology metrics\\n✅ Campus Safety - Incident & security data\\n✅ Sustainability Office - Environmental metrics\\n\\n<strong>📊 REPORT SECTIONS AUTO-GENERATED:</strong>\\n\\n<strong>1. Academic Excellence (COMPLETE)</strong>\\n• Graduation rates: 89.3% (↑2.1%)\\n• Student-faculty ratio: 14:1\\n• Average class size: 23 students\\n• Faculty publications: 1,247 peer-reviewed\\n\\n<strong>2. Financial Health (IN PROGRESS)</strong>\\n🔄 Processing endowment performance data...\\n• Operating budget: $284M\\n• Research funding: $67M (↑15%)\\n• Tuition revenue efficiency: 94.2%',
+    timestamp: '2:17 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This looks fantastic! Can you show me the interactive dashboard and how I can customize the report sections?',
+    timestamp: '2:18 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🎛️ INTERACTIVE REPORT BUILDER DASHBOARD</strong>\\n\\n<strong>Real-Time Report Status:</strong>\\n• Data collection: 94% complete (11/12 systems)\\n• Report generation: 78% complete\\n• Quality validation: 89% pass rate\\n• Estimated completion: 23 minutes\\n\\n<strong>📋 CUSTOMIZABLE REPORT MODULES:</strong>\\n\\n<strong>✅ Completed Sections:</strong>\\n• Student Success Metrics (Charts + narrative)\\n• Faculty Excellence Overview (Research metrics)\\n• Financial Performance Summary (5-year trends)\\n• Campus Life & Engagement (Survey data integration)\\n• Infrastructure & Technology (Capacity metrics)\\n\\n<strong>🔄 In Progress:</strong>\\n• Alumni Success Stories (Processing 2,847 records)\\n• Research Impact Analysis (Citation data syncing)\\n\\n<strong>🎨 CUSTOMIZATION OPTIONS:</strong>\\n\\n<strong>Visual Themes:</strong>\\n• Executive Summary (8-page highlight version)\\n• Comprehensive Report (45-page detailed version)\\n• Board Presentation (20-slide PowerPoint auto-generated)\\n• Web Dashboard (Interactive online version)\\n\\n<strong>⚡ INTERACTIVE FEATURES:</strong>\\n\\n<strong>Drill-Down Capabilities:</strong>\\n• Click any metric → See underlying data\\n• Filter by department, year, or demographic\\n• Real-time "what-if" scenario modeling\\n• Automated peer institution comparisons\\n\\n<strong>📤 EXPORT OPTIONS:</strong>\\n• PDF Report (formatted & print-ready)\\n• Excel Data Workbook (all source data)\\n• PowerPoint Presentation (auto-generated slides)\\n• Interactive Web Portal (stakeholder access)\\n\\n<strong>🔄 AUTOMATED UPDATES:</strong>\\n• Monthly data refresh capabilities\\n• Quarterly trend analysis updates\\n• Annual report regeneration (1-click process)\\n• Stakeholder notification system\\n\\n<em>🎯 Report will be ready in 19 minutes with all visualizations, narratives, and appendices complete!</em>',
+    timestamp: '2:20 PM',
+    documents: [
+      {
+        name: 'Report_Builder_Dashboard.html',
+        type: 'html' as const,
+        size: '3.1 MB'
+      },
+      {
+        name: 'Live_Data_Feeds.json',
+        type: 'json' as const,
+        size: '890 KB'
+      },
+      {
+        name: 'Custom_Report_Templates.zip',
+        type: 'zip' as const,
+        size: '12.4 MB'
+      }
+    ]
+  }
+];
+
 const apiDocumentationConversation = [
   {
     id: '1',
@@ -283,6 +379,116 @@ const snowflakeDataPipelineConversation = [
             Build bridges between disconnected campus systems, creating unified data views 
             that enable comprehensive analytics across departments.
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End AI Applications -->
+  <section class="py-16 bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-900 mb-6">AI-Powered Analytics Applications</h2>
+        <p class="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          Experience complete analytical workflows: an AI assistant that investigates complex data problems 
+          across multiple systems, and a comprehensive web application that automatically generates 
+          institutional research reports from 12+ data sources.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End Application 1: AI Data Analyst -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Interactive AI Data Analyst</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch an AI agent investigate complex institutional problems by pulling data from multiple 
+          systems, generating hypotheses, and recommending specific interventions
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={aiAnalystConversation}
+        title="Multi-System Problem Investigation"
+        description="AI analyst: data collection → hypothesis generation → intervention recommendations"
+      />
+    </div>
+  </section>
+
+  <!-- End-to-End Application 2: Data Fusion Report Builder -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Automated Report Generation Platform</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Experience a web application that connects to 12+ campus systems and automatically 
+          generates comprehensive institutional research reports with interactive dashboards
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={dataFusionAppConversation}
+        title="Multi-System Report Generation"
+        description="Web application: system integration → data fusion → automated report creation"
+      />
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-br from-emerald-50 to-teal-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">Application Capabilities</h2>
+      <div class="grid md:grid-cols-2 gap-8 mt-12">
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">🧠 AI Data Analyst Agent</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Cross-system data collection</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Automated hypothesis generation</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Predictive risk modeling</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Intervention recommendations</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Real-time problem investigation</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">📊 Report Generation Platform</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>12+ system integrations</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Automated data fusion</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Interactive web dashboard</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Multi-format export options</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Customizable report templates</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

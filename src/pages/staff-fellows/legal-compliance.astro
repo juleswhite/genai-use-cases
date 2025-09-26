@@ -3,6 +3,102 @@ import Layout from '../../layouts/Layout.astro';
 import ChatConversation from '../../components/ChatConversation.astro';
 import '../../styles/global.css';
 
+const complianceMonitoringConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We just received a major regulatory update that affects 40+ university policies. Can you show me how our automated compliance monitoring system would handle this update across all departments?',
+    timestamp: '8:30 AM',
+    documents: [
+      {
+        name: 'Federal_Regulation_Update_Notice.pdf',
+        type: 'pdf' as const,
+        size: '234 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve initiated the automated compliance cascade for the new federal regulation. Here\'s the real-time processing status:\\n\\n<strong>🚨 REGULATORY IMPACT ANALYSIS</strong>\\n\\n<strong>Affected Areas Detected:</strong>\\n• Student Privacy (FERPA updates): 12 policies\\n• Research Ethics: 8 policies\\n• Employment Law: 15 policies\\n• Financial Aid: 7 policies\\n• Campus Safety: 5 policies\\n\\n<strong>⚡ AUTOMATED PROCESSING:</strong>\\n\\n<strong>Step 1: Policy Impact Mapping (COMPLETE)</strong>\\n✅ Scanned 347 active university policies\\n✅ Identified 47 policies requiring updates\\n✅ Classified by urgency and department\\n\\n<strong>Step 2: Gap Analysis (IN PROGRESS)</strong>\\n🔄 Analyzing compliance gaps in current policies...\\n• Critical gaps: 8 policies (immediate attention)\\n• Moderate gaps: 23 policies (30-day timeline)\\n• Minor updates: 16 policies (60-day timeline)\\n\\n<strong>🎯 IMMEDIATE ACTIONS TRIGGERED:</strong>\\n• Department heads notified via priority email\\n• Compliance committee meeting scheduled (tomorrow 10 AM)\\n• Legal review packages auto-generated\\n• Implementation timeline drafted',
+    timestamp: '8:32 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Excellent! What about the critical gaps that need immediate attention?',
+    timestamp: '8:33 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🚨 CRITICAL COMPLIANCE GAPS - IMMEDIATE ACTION REQUIRED</strong>\\n\\n<strong>Priority 1: Student Data Privacy Policy</strong>\\n• Current gap: New consent requirements not addressed\\n• Affected systems: Student portal, registrar database\\n• Legal risk: High (potential federal violations)\\n• Auto-generated solution: Updated consent workflow\\n• Assigned to: IT Director + Legal Counsel\\n• Deadline: 72 hours\\n\\n<strong>Priority 2: Research Data Handling</strong>\\n• Current gap: International data transfer protocols\\n• Affected departments: 6 research centers\\n• Legal risk: High (grant funding implications)\\n• Auto-generated solution: Data localization requirements\\n• Assigned to: Research VP + Compliance Officer\\n• Deadline: 5 days\\n\\n<strong>⚡ AUTOMATED REMEDIATION PACKAGE:</strong>\\n\\n<strong>For Each Critical Gap:</strong>\\n• Draft policy language generated (based on similar institutions)\\n• Implementation checklist created\\n• Staff training materials prepared\\n• Compliance monitoring schedule established\\n• Budget impact analysis completed\\n\\n<strong>🎯 PROACTIVE MONITORING ACTIVATED:</strong>\\n\\n<strong>Real-Time Compliance Dashboard:</strong>\\n• Policy update status tracking\\n• Department compliance scores\\n• Upcoming deadline alerts\\n• Risk exposure metrics\\n\\n<strong>📋 NEXT 48 HOURS AUTO-SCHEDULED:</strong>\\n• Emergency legal review session (today 3 PM)\\n• Department briefing calls (tomorrow morning)\\n• Implementation team assignments\\n• Progress monitoring checkpoints\\n\\n<strong>📊 PROJECTED OUTCOMES:</strong>\\n• Full compliance timeline: 14 days (vs 3-6 months manual)\\n• Legal risk mitigation: 94% reduction\\n• Implementation cost savings: $78K\\n• Ongoing monitoring: Fully automated\\n\\n<em>All department heads have received priority briefing packets. Legal team has draft policy updates ready for review.</em>',
+    timestamp: '8:35 AM',
+    documents: [
+      {
+        name: 'Critical_Gaps_Action_Plan.pdf',
+        type: 'pdf' as const,
+        size: '1.8 MB'
+      },
+      {
+        name: 'Compliance_Dashboard_Live.html',
+        type: 'html' as const,
+        size: '2.3 MB'
+      },
+      {
+        name: 'Auto_Generated_Policy_Updates.docx',
+        type: 'docx' as const,
+        size: '567 KB'
+      }
+    ]
+  }
+];
+
+const legalWebAppConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need a comprehensive legal operations web application that can handle contract reviews, compliance tracking, and risk assessment in one platform. Can you show me what this would look like?',
+    timestamp: '1:45 PM',
+    documents: []
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll demonstrate the Legal Operations Hub - a comprehensive web application integrating all your legal workflows:\\n\\n<strong>⚖️ LEGAL OPERATIONS HUB - LIVE DASHBOARD</strong>\\n\\n<strong>🔍 REAL-TIME OVERVIEW:</strong>\\n\\n<strong>Contract Management:</strong>\\n• Active contracts: 347 (15 expiring this month)\\n• Pending reviews: 23 contracts\\n• Risk scores updated: 2 hours ago\\n• Auto-renewals processed: 8 today\\n\\n<strong>Compliance Status:</strong>\\n• Policy compliance: 94.2% (↑2.3%)\\n• Regulatory updates: 3 pending review\\n• Audit readiness score: 87/100\\n• Training completions: 89% staff current\\n\\n<strong>Risk Management:</strong>\\n• High-risk items: 6 (down from 12)\\n• Legal spend tracking: $287K YTD\\n• Insurance claims: 2 active\\n• Litigation matters: 1 ongoing\\n\\n<strong>🎛️ INTEGRATED MODULES:</strong>\\n✅ Contract Lifecycle Management\\n✅ Regulatory Compliance Tracker\\n✅ Risk Assessment Engine\\n✅ Legal Spend Analytics\\n✅ Document Repository (Vera integration)\\n✅ Workflow Automation\\n✅ Reporting & Dashboards',
+    timestamp: '1:47 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This looks comprehensive! Can you walk me through how the contract review workflow operates within the platform?',
+    timestamp: '1:48 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📋 INTEGRATED CONTRACT REVIEW WORKFLOW</strong>\\n\\n<strong>Workflow Status: DataTech Services Contract</strong>\\n\\n<strong>Stage 1: Automated Intake (COMPLETE)</strong>\\n✅ Contract uploaded via secure portal\\n✅ AI classification: Software License Agreement\\n✅ Metadata extraction: $125K annual, 3-year term\\n✅ Similar contracts analyzed: 8 precedents found\\n\\n<strong>Stage 2: AI Risk Assessment (COMPLETE)</strong>\\n✅ Risk score calculated: 67/100 (Medium-High)\\n✅ Key issues flagged:\\n   • Liability cap below university standard\\n   • Data breach notification timeline inadequate\\n   • Termination clause needs revision\\n\\n<strong>Stage 3: Intelligent Routing (IN PROGRESS)</strong>\\n🔄 Auto-assigned to Legal Counsel (Sarah Chen)\\n🔄 CC: IT Security (data processing clauses)\\n🔄 CC: Finance (budget approval required >$100K)\\n\\n<strong>⚡ INTERACTIVE REVIEW INTERFACE:</strong>\\n\\n<strong>Smart Contract Editor:</strong>\\n• Side-by-side comparison with standard templates\\n• AI-suggested revisions highlighted in real-time\\n• Risk mitigation recommendations\\n• Precedent language auto-populated\\n\\n<strong>Collaboration Tools:</strong>\\n• Comments thread with stakeholders\\n• Version control with change tracking\\n• Real-time editing for legal team\\n• Approval workflow with digital signatures\\n\\n<strong>📊 PROGRESS TRACKING:</strong>\\n\\n<strong>Current Status:</strong>\\n• Review started: 2 hours ago\\n• Estimated completion: Tomorrow 11 AM\\n• Stakeholder approvals: Finance (pending), IT (approved)\\n• Next action: Legal counsel revision review\\n\\n<strong>🔔 AUTOMATED NOTIFICATIONS:</strong>\\n• Vendor notified of review timeline\\n• Department budget pre-approval initiated\\n• Insurance team flagged for coverage review\\n• Calendar holds placed for all reviewers\\n\\n<strong>📈 ANALYTICS & INSIGHTS:</strong>\\n• Similar contract turnaround: 3.2 days average\\n• Risk reduction achieved: 78% through revisions\\n• Cost avoidance from AI suggestions: $23K annually\\n• Workflow efficiency: 65% faster than manual process\\n\\n<em>💡 Platform automatically learns from each review to improve future contract analysis and recommendations.</em>',
+    timestamp: '1:50 PM',
+    documents: [
+      {
+        name: 'Contract_Review_Dashboard.html',
+        type: 'html' as const,
+        size: '4.2 MB'
+      },
+      {
+        name: 'AI_Risk_Analysis_Report.pdf',
+        type: 'pdf' as const,
+        size: '890 KB'
+      },
+      {
+        name: 'Legal_Operations_Analytics.xlsx',
+        type: 'xlsx' as const,
+        size: '1.2 MB'
+      }
+    ]
+  }
+];
+
 const contractLifecycleConversation = [
   {
     id: '1',
@@ -342,6 +438,116 @@ const veraDocumentConversation = [
             AI-powered integration with Vera document management for automated version control, 
             compliance tracking, and regulatory change management across your legal document library.
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End AI Applications -->
+  <section class="py-16 bg-gradient-to-br from-red-50 via-white to-orange-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-900 mb-6">Complete Legal AI Systems</h2>
+        <p class="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          Experience comprehensive legal operations: automated compliance monitoring that processes 
+          regulatory updates across 40+ policies in minutes, and a unified web platform that handles 
+          contracts, compliance, and risk assessment in one integrated system.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End Application 1: Automated Compliance Monitoring -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Automated Regulatory Compliance Pipeline</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch how new federal regulations automatically trigger policy analysis across all 
+          university departments, with gap identification and remediation plans generated in real-time
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={complianceMonitoringConversation}
+        title="Regulatory Update Processing"
+        description="Compliance system: regulation intake → policy impact analysis → automated remediation"
+      />
+    </div>
+  </section>
+
+  <!-- End-to-End Application 2: Legal Operations Web Platform -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Integrated Legal Operations Hub</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Explore a comprehensive web application that unifies contract management, compliance tracking, 
+          and risk assessment with intelligent workflows and real-time collaboration tools
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={legalWebAppConversation}
+        title="Unified Legal Operations Platform"
+        description="Web application: contract intake → AI analysis → collaborative review → automated tracking"
+      />
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-br from-red-50 to-orange-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">System Architecture</h2>
+      <div class="grid md:grid-cols-2 gap-8 mt-12">
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">⚖️ Compliance Monitoring System</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+              <span>Regulatory change detection</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+              <span>Policy impact analysis</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+              <span>Automated gap identification</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+              <span>Remediation plan generation</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+              <span>Real-time compliance dashboard</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">🌐 Legal Operations Platform</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-orange-400 rounded-full mr-3"></div>
+              <span>Unified contract management</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-orange-400 rounded-full mr-3"></div>
+              <span>AI-powered risk assessment</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-orange-400 rounded-full mr-3"></div>
+              <span>Collaborative review workflows</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-orange-400 rounded-full mr-3"></div>
+              <span>Vera document integration</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-orange-400 rounded-full mr-3"></div>
+              <span>Analytics & reporting suite</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
