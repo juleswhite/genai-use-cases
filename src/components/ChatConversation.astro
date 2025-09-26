@@ -1,11 +1,13 @@
 ---
 import ChatBubble from './ChatBubble.astro';
+import type { Document } from './ChatBubble.astro';
 
 export interface Message {
   id: string;
   message: string;
   sender: 'user' | 'ai';
   timestamp?: string;
+  documents?: Document[];
 }
 
 export interface Props {
@@ -34,6 +36,7 @@ const { messages, title, description } = Astro.props;
           message={msg.message}
           sender={msg.sender}
           timestamp={msg.timestamp}
+          documents={msg.documents}
         />
       ))}
     </div>

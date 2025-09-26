@@ -7,8 +7,15 @@ const contractReviewConversation = [
   {
     id: '1',
     sender: 'user' as const,
-    message: 'I need you to review this software licensing contract and identify any potential issues or missing clauses. Here\'s the contract:\n\n[Contract text would be uploaded here]',
-    timestamp: '10:15 AM'
+    message: 'I need you to review this software licensing contract and identify any potential issues or missing clauses.',
+    timestamp: '10:15 AM',
+    documents: [
+      {
+        name: 'TechCorp_Software_License_Agreement_v2.1.pdf',
+        type: 'pdf' as const,
+        size: '2.4 MB'
+      }
+    ]
   },
   {
     id: '2',
@@ -38,7 +45,19 @@ const contractReviewConversation = [
     id: '6',
     sender: 'ai' as const,
     message: '<strong>Suggested Liability Cap Clause:</strong>\n\n"<em>Limitation of Liability. IN NO EVENT SHALL VENDOR\'S TOTAL LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT, WHETHER IN CONTRACT, TORT, OR OTHERWISE, EXCEED THE TOTAL AMOUNTS PAID BY CUSTOMER TO VENDOR UNDER THIS AGREEMENT IN THE TWELVE (12) MONTHS PRECEDING THE EVENT GIVING RISE TO LIABILITY. THIS LIMITATION SHALL APPLY REGARDLESS OF THE FORM OF ACTION AND SHALL SURVIVE TERMINATION OF THIS AGREEMENT.</em>"\n\n<strong>📋 Next Steps:</strong>\n1. Share this analysis with your legal team\n2. Request redlined version with these changes\n3. Negotiate the liability cap percentage if needed',
-    timestamp: '10:20 AM'
+    timestamp: '10:20 AM',
+    documents: [
+      {
+        name: 'Contract_Risk_Analysis_Report_2024.docx',
+        type: 'docx' as const,
+        size: '1.2 MB'
+      },
+      {
+        name: 'Recommended_Contract_Amendments.xlsx',
+        type: 'xlsx' as const,
+        size: '245 KB'
+      }
+    ]
   }
 ];
 ---

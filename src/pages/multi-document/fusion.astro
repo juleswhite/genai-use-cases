@@ -8,7 +8,24 @@ const tenurePacketConversation = [
     id: '1',
     sender: 'user' as const,
     message: 'I need to create a comprehensive tenure packet for Dr. Sarah Chen. I have her CV, teaching evaluations from the last 5 years, and peer review letters. Can you help me compile this into a structured evaluation document?',
-    timestamp: '2:15 PM'
+    timestamp: '2:15 PM',
+    documents: [
+      {
+        name: 'Sarah_Chen_CV_2024.pdf',
+        type: 'pdf' as const,
+        size: '1.8 MB'
+      },
+      {
+        name: 'Teaching_Evaluations_2019-2024.xlsx',
+        type: 'xlsx' as const,
+        size: '892 KB'
+      },
+      {
+        name: 'Peer_Review_Letters_Compiled.pdf',
+        type: 'pdf' as const,
+        size: '3.2 MB'
+      }
+    ]
   },
   {
     id: '2',
@@ -38,7 +55,19 @@ const tenurePacketConversation = [
     id: '6',
     sender: 'ai' as const,
     message: '<strong>📊 EXECUTIVE SUMMARY - TENURE EVALUATION</strong>\n\n<strong>Candidate:</strong> Dr. Sarah Chen, Associate Professor Track\n<strong>Department:</strong> Computer Science\n<strong>Evaluation Period:</strong> 2019-2024\n\n<strong>🏆 KEY STRENGTHS:</strong>\n\n<strong>Research (Outstanding):</strong>\n• 47 publications, 2,100+ total citations\n• $2.3M external funding (NSF, NIH, Industry)\n• Top 1% researcher in neural networks field\n• 3 patents with commercial applications\n\n<strong>Teaching (Excellent):</strong>\n• 4.7/5.0 average evaluation across 5 years\n• Mentored 12 PhD students (8 graduated successfully)\n• Curriculum innovation: AI Ethics course (now department standard)\n\n<strong>Service (Strong):</strong>\n• Editorial board: Journal of AI Research, Neural Computing\n• Program chair: ICML 2023\n• 15 peer review activities annually\n\n<strong>💫 RECOMMENDATION:</strong> <em>Strong candidate for tenure based on exceptional research impact, excellent teaching record, and meaningful service contributions.</em>',
-    timestamp: '2:20 PM'
+    timestamp: '2:20 PM',
+    documents: [
+      {
+        name: 'Chen_Tenure_Evaluation_Summary.pdf',
+        type: 'pdf' as const,
+        size: '967 KB'
+      },
+      {
+        name: 'Tenure_Committee_Recommendation.docx',
+        type: 'docx' as const,
+        size: '445 KB'
+      }
+    ]
   }
 ];
 ---

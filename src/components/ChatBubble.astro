@@ -1,13 +1,39 @@
 ---
+export interface Document {
+  name: string;
+  type: 'pdf' | 'docx' | 'xlsx' | 'csv' | 'txt' | 'pptx';
+  size?: string;
+}
+
 export interface Props {
   message: string;
   sender: 'user' | 'ai';
   timestamp?: string;
   avatar?: string;
+  documents?: Document[];
 }
 
-const { message, sender, timestamp, avatar } = Astro.props;
+const { message, sender, timestamp, avatar, documents } = Astro.props;
 const isUser = sender === 'user';
+
+// Function to get icon for document type
+function getDocumentIcon(type: string) {
+  switch (type) {
+    case 'pdf':
+      return { icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM8.5 7h7v1.5h-7V7zM8.5 10h7v1.5h-7V10zM8.5 13h4.5v1.5H8.5V13z', color: 'text-red-600 bg-red-50 border-red-200' };
+    case 'docx':
+      return { icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 8V3l5 5h-5z', color: 'text-blue-600 bg-blue-50 border-blue-200' };
+    case 'xlsx':
+      return { icon: 'M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h2v2H7V7zm0 4h2v2H7v-2zm0 4h2v2H7v-2zm4-8h2v2h-2V7zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm4-8h2v2h-2V7zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2z', color: 'text-green-600 bg-green-50 border-green-200' };
+    case 'csv':
+      return { icon: 'M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h10v2H7v-2z', color: 'text-emerald-600 bg-emerald-50 border-emerald-200' };
+    case 'pptx':
+      return { icon: 'M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6zm8 7h-1V4l5 5h-4z', color: 'text-orange-600 bg-orange-50 border-orange-200' };
+    case 'txt':
+    default:
+      return { icon: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM14 8V3l5 5h-5zM8 12h8v1H8v-1zm0 2h8v1H8v-1zm0 2h5v1H8v-1z', color: 'text-slate-600 bg-slate-50 border-slate-200' };
+  }
+}
 ---
 
 <div class={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}>
@@ -37,6 +63,45 @@ const isUser = sender === 'user';
         ? 'bg-blue-600 text-white rounded-br-sm' 
         : 'bg-white border border-slate-200 text-slate-900 rounded-bl-sm shadow-sm'
     }`}>
+      
+      <!-- Documents (if any) -->
+      {documents && documents.length > 0 && (
+        <div class="mb-3">
+          {documents.map((doc) => {
+            const docStyle = getDocumentIcon(doc.type);
+            return (
+              <div class={`flex items-center p-2 rounded-lg border ${docStyle.color} mb-2 last:mb-0 ${
+                isUser ? 'bg-blue-500/20 border-blue-300/50' : ''
+              }`}>
+                <div class={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
+                  isUser ? 'bg-white/20' : docStyle.color.split(' ')[2]
+                }`}>
+                  <svg class={`w-4 h-4 ${
+                    isUser ? 'text-white' : docStyle.color.split(' ')[0]
+                  }`} fill="currentColor" viewBox="0 0 24 24">
+                    <path d={docStyle.icon} />
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class={`text-sm font-medium truncate ${
+                    isUser ? 'text-white' : 'text-slate-900'
+                  }`}>
+                    {doc.name}
+                  </p>
+                  {doc.size && (
+                    <p class={`text-xs ${
+                      isUser ? 'text-blue-100' : 'text-slate-500'
+                    }`}>
+                      {doc.size}
+                    </p>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      
       <p class="text-sm leading-relaxed whitespace-pre-wrap" set:html={message}></p>
       
       {timestamp && (
