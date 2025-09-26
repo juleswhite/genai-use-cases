@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import '../../styles/global.css';
+
+// Helper function to create proper URLs that work with GitHub Pages base path
+const getUrl = (path: string) => {
+  const base = import.meta.env.BASE_URL || '/';
+  const normalizedBase = base.endsWith('/') ? base : base + '/';
+  const normalizedPath = path.replace(/^\//, '');
+  return normalizedBase + normalizedPath;
+};
+---
+
+<Layout title="Finance & Procurement Use Cases | Staff Fellows" description="AI applications for finance, procurement, and budget management">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-yellow-50 via-slate-50 to-yellow-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Finance & Procurement Use Cases
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Streamline financial operations with intelligent invoice processing, automated budget analysis, 
+          and smart vendor evaluation. Transform manual workflows into efficient, accurate systems.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coming Soon -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="bg-yellow-50 rounded-2xl p-12 border border-yellow-200">
+        <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Coming Soon</h2>
+        <p class="text-lg text-slate-600 mb-6">
+          Comprehensive use cases for finance and procurement roles are being developed based on staff fellow feedback.
+        </p>
+        <div class="text-slate-600">
+          <p class="mb-4"><strong>Focus Areas Include:</strong></p>
+          <div class="grid md:grid-cols-2 gap-4 text-left">
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                <span>Invoice scanning & validation automation</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                <span>Budget burn rate analysis & forecasting</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                <span>Vendor quote comparison & evaluation</span>
+              </li>
+            </ul>
+            <ul class="space-y-2">
+              <li class="flex items-center">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                <span>Travel exception workflow optimization</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                <span>Procurement process automation</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
+                <span>UNSPSC code generation</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-8">
+          <a href={getUrl('/staff-fellows')} class="inline-flex items-center px-6 py-3 border border-yellow-300 rounded-lg text-yellow-700 bg-yellow-100 hover:bg-yellow-200 transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to All Roles
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,470 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const contractLifecycleConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to implement a contract lifecycle management system that can handle everything from initial review to risk assessment to spend tracking. We have hundreds of contracts across departments with inconsistent processes. Can you help design an intelligent system?',
+    timestamp: '1:15 PM',
+    documents: [
+      {
+        name: 'Current_Contract_Inventory.xlsx',
+        type: 'xlsx' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'Legal_Process_Documentation.pdf',
+        type: 'pdf' as const,
+        size: '1.4 MB'
+      },
+      {
+        name: 'Vendor_Spend_Analysis_2024.xlsx',
+        type: 'xlsx' as const,
+        size: '890 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve analyzed your contract portfolio and processes. Here\'s a comprehensive solution:\n\n<strong>📊 CURRENT STATE ANALYSIS:</strong>\n\n<strong>Contract Volume:</strong>\n• 347 active contracts across 23 departments\n• Average value: $127K (range: $5K - $2.3M)\n• 78% are up for renewal in next 18 months\n\n<strong>🚨 KEY ISSUES IDENTIFIED:</strong>\n• No centralized risk scoring\n• Manual compliance monitoring\n• Inconsistent contract language\n• Limited spend visibility\n• Ad-hoc renewal processes\n\n<strong>💡 PROPOSED CLM SYSTEM:</strong>\n\n<strong>1. Intelligent Intake & Review</strong>\n• AI-powered risk assessment (auto-scoring)\n• Template matching and clause analysis\n• Automated routing based on contract type/value\n\n<strong>2. Smart Lifecycle Management</strong>\n• Proactive renewal notifications (90/60/30 days)\n• Performance tracking integration\n• Spend allocation monitoring',
+    timestamp: '1:17 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This looks excellent! Can you show me how the AI risk assessment would work? We need to be able to explain our risk ratings to university leadership.',
+    timestamp: '1:18 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🎯 AI RISK ASSESSMENT FRAMEWORK:</strong>\n\n<strong>Risk Scoring Matrix (0-100 scale):</strong>\n\n<strong>Financial Risk (40% weight):</strong>\n• Contract value vs. department budget\n• Payment terms and cash flow impact\n• Penalty clauses and liability exposure\n• Insurance and indemnification gaps\n\n<strong>Operational Risk (30% weight):</strong>\n• Vendor dependency level\n• Service level agreement adequacy\n• Business continuity implications\n• Integration complexity\n\n<strong>Compliance Risk (20% weight):</strong>\n• Regulatory requirement coverage\n• Data privacy and security clauses\n• University policy alignment\n• Audit and reporting obligations\n\n<strong>Strategic Risk (10% weight):</strong>\n• Mission alignment\n• Reputational considerations\n• Innovation vs. stability balance\n\n<strong>📋 EXAMPLE RISK ASSESSMENT:</strong>\n\n<strong>Software Licensing Contract - Score: 67/100 (Medium-High)</strong>\n• Financial: 72/100 - High annual cost, auto-renewal\n• Operational: 58/100 - Critical system, limited alternatives\n• Compliance: 82/100 - Strong data protection, good SLAs\n• Strategic: 45/100 - Legacy system, innovation constraints\n\n<strong>✅ TRANSPARENCY FEATURES:</strong>\n• Detailed scoring rationale for each category\n• Comparison with similar contracts\n• Recommended risk mitigation actions\n• Executive dashboard with trend analysis',
+    timestamp: '1:20 PM',
+    documents: [
+      {
+        name: 'CLM_Risk_Assessment_Framework.pdf',
+        type: 'pdf' as const,
+        size: '456 KB'
+      },
+      {
+        name: 'Risk_Scoring_Algorithm.py',
+        type: 'py' as const,
+        size: '23 KB'
+      }
+    ]
+  }
+];
+
+const eDiscoveryConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We have a complex litigation case involving 5 years of email communications, financial records, and research data across multiple departments. The current eDiscovery process is taking months and costing a fortune. How can AI streamline this?',
+    timestamp: '3:30 PM',
+    documents: [
+      {
+        name: 'Litigation_Scope_Document.pdf',
+        type: 'pdf' as const,
+        size: '234 KB'
+      },
+      {
+        name: 'Current_eDiscovery_Costs.xlsx',
+        type: 'xlsx' as const,
+        size: '67 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I can help you dramatically accelerate and reduce the cost of this eDiscovery process:\n\n<strong>📈 CURRENT PROCESS ANALYSIS:</strong>\n\n<strong>Estimated Data Volume:</strong>\n• 2.3M emails across 47 custodians\n• 890K financial documents\n• 150K research files\n• Total: ~45TB of data\n\n<strong>⏱️ TRADITIONAL TIMELINE vs AI-ENHANCED:</strong>\n\n<strong>Traditional Process (6-9 months):</strong>\n• Collection: 4-6 weeks\n• Processing: 8-12 weeks\n• Review: 16-24 weeks\n• Production: 2-4 weeks\n\n<strong>AI-Enhanced Process (6-10 weeks):</strong>\n• Smart Collection: 1-2 weeks\n• Intelligent Processing: 2-3 weeks\n• AI-Assisted Review: 2-4 weeks\n• Automated Production: 1 week\n\n<strong>🤖 AI ACCELERATION TECHNIQUES:</strong>\n\n<strong>1. Intelligent Data Classification</strong>\n• Auto-identify privileged communications\n• Categorize by relevance probability\n• Flag potential smoking gun documents\n• Remove obvious duplicates and irrelevant files',
+    timestamp: '3:32 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'That timeline improvement is incredible! Can you break down how the AI would handle the actual document review process? Our legal team needs to maintain quality while moving faster.',
+    timestamp: '3:33 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>⚡ AI-POWERED DOCUMENT REVIEW WORKFLOW:</strong>\n\n<strong>Phase 1: Predictive Coding (Week 1)</strong>\n• Senior attorneys review 500-1000 seed documents\n• AI learns patterns of relevance, privilege, and key issues\n• System generates predictive scores for entire document set\n• Quality control: 95%+ accuracy validated\n\n<strong>Phase 2: Continuous Active Learning (Weeks 2-3)</strong>\n• AI prioritizes uncertain documents for human review\n• System improves with each attorney decision\n• Auto-promotes high-confidence responsive documents\n• Flags potential privilege violations for review\n\n<strong>Phase 3: Quality Assurance (Week 4)</strong>\n• Statistical sampling of AI decisions\n• Senior attorney spot-checking\n• Privilege log auto-generation\n• Final production set validation\n\n<strong>🎯 QUALITY SAFEGUARDS:</strong>\n\n<strong>Multi-Layer Review:</strong>\n• AI initial scoring: 2.3M docs → 450K likely relevant\n• Junior attorney quick review: 450K → 180K responsive\n• Senior attorney final review: 180K → 67K produced\n• Partner quality check: Statistical sampling\n\n<strong>📊 PROJECTED OUTCOMES:</strong>\n• 85% reduction in review time\n• 70% cost savings\n• 99.2% accuracy rate\n• Complete audit trail\n• Privileged material protection: 100%\n\n<strong>💼 LEGAL TEAM BENEFITS:</strong>\n• Attorneys focus on strategy, not document sorting\n• Real-time case insights and patterns\n• Predictable timeline and budget\n• Enhanced quality through AI consistency',
+    timestamp: '3:35 PM',
+    documents: [
+      {
+        name: 'AI_eDiscovery_Workflow.pdf',
+        type: 'pdf' as const,
+        size: '789 KB'
+      },
+      {
+        name: 'Review_Quality_Metrics.xlsx',
+        type: 'xlsx' as const,
+        size: '145 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Legal & Compliance Use Cases | Staff Fellows" description="AI applications for legal operations, contract management, and compliance">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/staff-fellows" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Staff Fellows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Legal & Compliance
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-red-50 via-slate-50 to-red-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Legal & Compliance Use Cases
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Transform legal operations with AI-powered contract lifecycle management, intelligent risk assessment, 
+          and streamlined eDiscovery. Maintain rigorous quality while dramatically improving efficiency.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Applications -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Legal Operations Transformation</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-8 mb-16">
+        <!-- Contract Lifecycle Management -->
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200">
+          <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Contract Lifecycle Management</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            Intelligent contract management from initial review through renewal. AI-powered risk scoring, 
+            automated compliance monitoring, and strategic spend insights.
+          </p>
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Automated risk assessment</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Proactive renewal management</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Spend optimization insights</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Compliance tracking automation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- eDiscovery Acceleration -->
+        <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl border border-purple-200">
+          <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">eDiscovery Acceleration</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            Transform months-long document review into weeks with AI-powered predictive coding, 
+            privilege protection, and continuous active learning.
+          </p>
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Predictive coding & active learning</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Automatic privilege identification</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Cost reduction (70%+ savings)</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Timeline compression (85% faster)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Capabilities -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-emerald-50 rounded-xl p-6 border border-emerald-200">
+          <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Legal Spend Analytics</h3>
+          <p class="text-slate-600 text-sm">
+            Comprehensive analysis of legal expenditures, vendor performance, and resource allocation 
+            to optimize budget allocation and identify cost-saving opportunities.
+          </p>
+        </div>
+
+        <div class="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
+          <div class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Regulatory Compliance</h3>
+          <p class="text-slate-600 text-sm">
+            Automated monitoring of regulatory changes, policy updates, and compliance requirements 
+            across multiple jurisdictions and regulatory frameworks.
+          </p>
+        </div>
+
+        <div class="bg-teal-50 rounded-xl p-6 border border-teal-200">
+          <div class="w-10 h-10 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Risk Management</h3>
+          <p class="text-slate-600 text-sm">
+            Proactive identification and assessment of legal risks across university operations, 
+            with predictive analytics for potential liability exposure.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Example 1: Contract Management -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Intelligent Contract Lifecycle Management</h2>
+        <p class="text-slate-600 leading-relaxed">
+          See how AI transforms contract management from reactive administration to proactive strategic oversight
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={contractLifecycleConversation}
+        title="University Contract Portfolio Analysis"
+        description="Legal operations director implementing comprehensive CLM system"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 2: eDiscovery -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">AI-Powered eDiscovery Process</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Transform litigation support from a months-long manual process to an intelligent, efficient system
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={eDiscoveryConversation}
+        title="Complex Litigation eDiscovery"
+        description="General counsel office managing large-scale document review"
+      />
+    </div>
+  </section>
+
+  <!-- Implementation Framework -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white mb-6">Legal AI Implementation Framework</h2>
+        <p class="text-slate-300 max-w-3xl mx-auto">
+          A structured approach to implementing AI in legal operations while maintaining the highest 
+          standards of quality, ethics, and professional responsibility.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Phase 1 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <span class="text-white font-bold text-sm">1</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Assessment</h3>
+            <p class="text-slate-400 text-xs">Weeks 1-2</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-red-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Contract portfolio audit</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-red-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Process mapping</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-red-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Risk identification</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <span class="text-white font-bold text-sm">2</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Pilot</h3>
+            <p class="text-slate-400 text-xs">Weeks 3-8</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Limited contract review</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Risk scoring validation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Quality metrics</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <span class="text-white font-bold text-sm">3</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Expansion</h3>
+            <p class="text-slate-400 text-xs">Weeks 9-16</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Full CLM deployment</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>eDiscovery integration</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Training programs</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <span class="text-white font-bold text-sm">4</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Optimization</h3>
+            <p class="text-slate-400 text-xs">Ongoing</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Performance analytics</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Continuous improvement</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Strategic insights</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Proposition -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">Legal Operations Excellence</h2>
+      <p class="text-xl text-slate-600 leading-relaxed mb-8">
+        <span class="text-red-600 font-semibold">Your legal expertise + AI precision = Risk mitigation at scale.</span>
+        You understand the nuances of legal risk and compliance requirements. AI amplifies that expertise 
+        to create comprehensive, proactive legal operations that protect the university while enabling innovation.
+      </p>
+      
+      <div class="grid md:grid-cols-4 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-red-600 mb-2">85%</div>
+          <div class="text-slate-600 text-sm">Faster Contract Review</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-red-600 mb-2">70%</div>
+          <div class="text-slate-600 text-sm">eDiscovery Cost Reduction</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-red-600 mb-2">100%</div>
+          <div class="text-slate-600 text-sm">Compliance Monitoring</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-red-600 mb-2">24/7</div>
+          <div class="text-slate-600 text-sm">Risk Assessment</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
