@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://juleswhite.github.io',
   // Only use base path in production for GitHub Pages
-  base: process.env.NODE_ENV === 'production' ? '/majk_gen_ai_use_cases_7a6844db' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/genai-use-cases' : '/',
   vite: {
     plugins: [tailwindcss()]
   }
