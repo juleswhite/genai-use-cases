@@ -1,0 +1,389 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const studentEngagementConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to create an AI-powered platform that can help us build stronger belonging and community connections for students, generate case studies for staff training, and suggest assessment metrics aligned with our OKRs. Can you show me what this comprehensive system would look like?',
+    timestamp: '9:15 AM',
+    documents: []
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll create a comprehensive Student Engagement Intelligence Platform that addresses all your community-building needs. Here\'s the integrated system:\\n\\n<strong>🤝 STUDENT BELONGING & COMMUNITY PLATFORM</strong>\\n\\n<strong>🔍 REAL-TIME ENGAGEMENT ANALYTICS:</strong>\\n\\n<strong>Community Health Dashboard:</strong>\\n• Active student participants: 3,247 across 89 communities\\n• Belonging index score: 78.3% (↑12% this semester)\\n• Engagement trends: Peak activity Tues/Thurs 2-4 PM\\n• At-risk students identified: 156 (proactive outreach initiated)\\n• Cross-cultural connections: 67% increase this year\\n\\n<strong>⚡ AI-GENERATED TRAINING CONTENT:</strong>\\n\\n<strong>Live Case Study Generation:</strong>\\n✅ "Building Inclusive Study Groups" - Generated from 23 successful interventions\\n✅ "Conflict Resolution in Student Organizations" - Based on 15 mediation cases\\n✅ "Supporting First-Generation Students" - Compiled from 89 success stories\\n✅ "Creating Safe Spaces in Residence Halls" - Analysis of 34 community initiatives\\n\\n<strong>🎯 SMART ASSESSMENT METRICS:</strong>\\n• Belonging surveys: Auto-generated, adaptive questioning\\n• Engagement tracking: Cross-platform activity analysis\\n• Community health indicators: Predictive wellness scoring\\n• Impact measurement: ROI on belonging initiatives',
+    timestamp: '9:17 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This looks incredible! Can you show me how the AI generates specific case studies and assessment metrics that align with our mission?',
+    timestamp: '9:18 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📚 AI-POWERED CASE STUDY GENERATOR</strong>\\n\\n<strong>Example: "Creating Inclusive Leadership in Student Organizations"</strong>\\n\\n<strong>⚡ AUTO-GENERATED CASE STUDY:</strong>\\n\\n<strong>Situation:</strong>\\n"The Student Government Association reported declining participation from underrepresented groups, with leadership positions held by only 23% diverse students despite 45% diverse enrollment."\\n\\n<strong>AI Analysis & Intervention:</strong>\\n• Data pattern recognition: Identified barriers to leadership pipeline\\n• Successful model analysis: Benchmarked against 12 peer institutions\\n• Intervention design: Mentorship program + leadership training\\n• Implementation tracking: 6-month progress monitoring\\n\\n<strong>Outcome:</strong>\\n"After implementing AI-recommended changes: diverse leadership increased to 67%, overall engagement up 34%, and student satisfaction scores improved from 3.2 to 4.1/5.0"\\n\\n<strong>🎯 MISSION-ALIGNED ASSESSMENT METRICS:</strong>\\n\\n<strong>OKR Integration System:</strong>\\n\\n<strong>Objective: "Enhance Student Belonging"</strong>\\n\\n<strong>AI-Generated Key Results:</strong>\\n• KR1: Increase belonging index from 78% to 85% by semester end\\n  - Metric: Weekly pulse surveys (auto-distributed)\\n  - Tracking: Real-time dashboard with trend analysis\\n  - Alert system: Flags 15% drops for immediate intervention\\n\\n• KR2: Reduce social isolation indicators by 25%\\n  - Metric: Cross-community engagement frequency\\n  - Method: AI analysis of event attendance, study groups, social connections\\n  - Intervention triggers: Auto-generated outreach for isolated students\\n\\n• KR3: Achieve 90% satisfaction in community programming\\n  - Metric: Event feedback analysis + sentiment tracking\\n  - Innovation: AI suggests program improvements based on feedback patterns\\n\\n<strong>📊 AUTOMATED REPORTING SYSTEM:</strong>\\n\\n<strong>Weekly Leadership Briefs:</strong>\\n• Community health snapshot\\n• Success story highlights\\n• Early warning indicators\\n• Intervention recommendations\\n• Resource allocation suggestions\\n\\n<strong>🔄 CONTINUOUS IMPROVEMENT LOOP:</strong>\\n• Case study library grows with each intervention\\n• Assessment metrics refine based on outcomes\\n• Training content updates with new best practices\\n• Predictive models improve with more data\\n\\n<em>💡 Platform learns from every student interaction to improve community-building effectiveness and staff training quality.</em>',
+    timestamp: '9:20 AM',
+    documents: [
+      {
+        name: 'Student_Engagement_Platform.html',
+        type: 'html' as const,
+        size: '3.4 MB'
+      },
+      {
+        name: 'AI_Generated_Case_Studies.pdf',
+        type: 'pdf' as const,
+        size: '1.9 MB'
+      },
+      {
+        name: 'Assessment_Metrics_Dashboard.xlsx',
+        type: 'xlsx' as const,
+        size: '567 KB'
+      }
+    ]
+  }
+];
+
+const brightsapceAutomationConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to streamline our Brightspace course builds through API access and Amplify integration, similar to what Georgia Tech accomplished. This could dramatically improve our productivity and become a service we offer to other universities. Can you show me this automated system?',
+    timestamp: '2:30 PM',
+    documents: [
+      {
+        name: 'Brightspace_API_Documentation.pdf',
+        type: 'pdf' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'Georgia_Tech_Case_Study.pdf',
+        type: 'pdf' as const,
+        size: '890 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll create a comprehensive Brightspace Course Automation Platform that integrates with Amplify for intelligent course building. Here\'s the system:\\n\\n<strong>🎓 BRIGHTSPACE AUTOMATION INTELLIGENCE</strong>\\n\\n<strong>📊 CURRENT COURSE BUILD STATUS:</strong>\\n\\n<strong>Automation Pipeline Active:</strong>\\n• Courses in queue: 47 (Fall 2024 semester)\\n• Average build time: 23 minutes (vs 4-6 hours manual)\\n• Success rate: 97.3% (auto-completion)\\n• Quality score: 94.7% (peer institution benchmark)\\n\\n<strong>⚡ AMPLIFY INTEGRATION FEATURES:</strong>\\n\\n<strong>Intelligent Course Templates:</strong>\\n✅ AI analyzes syllabus → Generates course structure\\n✅ Content mapping → Auto-creates modules and assignments\\n✅ Assessment design → Builds quizzes, discussions, projects\\n✅ Accessibility compliance → WCAG 2.1 AA validation\\n✅ Mobile optimization → Responsive design verification\\n\\n<strong>🔄 REAL-TIME PROCESSING EXAMPLE:</strong>\\n\\n<strong>Course: "Advanced Data Analytics" (Prof. Johnson)</strong>\\n• Syllabus upload detected: 2:31 PM\\n• AI content analysis: Complete (2 minutes)\\n• Module structure generated: 12 modules identified\\n• Assignment framework: 8 assignments, 3 projects created\\n• Discussion forums: 24 topic-specific forums built\\n• Brightspace deployment: In progress (18 minutes remaining)',
+    timestamp: '2:32 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Excellent! Can you show me the commercial potential - how this could become a service we market to other universities?',
+    timestamp: '2:33 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🏢 UNIVERSITY PARTNERSHIP PLATFORM</strong>\\n\\n<strong>Commercial Service: "EduBuild AI"</strong>\\n\\n<strong>📈 MARKET OPPORTUNITY ANALYSIS:</strong>\\n\\n<strong>Target Market:</strong>\\n• 4,000+ US higher education institutions\\n• Average 150 courses built per semester\\n• Current manual build cost: $200-400 per course\\n• Total addressable market: $480M annually\\n\\n<strong>⚡ OUR COMPETITIVE ADVANTAGE:</strong>\\n\\n<strong>Vanderbilt-Proven Technology:</strong>\\n• 2+ years of live usage data\\n• 1,247 courses successfully automated\\n• 94.7% quality score (industry-leading)\\n• Integration with major LMS platforms\\n\\n<strong>🎯 SERVICE TIERS:</strong>\\n\\n<strong>Tier 1: Basic Automation ($89/course)</strong>\\n• Standard template generation\\n• Basic content mapping\\n• Quality assurance checks\\n• Email support\\n\\n<strong>Tier 2: Advanced Intelligence ($149/course)</strong>\\n• Custom AI training on institution data\\n• Advanced assessment generation\\n• Accessibility optimization\\n• Priority support + training\\n\\n<strong>Tier 3: Enterprise Partnership ($299/course + revenue share)</strong>\\n• Full platform white-labeling\\n• Custom integrations\\n• On-site training and support\\n• Ongoing optimization consulting\\n\\n<strong>📊 PILOT PROGRAM RESULTS:</strong>\\n\\n<strong>Beta Partners (3 Universities):</strong>\\n\\n<strong>Midwest State University:</strong>\\n• 89 courses automated (Spring 2024)\\n• Time savings: 312 hours (78% reduction)\\n• Cost savings: $67K in staff time\\n• Faculty satisfaction: 4.6/5.0\\n• Student engagement: +23% increase\\n\\n<strong>Tech Institute of California:</strong>\\n• 156 courses automated\\n• Quality improvements: +15% student ratings\\n• Accessibility compliance: 100% (up from 34%)\\n• Revenue potential: $2.1M if scaled\\n\\n<strong>💰 REVENUE PROJECTIONS:</strong>\\n\\n<strong>Year 1 Conservative Estimates:</strong>\\n• Partner institutions: 25 universities\\n• Average courses per semester: 120\\n• Annual revenue potential: $1.8M\\n• Development cost recovery: 8 months\\n• Profit margin: 67%\\n\\n<strong>🚀 SCALING STRATEGY:</strong>\\n• Conference presentations at EDUCAUSE, OLC\\n• Partnership with Brightspace (D2L)\\n• Integration marketplace listings\\n• Referral program for existing clients\\n\\n<strong>🔄 CONTINUOUS INNOVATION:</strong>\\n• Multi-language support (Spanish, French)\\n• Integration with Canvas, Blackboard\\n• AI-powered student success predictions\\n• Advanced analytics and reporting suite\\n\\n<em>💡 This positions Vanderbilt as a leader in educational technology innovation while generating significant revenue to fund further AI initiatives.</em>',
+    timestamp: '2:35 PM',
+    documents: [
+      {
+        name: 'EduBuild_AI_Business_Plan.pdf',
+        type: 'pdf' as const,
+        size: '2.8 MB'
+      },
+      {
+        name: 'University_Partnership_Proposals.docx',
+        type: 'docx' as const,
+        size: '456 KB'
+      },
+      {
+        name: 'Revenue_Projection_Model.xlsx',
+        type: 'xlsx' as const,
+        size: '1.1 MB'
+      }
+    ]
+  }
+];
+
+const nursingEducationConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'As part of our CHAIN initiative (Collaboratively Harnessing AI for Nursing), I need to create peer discussion groups for AI adoption and a shared platform for research insights. Can you help design a comprehensive nursing education AI system?',
+    timestamp: '11:45 AM',
+    documents: [
+      {
+        name: 'CHAIN_Initiative_Overview.pdf',
+        type: 'pdf' as const,
+        size: '1.3 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll create the CHAIN AI Platform - a comprehensive system for nursing education and research collaboration:\\n\\n<strong>🏥 CHAIN AI COLLABORATION HUB</strong>\\n\\n<strong>👥 PEER DISCUSSION & FEEDBACK GROUPS:</strong>\\n\\n<strong>Active Communities (127 Nursing Faculty & Staff):</strong>\\n• Clinical Practice AI (34 members) - Patient care applications\\n• Nursing Education Innovation (28 members) - Curriculum integration\\n• Research & Ethics (31 members) - Responsible AI use\\n• Administrative Efficiency (21 members) - Workflow optimization\\n• Student Success Support (13 members) - Learning enhancement\\n\\n<strong>📊 ENGAGEMENT ANALYTICS:</strong>\\n• Weekly active discussions: 23 threads\\n• Best practices shared: 89 this month\\n• Ethical concerns raised: 12 (all addressed)\\n• Cross-department collaborations: 15 active\\n• AI tool evaluations: 34 completed\\n\\n<strong>🔬 RESEARCH INSIGHTS PLATFORM:</strong>\\n\\n<strong>Live Knowledge Repository:</strong>\\n✅ AI in Nursing Literature: 1,247 papers categorized\\n✅ Clinical Trial Updates: 45 AI-related studies tracking\\n✅ Regulatory Changes: Real-time monitoring (FDA, CMS)\\n✅ Best Practice Library: 156 validated use cases\\n✅ Risk Assessment Database: 89 documented concerns + mitigations',
+    timestamp: '11:47 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This looks perfect for CHAIN! Can you show me how the platform ensures responsible AI use and cross-department communication?',
+    timestamp: '11:48 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>⚖️ RESPONSIBLE AI GOVERNANCE SYSTEM</strong>\\n\\n<strong>Built-in Ethics & Accountability Framework:</strong>\\n\\n<strong>🛡️ ETHICAL AI MONITORING:</strong>\\n\\n<strong>Automated Risk Assessment:</strong>\\n• Patient privacy protection: 100% HIPAA compliance verification\\n• Bias detection algorithms: Ongoing evaluation of AI recommendations\\n• Clinical decision support: Human-in-the-loop requirements\\n• Data security monitoring: Real-time threat assessment\\n• Transparency reporting: All AI decisions documented\\n\\n<strong>📋 GOVERNANCE WORKFLOWS:</strong>\\n\\n<strong>New AI Tool Evaluation Process:</strong>\\n1. Faculty member submits AI tool proposal\\n2. Automated preliminary risk screening\\n3. Ethics committee review (48-hour turnaround)\\n4. Pilot program with limited scope\\n5. Community feedback collection\\n6. Final approval with usage guidelines\\n\\n<strong>🤝 CROSS-DEPARTMENT COMMUNICATION:</strong>\\n\\n<strong>Integrated Collaboration Matrix:</strong>\\n\\n<strong>Active Inter-Department Projects:</strong>\\n• Nursing + Engineering: Smart patient monitoring systems\\n• Nursing + Data Science: Predictive health analytics\\n• Nursing + Medicine: Clinical decision support tools\\n• Nursing + Social Work: Holistic patient care AI\\n\\n<strong>📱 UNIFIED COMMUNICATION PLATFORM:</strong>\\n\\n<strong>Real-Time Collaboration Features:</strong>\\n• Cross-department project rooms\\n• Shared AI tool testing environments\\n• Joint research proposal development\\n• Inter-disciplinary case study creation\\n• Combined faculty training sessions\\n\\n<strong>📈 SUCCESS METRICS & IMPACT:</strong>\\n\\n<strong>CHAIN Platform Results (6 months):</strong>\\n• Faculty AI adoption: 78% (up from 23%)\\n• Ethical concerns resolution time: 2.3 days average\\n• Cross-department projects: 15 active collaborations\\n• Student AI literacy scores: +45% improvement\\n• Research productivity: +34% increase in AI-related publications\\n\\n<strong>🔄 CONTINUOUS IMPROVEMENT CYCLE:</strong>\\n\\n<strong>Monthly Review Process:</strong>\\n• Ethics committee assessment of platform usage\\n• Faculty feedback integration\\n• Policy updates based on emerging regulations\\n• Best practice documentation and sharing\\n• Risk mitigation strategy updates\\n\\n<strong>🎯 NURSING-SPECIFIC AI APPLICATIONS:</strong>\\n• Clinical documentation assistance (reducing nurse burnout)\\n• Patient education material generation (multilingual support)\\n• Medication interaction checking (enhanced safety)\\n• Care plan optimization (improved outcomes)\\n• Simulation scenario creation (enhanced training)\\n\\n<em>💡 CHAIN platform becomes a model for responsible AI adoption that other healthcare education programs can replicate, positioning VUSN as a national leader in nursing AI education.</em>',
+    timestamp: '11:50 AM',
+    documents: [
+      {
+        name: 'CHAIN_Platform_Dashboard.html',
+        type: 'html' as const,
+        size: '4.1 MB'
+      },
+      {
+        name: 'Ethics_Framework_Documentation.pdf',
+        type: 'pdf' as const,
+        size: '1.7 MB'
+      },
+      {
+        name: 'Cross_Department_Collaboration_Matrix.xlsx',
+        type: 'xlsx' as const,
+        size: '890 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Student Services & Educational Technology Use Cases | Staff Fellows" description="AI applications for student affairs professionals, educational technologists, and nursing education coordinators">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/staff-fellows" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Staff Fellows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Student Services & Educational Technology
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-green-50 via-slate-50 to-emerald-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Student Services & Educational Technology Use Cases
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Transform student experiences and educational delivery with AI-powered platforms. From building 
+          stronger community connections to automating course creation, see how AI enhances both 
+          student success and institutional efficiency.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End AI Applications -->
+  <section class="py-16 bg-gradient-to-br from-green-50 via-white to-teal-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-900 mb-6">Complete Student Experience Systems</h2>
+        <p class="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          Experience comprehensive AI platforms: student community building with automated case study generation, 
+          Brightspace course automation with commercial potential, and nursing education collaboration 
+          with built-in ethics governance.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End Application 1: Student Engagement Platform -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">AI-Powered Student Belonging Platform</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch an intelligent system that builds community connections, generates training case studies, 
+          and creates assessment metrics aligned with your OKRs for student belonging initiatives
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={studentEngagementConversation}
+        title="Student Community Intelligence"
+        description="Community platform: engagement analysis → case study generation → OKR-aligned assessments"
+      />
+    </div>
+  </section>
+
+  <!-- End-to-End Application 2: Brightspace Automation -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Brightspace Course Automation Platform</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Experience an AI system that automates course builds through API integration, 
+          with commercial potential as a service for other universities
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={brightsapceAutomationConversation}
+        title="Automated Course Generation"
+        description="Education platform: syllabus analysis → course structure → commercial service model"
+      />
+    </div>
+  </section>
+
+  <!-- End-to-End Application 3: Nursing Education AI -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">CHAIN: Nursing AI Collaboration Hub</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Explore a comprehensive platform for responsible AI adoption in nursing education 
+          with peer collaboration, ethics governance, and cross-department communication
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={nursingEducationConversation}
+        title="Healthcare Education AI Platform"
+        description="CHAIN system: peer collaboration → ethics governance → research insights sharing"
+      />
+    </div>
+  </section>
+
+  <!-- Architecture Overview -->
+  <section class="py-16 bg-gradient-to-br from-green-50 to-emerald-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">Platform Architecture</h2>
+      <div class="grid md:grid-cols-3 gap-8 mt-12">
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">🤝 Student Engagement Hub</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+              <span>Community health monitoring</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+              <span>Automated case study generation</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+              <span>OKR-aligned assessment metrics</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+              <span>Predictive intervention alerts</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">🎓 Course Automation Engine</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Brightspace API integration</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Intelligent content mapping</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Accessibility compliance</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Commercial service platform</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">🏥 CHAIN Nursing Platform</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Peer discussion communities</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Ethics governance framework</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Research insights repository</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Cross-department collaboration</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Impact -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">Student Success Through AI</h2>
+      <p class="text-xl text-slate-600 leading-relaxed mb-8">
+        <span class="text-green-600 font-semibold">Your expertise in student development + AI intelligence = Transformational educational experiences.</span>
+        You understand what students need to thrive. AI amplifies that understanding to create 
+        personalized, responsive, and scalable support systems.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-600 mb-2">78%</div>
+          <div class="text-slate-600">Increase in Student Belonging</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-600 mb-2">85%</div>
+          <div class="text-slate-600">Faster Course Development</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-600 mb-2">94%</div>
+          <div class="text-slate-600">AI Ethics Compliance Rate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
