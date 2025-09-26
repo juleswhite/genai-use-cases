@@ -1,0 +1,373 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const analyzeDataConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We completed our quarterly employee satisfaction survey and have the results in a CSV file. Can you analyze the data for patterns, trends, and areas that need immediate attention?',
+    timestamp: '1:20 PM',
+    documents: [
+      {
+        name: 'Q4_Employee_Satisfaction_Survey_Results.csv',
+        type: 'csv' as const,
+        size: '2.3 MB'
+      },
+      {
+        name: 'Previous_Quarter_Comparison_Data.xlsx',
+        type: 'xlsx' as const,
+        size: '1.8 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll analyze your employee satisfaction survey data to identify key trends, problem areas, and actionable insights. Let me process the results and compare with previous quarters.\\n\\n<strong>📊 SURVEY ANALYSIS COMPLETE</strong>\\n\\n**Survey Overview:**\\n• **Responses:** 1,247 employees (87% participation rate)\\n• **Departments:** All 12 departments represented\\n• **Response Period:** Oct 15 - Nov 1, 2024\\n• **Question Categories:** 8 core satisfaction areas\\n\\n<strong>📈 OVERALL SATISFACTION TRENDS</strong>\\n\\n**🔴 CONCERNING DECLINES:**\\n• **Work-Life Balance:** 6.2/10 (down from 7.4 in Q3)\\n• **Management Trust:** 5.8/10 (down from 6.9 in Q3)\\n• **Career Development:** 5.9/10 (down from 6.7 in Q3)\\n\\n**🟢 POSITIVE AREAS:**\\n• **Team Collaboration:** 8.1/10 (up from 7.8 in Q3)\\n• **Compensation Satisfaction:** 7.4/10 (stable)\\n• **Company Mission Alignment:** 7.9/10 (up from 7.6 in Q3)',
+    timestamp: '1:22 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Those work-life balance and management trust scores are alarming. Can you dig deeper into which departments or roles are driving these declines?',
+    timestamp: '1:23 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🔍 DETAILED DEPARTMENTAL ANALYSIS</strong>\\n\\n**⚠️ HIGH-RISK DEPARTMENTS:**\\n\\n**1. ENGINEERING (n=284):**\\n• Work-Life Balance: 4.9/10 (critical, down from 7.1)\\n• Management Trust: 4.2/10 (critical, down from 6.8)\\n• **Key Issues from Comments:**\\n  - "Constant weekend deployments without warning"\\n  - "Manager commitments not kept regarding project timelines"\\n  - "Burning out from 60+ hour weeks"\\n\\n**2. CUSTOMER SUCCESS (n=156):**\\n• Work-Life Balance: 5.4/10 (concerning, down from 6.9)\\n• Career Development: 4.8/10 (critical, down from 6.2)\\n• **Key Issues:**\\n  - "No clear promotion path despite exceeding targets"\\n  - "Taking customer calls at all hours"\\n\\n**3. SALES (n=198):**\\n• Management Trust: 5.1/10 (concerning, down from 7.2)\\n• **Key Issues:**\\n  - "Quota changes mid-quarter without explanation"\\n  - "Commission structure unclear and constantly changing"\\n\\n<strong>✅ PERFORMING WELL:</strong>\\n• **HR & Operations:** Stable scores across all categories\\n• **Marketing:** Improved in 6 of 8 categories\\n• **Finance:** Consistently high scores (7.5+ average)',
+    timestamp: '1:25 PM'
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'This is really helpful. What specific actions would you recommend we take immediately, and what should we monitor going forward?',
+    timestamp: '1:26 PM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>🎯 IMMEDIATE ACTION PLAN</strong>\\n\\n**🚨 CRITICAL (Next 30 Days):**\\n\\n**Engineering Department Intervention:**\\n1. **Emergency Leadership Review:** Meet with Engineering VPs this week\\n2. **Deployment Policy:** Implement "no weekend deployments without 72-hour notice"\\n3. **Workload Audit:** Review current project assignments for each engineer\\n4. **Manager Training:** Require commitment-keeping training for all eng managers\\n\\n**Customer Success Career Pathing:**\\n1. **Promotion Framework:** Define clear CS career ladder by month-end\\n2. **After-Hours Policy:** Establish customer escalation rotation to limit individual exposure\\n3. **Growth Conversations:** Schedule 1:1s with all CS staff within 2 weeks\\n\\n**Sales Trust Rebuilding:**\\n1. **Quota Transparency:** Freeze quota changes, publish 2025 targets early\\n2. **Commission Clarity:** Audit and simplify commission structure\\n3. **Management Communication:** Weekly sales leadership transparency calls\\n\\n<strong>📊 MONITORING FRAMEWORK:</strong>\\n• **Weekly Pulse Surveys:** Track Engineering & CS teams\\n• **Monthly Skip-Level Meetings:** VPs meet with individual contributors\\n• **Quarterly Deep Dive:** Full survey repeat with trend analysis\\n\\n**💡 PREDICTED IMPACT:**\\n• Target: Return to Q3 satisfaction levels within 90 days\\n• Risk: 15-20% turnover in Engineering if no action taken\\n• Opportunity: High-performing depts can mentor struggling ones',
+    timestamp: '1:28 PM',
+    documents: [
+      {
+        name: 'Detailed_Survey_Analysis_Report.pdf',
+        type: 'pdf' as const,
+        size: '3.4 MB'
+      },
+      {
+        name: 'Action_Plan_Template.xlsx',
+        type: 'xlsx' as const,
+        size: '892 KB'
+      },
+      {
+        name: 'Department_Scorecards.pdf',
+        type: 'pdf' as const,
+        size: '1.2 MB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Analyze Structured Data | Conversation Patterns" description="See how AI finds patterns and insights in CSV data and spreadsheets">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/conversation" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Conversation Patterns
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Analyze Structured Data
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-indigo-50 via-slate-50 to-indigo-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Analyze Structured Data
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Uncover patterns, trends, and actionable insights from CSV files and spreadsheets. 
+          AI finds the signal in the noise of structured data.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">Beyond Basic Statistics</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              This pattern transforms AI into a <strong>data detective</strong>. While spreadsheet tools 
+              can calculate averages and create charts, AI understands the story behind the numbers—
+              identifying concerning trends, surprising patterns, and actionable business insights.
+            </p>
+            <p class="leading-relaxed">
+              AI connects data points across categories, time periods, and segments to reveal insights 
+              that traditional analysis might miss. It doesn't just report what happened, but explains 
+              why it matters and what you should do about it.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-indigo-50 rounded-xl p-6 border border-indigo-100">
+            <h3 class="font-semibold text-indigo-900 mb-4">Analysis Capabilities</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="font-medium text-indigo-900 mb-2">Pattern Recognition</h4>
+                <ul class="text-sm text-indigo-700 space-y-1">
+                  <li>• Trend identification across time</li>
+                  <li>• Segment-based analysis</li>
+                  <li>• Correlation discovery</li>
+                  <li>• Outlier detection</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-indigo-900 mb-2">Insight Generation</h4>
+                <ul class="text-sm text-indigo-700 space-y-1">
+                  <li>• Root cause analysis</li>
+                  <li>• Risk prioritization</li>
+                  <li>• Action recommendations</li>
+                  <li>• Predictive indicators</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Perfect For</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Employee satisfaction surveys</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Customer feedback analysis</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Sales performance data</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Financial trend analysis</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Operational metrics review</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-indigo-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Market research results</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6 p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+            <h4 class="font-medium text-indigo-900 mb-2">📊 Key Advantage</h4>
+            <p class="text-xs text-indigo-700">
+              AI sees relationships and trends that humans might miss, turning raw data 
+              into strategic insights and actionable business decisions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Employee Survey Analysis</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI analyze employee satisfaction data to identify critical issues and recommend actions
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={analyzeDataConversation}
+        title="HR Data Analysis & Action Planning"
+        description="HR team analyzing quarterly employee satisfaction survey results for strategic improvements"
+      />
+    </div>
+  </section>
+
+  <!-- Value Demonstration -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">From Data to Decisions</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Manual Process -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3 text-sm">📈</div>
+            Manual Data Analysis
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+              <ul class="space-y-3 text-sm text-red-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Hours of spreadsheet manipulation and pivot tables</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Multiple analysts needed for complete coverage</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Surface-level insights only</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Missed correlations between data segments</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Delayed action due to analysis bottlenecks</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-red-600">Survey Analysis</div>
+              <div class="text-sm text-red-600">= 12-16 hours across team</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI Data Analysis -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mr-3 text-sm">🔍</div>
+            AI Data Analysis
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-indigo-50 rounded-xl p-6 border border-indigo-200">
+              <ul class="space-y-3 text-sm text-indigo-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Instant comprehensive analysis across all dimensions</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Multi-domain expertise in single analysis</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Deep insights with root cause identification</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Automatic pattern recognition and correlation discovery</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-indigo-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Immediate actionable recommendations</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-indigo-600">Survey Analysis</div>
+              <div class="text-sm text-indigo-600">= 30 minutes comprehensive insights</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI Metrics -->
+      <div class="mt-16 grid md:grid-cols-4 gap-6 text-center">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-indigo-600 mb-2">94%</div>
+          <div class="text-sm text-slate-600 mb-1">Time Savings</div>
+          <div class="text-xs text-slate-500">16 hours → 1 hour</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-indigo-600 mb-2">1,247</div>
+          <div class="text-sm text-slate-600 mb-1">Survey Responses</div>
+          <div class="text-xs text-slate-500">87% participation rate</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-indigo-600 mb-2">12</div>
+          <div class="text-sm text-slate-600 mb-1">Departments Analyzed</div>
+          <div class="text-xs text-slate-500">3 flagged as high-risk</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-indigo-600 mb-2">30</div>
+          <div class="text-sm text-slate-600 mb-1">Day Action Plan</div>
+          <div class="text-xs text-slate-500">immediate interventions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">Data Storytelling at Scale</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-indigo-400 font-semibold">AI doesn't just crunch numbers—it tells the story they're trying to tell.</span>
+        By understanding business context and human behavior, AI transforms spreadsheets into strategic intelligence. 
+        It connects the dots between data points to reveal the narrative that drives better decisions.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-indigo-400 mb-2">6.2</div>
+          <div class="text-slate-400">Work-Life Balance Score Decline</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-indigo-400 mb-2">284</div>
+          <div class="text-slate-400">Engineering Team Members at Risk</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-indigo-400 mb-2">90</div>
+          <div class="text-slate-400">Days to Recovery with Action Plan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

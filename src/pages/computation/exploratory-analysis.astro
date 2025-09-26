@@ -1,0 +1,391 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const exploratoryAnalysisConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We just completed our clinical trial for the new diabetes medication. I have the raw patient data and need to analyze it interactively to understand efficacy patterns before we prepare the FDA submission. Can you help me explore this data?',
+    timestamp: '10:15 AM',
+    documents: [
+      {
+        name: 'Clinical_Trial_Patient_Data_Phase_3.csv',
+        type: 'csv' as const,
+        size: '15.7 MB'
+      },
+      {
+        name: 'Patient_Demographics_Stratification.xlsx',
+        type: 'xlsx' as const,
+        size: '3.2 MB'
+      },
+      {
+        name: 'Adverse_Events_Log.csv',
+        type: 'csv' as const,
+        size: '2.8 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll help you conduct an interactive exploratory analysis of your clinical trial data. Let me start by examining the dataset structure and generating initial insights, then we can dive deeper based on what we find.\\n\\n<strong>📊 INITIAL DATA EXPLORATION</strong>\\n\\n```python\\n# Loading and examining clinical trial data\\nimport pandas as pd\\nimport numpy as np\\nimport matplotlib.pyplot as plt\\nimport seaborn as sns\\n\\n# Load datasets\\npatient_data = pd.read_csv(\'Clinical_Trial_Patient_Data_Phase_3.csv\')\\ndemographics = pd.read_csv(\'Patient_Demographics_Stratification.csv\')\\nadverse_events = pd.read_csv(\'Adverse_Events_Log.csv\')\\n\\nprint(f"Total patients: {len(patient_data)}")\\nprint(f"Treatment arms: {patient_data[\'treatment_arm\'].unique()}")\\nprint(f"Primary endpoint (HbA1c reduction): {patient_data[\'hba1c_change\'].describe()}")\\n```\\n\\n**📈 DATASET OVERVIEW:**\\n• **Patients:** 2,847 participants across 6 countries\\n• **Treatment Arms:** Drug (n=1,423), Placebo (n=1,424)\\n• **Primary Endpoint:** HbA1c reduction from baseline\\n• **Secondary Endpoints:** Weight change, blood pressure, quality of life\\n• **Study Duration:** 24 weeks with 4-week follow-up',
+    timestamp: '10:17 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Excellent! What does the initial efficacy data show? I\'m particularly interested in whether we hit our primary endpoint and if there are any demographic subgroups where the drug works better.',
+    timestamp: '10:18 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🎯 PRIMARY EFFICACY ANALYSIS</strong>\\n\\n```python\\n# Primary endpoint analysis\\ntreatment_efficacy = patient_data.groupby(\'treatment_arm\')[\'hba1c_change\'].agg([\\n    \'mean\', \'std\', \'count\'\\n]).round(3)\\n\\nprint("HbA1c Change from Baseline:")\\nprint(treatment_efficacy)\\n\\n# Statistical significance test\\nfrom scipy.stats import ttest_ind\\ndrug_group = patient_data[patient_data[\'treatment_arm\'] == \'Drug\'][\'hba1c_change\']\\nplacebo_group = patient_data[patient_data[\'treatment_arm\'] == \'Placebo\'][\'hba1c_change\']\\nt_stat, p_value = ttest_ind(drug_group, placebo_group)\\n\\nprint(f"\\nStatistical Analysis:")\\nprint(f"T-statistic: {t_stat:.4f}")\\nprint(f"P-value: {p_value:.2e}")\\n```\\n\\n**✅ PRIMARY ENDPOINT RESULTS:**\\n• **Drug Group:** -1.34% HbA1c reduction (SD: 0.52)\\n• **Placebo Group:** -0.23% HbA1c reduction (SD: 0.41)\\n• **Treatment Effect:** -1.11% difference (95% CI: -1.18 to -1.04)\\n• **P-value:** <0.0001 (highly significant)\\n• **Clinical Significance:** ✅ Exceeded target of -1.0% reduction\\n\\n**🔍 DEMOGRAPHIC SUBGROUP ANALYSIS:**\\n\\n```python\\n# Subgroup analysis by age, BMI, and baseline HbA1c\\nsubgroups = patient_data.groupby([\'treatment_arm\', \'age_group\', \'bmi_category\'])[\'hba1c_change\'].mean().unstack(level=0)\\nsubgroups[\'treatment_effect\'] = subgroups[\'Drug\'] - subgroups[\'Placebo\']\\nprint(subgroups.sort_values(\'treatment_effect\', ascending=False))\\n```',
+    timestamp: '10:20 AM'
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'This is looking very promising! Can you analyze the safety profile next? I need to understand the adverse event patterns and whether there are any concerning signals we need to address.',
+    timestamp: '10:21 AM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>🛡️ COMPREHENSIVE SAFETY ANALYSIS</strong>\\n\\n```python\\n# Adverse event analysis\\nae_summary = adverse_events.groupby([\'treatment_arm\', \'severity\', \'system_organ_class\']).size().unstack(fill_value=0)\\n\\n# Calculate incidence rates\\ntotal_patients_drug = len(patient_data[patient_data[\'treatment_arm\'] == \'Drug\'])\\ntotal_patients_placebo = len(patient_data[patient_data[\'treatment_arm\'] == \'Placebo\'])\\n\\nae_rates = adverse_events.groupby([\'treatment_arm\', \'preferred_term\']).size().reset_index(name=\'count\')\\nae_rates[\'incidence_rate\'] = np.where(\\n    ae_rates[\'treatment_arm\'] == \'Drug\',\\n    (ae_rates[\'count\'] / total_patients_drug * 100),\\n    (ae_rates[\'count\'] / total_patients_placebo * 100)\\n)\\n\\n# Identify significantly different AEs\\nfrom scipy.stats import fisher_exact\\nsignificant_aes = []\\nfor ae in ae_rates[\'preferred_term\'].unique():\\n    drug_events = ae_rates[(ae_rates[\'treatment_arm\'] == \'Drug\') & (ae_rates[\'preferred_term\'] == ae)][\'count\'].sum()\\n    placebo_events = ae_rates[(ae_rates[\'treatment_arm\'] == \'Placebo\') & (ae_rates[\'preferred_term\'] == ae)][\'count\'].sum()\\n    \\n    # Fisher\'s exact test\\n    odds_ratio, p_val = fisher_exact([[drug_events, total_patients_drug - drug_events],\\n                                     [placebo_events, total_patients_placebo - placebo_events]])\\n    if p_val < 0.05:\\n        significant_aes.append({\'ae\': ae, \'p_value\': p_val, \'odds_ratio\': odds_ratio})\\n```\\n\\n**📊 SAFETY PROFILE SUMMARY:**\\n\\n**Overall Adverse Events:**\\n• **Drug Group:** 1,089 patients with ≥1 AE (76.5%)\\n• **Placebo Group:** 987 patients with ≥1 AE (69.3%)\\n• **Risk Difference:** +7.2% (95% CI: 4.1% to 10.3%)\\n\\n**🔴 NOTABLE SAFETY SIGNALS:**\\n• **Gastrointestinal:** Nausea (Drug: 12.4% vs Placebo: 4.1%, p<0.001)\\n• **Gastrointestinal:** Diarrhea (Drug: 8.7% vs Placebo: 3.2%, p<0.001)\\n• **Endocrine:** Hypoglycemia (Drug: 3.4% vs Placebo: 0.8%, p<0.001)\\n\\n**✅ REASSURING FINDINGS:**\\n• **Serious AEs:** Drug: 2.1% vs Placebo: 2.3% (p=0.72, not significant)\\n• **Cardiovascular Events:** No difference between groups\\n• **Discontinuation Rate:** Drug: 8.9% vs Placebo: 7.1% (acceptable)\\n\\n**💡 CLINICAL INTERPRETATION:**\\n• GI events are dose-dependent and manageable with titration\\n• Hypoglycemia risk is expected mechanism of action\\n• No major safety concerns that would preclude approval',
+    timestamp: '10:23 AM'
+  },
+  {
+    id: '7',
+    sender: 'user' as const,
+    message: 'Perfect! Now I need to create visualizations for the FDA submission. Can you generate publication-quality plots showing efficacy by subgroup and safety profiles?',
+    timestamp: '10:24 AM'
+  },
+  {
+    id: '8',
+    sender: 'ai' as const,
+    message: '<strong>📈 PUBLICATION-QUALITY VISUALIZATIONS</strong>\\n\\n```python\\n# Create comprehensive figure set for FDA submission\\nimport matplotlib.pyplot as plt\\nimport seaborn as sns\\nfrom matplotlib.patches import Rectangle\\n\\n# Set publication style\\nplt.style.use(\'seaborn-v0_8-whitegrid\')\\nsns.set_palette("husl")\\n\\n# Figure 1: Primary Endpoint Forest Plot\\nfig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(16, 12))\\nfig.suptitle(\'Clinical Trial Results: Efficacy and Safety Analysis\', fontsize=16, fontweight=\'bold\')\\n\\n# Forest plot for subgroup analysis\\nsubgroups_plot = [\\n    (\'Overall Population\', -1.11, (-1.18, -1.04)),\\n    (\'Age <65\', -1.15, (-1.24, -1.06)),\\n    (\'Age ≥65\', -1.03, (-1.16, -0.90)),\\n    (\'BMI <30\', -1.08, (-1.18, -0.98)),\\n    (\'BMI ≥30\', -1.17, (-1.29, -1.05)),\\n    (\'Baseline HbA1c 7-9%\', -1.09, (-1.17, -1.01)),\\n    (\'Baseline HbA1c >9%\', -1.21, (-1.35, -1.07))\\n]\\n\\ny_pos = range(len(subgroups_plot))\\neffects = [x[1] for x in subgroups_plot]\\nlower_ci = [x[2][0] for x in subgroups_plot]\\nupper_ci = [x[2][1] for x in subgroups_plot]\\nlabels = [x[0] for x in subgroups_plot]\\n\\nax1.errorbar(effects, y_pos, xerr=[[e - l for e, l in zip(effects, lower_ci)],\\n                                   [u - e for e, u in zip(effects, upper_ci)]], \\n             fmt=\'o\', capsize=5, capthick=2, markersize=8)\\nax1.axvline(x=0, color=\'red\', linestyle=\'--\', alpha=0.7)\\nax1.axvline(x=-1.0, color=\'green\', linestyle=\'--\', alpha=0.7, label=\'Target Efficacy\')\\nax1.set_yticks(y_pos)\\nax1.set_yticklabels(labels)\\nax1.set_xlabel(\'HbA1c Change from Baseline (%)\')\\nax1.set_title(\'Efficacy by Subgroup (Forest Plot)\')\\nax1.legend()\\n\\n# Safety events comparison\\nsafety_data = {\\n    \'Adverse Event\': [\'Nausea\', \'Diarrhea\', \'Hypoglycemia\', \'Headache\', \'UTI\'],\\n    \'Drug (%)\': [12.4, 8.7, 3.4, 6.2, 4.1],\\n    \'Placebo (%)\': [4.1, 3.2, 0.8, 5.9, 3.8]\\n}\\n\\nx = np.arange(len(safety_data[\'Adverse Event\']))\\nwidth = 0.35\\n\\nax2.bar(x - width/2, safety_data[\'Drug (%)\'], width, label=\'Drug\', alpha=0.8)\\nax2.bar(x + width/2, safety_data[\'Placebo (%)\'], width, label=\'Placebo\', alpha=0.8)\\nax2.set_xlabel(\'Adverse Events\')\\nax2.set_ylabel(\'Incidence Rate (%)\')\\nax2.set_title(\'Safety Profile Comparison\')\\nax2.set_xticks(x)\\nax2.set_xticklabels(safety_data[\'Adverse Event\'], rotation=45)\\nax2.legend()\\n\\nplt.tight_layout()\\nplt.savefig(\'FDA_Submission_Clinical_Results.png\', dpi=300, bbox_inches=\'tight\')\\nplt.show()\\n```\\n\\n**📋 FDA SUBMISSION PACKAGE GENERATED:**\\n\\n**Primary Analysis Results:**\\n• **Statistical Power:** >99% (exceeded planned 90%)\\n• **Effect Size:** Clinically meaningful (-1.11% HbA1c reduction)\\n• **Consistency:** Efficacy maintained across all prespecified subgroups\\n• **Dose-Response:** Clear relationship observed in Phase 2\\n\\n**Regulatory Strategy Recommendations:**\\n1. **Labeling:** Request broad indication for Type 2 diabetes\\n2. **Dosing:** Start 5mg daily, titrate to 10mg based on tolerance\\n3. **Warnings:** Include GI tolerability guidance in prescribing information\\n4. **Post-Market:** Propose cardiovascular outcomes study (standard requirement)\\n\\n**🎯 KEY REGULATORY STRENGTHS:**\\n• Exceeded FDA guidance on clinically meaningful efficacy\\n• Safety profile consistent with drug class\\n• Robust statistical analysis with appropriate multiplicity control\\n• Comprehensive subgroup analysis demonstrates broad efficacy',
+    timestamp: '10:26 AM',
+    documents: [
+      {
+        name: 'FDA_Submission_Clinical_Results.png',
+        type: 'pdf' as const,
+        size: '2.4 MB'
+      },
+      {
+        name: 'Statistical_Analysis_Report.pdf',
+        type: 'pdf' as const,
+        size: '8.7 MB'
+      },
+      {
+        name: 'Regulatory_Strategy_Summary.docx',
+        type: 'docx' as const,
+        size: '1.3 MB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Exploratory Analysis | Computation + Automation" description="See how AI conducts interactive data analysis with real-time code execution">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/computation" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Computation + Automation
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Exploratory Analysis
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-blue-50 via-slate-50 to-blue-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Exploratory Analysis
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Conduct interactive data analysis in real-time. AI writes and executes code as you ask questions, 
+          uncovering insights through dynamic statistical analysis and visualization.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">Interactive Data Science</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              This pattern transforms AI into a <strong>live data scientist</strong>. As you ask questions about your data, 
+              AI writes and executes Python code in real-time, generating statistical analyses, visualizations, 
+              and insights on demand. It's like having a senior data scientist available 24/7.
+            </p>
+            <p class="leading-relaxed">
+              AI understands statistical methods, data visualization best practices, and domain expertise. 
+              It can perform complex analyses like survival curves, regression modeling, and hypothesis testing—
+              all while explaining the results in business terms you can act upon.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-blue-50 rounded-xl p-6 border border-blue-100">
+            <h3 class="font-semibold text-blue-900 mb-4">Analysis Capabilities</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="font-medium text-blue-900 mb-2">Statistical Methods</h4>
+                <ul class="text-sm text-blue-700 space-y-1">
+                  <li>• Hypothesis testing (t-tests, chi-square)</li>
+                  <li>• Regression analysis (linear, logistic)</li>
+                  <li>• Survival analysis (Kaplan-Meier)</li>
+                  <li>• Time series forecasting</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-blue-900 mb-2">Visualization & Reporting</h4>
+                <ul class="text-sm text-blue-700 space-y-1">
+                  <li>• Publication-quality plots</li>
+                  <li>• Interactive dashboards</li>
+                  <li>• Statistical reports</li>
+                  <li>• Regulatory submissions</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Perfect For</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Clinical trial analysis</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Market research deep-dives</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Financial modeling & forecasting</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Operational performance analysis</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>A/B test evaluation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Regulatory submission prep</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            <h4 class="font-medium text-blue-900 mb-2">🧠 Key Advantage</h4>
+            <p class="text-xs text-blue-700">
+              AI combines statistical expertise with domain knowledge, conducting analyses 
+              that would typically require specialized data scientists.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Clinical Trial Data Analysis</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI conduct real-time statistical analysis of pharmaceutical trial data for FDA submission
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={exploratoryAnalysisConversation}
+        title="Live Statistical Analysis Session"
+        description="Pharmaceutical team analyzing Phase 3 clinical trial results with AI-powered data science"
+      />
+    </div>
+  </section>
+
+  <!-- Value Demonstration -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">The Analysis Accelerator</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Traditional Process -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3 text-sm">⏱️</div>
+            Traditional Data Analysis
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+              <ul class="space-y-3 text-sm text-red-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Weeks waiting for biostatistician availability</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Multiple back-and-forth iterations</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Static reports that can't be modified</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Limited exploration of ad-hoc questions</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Delayed regulatory submissions</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-red-600">Clinical Analysis</div>
+              <div class="text-sm text-red-600">= 3-4 weeks turnaround</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI Exploratory Analysis -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-3 text-sm">⚡</div>
+            AI Exploratory Analysis
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
+              <ul class="space-y-3 text-sm text-blue-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Immediate analysis as questions arise</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Interactive conversation-driven exploration</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Dynamic visualizations and code execution</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Unlimited follow-up questions and deep-dives</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Publication-ready results in real-time</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-blue-600">Clinical Analysis</div>
+              <div class="text-sm text-blue-600">= 2 hours interactive session</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI Metrics -->
+      <div class="mt-16 grid md:grid-cols-4 gap-6 text-center">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-blue-600 mb-2">95%</div>
+          <div class="text-sm text-slate-600 mb-1">Time Reduction</div>
+          <div class="text-xs text-slate-500">4 weeks → 2 hours</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-blue-600 mb-2">2,847</div>
+          <div class="text-sm text-slate-600 mb-1">Patients Analyzed</div>
+          <div class="text-xs text-slate-500">across 6 countries</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-blue-600 mb-2">99%</div>
+          <div class="text-sm text-slate-600 mb-1">Statistical Power</div>
+          <div class="text-xs text-slate-500">exceeded target</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-blue-600 mb-2">$200K</div>
+          <div class="text-sm text-slate-600 mb-1">Analysis Cost Saved</div>
+          <div class="text-xs text-slate-500">vs traditional biostat</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">Data Science at the Speed of Thought</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-blue-400 font-semibold">Exploratory analysis becomes a conversation, not a project.</span>
+        By combining statistical expertise with real-time code execution, AI eliminates the bottleneck between 
+        having questions about your data and getting answers. It's the difference between waiting weeks 
+        for analysis and getting insights in minutes.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-400 mb-2">-1.11%</div>
+          <div class="text-slate-400">HbA1c Reduction (Primary Endpoint)</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-400 mb-2"><0.0001</div>
+          <div class="text-slate-400">P-value (Highly Significant)</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-400 mb-2">76.5%</div>
+          <div class="text-slate-400">Patients with Adverse Events</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

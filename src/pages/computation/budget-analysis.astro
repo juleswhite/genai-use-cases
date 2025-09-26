@@ -1,0 +1,379 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const budgetAnalysisConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'Our research division has multiple NIH grants running simultaneously, and I\'m getting worried about our burn rates and staffing allocation. Can you analyze our current budget situation and help me identify potential issues before they become critical?',
+    timestamp: '2:45 PM',
+    documents: [
+      {
+        name: 'NIH_Grant_Budgets_FY2024.xlsx',
+        type: 'xlsx' as const,
+        size: '4.1 MB'
+      },
+      {
+        name: 'Monthly_Expenditure_Reports_Q1_Q2.csv',
+        type: 'csv' as const,
+        size: '2.8 MB'
+      },
+      {
+        name: 'Staff_Allocation_Matrix.xlsx',
+        type: 'xlsx' as const,
+        size: '1.9 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll analyze your grant portfolio and staffing model to identify budget risks and optimization opportunities. Let me start by examining your current burn rates and funding runway.\\n\\n<strong>💰 GRANT PORTFOLIO ANALYSIS</strong>\\n\\n```python\\n# Load and analyze grant budget data\\nimport pandas as pd\\nimport numpy as np\\nfrom datetime import datetime, timedelta\\n\\n# Load datasets\\ngrant_budgets = pd.read_excel(\'NIH_Grant_Budgets_FY2024.xlsx\')\\nexpenditure_data = pd.read_csv(\'Monthly_Expenditure_Reports_Q1_Q2.csv\')\\nstaff_allocation = pd.read_excel(\'Staff_Allocation_Matrix.xlsx\')\\n\\n# Calculate current burn rates by grant\\nburn_analysis = expenditure_data.groupby([\'grant_id\', \'month\']).sum()\\ncurrent_burn_rate = burn_analysis.groupby(\'grant_id\')[\'total_expenditure\'].mean()\\n\\nprint("Grant Portfolio Overview:")\\nprint(f"Active Grants: {len(grant_budgets)}")\\nprint(f"Total Budget: ${grant_budgets[\'total_budget\'].sum():,.2f}")\\nprint(f"YTD Expenditure: ${expenditure_data[\'total_expenditure\'].sum():,.2f}")\\n```\\n\\n**📊 PORTFOLIO OVERVIEW:**\\n• **Active Grants:** 8 NIH grants (5 R01, 2 R21, 1 P01)\\n• **Total Portfolio Value:** $12.4M over 3-5 years\\n• **Current Annual Budget:** $4.2M\\n• **YTD Expenditure:** $2.1M (50% of annual, 6 months elapsed)\\n\\n**⚠️ INITIAL RISK FLAGS:**\\n• **Grant R01-2023-05:** 73% budget consumed, 18 months remaining\\n• **Grant R21-2024-02:** Burning 15% faster than planned\\n• **Staff Overallocation:** 3 researchers allocated >100% FTE',
+    timestamp: '2:47 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'That R01-2023-05 situation sounds critical. Can you dig deeper into what\'s driving the overspend and give me specific recommendations for course correction?',
+    timestamp: '2:48 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🔍 CRITICAL GRANT ANALYSIS: R01-2023-05</strong>\\n\\n```python\\n# Deep dive into problematic grant\\nr01_05_data = expenditure_data[expenditure_data[\'grant_id\'] == \'R01-2023-05\']\\nr01_05_budget = grant_budgets[grant_budgets[\'grant_id\'] == \'R01-2023-05\'].iloc[0]\\n\\n# Analyze spending by category\\nspending_by_category = r01_05_data.groupby(\'expense_category\')[\'amount\'].sum()\\nbudget_by_category = {\\n    \'personnel\': r01_05_budget[\'personnel_budget\'],\\n    \'supplies\': r01_05_budget[\'supplies_budget\'],\\n    \'equipment\': r01_05_budget[\'equipment_budget\'],\\n    \'travel\': r01_05_budget[\'travel_budget\'],\\n    \'indirect\': r01_05_budget[\'indirect_budget\']\\n}\\n\\n# Calculate variance by category\\nvariance_analysis = {}\\nfor category in budget_by_category:\\n    spent = spending_by_category.get(category, 0)\\n    budgeted = budget_by_category[category]\\n    months_elapsed = 18  # Grant is 18 months in\\n    total_months = 36    # 3-year grant\\n    expected_spend = budgeted * (months_elapsed / total_months)\\n    variance = spent - expected_spend\\n    variance_analysis[category] = {\\n        \'budgeted_total\': budgeted,\\n        \'spent_ytd\': spent,\\n        \'expected_spend\': expected_spend,\\n        \'variance\': variance,\\n        \'variance_pct\': (variance / expected_spend) * 100 if expected_spend > 0 else 0\\n    }\\n\\nprint("R01-2023-05 Variance Analysis:")\\nfor category, data in variance_analysis.items():\\n    print(f"{category}: ${data[\'variance\']:,.0f} ({data[\'variance_pct\']:.1f}%) over expected")\\n```\\n\\n**🚨 ROOT CAUSE ANALYSIS - R01-2023-05:**\\n\\n**Personnel Overspend (Primary Issue):**\\n• **Variance:** +$89,000 over expected (34% overspend)\\n• **Driver:** Dr. Sarah Chen elevated from 50% to 80% FTE (not budgeted)\\n• **Impact:** Consuming personnel budget 18 months early\\n\\n**Equipment Overspend (Secondary):**\\n• **Variance:** +$23,000 over expected (67% overspend)\\n• **Driver:** Unplanned mass spectrometer repair ($18K)\\n• **Impact:** Equipment budget nearly exhausted\\n\\n**Supplies On Track:**\\n• **Variance:** -$2,000 under expected (within normal range)\\n\\n**💡 IMMEDIATE ACTION PLAN:**\\n\\n**Option 1 - Personnel Reallocation (Recommended):**\\n1. **Reduce Dr. Chen to 60% FTE** (saves $1,200/month)\\n2. **Shift 20% effort to Grant R21-2024-02** (has personnel budget available)\\n3. **Hire postdoc at 40% FTE** (lower cost, same productivity)\\n\\n**Option 2 - Budget Reallocation:**\\n1. **Transfer $45K from supplies to personnel** (NIH allows up to 25% reallocation)\\n2. **Defer equipment purchases to Year 3**\\n3. **Request no-cost extension** for additional 6 months\\n\\n**Projected Impact:** Extends grant runway by 12 months, maintains research productivity',
+    timestamp: '2:50 PM'
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'Excellent analysis! Now I need to look at the big picture. Can you create a forecasting model for our entire portfolio and identify the optimal staffing allocation across all grants?',
+    timestamp: '2:51 PM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>📈 PORTFOLIO OPTIMIZATION MODEL</strong>\\n\\n```python\\n# Create comprehensive forecasting model\\nimport matplotlib.pyplot as plt\\nfrom scipy.optimize import minimize\\n\\n# Portfolio-level burn rate forecasting\\ndef forecast_portfolio_burn(grants_data, months_ahead=18):\\n    forecasts = {}\\n    total_risk_score = 0\\n    \\n    for _, grant in grants_data.iterrows():\\n        grant_id = grant[\'grant_id\']\\n        current_burn = current_burn_rate[grant_id]\\n        remaining_budget = grant[\'total_budget\'] - grant[\'spent_ytd\']\\n        months_remaining = grant[\'months_remaining\']\\n        \\n        # Calculate runway at current burn rate\\n        runway_months = remaining_budget / current_burn if current_burn > 0 else months_remaining\\n        \\n        # Risk scoring\\n        if runway_months < months_remaining * 0.8:  # <80% of planned timeline\\n            risk_level = \"HIGH\"\\n            risk_score = 3\\n        elif runway_months < months_remaining * 0.95:\\n            risk_level = \"MEDIUM\"\\n            risk_score = 2\\n        else:\\n            risk_level = \"LOW\"\\n            risk_score = 1\\n            \\n        forecasts[grant_id] = {\\n            \'runway_months\': runway_months,\\n            \'risk_level\': risk_level,\\n            \'risk_score\': risk_score,\\n            \'projected_shortfall\': max(0, (current_burn * months_remaining) - remaining_budget)\\n        }\\n        total_risk_score += risk_score\\n    \\n    return forecasts, total_risk_score\\n\\n# Run portfolio forecast\\nforecasts, portfolio_risk = forecast_portfolio_burn(grant_budgets)\\n\\nprint("Portfolio Risk Assessment:")\\nprint(f"Total Risk Score: {portfolio_risk}/24 (24 = maximum risk)")\\nprint(f"High-Risk Grants: {sum(1 for f in forecasts.values() if f[\'risk_level\'] == \'HIGH\')} of 8")\\n\\n# Optimal staffing allocation using linear programming\\ndef optimize_staffing_allocation():\\n    # Objective: Minimize total cost while maximizing research output\\n    # Constraints: Personnel budget limits, FTE limits, minimum staffing requirements\\n    \\n    results = {\\n        \'recommended_changes\': [\\n            {\'action\': \'Reduce Dr. Chen R01-2023-05 from 80% to 60% FTE\', \'impact\': \'$14.4K annual savings\'},\\n            {\'action\': \'Increase Dr. Martinez R21-2024-02 from 40% to 60% FTE\', \'impact\': \'Accelerate milestones by 3 months\'},\\n            {\'action\': \'Hire Postdoc A on P01-2022-01 at 50% FTE\', \'impact\': \'$8K under budget, high productivity\'},\\n            {\'action\': \'Reallocate Lab Tech from R01-2021-03 (ending) to R01-2023-05\', \'impact\': \'Maintain lab operations\'}\\n        ],\\n        \'cost_savings\': 23400,\\n        \'efficiency_gain\': \'15% improvement in cost-per-publication\',\\n        \'risk_reduction\': \'Eliminates 2 of 3 high-risk grants\'\\n    }\\n    return results\\n\\noptimal_allocation = optimize_staffing_allocation()\\n```\\n\\n**🎯 OPTIMIZED PORTFOLIO STRATEGY:**\\n\\n**Portfolio Health Scorecard:**\\n• **Current Risk Score:** 18/24 (HIGH - needs intervention)\\n• **Post-Optimization Score:** 12/24 (MEDIUM - manageable)\\n• **Budget Runway Extension:** +8 months average\\n• **Annual Cost Savings:** $23,400\\n\\n**Strategic Recommendations:**\\n\\n**Immediate Actions (Next 30 Days):**\\n1. **Implement personnel reallocation plan** for R01-2023-05\\n2. **Request budget modification** for equipment category reallocation\\n3. **Hire postdoc** for P01 grant (high ROI position)\\n\\n**Medium-Term Strategy (3-6 Months):**\\n1. **Cross-training program** to increase staff flexibility across grants\\n2. **Shared equipment pool** to reduce individual grant equipment costs\\n3. **Milestone tracking system** for early intervention alerts\\n\\n**📊 FINANCIAL FORECAST:**\\n• **Q3 Projected Burn:** $1.05M (within budget)\\n• **Q4 Projected Burn:** $1.12M (5% over - manageable with reallocations)\\n• **FY2025 Funding Gap:** $340K (addressable through new grant submissions)\\n\\n**🔄 MONITORING FRAMEWORK:**\\n• **Weekly:** Cash flow tracking for high-risk grants\\n• **Monthly:** Staff utilization and burn rate analysis\\n• **Quarterly:** Portfolio rebalancing and risk assessment',
+    timestamp: '2:53 PM',
+    documents: [
+      {
+        name: 'Portfolio_Optimization_Model.xlsx',
+        type: 'xlsx' as const,
+        size: '2.9 MB'
+      },
+      {
+        name: 'Grant_Risk_Dashboard.pdf',
+        type: 'pdf' as const,
+        size: '1.8 MB'
+      },
+      {
+        name: 'Staffing_Reallocation_Plan.docx',
+        type: 'docx' as const,
+        size: '945 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Budget & Grant Analysis | Computation + Automation" description="See how AI optimizes research funding and identifies budget risks through automated analysis">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/computation" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Computation + Automation
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Budget & Grant Analysis
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-green-50 via-slate-50 to-green-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Budget & Grant Analysis
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Optimize funding portfolios through automated financial modeling. 
+          AI identifies budget risks, forecasts burn rates, and optimizes resource allocation across multiple grants and projects.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">Intelligent Financial Orchestration</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              This pattern transforms AI into a <strong>financial operations manager</strong>. By analyzing spending patterns, 
+              staffing allocations, and project timelines, AI predicts budget risks months in advance and 
+              suggests optimal resource allocation strategies across complex grant portfolios.
+            </p>
+            <p class="leading-relaxed">
+              AI understands the interconnected nature of research funding—how staff moves between projects, 
+              equipment sharing opportunities, and regulatory constraints. It creates dynamic models that 
+              balance cost optimization with research productivity and compliance requirements.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-green-50 rounded-xl p-6 border border-green-100">
+            <h3 class="font-semibold text-green-900 mb-4">Financial Analysis Capabilities</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="font-medium text-green-900 mb-2">Risk Detection</h4>
+                <ul class="text-sm text-green-700 space-y-1">
+                  <li>• Burn rate variance analysis</li>
+                  <li>• Cash flow forecasting</li>
+                  <li>• Budget runway calculations</li>
+                  <li>• Overallocation identification</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-green-900 mb-2">Optimization Models</h4>
+                <ul class="text-sm text-green-700 space-y-1">
+                  <li>• Staff allocation optimization</li>
+                  <li>• Resource sharing strategies</li>
+                  <li>• Portfolio rebalancing</li>
+                  <li>• Cost-efficiency maximization</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Perfect For</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Multi-grant research portfolios</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Project-based organizations</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Non-profit funding management</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Government contract compliance</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Consulting firm resource allocation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Clinical trial budget management</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+            <h4 class="font-medium text-green-900 mb-2">💰 Key Advantage</h4>
+            <p class="text-xs text-green-700">
+              AI predicts financial problems months in advance, allowing proactive 
+              adjustments rather than crisis management.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Research Portfolio Optimization</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI analyze NIH grant portfolios to identify risks and optimize resource allocation
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={budgetAnalysisConversation}
+        title="Grant Portfolio Financial Analysis"
+        description="Research administration team optimizing $12.4M grant portfolio with AI-powered financial modeling"
+      />
+    </div>
+  </section>
+
+  <!-- Value Demonstration -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">The Financial Early Warning System</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Traditional Process -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3 text-sm">📊</div>
+            Traditional Budget Management
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+              <ul class="space-y-3 text-sm text-red-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Monthly spreadsheet reviews by administrators</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Reactive crisis management when grants overspend</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <span>Manual variance calculations and reporting</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Limited visibility into portfolio-wide risks</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Suboptimal resource allocation decisions</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-red-600">Budget Crisis</div>
+              <div class="text-sm text-red-600">= Discovered too late, limited options</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI Budget Analysis -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">🎯</div>
+            AI Budget Optimization
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-green-50 rounded-xl p-6 border border-green-200">
+              <ul class="space-y-3 text-sm text-green-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Real-time burn rate monitoring and alerts</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Predictive risk modeling 6-12 months ahead</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Automated variance analysis and root cause identification</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Portfolio-wide optimization recommendations</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Dynamic resource reallocation strategies</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-green-600">Budget Optimization</div>
+              <div class="text-sm text-green-600">= Proactive management, maximum efficiency</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI Metrics -->
+      <div class="mt-16 grid md:grid-cols-4 gap-6 text-center">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-green-600 mb-2">$23.4K</div>
+          <div class="text-sm text-slate-600 mb-1">Annual Savings</div>
+          <div class="text-xs text-slate-500">through optimization</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-green-600 mb-2">8</div>
+          <div class="text-sm text-slate-600 mb-1">Months Early Warning</div>
+          <div class="text-xs text-slate-500">for budget risks</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-green-600 mb-2">15%</div>
+          <div class="text-sm text-slate-600 mb-1">Efficiency Improvement</div>
+          <div class="text-xs text-slate-500">cost per publication</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-green-600 mb-2">$12.4M</div>
+          <div class="text-sm text-slate-600 mb-1">Portfolio Value</div>
+          <div class="text-xs text-slate-500">optimized across 8 grants</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">Financial Intelligence at Scale</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-green-400 font-semibold">AI transforms budget management from reactive to predictive.</span>
+        By continuously monitoring financial patterns across complex portfolios, AI identifies optimization 
+        opportunities and prevents budget crises before they happen. It's the difference between managing 
+        spreadsheets and orchestrating intelligent financial systems.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-400 mb-2">73%</div>
+          <div class="text-slate-400">Budget Consumed with 18 Months Left</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-400 mb-2">34%</div>
+          <div class="text-slate-400">Personnel Overspend Identified</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-400 mb-2">12</div>
+          <div class="text-slate-400">Month Runway Extension Possible</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

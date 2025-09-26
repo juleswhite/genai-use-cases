@@ -1,0 +1,381 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const extractStructuredConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I have a messy collection of vendor invoices in various formats. Can you extract the key information into a structured format for accounting?',
+    timestamp: '3:15 PM',
+    documents: [
+      {
+        name: 'Vendor_Invoices_Q4_Batch.pdf',
+        type: 'pdf' as const,
+        size: '12.4 MB'
+      },
+      {
+        name: 'Cloud_Services_Bills_Mixed.zip',
+        type: 'pdf' as const,
+        size: '8.9 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll extract structured data from all your vendor invoices and organize them into a standardized format for accounting.\n\n<strong>📊 EXTRACTION IN PROGRESS...</strong>\n\nProcessing 47 invoices across different formats:\n• Standard PDF invoices (23)\n• Email-embedded bills (12) \n• Scanned receipts (8)\n• Online billing screenshots (4)\n\n<strong>🔍 KEY DATA POINTS EXTRACTED:</strong>\n\n**Vendor Information:**\n• Company names and addresses\n• Tax ID numbers where available\n• Contact information\n\n**Invoice Details:**\n• Invoice numbers and dates\n• Line items with descriptions\n• Quantities and unit prices\n• Tax amounts and totals\n• Payment terms and due dates',
+    timestamp: '3:17 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Perfect! Can you organize this into an Excel spreadsheet format that our accounting software can import?',
+    timestamp: '3:18 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📋 STRUCTURED INVOICE DATA EXPORT</strong>\n\n<strong>✅ Excel Format Created:</strong>\n\n**Master Invoice Register (47 entries):**\n\n| Invoice # | Vendor | Date | Net Amount | Tax | Total | Due Date | Status |\n|-----------|---------|------|------------|-----|-------|-----------|--------|\n| INV-2024-001 | CloudTech Solutions | 2024-10-15 | $2,340.00 | $234.00 | $2,574.00 | 2024-11-14 | Pending |\n| AWS-789456 | Amazon Web Services | 2024-10-20 | $1,892.33 | $0.00 | $1,892.33 | 2024-11-19 | Pending |\n| SF-334211 | Salesforce Inc | 2024-10-22 | $890.00 | $89.00 | $979.00 | 2024-11-21 | Pending |\n\n**📊 SUMMARY ANALYTICS:**\n• **Total Amount:** $47,892.44\n• **Tax Amount:** $3,234.12\n• **Grand Total:** $51,126.56\n• **Average Invoice:** $1,087.37\n• **Largest Invoice:** CloudTech ($2,574.00)\n\n**🏷️ VENDOR BREAKDOWN:**\n• Software/SaaS: $28,450 (56%)\n• Cloud Infrastructure: $12,340 (24%)\n• Office Supplies: $6,890 (13%)\n• Professional Services: $3,446 (7%)',
+    timestamp: '3:20 PM',
+    documents: [
+      {
+        name: 'Structured_Invoice_Register_Q4.xlsx',
+        type: 'xlsx' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'Vendor_Analysis_Summary.csv',
+        type: 'csv' as const,
+        size: '245 KB'
+      }
+    ]
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'Excellent! Can you also flag any invoices with potential issues or anomalies that need manual review?',
+    timestamp: '3:21 PM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>🚨 ANOMALY DETECTION RESULTS</strong>\n\n<strong>⚠️ FLAGGED FOR REVIEW (5 invoices):</strong>\n\n**🔴 High Priority:**\n• **INV-GHI-789** - TechVendor Corp\n  - Issue: 300% price increase from previous month\n  - Amount: $4,560 (was $1,520 last month)\n  - Action: Verify service upgrade or billing error\n\n• **Receipt-OCR-Failed-002**\n  - Issue: Poor scan quality, manual verification needed\n  - Extracted: "Offic? Sup?lies $???.99"\n  - Action: Re-scan or contact vendor for digital copy\n\n**🟡 Medium Priority:**\n• **AWS-334455** - Missing tax information\n• **INV-2024-445** - Unusual payment terms (120 days vs standard 30)\n• **SF-998877** - Duplicate invoice number detected\n\n<strong>💡 RECOMMENDATIONS:</strong>\n1. Set up automated alerts for >100% price changes\n2. Implement OCR quality thresholds\n3. Create vendor master data validation\n4. Schedule monthly duplicate detection runs\n\n<strong>✅ READY FOR IMPORT:</strong>\n42 of 47 invoices (89%) are clean and ready for accounting software import.',
+    timestamp: '3:23 PM',
+    documents: [
+      {
+        name: 'Invoice_Anomaly_Report.pdf',
+        type: 'pdf' as const,
+        size: '892 KB'
+      },
+      {
+        name: 'Data_Quality_Assessment.docx',
+        type: 'docx' as const,
+        size: '445 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Extract Structured Information | Conversation Patterns" description="See how AI converts unstructured documents into organized, actionable data">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/conversation" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Conversation Patterns
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Extract Structured Information
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-green-50 via-slate-50 to-green-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Extract Structured Information
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Transform chaotic, unstructured documents into clean, organized data. 
+          AI sees patterns in messy content and converts it into actionable spreadsheets, databases, and reports.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">From Chaos to Structure</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              This pattern transforms AI from a reader into a <strong>data organizer</strong>. Instead of just 
+              understanding content, AI extracts specific information and structures it according to your needs—
+              whether that's spreadsheet rows, database records, or JSON objects.
+            </p>
+            <p class="leading-relaxed">
+              The magic happens when AI recognizes patterns across inconsistent formats. It understands that 
+              "Invoice #12345" and "Inv. No. 12345" mean the same thing, and can extract clean data even 
+              from poorly formatted or scanned documents.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-green-50 rounded-xl p-6 border border-green-100">
+            <h3 class="font-semibold text-green-900 mb-4">Extraction Capabilities</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="font-medium text-green-900 mb-2">Data Types</h4>
+                <ul class="text-sm text-green-700 space-y-1">
+                  <li>• Names, addresses, contacts</li>
+                  <li>• Dates, amounts, quantities</li>
+                  <li>• Product codes, descriptions</li>
+                  <li>• Key-value pairs</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-green-900 mb-2">Output Formats</h4>
+                <ul class="text-sm text-green-700 space-y-1">
+                  <li>• Excel spreadsheets</li>
+                  <li>• CSV files</li>
+                  <li>• JSON/XML data</li>
+                  <li>• Database records</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Perfect For</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Invoice and receipt processing</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Survey response compilation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Contact list building from business cards</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Medical records digitization</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Legal document data extraction</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Financial statement analysis</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+            <h4 class="font-medium text-green-900 mb-2">💡 Key Advantage</h4>
+            <p class="text-xs text-green-700">
+              Unlike OCR or simple text extraction, AI understands context and can handle variations, 
+              errors, and different formats intelligently.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Invoice Data Extraction</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI transform messy vendor invoices into clean, structured accounting data
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={extractStructuredConversation}
+        title="Accounting Data Extraction Pipeline"
+        description="Finance team processing vendor invoices for accounting software import"
+      />
+    </div>
+  </section>
+
+  <!-- Value Demonstration -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">The Extraction Value</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Manual Process -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3 text-sm">😰</div>
+            Manual Data Entry
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+              <ul class="space-y-3 text-sm text-red-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Hours spent typing data from each invoice</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>High error rates from manual transcription</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Inconsistent data formatting</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Delayed month-end closing processes</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Difficulty tracking patterns or anomalies</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-red-600">47 invoices</div>
+              <div class="text-sm text-red-600">= 8+ hours of manual work</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI Extraction -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-3 text-sm">🚀</div>
+            AI Data Extraction
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-green-50 rounded-xl p-6 border border-green-200">
+              <ul class="space-y-3 text-sm text-green-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Batch processing of all documents simultaneously</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>99.5% accuracy with automatic validation</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Standardized format ready for import</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Same-day processing and closing</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Automatic anomaly detection and reporting</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-green-600">47 invoices</div>
+              <div class="text-sm text-green-600">= 8 minutes of AI processing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI Metrics -->
+      <div class="mt-16 grid md:grid-cols-4 gap-6 text-center">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-green-600 mb-2">95%</div>
+          <div class="text-sm text-slate-600 mb-1">Time Savings</div>
+          <div class="text-xs text-slate-500">8 hours → 8 minutes</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-green-600 mb-2">99.5%</div>
+          <div class="text-sm text-slate-600 mb-1">Accuracy Rate</div>
+          <div class="text-xs text-slate-500">vs 85% manual entry</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-green-600 mb-2">$2,400</div>
+          <div class="text-sm text-slate-600 mb-1">Monthly Savings</div>
+          <div class="text-xs text-slate-500">labor cost reduction</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-green-600 mb-2">24x</div>
+          <div class="text-sm text-slate-600 mb-1">Processing Speed</div>
+          <div class="text-xs text-slate-500">faster than manual</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">Beyond Simple OCR</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-green-400 font-semibold">AI extraction understands context, not just characters.</span>
+        While OCR can read text, AI extraction recognizes what that text means, handles variations and errors, 
+        and organizes information according to your specific business needs. It's the difference between 
+        reading words and understanding documents.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-400 mb-2">47</div>
+          <div class="text-slate-400">Documents Processed in 8 Minutes</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-400 mb-2">5</div>
+          <div class="text-slate-400">Anomalies Automatically Detected</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-400 mb-2">100%</div>
+          <div class="text-slate-400">Ready for System Import</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

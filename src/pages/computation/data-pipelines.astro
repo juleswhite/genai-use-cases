@@ -1,0 +1,384 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const dataPipelinesConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We\'re evaluating cloud infrastructure vendors and getting proposals in completely different formats - some PDFs, some Excel, some custom presentations. I need to create a systematic way to extract key information and populate our vendor comparison matrix automatically.',
+    timestamp: '11:30 AM',
+    documents: [
+      {
+        name: 'AWS_Infrastructure_Proposal.pdf',
+        type: 'pdf' as const,
+        size: '3.4 MB'
+      },
+      {
+        name: 'Azure_Cost_Breakdown.xlsx',
+        type: 'xlsx' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'GCP_Technical_Specs.pptx',
+        type: 'pptx' as const,
+        size: '5.8 MB'
+      },
+      {
+        name: 'Vendor_Comparison_Template.xlsx',
+        type: 'xlsx' as const,
+        size: '892 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll build a comprehensive data pipeline that can ingest vendor proposals in any format and automatically populate your comparison matrix. Let me create a system that handles document parsing, data extraction, and structured output generation.\\n\\n<strong>🔄 VENDOR PROPOSAL DATA PIPELINE</strong>\\n\\n```python\\n#!/usr/bin/env python3\\n"""\\nVendor Proposal Processing Pipeline\\nAuthor: AI Assistant\\nDescription: Automated extraction and comparison of vendor proposals\\n"""\\n\\nimport pandas as pd\\nimport numpy as np\\nfrom pathlib import Path\\nimport json\\nimport logging\\nfrom typing import Dict, List, Any\\nfrom dataclasses import dataclass\\nfrom datetime import datetime\\n\\n# Document processing imports\\nimport PyPDF2\\nfrom pptx import Presentation\\nfrom openpyxl import load_workbook\\nimport openai\\nfrom PIL import Image\\nimport pytesseract  # For OCR of images in presentations\\n\\n@dataclass\\nclass VendorProposal:\\n    vendor_name: str\\n    document_type: str\\n    pricing_model: str\\n    monthly_cost: float\\n    setup_fees: float\\n    compute_specs: Dict[str, Any]\\n    storage_options: Dict[str, Any]\\n    sla_guarantees: Dict[str, Any]\\n    support_tier: str\\n    contract_terms: Dict[str, Any]\\n    compliance_certifications: List[str]\\n    \\nclass VendorProposalProcessor:\\n    def __init__(self, config_file=\\'pipeline_config.json\\'):\\n        self.config = self.load_config(config_file)\\n        self.extraction_schema = self.define_extraction_schema()\\n        self.processed_proposals = {}\\n        \\n        # Setup logging\\n        logging.basicConfig(level=logging.INFO)\\n        self.logger = logging.getLogger(__name__)\\n\\n    def define_extraction_schema(self):\\n        \"\"\"Define the standardized schema for vendor comparison\"\"\"\\n        return {\\n            \\'pricing\\': {\\n                \\'monthly_base_cost\\': \\'number\\',\\n                \\'per_gb_storage_cost\\': \\'number\\',\\n                \\'data_transfer_cost\\': \\'number\\',\\n                \\'setup_fees\\': \\'number\\'\\n            },\\n            \\'technical_specs\\': {\\n                \\'cpu_cores\\': \\'number\\',\\n                \\'ram_gb\\': \\'number\\',\\n                \\'storage_type\\': \\'string\\',\\n                \\'network_bandwidth\\': \\'string\\'\\n            },\\n            \\'service_levels\\': {\\n                \\'uptime_sla\\': \\'percentage\\',\\n                \\'support_response_time\\': \\'string\\',\\n                \\'backup_frequency\\': \\'string\\'\\n            },\\n            \\'compliance\\': {\\n                \\'certifications\\': \\'list\\',\\n                \\'data_residency\\': \\'string\\',\\n                \\'encryption_standards\\': \\'list\\'\\n            }\\n        }\\n```\\n\\n**📄 MULTI-FORMAT DOCUMENT PROCESSING:**\\n\\n**Phase 1: Document Ingestion**\\n• **PDF Processing:** Extract text, tables, and embedded images\\n• **Excel Analysis:** Parse multiple sheets, formulas, and charts\\n• **PowerPoint Parsing:** Extract slide content, speaker notes, and images\\n• **OCR Integration:** Handle scanned documents and image-based content',
+    timestamp: '11:32 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This looks promising! Can you show me how it actually extracts and normalizes the data from these different formats? The challenge is that each vendor structures their information completely differently.',
+    timestamp: '11:33 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🔍 INTELLIGENT EXTRACTION ENGINE</strong>\\n\\n```python\\ndef process_pdf_proposal(self, pdf_path: str) -> Dict[str, Any]:\\n    \"\"\"Extract structured data from PDF proposals\"\"\"\\n    \\n    # Extract text from PDF\\n    with open(pdf_path, \\'rb\\') as file:\\n        pdf_reader = PyPDF2.PdfReader(file)\\n        text_content = \\"\\"\\n        for page in pdf_reader.pages:\\n            text_content += page.extract_text()\\n    \\n    # Use AI to extract structured information\\n    extraction_prompt = f\"\"\"\\n    Extract vendor proposal information from this PDF content:\\n    \\n    {text_content[:8000]}  # Truncate for token limits\\n    \\n    Please extract and structure as JSON matching this schema:\\n    {{\\n      \"vendor_name\": \"string\",\\n      \"pricing\": {{\\n        \"monthly_base_cost\": \"number (USD)\",\\n        \"per_gb_storage_cost\": \"number (USD)\",\\n        \"data_transfer_cost\": \"number (USD per GB)\",\\n        \"setup_fees\": \"number (USD)\"\\n      }},\\n      \"technical_specs\": {{\\n        \"cpu_cores\": \"number\",\\n        \"ram_gb\": \"number\",\\n        \"storage_type\": \"SSD/HDD/NVMe\",\\n        \"network_bandwidth\": \"string\"\\n      }},\\n      \"service_levels\": {{\\n        \"uptime_sla\": \"percentage as decimal\",\\n        \"support_response_time\": \"string\",\\n        \"backup_frequency\": \"string\"\\n      }},\\n      \"compliance\": {{\\n        \"certifications\": [\"list of certifications\"],\\n        \"data_residency\": \"string\",\\n        \"encryption_standards\": [\"list of encryption methods\"]\\n      }}\\n    }}\\n    \\n    Handle variations in terminology (e.g., \\'compute units\\' vs \\'CPU cores\\').\\n    Convert all pricing to monthly USD equivalents.\\n    If information is missing, use null values.\\n    \"\"\"\\n    \\n    response = openai.ChatCompletion.create(\\n        model=\"gpt-4-1106-preview\",\\n        messages=[{\"role\": \"user\", \"content\": extraction_prompt}]\\n    )\\n    \\n    return json.loads(response.choices[0].message.content)\\n\\ndef process_excel_proposal(self, excel_path: str) -> Dict[str, Any]:\\n    \"\"\"Extract structured data from Excel proposals\"\"\"\\n    \\n    workbook = load_workbook(excel_path)\\n    extracted_data = {}\\n    \\n    # Process each worksheet\\n    for sheet_name in workbook.sheetnames:\\n        sheet = workbook[sheet_name]\\n        \\n        # Convert sheet to pandas DataFrame\\n        data = []\\n        for row in sheet.iter_rows(values_only=True):\\n            data.append(row)\\n        \\n        df = pd.DataFrame(data)\\n        \\n        # Use AI to understand and extract from tabular data\\n        sheet_summary = self.analyze_excel_sheet(df, sheet_name)\\n        extracted_data[sheet_name] = sheet_summary\\n    \\n    # Combine and normalize across sheets\\n    return self.normalize_excel_data(extracted_data)\\n\\ndef process_powerpoint_proposal(self, pptx_path: str) -> Dict[str, Any]:\\n    \"\"\"Extract structured data from PowerPoint proposals\"\"\"\\n    \\n    presentation = Presentation(pptx_path)\\n    slide_contents = []\\n    \\n    for i, slide in enumerate(presentation.slides):\\n        slide_text = \\\"\\\"\\n        \\n        # Extract text from shapes\\n        for shape in slide.shapes:\\n            if hasattr(shape, \\'text\\'):\\n                slide_text += shape.text + \"\\\\n\"\\n        \\n        # Extract text from tables\\n        for shape in slide.shapes:\\n            if shape.has_table:\\n                table = shape.table\\n                for row in table.rows:\\n                    row_text = []\\n                    for cell in row.cells:\\n                        row_text.append(cell.text)\\n                    slide_text += \" | \".join(row_text) + \"\\\\n\"\\n        \\n        # Process images with OCR if needed\\n        for shape in slide.shapes:\\n            if shape.shape_type == 13:  # Picture\\n                try:\\n                    image = Image.open(io.BytesIO(shape.image.blob))\\n                    ocr_text = pytesseract.image_to_string(image)\\n                    slide_text += f\"[Image text: {ocr_text}]\\\\n\"\\n                except:\\n                    self.logger.warning(f\"Could not process image in slide {i}\")\\n        \\n        slide_contents.append({\\n            \\'slide_number\\': i + 1,\\n            \\'content\\': slide_text\\n        })\\n    \\n    # Use AI to extract structured information from presentation\\n    return self.extract_from_presentation_content(slide_contents)\\n```\\n\\n**🔧 INTELLIGENT NORMALIZATION:**\\n\\n```python\\ndef normalize_extracted_data(self, raw_data: Dict[str, Any], vendor_name: str) -> VendorProposal:\\n    \"\"\"Normalize extracted data into standardized format\"\"\"\\n    \\n    normalization_prompt = f\"\"\"\\n    Normalize this vendor proposal data into a standardized format:\\n    \\n    Raw Data: {json.dumps(raw_data, indent=2)}\\n    Vendor: {vendor_name}\\n    \\n    Please normalize and return in this exact structure:\\n    {{\\n      \"monthly_cost_usd\": <number>,\\n      \"setup_fees_usd\": <number>,\\n      \"compute_vcpus\": <number>,\\n      \"memory_gb\": <number>,\\n      \"storage_type\": \"SSD|HDD|NVMe\",\\n      \"uptime_sla_percent\": <decimal 0-1>,\\n      \"support_tier\": \"Basic|Standard|Premium|Enterprise\",\\n      \"certifications\": [<list of compliance certs>],\\n      \"contract_length_months\": <number>,\\n      \"data_centers_regions\": [<list of regions>],\\n      \"backup_included\": <boolean>,\\n      \"monitoring_included\": <boolean>\\n    }}\\n    \\n    Conversion rules:\\n    - Convert all currencies to USD\\n    - Normalize CPU specs (cores, vCPUs, etc.) to vCPU count\\n    - Convert storage sizes to GB\\n    - Standardize region names (us-east-1, eu-west-1, etc.)\\n    - Map support tiers to standard categories\\n    - Convert SLA percentages to decimals (99.9% = 0.999)\\n    \"\"\"\\n    \\n    response = openai.ChatCompletion.create(\\n        model=\"gpt-4\",\\n        messages=[{\"role\": \"user\", \"content\": normalization_prompt}]\\n    )\\n    \\n    normalized = json.loads(response.choices[0].message.content)\\n    \\n    return VendorProposal(\\n        vendor_name=vendor_name,\\n        document_type=raw_data.get(\\'document_type\\', \\'unknown\\'),\\n        monthly_cost=normalized[\\'monthly_cost_usd\\'],\\n        setup_fees=normalized[\\'setup_fees_usd\\'],\\n        compute_specs={\\n            \\'vcpus\\': normalized[\\'compute_vcpus\\'],\\n            \\'memory_gb\\': normalized[\\'memory_gb\\'],\\n            \\'storage_type\\': normalized[\\'storage_type\\']\\n        },\\n        sla_guarantees={\\'uptime\\': normalized[\\'uptime_sla_percent\\']},\\n        support_tier=normalized[\\'support_tier\\'],\\n        compliance_certifications=normalized[\\'certifications\\'],\\n        contract_terms={\\'length_months\\': normalized[\\'contract_length_months\\']},\\n        # ... additional fields\\n    )\\n```\\n\\n**📊 KEY NORMALIZATION CHALLENGES SOLVED:**\\n\\n**Pricing Variations:**\\n• **AWS:** \"$0.096/hour\" → Converts to $69.12/month\\n• **Azure:** \"$2,100/month\" → Direct monthly cost\\n• **GCP:** \"$0.00014/second\" → Converts to $365.04/month\\n\\n**Technical Specifications:**\\n• **CPU:** \"4 cores\", \"4 vCPUs\", \"4 compute units\" → Normalized to 4 vCPUs\\n• **Storage:** \"500GB SSD\", \"0.5TB solid state\" → Normalized to 500GB SSD\\n• **Memory:** \"8192MB\", \"8GB RAM\" → Normalized to 8GB\\n\\n**Service Levels:**\\n• **Uptime:** \"99.95%\", \"four nines\" → Normalized to 0.9995\\n• **Support:** \"24x7\", \"Premium\", \"Enterprise\" → Mapped to standard tiers',
+    timestamp: '11:35 AM'
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'Excellent! Now can you show me how this all comes together into the final comparison matrix? I need something that our procurement team can use for decision-making.',
+    timestamp: '11:36 AM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>📈 AUTOMATED COMPARISON MATRIX GENERATION</strong>\\n\\n```python\\ndef generate_comparison_matrix(self) -> pd.DataFrame:\\n    \"\"\"Generate comprehensive vendor comparison matrix\"\"\"\\n    \\n    # Create comparison DataFrame\\n    comparison_data = []\\n    \\n    for vendor, proposal in self.processed_proposals.items():\\n        row = {\\n            \\'Vendor\\': proposal.vendor_name,\\n            \\'Monthly Cost (USD)\\': proposal.monthly_cost,\\n            \\'Setup Fees (USD)\\': proposal.setup_fees,\\n            \\'vCPUs\\': proposal.compute_specs.get(\\'vcpus\\', \\'N/A\\'),\\n            \\'Memory (GB)\\': proposal.compute_specs.get(\\'memory_gb\\', \\'N/A\\'),\\n            \\'Storage Type\\': proposal.compute_specs.get(\\'storage_type\\', \\'N/A\\'),\\n            \\'Uptime SLA (%)\\': f\"{proposal.sla_guarantees.get(\\'uptime\\', 0) * 100:.2f}%\",\\n            \\'Support Tier\\': proposal.support_tier,\\n            \\'SOC 2 Certified\\': \\'SOC 2\\' in proposal.compliance_certifications,\\n            \\'HIPAA Compliant\\': \\'HIPAA\\' in proposal.compliance_certifications,\\n            \\'Contract Length\\': f\"{proposal.contract_terms.get(\\'length_months\\', \\'TBD\\')} months\"\\n        }\\n        comparison_data.append(row)\\n    \\n    df = pd.DataFrame(comparison_data)\\n    \\n    # Add calculated columns\\n    df[\\'Cost per vCPU\\'] = df[\\'Monthly Cost (USD)\\'] / df[\\'vCPUs\\'].replace(\\'N/A\\', np.nan)\\n    df[\\'Total First Year Cost\\'] = df[\\'Monthly Cost (USD)\\'] * 12 + df[\\'Setup Fees (USD)\\']\\n    \\n    return df\\n\\ndef create_executive_summary(self, comparison_df: pd.DataFrame) -> str:\\n    \"\"\"Generate executive summary with recommendations\"\"\"\\n    \\n    analysis_prompt = f\"\"\"\\n    Create an executive summary for vendor selection based on this comparison data:\\n    \\n    {comparison_df.to_string()}\\n    \\n    Please provide:\\n    \\n    1. TOP 3 RECOMMENDATIONS with rationale\\n    2. KEY DIFFERENTIATORS between vendors\\n    3. RISK ASSESSMENT for each option\\n    4. COST-BENEFIT ANALYSIS summary\\n    5. DECISION CRITERIA recommendations\\n    \\n    Format as professional executive summary for procurement decision.\\n    Focus on business value, not just technical specs.\\n    \"\"\"\\n    \\n    response = openai.ChatCompletion.create(\\n        model=\"gpt-4\",\\n        messages=[{\"role\": \"user\", \"content\": analysis_prompt}]\\n    )\\n    \\n    return response.choices[0].message.content\\n\\ndef export_results(self, comparison_df: pd.DataFrame, summary: str):\\n    \"\"\"Export results to Excel with multiple sheets\"\"\"\\n    \\n    timestamp = datetime.now().strftime(\"%Y%m%d_%H%M%S\")\\n    filename = f\\'vendor_comparison_{timestamp}.xlsx\\'\\n    \\n    with pd.ExcelWriter(filename, engine=\\'openpyxl\\') as writer:\\n        # Main comparison sheet\\n        comparison_df.to_excel(writer, sheet_name=\\'Vendor Comparison\\', index=False)\\n        \\n        # Executive summary sheet\\n        summary_df = pd.DataFrame({\\'Executive Summary\\': [summary]})\\n        summary_df.to_excel(writer, sheet_name=\\'Executive Summary\\', index=False)\\n        \\n        # Detailed analysis sheets\\n        for vendor, proposal in self.processed_proposals.items():\\n            detail_data = {\\n                \\'Category\\': [],\\n                \\'Specification\\': [],\\n                \\'Value\\': []\\n            }\\n            \\n            # Add detailed specs for each vendor\\n            for category, specs in proposal.__dict__.items():\\n                if isinstance(specs, dict):\\n                    for key, value in specs.items():\\n                        detail_data[\\'Category\\'].append(category)\\n                        detail_data[\\'Specification\\'].append(key)\\n                        detail_data[\\'Value\\'].append(str(value))\\n                else:\\n                    detail_data[\\'Category\\'].append(\\'General\\')\\n                    detail_data[\\'Specification\\'].append(category)\\n                    detail_data[\\'Value\\'].append(str(specs))\\n            \\n            detail_df = pd.DataFrame(detail_data)\\n            sheet_name = f\\'{vendor} Details\\'[:31]  # Excel sheet name limit\\n            detail_df.to_excel(writer, sheet_name=sheet_name, index=False)\\n    \\n    return filename\\n```\\n\\n**📊 GENERATED COMPARISON MATRIX:**\\n\\n| Vendor | Monthly Cost | vCPUs | Memory | Storage | Uptime SLA | Support | SOC 2 | Total 1st Year |\\n|--------|-------------|--------|---------|---------|------------|---------|-------|----------------|\\n| **AWS** | $2,340 | 16 | 64GB | NVMe SSD | 99.95% | Enterprise | ✅ | $28,080 |\\n| **Azure** | $2,100 | 14 | 56GB | Premium SSD | 99.9% | Premium | ✅ | $26,200 |\\n| **GCP** | $1,890 | 16 | 64GB | SSD | 99.95% | Standard | ✅ | $23,180 |\\n\\n**🎯 EXECUTIVE SUMMARY HIGHLIGHTS:**\\n\\n**TOP RECOMMENDATION: Google Cloud Platform**\\n• **Cost Advantage:** 19% lower than AWS, 11% lower than Azure\\n• **Performance:** Matches AWS specs at lower cost\\n• **Risk:** Standard support tier may require upgrade for production\\n\\n**KEY DIFFERENTIATORS:**\\n• **AWS:** Premium support, extensive compliance, highest cost\\n• **Azure:** Balanced offering, strong enterprise integration\\n• **GCP:** Best price-performance ratio, newer infrastructure\\n\\n**DECISION FRAMEWORK:**\\n• **Cost-Optimized:** Choose GCP (save $4,900+ annually)\\n• **Risk-Minimized:** Choose AWS (proven enterprise track record)\\n• **Balanced Approach:** Choose Azure (middle ground on cost/features)\\n\\n**📋 AUTOMATED PIPELINE BENEFITS:**\\n• **Processing Time:** 3 proposals analyzed in 15 minutes (vs 8+ hours manual)\\n• **Accuracy:** Eliminates transcription errors and missed details\\n• **Consistency:** Standardized comparison across all vendors\\n• **Scalability:** Can handle unlimited proposal volume\\n• **Auditability:** Complete extraction and normalization trail',
+    timestamp: '11:38 AM',
+    documents: [
+      {
+        name: 'vendor_comparison_20241115_1138.xlsx',
+        type: 'xlsx' as const,
+        size: '3.2 MB'
+      },
+      {
+        name: 'data_pipeline_processor.py',
+        type: 'txt' as const,
+        size: '18.7 KB'
+      },
+      {
+        name: 'Executive_Summary_Vendor_Selection.pdf',
+        type: 'pdf' as const,
+        size: '1.4 MB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Data Pipelines | Computation + Automation" description="See how AI creates sophisticated data processing workflows that transform unstructured inputs into structured business intelligence">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/computation" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Computation + Automation
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Data Pipelines
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-purple-50 via-slate-50 to-purple-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Data Pipelines
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Automate complex data transformation workflows that ingest content from any format 
+          and output structured business intelligence. AI orchestrates the entire pipeline from extraction to analysis.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">Intelligent Data Orchestration</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              This pattern transforms AI into a <strong>data engineering platform</strong>. It automatically ingests 
+              documents in any format—PDFs, Excel files, PowerPoints, even scanned images—extracts relevant 
+              information, normalizes it to consistent schemas, and outputs structured business intelligence.
+            </p>
+            <p class="leading-relaxed">
+              AI understands both the technical challenges of data extraction and the business context of 
+              the information. It handles format variations, missing data, and inconsistent terminology while 
+              maintaining data quality and creating audit trails for compliance and reproducibility.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-purple-50 rounded-xl p-6 border border-purple-100">
+            <h3 class="font-semibold text-purple-900 mb-4">Pipeline Capabilities</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="font-medium text-purple-900 mb-2">Multi-Format Ingestion</h4>
+                <ul class="text-sm text-purple-700 space-y-1">
+                  <li>• PDF text and table extraction</li>
+                  <li>• Excel formula evaluation</li>
+                  <li>• PowerPoint content parsing</li>
+                  <li>• OCR for scanned documents</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-purple-900 mb-2">Intelligent Processing</h4>
+                <ul class="text-sm text-purple-700 space-y-1">
+                  <li>• Schema normalization</li>
+                  <li>• Data quality validation</li>
+                  <li>• Automated enrichment</li>
+                  <li>• Structured output generation</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Perfect For</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Vendor proposal comparisons</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>RFP response analysis</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Financial statement consolidation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Regulatory compliance reporting</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Market research aggregation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Due diligence documentation</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6 p-4 bg-purple-50 rounded-lg border border-purple-200">
+            <h4 class="font-medium text-purple-900 mb-2">🔄 Key Advantage</h4>
+            <p class="text-xs text-purple-700">
+              AI creates end-to-end data pipelines that handle the full complexity of 
+              real-world document processing and business analysis workflows.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Vendor Proposal Processing Pipeline</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI build an automated system to extract and compare vendor proposals across different formats
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={dataPipelinesConversation}
+        title="Multi-Format Data Pipeline Development"
+        description="Procurement team automating vendor proposal analysis with AI-powered data processing pipeline"
+      />
+    </div>
+  </section>
+
+  <!-- Value Demonstration -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">The Data Transformation Engine</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Manual Process -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3 text-sm">📄</div>
+            Manual Document Processing
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+              <ul class="space-y-3 text-sm text-red-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Days spent reading and extracting data manually</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Inconsistent data extraction across formats</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Manual transcription errors and omissions</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Difficulty comparing different proposal formats</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Delayed procurement decisions</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-red-600">3 Vendor Proposals</div>
+              <div class="text-sm text-red-600">= 2-3 days manual analysis</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI Data Pipeline -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mr-3 text-sm">🔄</div>
+            AI Data Pipeline
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-purple-50 rounded-xl p-6 border border-purple-200">
+              <ul class="space-y-3 text-sm text-purple-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Automated multi-format document ingestion</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Intelligent extraction with AI understanding</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Standardized schema normalization</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Automated comparison matrix generation</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Executive summary with recommendations</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-purple-600">3 Vendor Proposals</div>
+              <div class="text-sm text-purple-600">= 15 minutes automated processing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI Metrics -->
+      <div class="mt-16 grid md:grid-cols-4 gap-6 text-center">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-purple-600 mb-2">96%</div>
+          <div class="text-sm text-slate-600 mb-1">Time Savings</div>
+          <div class="text-xs text-slate-500">3 days → 15 minutes</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-purple-600 mb-2">19%</div>
+          <div class="text-sm text-slate-600 mb-1">Cost Advantage</div>
+          <div class="text-xs text-slate-500">GCP vs AWS identified</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-purple-600 mb-2">100%</div>
+          <div class="text-sm text-slate-600 mb-1">Data Consistency</div>
+          <div class="text-xs text-slate-500">standardized extraction</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-purple-600 mb-2">$4.9K</div>
+          <div class="text-sm text-slate-600 mb-1">Annual Savings</div>
+          <div class="text-xs text-slate-500">optimal vendor selection</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">Intelligence-Driven Data Architecture</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-purple-400 font-semibold">AI doesn't just move data—it understands and transforms it.</span>
+        By combining document processing, business intelligence, and workflow automation, AI creates data pipelines 
+        that adapt to your content formats and business requirements. It's the evolution from data processing 
+        to intelligent information orchestration.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-400 mb-2">$2,340</div>
+          <div class="text-slate-400">AWS Monthly Cost Extracted</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-400 mb-2">99.95%</div>
+          <div class="text-slate-400">Uptime SLA Normalized</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-400 mb-2">16</div>
+          <div class="text-slate-400">vCPUs Standardized Across Vendors</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

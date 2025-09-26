@@ -1,0 +1,374 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const proposeEditsConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to review this software licensing agreement before we sign. Can you identify any problematic clauses and suggest specific changes to better protect our interests?',
+    timestamp: '11:15 AM',
+    documents: [
+      {
+        name: 'CloudTech_Software_License_Agreement_v2.3.pdf',
+        type: 'pdf' as const,
+        size: '2.8 MB'
+      },
+      {
+        name: 'Previous_Negotiation_Notes.docx',
+        type: 'docx' as const,
+        size: '890 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll analyze this licensing agreement and propose specific redlines to protect your interests. Let me identify problematic clauses and suggest precise language changes.\\n\\n<strong>⚠️ HIGH-RISK CLAUSES IDENTIFIED</strong>\\n\\n**1. AUTOMATIC RENEWAL (Section 4.2):**\\n<u>Current Language:</u> "Agreement automatically renews for successive one-year terms unless terminated with 90 days written notice."\\n\\n<u>🔴 Risk:</u> Difficult to exit, locks in pricing\\n\\n<u>✅ Proposed Edit:</u> "Agreement renews only upon mutual written consent. Either party may terminate with 30 days written notice."\\n\\n**2. LIABILITY CAP (Section 8.1):**\\n<u>Current:</u> "Total liability shall not exceed fees paid in the preceding 12 months."\\n\\n<u>🔴 Risk:</u> Inadequate for data breach or system failures\\n\\n<u>✅ Proposed Edit:</u> "Liability cap of $2M for data security incidents; $500K for other claims, excluding willful misconduct."',
+    timestamp: '11:17 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Great analysis! What about the data ownership and indemnification clauses? Those were flagged in our previous negotiation notes.',
+    timestamp: '11:18 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📝 ADDITIONAL CRITICAL REDLINES</strong>\\n\\n**3. DATA OWNERSHIP (Section 12.4):**\\n<u>Current:</u> "Provider may use Customer Data for service improvement and analytics."\\n\\n<u>🔴 Major Risk:</u> Gives broad rights to your proprietary data\\n\\n<u>✅ Proposed Edit:</u> "Customer retains exclusive ownership of all Customer Data. Provider may use only aggregated, anonymized data patterns for service improvement, subject to Customer approval."\\n\\n**4. INDEMNIFICATION (Section 10.2):**\\n<u>Current:</u> "Customer indemnifies Provider against all third-party claims related to Customer\'s use of the service."\\n\\n<u>🔴 Risk:</u> One-sided, you bear all third-party risk\\n\\n<u>✅ Proposed Edit:</u> "Mutual indemnification. Each party indemnifies the other for claims arising from: (a) their negligence, (b) IP infringement, (c) breach of agreement."\\n\\n**5. SERVICE LEVEL AGREEMENT (Section 6.1):**\\n<u>Current:</u> "Provider will use commercially reasonable efforts to maintain 99% uptime."\\n\\n<u>🔴 Risk:</u> Vague commitment, no remedies\\n\\n<u>✅ Proposed Edit:</u> "Provider guarantees 99.5% monthly uptime. Credits: 5% monthly fee per 0.1% below SLA. Emergency response within 2 hours for critical issues."',
+    timestamp: '11:20 AM'
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'Perfect! Can you prepare a comprehensive redline document with all these changes, plus a summary I can share with our legal team?',
+    timestamp: '11:21 AM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>📋 COMPLETE REDLINE PACKAGE PREPARED</strong>\\n\\n**EXECUTIVE SUMMARY FOR LEGAL TEAM:**\\n\\n<strong>🎯 NEGOTIATION PRIORITIES (Ranked by Impact):</strong>\\n\\n**Priority 1 - CRITICAL:**\\n• **Data Ownership:** Prevent vendor access to proprietary data\\n• **Liability Cap:** Increase protection for security incidents to $2M\\n• **Termination Rights:** Reduce notice period from 90 to 30 days\\n\\n**Priority 2 - IMPORTANT:**\\n• **Indemnification:** Make mutual instead of one-sided\\n• **SLA Guarantees:** Add specific uptime commitments with credits\\n• **Auto-Renewal:** Require mutual consent for renewals\\n\\n**Priority 3 - PREFERRED:**\\n• **Emergency Response:** 2-hour response time for critical issues\\n• **Data Processing:** Require approval for analytics use\\n\\n<strong>💼 BUSINESS IMPACT:</strong>\\n• **Risk Reduction:** $2M+ potential liability protection\\n• **Operational Flexibility:** Earlier exit options preserve negotiation power\\n• **Data Security:** Maintains competitive advantage through data control\\n\\n<strong>📊 NEGOTIATION LEVERAGE:**\\n• Contract value: $450K annually\\n• 3-year commitment offered\\n• Multiple vendor alternatives available',
+    timestamp: '11:23 AM',
+    documents: [
+      {
+        name: 'CloudTech_Agreement_REDLINED.docx',
+        type: 'docx' as const,
+        size: '3.2 MB'
+      },
+      {
+        name: 'Legal_Review_Summary.pdf',
+        type: 'pdf' as const,
+        size: '1.1 MB'
+      },
+      {
+        name: 'Negotiation_Talking_Points.docx',
+        type: 'docx' as const,
+        size: '445 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Propose Edits | Conversation Patterns" description="See how AI suggests specific contract redlines and document improvements">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/conversation" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Conversation Patterns
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Propose Edits
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-yellow-50 via-slate-50 to-yellow-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Propose Edits
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Generate specific redlines, changes, and improvements to contracts and documents. 
+          AI identifies risks and suggests precise language to protect your interests.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">Precision Legal Analysis</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              This pattern transforms AI into a <strong>contract negotiation partner</strong>. Instead of just 
+              highlighting issues, AI suggests specific alternative language that addresses concerns while 
+              maintaining the commercial intent of agreements.
+            </p>
+            <p class="leading-relaxed">
+              AI analyzes risk patterns across contract types and proposes industry-standard protective language. 
+              It understands legal precedent, commercial balance, and negotiation strategy—providing actionable 
+              redlines that legal teams can immediately implement.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-yellow-50 rounded-xl p-6 border border-yellow-100">
+            <h3 class="font-semibold text-yellow-900 mb-4">Edit Capabilities</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="font-medium text-yellow-900 mb-2">Risk Detection</h4>
+                <ul class="text-sm text-yellow-700 space-y-1">
+                  <li>• Liability exposure analysis</li>
+                  <li>• Termination clause review</li>
+                  <li>• Data ownership concerns</li>
+                  <li>• SLA enforcement gaps</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-yellow-900 mb-2">Proposed Solutions</h4>
+                <ul class="text-sm text-yellow-700 space-y-1">
+                  <li>• Specific replacement language</li>
+                  <li>• Mutual protection clauses</li>
+                  <li>• Performance guarantees</li>
+                  <li>• Balanced indemnification</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Perfect For</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Software licensing agreements</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Vendor service contracts</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Employment agreements</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Partnership MOUs</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Real estate leases</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Data processing agreements</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+            <h4 class="font-medium text-yellow-900 mb-2">⚖️ Key Advantage</h4>
+            <p class="text-xs text-yellow-700">
+              AI provides specific alternative language, not just issue identification. 
+              This accelerates negotiations and reduces legal review cycles.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Contract Redline Generation</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI analyze a software license and propose specific protective edits
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={proposeEditsConversation}
+        title="Legal Contract Analysis & Redlining"
+        description="Legal team preparing negotiation position for software licensing agreement"
+      />
+    </div>
+  </section>
+
+  <!-- Value Demonstration -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">The Negotiation Accelerator</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Manual Process -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3 text-sm">⏳</div>
+            Traditional Legal Review
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+              <ul class="space-y-3 text-sm text-red-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Days of senior attorney review time</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Multiple review cycles for risk identification</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Research time for alternative language</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Inconsistent risk assessment across contracts</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Delayed deal closing due to legal bottlenecks</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-red-600">Software License</div>
+              <div class="text-sm text-red-600">= 8-12 hours attorney time</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI Contract Analysis -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mr-3 text-sm">⚡</div>
+            AI Contract Analysis
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
+              <ul class="space-y-3 text-sm text-yellow-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Immediate comprehensive risk analysis</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Specific alternative language provided</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Industry-standard protective clauses suggested</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Consistent risk framework across all contracts</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Ready-to-negotiate redline documents</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-yellow-600">Software License</div>
+              <div class="text-sm text-yellow-600">= 15 minutes + attorney review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI Metrics -->
+      <div class="mt-16 grid md:grid-cols-4 gap-6 text-center">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">85%</div>
+          <div class="text-sm text-slate-600 mb-1">Time Reduction</div>
+          <div class="text-xs text-slate-500">12 hours → 90 minutes</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">6</div>
+          <div class="text-sm text-slate-600 mb-1">Critical Risks Identified</div>
+          <div class="text-xs text-slate-500">with specific solutions</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">$2M</div>
+          <div class="text-sm text-slate-600 mb-1">Liability Protection</div>
+          <div class="text-xs text-slate-500">improved cap structure</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">3x</div>
+          <div class="text-sm text-slate-600 mb-1">Negotiation Speed</div>
+          <div class="text-xs text-slate-500">faster deal closure</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">Beyond Issue Identification</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-yellow-400 font-semibold">AI doesn't just find problems—it proposes solutions.</span>
+        By understanding legal risk patterns and commercial balance, AI provides specific alternative language 
+        that protects your interests while maintaining deal momentum. It's like having an experienced 
+        contract attorney available 24/7 for first-pass negotiations.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-400 mb-2">5</div>
+          <div class="text-slate-400">High-Risk Clauses Redlined</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-400 mb-2">90%</div>
+          <div class="text-slate-400">Risk Mitigation Through Edits</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-400 mb-2">30</div>
+          <div class="text-slate-400">Days Reduced Notice Period</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
