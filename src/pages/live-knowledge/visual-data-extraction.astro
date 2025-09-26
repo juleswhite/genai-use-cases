@@ -1,0 +1,339 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+---
+
+<Layout title="Visual Data Extraction | Live Knowledge" description="Extract tables, charts, and data from images into structured formats like CSV or JSON">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-orange-50 via-slate-50 to-yellow-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="w-16 h-16 bg-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Visual Data Extraction
+        </h1>
+        <p class="text-xl text-slate-600 leading-relaxed">
+          Transform tables, charts, graphs, and handwritten data from images into 
+          structured formats like CSV, JSON, or Excel. Turn any visual data into actionable datasets.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Case Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <!-- Scenario -->
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-8">The Scenario</h2>
+          <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-8 border border-yellow-200">
+            <h3 class="text-xl font-semibold text-yellow-900 mb-4">Research Paper Data Tables</h3>
+            <p class="text-yellow-800 mb-6">
+              You're conducting a literature review and found a crucial research paper with 
+              performance data in a complex table format. The PDF doesn't allow text selection, 
+              and manually transcribing 200+ data points would take hours. You need this data 
+              in your analysis spreadsheet by tomorrow morning.
+            </p>
+            
+            <div class="bg-white rounded-xl p-6 border border-yellow-200">
+              <div class="flex items-center mb-4">
+                <div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                <span class="font-medium text-slate-900">What you see in the image:</span>
+              </div>
+              <ul class="text-slate-700 space-y-2 text-sm">
+                <li>• Multi-column comparison table with 15 different algorithms</li>
+                <li>• Performance metrics: accuracy, precision, recall, F1-score</li>
+                <li>• Multiple datasets tested (5 different test sets)</li>
+                <li>• Some cells contain ranges (e.g., "0.89-0.92")</li>
+                <li>• Header spans and merged cells for categories</li>
+                <li>• Small font with decimal precision to 3 places</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern In Action -->
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-8">Pattern in Action</h2>
+          <ChatConversation 
+            messages={[
+              {
+                type: 'user',
+                content: 'I need to extract all the data from this research paper table for my meta-analysis. The PDF is not selectable and I need this in CSV format for statistical analysis. Can you help me digitize this table?',
+                hasAttachment: true,
+                attachmentType: 'image'
+              },
+              {
+                type: 'assistant', 
+                content: `# 📊 Extracted Research Data
+
+## CSV Format (Ready for Analysis)
+\`\`\`csv
+Algorithm,Dataset,Accuracy,Precision,Recall,F1_Score,Runtime_ms
+Random Forest,Dataset_A,0.892,0.885,0.901,0.893,245
+Random Forest,Dataset_B,0.878,0.871,0.889,0.880,312
+Random Forest,Dataset_C,0.901,0.896,0.908,0.902,289
+Random Forest,Dataset_D,0.885,0.879,0.892,0.885,334
+Random Forest,Dataset_E,0.869,0.862,0.877,0.869,298
+SVM_Linear,Dataset_A,0.856,0.848,0.865,0.856,189
+SVM_Linear,Dataset_B,0.841,0.834,0.849,0.841,221
+SVM_Linear,Dataset_C,0.863,0.857,0.870,0.863,198
+SVM_Linear,Dataset_D,0.852,0.845,0.860,0.852,256
+SVM_Linear,Dataset_E,0.838,0.831,0.846,0.838,234
+Neural_Network,Dataset_A,0.912,0.907,0.918,0.912,1245
+Neural_Network,Dataset_B,0.898,0.892,0.905,0.898,1389
+Neural_Network,Dataset_C,0.925,0.921,0.929,0.925,1298
+Neural_Network,Dataset_D,0.907,0.901,0.914,0.907,1456
+Neural_Network,Dataset_E,0.889,0.883,0.896,0.889,1334
+Gradient_Boosting,Dataset_A,0.897,0.891,0.904,0.897,456
+Gradient_Boosting,Dataset_B,0.883,0.877,0.890,0.883,512
+Gradient_Boosting,Dataset_C,0.904,0.899,0.910,0.904,489
+Gradient_Boosting,Dataset_D,0.890,0.884,0.897,0.890,534
+Gradient_Boosting,Dataset_E,0.876,0.870,0.883,0.876,498
+\`\`\`
+
+---
+
+## 📈 Quick Analysis Summary
+
+### **Best Performing Algorithm:**
+- **Neural Network** - Highest average F1-score (0.906)
+- Consistently performs best across all datasets
+- Trade-off: ~3x slower runtime than other methods
+
+### **Most Efficient:**
+- **SVM Linear** - Best speed/performance balance
+- Average F1-score: 0.850 
+- Fastest runtime: 219ms average
+
+### **Dataset Difficulty Ranking:**
+1. **Dataset_C** (Easiest) - All algorithms perform well
+2. **Dataset_A** (Moderate) - Good baseline performance  
+3. **Dataset_D** (Moderate-Hard) - Slight performance drop
+4. **Dataset_B** (Hard) - Notable performance decrease
+5. **Dataset_E** (Hardest) - Lowest scores across all algorithms
+
+---
+
+## 📊 Statistical Insights
+
+### Performance Ranges by Algorithm:
+- **Neural Network**: 0.889-0.925 (σ=0.014)
+- **Gradient Boosting**: 0.876-0.904 (σ=0.011) 
+- **Random Forest**: 0.869-0.902 (σ=0.013)
+- **SVM Linear**: 0.838-0.863 (σ=0.010)
+
+### Key Findings for Your Meta-Analysis:
+1. **Neural networks show highest variance** but best peak performance
+2. **SVM demonstrates most consistent results** across datasets
+3. **Dataset characteristics significantly impact** all algorithms (8-10% performance swing)
+4. **Runtime scaling**: Neural networks 4-6x slower than tree methods
+
+---
+
+## 📄 Export Options
+
+### For SPSS/R Analysis:
+\`\`\`r
+# R code to load this data
+data <- read.csv("research_data.csv")
+summary(data)
+anova_result <- aov(F1_Score ~ Algorithm + Dataset, data=data)
+\`\`\`
+
+### For Python Analysis:
+\`\`\`python
+import pandas as pd
+df = pd.read_csv('research_data.csv')
+pivot_table = df.pivot_table(values='F1_Score', 
+                           index='Algorithm', 
+                           columns='Dataset', 
+                           aggfunc='mean')
+\`\`\`
+
+### Missing Data Notes:
+- All cells successfully extracted
+- No apparent OCR errors detected
+- Decimal precision maintained to 3 places as in original
+- Runtime data converted from "ms" notation to numeric values
+
+*The data is now ready for your statistical meta-analysis. All 100 data points extracted successfully!*`
+              }
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Benefits -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Why This Works</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Save Hours of Work</h3>
+          <p class="text-slate-600 text-sm">
+            Extract hundreds of data points in minutes instead of hours of manual transcription.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Maintain Accuracy</h3>
+          <p class="text-slate-600 text-sm">
+            Preserve original precision and detect potential transcription errors automatically.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Ready for Analysis</h3>
+          <p class="text-slate-600 text-sm">
+            Get analysis-ready formats with statistical insights and export options included.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Types We Handle -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Data Types We Extract</h2>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Research Tables</h3>
+          <p class="text-slate-600 text-sm">Academic papers, experimental results, comparison matrices, and statistical summaries.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Financial Data</h3>
+          <p class="text-slate-600 text-sm">Budget reports, expense sheets, revenue tables, and investment performance charts.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Survey Results</h3>
+          <p class="text-slate-600 text-sm">Questionnaire data, polling results, demographic breakdowns, and response analytics.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Inventory Lists</h3>
+          <p class="text-slate-600 text-sm">Stock counts, product catalogs, pricing tables, and warehouse management data.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Performance Metrics</h3>
+          <p class="text-slate-600 text-sm">KPI dashboards, benchmark comparisons, test results, and quality measurements.</p>
+        </div>
+
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-3">Handwritten Data</h3>
+          <p class="text-slate-600 text-sm">Field notes, lab recordings, meeting minutes, and manually collected measurements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chart Types -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Chart & Graph Extraction</h2>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Bar & Column Charts</h3>
+          <p class="text-slate-600 text-sm">Extract values, categories, and series data from vertical and horizontal bar charts.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Line Graphs</h3>
+          <p class="text-slate-600 text-sm">Time series data, trend lines, and multi-variable plots with precise coordinate extraction.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+              <line x1="9" y1="9" x2="9.01" y2="9"></line>
+              <line x1="15" y1="9" x2="15.01" y2="9"></line>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Pie Charts</h3>
+          <p class="text-slate-600 text-sm">Percentage breakdowns, category distributions, and proportional data analysis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pro Tips -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Extraction Tips</h2>
+      
+      <div class="space-y-6">
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">1</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">High Resolution Images</h3>
+            <p class="text-slate-600">Use high-resolution photos or scans for better accuracy, especially with small text or decimal numbers.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">2</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Specify Output Format</h3>
+            <p class="text-slate-600">Request specific formats: "CSV for Excel," "JSON for programming," or "formatted for SPSS analysis."</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">3</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Include Context</h3>
+            <p class="text-slate-600">Mention the data purpose: "for statistical analysis," "for database import," or "for presentation charts."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
