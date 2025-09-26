@@ -7,7 +7,7 @@ const normalizationConversation = [
   {
     id: '1',
     sender: 'user' as const,
-    message: 'We received 47 candidate résumés for our Senior Software Engineer position. They\'re all in different formats and styles. Can you help me create a standardized evaluation matrix?',
+    message: 'We received 47 candidate résumés for our Senior Software Engineer position. They\'re all in different formats and styles. Can you help me extract key qualifications and organize them into a structured Excel table for easy comparison?',
     timestamp: '9:30 AM',
     documents: [
       {
@@ -30,28 +30,28 @@ const normalizationConversation = [
   {
     id: '2',
     sender: 'ai' as const,
-    message: 'I\'ll analyze all 47 résumés and extract key information into a standardized format. Let me process the different resume styles and create a unified evaluation matrix.\n\n<strong>📊 Processing Results:</strong>\n\n<strong>Resume Format Variety Detected:</strong>\n• Traditional chronological (23 candidates)\n• Functional/skills-based (12 candidates)  \n• Creative/portfolio style (8 candidates)\n• Academic CV format (4 candidates)\n\n<strong>Key Data Points Extracted:</strong>\n• Years of experience\n• Technical skills & proficiency levels\n• Education & certifications\n• Previous company sizes & roles\n• Project highlights & achievements',
+    message: 'I\'ll extract key qualifications from all 47 résumés and organize them into a structured Excel table. Let me process the different resume formats and pull out the essential information.\n\n<strong>📊 Resume Processing Results:</strong>\n\n<strong>Format Variety Detected:</strong>\n• Traditional chronological (23 candidates)\n• Functional/skills-based (12 candidates)  \n• Creative/portfolio style (8 candidates)\n• Academic CV format (4 candidates)\n\n<strong>Standardized Data Fields Extracted:</strong>\n• Contact information & basic details\n• Education background & certifications\n• Years of experience by technology\n• Previous company names & role titles\n• Key project descriptions & achievements\n• Technical skills with context',
     timestamp: '9:33 AM'
   },
   {
     id: '3',
     sender: 'user' as const,
-    message: 'Perfect! Can you now create a standardized comparison table focusing on our must-have requirements: Python experience, cloud platforms, team leadership, and system design?',
+    message: 'Great! Can you show me a sample of the extracted data organized in a table format? I want to see how the qualifications look when normalized across different resume styles.',
     timestamp: '9:34 AM'
   },
   {
     id: '4',
     sender: 'ai' as const,
-    message: '<strong>🎯 STANDARDIZED CANDIDATE EVALUATION MATRIX</strong>\n\n**Top 15 Candidates (Scored 80+ overall):**\n\n| Candidate | Python Exp | Cloud Platforms | Leadership | System Design | Total Score |\n|-----------|------------|-----------------|------------|---------------|-------------|\n| Sarah Kim | 7 years ⭐⭐⭐⭐⭐ | AWS, GCP ⭐⭐⭐⭐ | Led 12-person team ⭐⭐⭐⭐⭐ | Netflix-scale systems ⭐⭐⭐⭐⭐ | **94/100** |\n| Marcus Chen | 5 years ⭐⭐⭐⭐ | AWS, Azure ⭐⭐⭐⭐ | Tech lead (6 people) ⭐⭐⭐⭐ | E-commerce platforms ⭐⭐⭐⭐ | **89/100** |\n| Elena Rodriguez | 6 years ⭐⭐⭐⭐⭐ | AWS ⭐⭐⭐ | Senior dev mentor ⭐⭐⭐ | Microservices expert ⭐⭐⭐⭐⭐ | **87/100** |\n\n<strong>📋 Normalization Insights:</strong>\n• **Experience Range:** 2-12 years (avg: 5.2 years)\n• **Most Common Gap:** System design experience (32% lack it)\n• **Standout Skills:** Machine Learning (15 candidates), DevOps (23 candidates)\n• **Geographic Distribution:** 65% remote-first candidates',
+    message: '<strong>📋 EXTRACTED QUALIFICATIONS TABLE (Sample Rows)</strong>\n\n**Candidate Qualifications Matrix:**\n\n| Name | Education | Python Experience | Cloud Platforms | Leadership Experience | Key Projects Excerpt |\n|------|-----------|-------------------|------------------|-----------------------|----------------------|\n| **Sarah Kim** | MS Computer Science, Stanford | \"7+ years Python development, Django expert\" | \"AWS Solutions Architect, GCP Professional\" | \"Engineering Manager at Netflix, led 12-person team\" | \"Built recommendation engine serving 200M users\" |\n| **Marcus Chen** | BS Software Engineering, MIT | \"5 years backend Python, Flask specialist\" | \"AWS Certified, Azure DevOps experience\" | \"Tech Lead at Shopify, managed 6 developers\" | \"Designed microservices architecture for e-commerce platform\" |\n| **Elena Rodriguez** | PhD Computer Science, Berkeley | \"6 years Python, expert in data science libraries\" | \"AWS data engineer, Kubernetes deployment\" | \"Senior Developer & Mentor, guided 8 junior devs\" | \"Scaled machine learning pipeline to process 1TB daily\" |\n| **David Park** | Bootcamp Graduate, General Assembly | \"3 years Python web development, FastAPI\" | \"Basic AWS, learning cloud architecture\" | \"Solo freelancer, client project management\" | \"Created inventory management system for 50+ restaurants\" |\n| **Aisha Patel** | MS Data Science, Carnegie Mellon | \"8 years Python, specialized in ML/AI frameworks\" | \"Multi-cloud: AWS, Azure, GCP certified\" | \"Research team lead, coordinated 4 PhD students\" | \"Developed NLP model achieving 94% accuracy for Fortune 500\" |\n\n<strong>📊 Data Extraction Summary:</strong>\n• **47 candidates processed** into standardized format\n• **Consistent field structure** across all resume types\n• **Direct qualification excerpts** preserved for context\n• **Ready for hiring team review** and comparison',
     timestamp: '9:36 AM',
     documents: [
       {
-        name: 'Candidate_Evaluation_Matrix_Senior_SWE.xlsx',
+        name: 'Candidate_Qualifications_Extracted.xlsx',
         type: 'xlsx' as const,
         size: '1.2 MB'
       },
       {
-        name: 'Detailed_Skills_Breakdown.csv',
+        name: 'Full_Candidate_Database.csv',
         type: 'csv' as const,
         size: '892 KB'
       }
@@ -60,19 +60,19 @@ const normalizationConversation = [
   {
     id: '5',
     sender: 'user' as const,
-    message: 'This is excellent! Can you also flag any candidates with unique specializations that might be valuable even if they don\'t fit the standard profile?',
+    message: 'Perfect! This table format makes it so much easier to compare candidates. Can you also add additional columns for contact information and any standout technical specializations you extracted?',
     timestamp: '9:38 AM'
   },
   {
     id: '6',
     sender: 'ai' as const,
-    message: '<strong>🌟 UNIQUE SPECIALIZATION CANDIDATES</strong>\n\n**Hidden Gems (Non-standard but valuable):**\n\n<strong>Alex Thompson (Score: 76)</strong>\n• **Specialty:** Cybersecurity + Backend (rare combo)\n• **Unique Value:** Built secure payment systems for fintech\n• **Why Consider:** Growing security requirements in our roadmap\n\n<strong>Priya Patel (Score: 73)</strong>\n• **Specialty:** AI/ML Engineering + Python expertise  \n• **Unique Value:** 8 years ML model deployment experience\n• **Why Consider:** Perfect for our upcoming AI features initiative\n\n<strong>Jordan Williams (Score: 71)</strong>\n• **Specialty:** Performance optimization specialist\n• **Unique Value:** Reduced costs by 40% at previous startup\n• **Why Consider:** Could optimize our growing infrastructure costs\n\n<strong>📊 Recommendation:**\nInterview top 8 standard candidates + these 3 specialists for strategic diversity.',
+    message: '<strong>📧 ENHANCED CANDIDATE TABLE WITH CONTACT INFO</strong>\n\n**Extended Qualifications Matrix:**\n\n| Name | Email | Phone | Location | Years Exp | Technical Specializations | Notable Achievements |\n|------|-------|--------|----------|-----------|---------------------------|---------------------|\n| **Sarah Kim** | sarah.kim@email.com | (555) 123-4567 | San Francisco, CA | 7 years | \"Django, React, AWS Architecture\" | \"Led Netflix recommendation system redesign\" |\n| **Marcus Chen** | m.chen.dev@gmail.com | (555) 234-5678 | Remote (EST) | 5 years | \"Flask, Microservices, Azure DevOps\" | \"Shopify checkout optimization: +15% conversion\" |\n| **Elena Rodriguez** | elena.r.phd@university.edu | (555) 345-6789 | Boston, MA | 6 years | \"Data Science, Kubernetes, MLOps\" | \"Published 12 papers on distributed ML systems\" |\n| **David Park** | davidpark.dev@freelance.co | (555) 456-7890 | Austin, TX | 3 years | \"FastAPI, PostgreSQL, Restaurant Tech\" | \"Built inventory system used by 50+ restaurants\" |\n| **Aisha Patel** | aisha.patel@ai-research.org | (555) 567-8901 | New York, NY | 8 years | \"NLP, Multi-cloud, Research Leadership\" | \"Fortune 500 NLP model: 94% accuracy improvement\" |\n\n<strong>🔍 Additional Extracted Specializations:</strong>\n• **Cybersecurity Focus:** Alex Thompson - \"Fintech security expert, PCI compliance\"\n• **Performance Engineering:** Jordan Williams - \"Cost optimization, reduced AWS spend 40%\"\n• **Mobile + Backend:** Lisa Zhang - \"React Native + Python, 5M+ app downloads\"\n• **DevOps Specialist:** Ryan Kumar - \"CI/CD pipelines, infrastructure as code expert\"\n• **Blockchain Developer:** Maria Santos - \"DeFi protocols, smart contract auditing\"\n\n<strong>📋 Excel File Structure:</strong>\n• **Main Sheet:** All 47 candidates with core qualifications\n• **Contact Sheet:** Email, phone, location, availability\n• **Skills Matrix:** Detailed breakdown by technology\n• **Projects Sheet:** Full project descriptions and achievements',
     timestamp: '9:40 AM',
     documents: [
       {
-        name: 'Specialist_Candidates_Analysis.pdf',
-        type: 'pdf' as const,
-        size: '678 KB'
+        name: 'Complete_Candidate_Database.xlsx',
+        type: 'xlsx' as const,
+        size: '2.1 MB'
       }
     ]
   }
@@ -132,8 +132,8 @@ const normalizationConversation = [
           Document Normalization
         </h1>
         <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-          Transform chaotic, inconsistent documents into standardized, comparable formats. 
-          AI finds the signal in the noise, creating order from variety.
+          Extract and organize information from diverse document formats into structured, searchable tables. 
+          AI finds the signal in the noise, creating organized data from chaotic formats.
         </p>
       </div>
     </div>
@@ -149,12 +149,12 @@ const normalizationConversation = [
             <p class="leading-relaxed">
               Real-world documents come in endless formats, styles, and structures. A stack of résumés might include 
               traditional chronological formats, modern creative designs, academic CVs, and functional skill-based layouts. 
-              <strong>Normalization makes them comparable.</strong>
+              <strong>Normalization extracts key information into organized, searchable tables.</strong>
             </p>
             <p class="leading-relaxed">
-              AI doesn't just extract data—it <em>understands context</em>. It recognizes that "Team Lead" and 
-              "Engineering Manager" represent similar leadership experience, or that "5 years Python development" 
-              and "Senior Python Engineer since 2019" convey equivalent expertise levels.
+              AI doesn't just extract data—it <em>understands context</em>. It preserves the exact language candidates use 
+              to describe their experience while organizing it into consistent table columns. This maintains the 
+              authenticity of their qualifications while enabling easy comparison and searchability.
             </p>
           </div>
           
@@ -179,14 +179,14 @@ const normalizationConversation = [
                 <div class="w-6 h-6 bg-green-200 text-green-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">3</div>
                 <div>
                   <h4 class="font-medium text-green-900">Standardization</h4>
-                  <p class="text-green-700 text-sm">Information mapped to consistent fields, formats, and scoring systems</p>
+                  <p class="text-green-700 text-sm">Information organized into consistent table columns with preserved original language</p>
                 </div>
               </div>
               <div class="flex items-start">
                 <div class="w-6 h-6 bg-green-200 text-green-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">4</div>
                 <div>
-                  <h4 class="font-medium text-green-900">Comparative Analysis</h4>
-                  <p class="text-green-700 text-sm">Standardized data enables direct comparison and ranking</p>
+                  <h4 class="font-medium text-green-900">Structured Output</h4>
+                  <p class="text-green-700 text-sm">Organized Excel files ready for hiring team review and filtering</p>
                 </div>
               </div>
             </div>
@@ -198,7 +198,7 @@ const normalizationConversation = [
           <ul class="space-y-3 text-sm text-slate-600">
             <li class="flex items-start">
               <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-              <span>Candidate resume evaluation and ranking</span>
+              <span>Candidate resume extraction and organization</span>
             </li>
             <li class="flex items-start">
               <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
@@ -232,14 +232,14 @@ const normalizationConversation = [
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-slate-900 mb-4">Candidate Resume Normalization</h2>
         <p class="text-slate-600 leading-relaxed">
-          Watch AI process 47 different resume formats into a standardized evaluation matrix
+          Watch AI extract qualifications from 47 different resume formats into organized Excel tables
         </p>
       </div>
       
       <ChatConversation 
         messages={normalizationConversation}
         title="HR Resume Processing Pipeline"
-        description="Hiring manager processing diverse candidate resumes for systematic evaluation"
+        description="Hiring manager extracting candidate qualifications into structured Excel format"
       />
     </div>
   </section>
