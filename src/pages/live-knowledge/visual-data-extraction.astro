@@ -64,14 +64,21 @@ import '../../styles/global.css';
           <ChatConversation 
             messages={[
               {
-                type: 'user',
-                content: 'I need to extract all the data from this research paper table for my meta-analysis. The PDF is not selectable and I need this in CSV format for statistical analysis. Can you help me digitize this table?',
-                hasAttachment: true,
-                attachmentType: 'image'
+                id: '1',
+                message: 'I need to extract all the data from this research paper table for my meta-analysis. The PDF is not selectable and I need this in CSV format for statistical analysis. Can you help me digitize this table?',
+                sender: 'user',
+                documents: [
+                  {
+                    name: 'research-paper-table.png',
+                    type: 'image',
+                    url: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&crop=center'
+                  }
+                ]
               },
               {
-                type: 'assistant', 
-                content: `# 📊 Extracted Research Data
+                id: '2',
+                sender: 'ai', 
+                message: `# 📊 Extracted Research Data
 
 ## CSV Format (Ready for Analysis)
 \`\`\`csv

@@ -64,14 +64,21 @@ import '../../styles/global.css';
           <ChatConversation 
             messages={[
               {
-                type: 'user',
-                content: 'URGENT: Our production app is down with database errors. I\'m attaching the error screenshot. This started after a deployment 2 hours ago. System was fine this morning. All users affected. Need immediate help!',
-                hasAttachment: true,
-                attachmentType: 'image'
+                id: '1',
+                message: 'URGENT: Our production app is down with database errors. I\'m attaching the error screenshot. This started after a deployment 2 hours ago. System was fine this morning. All users affected. Need immediate help!',
+                sender: 'user',
+                documents: [
+                  {
+                    name: 'database-error-screenshot.png',
+                    type: 'image',
+                    url: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=600&fit=crop&crop=center'
+                  }
+                ]
               },
               {
-                type: 'assistant', 
-                content: `# 🚨 IMMEDIATE ACTION REQUIRED
+                id: '2',
+                sender: 'ai', 
+                message: `# 🚨 IMMEDIATE ACTION REQUIRED
 
 ## Error Analysis
 **Root Cause:** Connection pool exhaustion due to new deployment

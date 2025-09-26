@@ -63,14 +63,21 @@ import '../../styles/global.css';
           <ChatConversation 
             messages={[
               {
-                type: 'user',
-                content: 'I\'m attaching wireframes from our mobile app design session. Can you analyze these and create detailed technical specifications for our development team? Focus on user flows, component requirements, and API needs.',
-                hasAttachment: true,
-                attachmentType: 'image'
+                id: '1',
+                message: 'I\'m attaching wireframes from our mobile app design session. Can you analyze these and create detailed technical specifications for our development team? Focus on user flows, component requirements, and API needs.',
+                sender: 'user',
+                documents: [
+                  {
+                    name: 'mobile-app-wireframes.jpg',
+                    type: 'image',
+                    url: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop&crop=center'
+                  }
+                ]
               },
               {
-                type: 'assistant', 
-                content: `# Mobile App Technical Specifications
+                id: '2',
+                sender: 'ai', 
+                message: `# Mobile App Technical Specifications
 
 ## Screen Architecture Overview
 The wireframes show a **5-screen core application** with social authentication and personalized dashboard functionality.

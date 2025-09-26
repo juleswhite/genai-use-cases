@@ -65,14 +65,21 @@ import '../../styles/global.css';
           <ChatConversation 
             messages={[
               {
-                type: 'user',
-                content: 'Help! New espresso machine just arrived at the office and I need to figure out how to use it ASAP. Everyone wants coffee and I\'m the designated "tech person." No manual in sight. Photo attached!',
-                hasAttachment: true,
-                attachmentType: 'image'
+                id: '1',
+                message: 'Help! New espresso machine just arrived at the office and I need to figure out how to use it ASAP. Everyone wants coffee and I\'m the designated "tech person." No manual in sight. Photo attached!',
+                sender: 'user',
+                documents: [
+                  {
+                    name: 'office-espresso-machine.jpg',
+                    type: 'image',
+                    url: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=600&fit=crop&crop=center'
+                  }
+                ]
               },
               {
-                type: 'assistant', 
-                content: `# ☕ Your Ultimate Coffee Machine Guide
+                id: '2',
+                sender: 'ai', 
+                message: `# ☕ Your Ultimate Coffee Machine Guide
 
 ## QUICK START (Coffee in 3 minutes!)
 

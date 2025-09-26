@@ -63,14 +63,21 @@ import '../../styles/global.css';
           <ChatConversation 
             messages={[
               {
-                type: 'user',
-                content: 'I\'m attaching a photo of our product strategy whiteboard from today\'s brainstorming session. Can you help me organize this into a structured summary with clear action items?',
-                hasAttachment: true,
-                attachmentType: 'image'
+                id: '1',
+                message: 'I\'m attaching a photo of our product strategy whiteboard from today\'s brainstorming session. Can you help me organize this into a structured summary with clear action items?',
+                sender: 'user',
+                documents: [
+                  {
+                    name: 'whiteboard-strategy-session.jpg',
+                    type: 'image',
+                    url: 'https://images.unsplash.com/photo-1553028826-f4804151e596?w=800&h=600&fit=crop&crop=center'
+                  }
+                ]
               },
               {
-                type: 'assistant', 
-                content: `# Product Strategy Session Summary
+                id: '2',
+                sender: 'ai', 
+                message: `# Product Strategy Session Summary
 
 ## Key User Personas Identified
 1. **Tech-Savvy Early Adopter** (Sarah, 28)

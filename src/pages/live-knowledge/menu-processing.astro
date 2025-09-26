@@ -64,14 +64,21 @@ import '../../styles/global.css';
           <ChatConversation 
             messages={[
               {
-                type: 'user',
-                content: 'I\'m ordering lunch for 50 people. Here\'s the catering menu. Can you create an optimized order that covers: 8 vegetarians, 3 vegans, 5 gluten-free, 2 severe nut allergies, $15/person budget, and good variety for everyone else?',
-                hasAttachment: true,
-                attachmentType: 'image'
+                id: '1',
+                message: 'I\'m ordering lunch for 50 people. Here\'s the catering menu. Can you create an optimized order that covers: 8 vegetarians, 3 vegans, 5 gluten-free, 2 severe nut allergies, $15/person budget, and good variety for everyone else?',
+                sender: 'user',
+                documents: [
+                  {
+                    name: 'catering-menu.jpg',
+                    type: 'image',
+                    url: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop&crop=center'
+                  }
+                ]
               },
               {
-                type: 'assistant', 
-                content: `# Optimized Catering Order for 50 People
+                id: '2',
+                sender: 'ai', 
+                message: `# Optimized Catering Order for 50 People
 
 ## Order Summary
 **Total Cost:** $742 ($14.84/person) ✅ Under budget
