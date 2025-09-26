@@ -6,10 +6,16 @@ import '../../styles/global.css';
 const contentIntelligenceConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'I need a comprehensive content intelligence platform that can monitor brand compliance across our 2,300+ websites, generate automated social media content, and create personalized marketing campaigns. Can you show me what this integrated system would look like?',
+    sender: 'ai' as const,
+    message: '📱 <strong>CONTENT INTELLIGENCE PLATFORM OPERATIONAL</strong> - I\'ve automatically scanned all 2,347 campus websites and initiated comprehensive brand compliance monitoring. Social media automation and campaign personalization systems are now active:\n\n<strong>🔍 REAL-TIME CAMPUS CONTENT MONITORING:</strong>\n\n<strong>Brand Compliance Analysis:</strong>\n• Websites monitored: 2,347 active sites (100% coverage)\n• Brand compliance score: 87.3% (↑12% improvement this month)\n• Non-compliant sites: 298 auto-flagged for immediate review\n• Logo violations: 23 detected and correction alerts sent\n• Color palette compliance: 94.1% across all properties\n\n<strong>⚡ AUTOMATED CONTENT GENERATION ACTIVE:</strong>\n• Social media posts: 15 auto-generated today (optimized for engagement)\n• Email campaigns: 3 personalized sequences running\n• Website content: Dynamic updates across 156 department sites\n• Alumni communications: Targeted messaging based on graduation year\n\n<strong>📊 PERFORMANCE ANALYTICS:</strong>\n• Social engagement: 156K weekly interactions (↑34%)\n• Website traffic: 2.3M monthly visitors\n• Email delivery rates: 89.2% (above industry average)\n• SEO rankings: 67% of pages ranking top 10 for target keywords',
     timestamp: '11:00 AM',
-    documents: []
+    documents: [
+      {
+        name: 'Auto_Content_Intelligence_Report.pdf',
+        type: 'pdf' as const,
+        size: '3.1 MB'
+      }
+    ]
   },
   {
     id: '2',
@@ -51,8 +57,8 @@ const contentIntelligenceConversation = [
 const websiteAuditConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'We have 2,300+ faculty and staff websites across campus, each built using different templates and standards. I need to audit all of them for brand compliance, SEO optimization, and accessibility issues. This would take months manually. Can AI agents help automate this audit process?',
+    sender: 'ai' as const,
+    message: '🔍 <strong>CAMPUS WEBSITE AUDIT COMPLETE</strong> - I\'ve automatically crawled and analyzed all 2,347 faculty and staff websites across campus. Comprehensive audit results are now available with prioritized action items:\n\n<strong>⚡ AUTOMATED AUDIT RESULTS:</strong>\n\n<strong>Brand Compliance Analysis:</strong>\n• Sites fully compliant: 2,049 (87.3%)\n• Minor brand issues: 253 sites (outdated logos, color variations)\n• Major compliance issues: 45 sites (complete brand overhaul needed)\n• Template violations: 87 sites using unauthorized designs\n\n<strong>📊 SEO OPTIMIZATION STATUS:</strong>\n• Sites with good SEO health: 1,876 (79.8%)\n• Missing meta descriptions: 421 sites\n• Poor page load times: 156 sites (>3 seconds)\n• Mobile responsiveness issues: 89 sites\n\n<strong>♿ ACCESSIBILITY COMPLIANCE:</strong>\n• WCAG 2.1 AA compliant: 1,654 sites (70.4%)\n• Alt text missing: 532 sites with image issues\n• Color contrast violations: 234 sites\n• Keyboard navigation problems: 123 sites\n\n<strong>🚨 PRIORITY ACTION ITEMS AUTO-GENERATED:</strong>\n• Critical accessibility fixes: 45 sites (legal compliance risk)\n• Brand violations: 87 sites (immediate attention required)\n• SEO quick wins: 421 sites (meta description updates)\n• Performance optimization: 156 sites (speed improvements)',
     timestamp: '9:30 AM',
     documents: [
       {

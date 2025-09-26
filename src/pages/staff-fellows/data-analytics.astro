@@ -6,10 +6,16 @@ import '../../styles/global.css';
 const aiAnalystConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'I need to investigate why our student retention rates dropped 4% this semester. Can the AI analyst help me pull data from multiple systems and identify the root causes?',
+    sender: 'ai' as const,
+    message: '🚨 <strong>RETENTION ANOMALY DETECTED</strong> - My automated monitoring system has identified a concerning 4.1% drop in student retention rates. I\'m initiating a comprehensive multi-system investigation:\\n\\n<strong>🔍 EMERGENCY DATA ANALYSIS ACTIVATED:</strong>\\n\\n<strong>Systems Currently Scanning:</strong>\\n• Student Information System: 15,247 active records\\n• Financial Aid Database: Processing 3,247 aid changes\\n• Learning Management System: Analyzing engagement patterns\\n• Campus Housing: Reviewing satisfaction & occupancy\\n• Academic Success Center: Tracking intervention effectiveness\\n• Counseling Services: Monitoring support utilization\\n\\n<strong>⚡ PRELIMINARY PATTERN ANALYSIS:</strong>\\n\\n<strong>Affected Demographics:</strong>\\n• First-year students: ↓6.8% retention (CRITICAL)\\n• Transfer students: ↓3.2% retention\\n• Upperclassmen: ↓1.2% retention (within normal variance)\\n\\n<strong>🎯 CORRELATION SIGNALS DETECTED:</strong>\\n• Financial aid processing delays: 67% correlation with departures\\n• Course engagement scores: 34% lower in departed cohort\\n• Housing satisfaction: Significant downward trend\\n• Academic support usage: ↓23% compared to previous semester',
     timestamp: '10:00 AM',
-    documents: []
+    documents: [
+      {
+        name: 'Automated_Retention_Alert.pdf',
+        type: 'pdf' as const,
+        size: '156 KB'
+      }
+    ]
   },
   {
     id: '2',
@@ -51,14 +57,19 @@ const aiAnalystConversation = [
 const dataFusionAppConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'I need to create our annual institutional research report. Can you help me build a web application that automatically pulls data from all our key systems and generates the comprehensive report?',
+    sender: 'ai' as const,
+    message: '📊 <strong>ANNUAL REPORT AUTOMATION INITIATED</strong> - I\'ve detected it\'s time for your institutional research report and have automatically begun data collection from all campus systems. The integrated report builder is now active:\\n\\n<strong>🌐 LIVE DATA FUSION IN PROGRESS:</strong>\\n\\n<strong>12 Systems Connected & Processing:</strong>\\n✅ Student Information System - 15,247 records synchronized\\n✅ Financial Systems - Budget & expenditure analysis complete\\n✅ HR Database - Faculty & staff metrics updated\\n✅ Research Administration - Grant data & publications indexed\\n✅ Alumni Relations - Engagement & giving patterns analyzed\\n✅ Facilities Management - Space utilization calculated\\n🔄 Library Systems - Resource usage statistics (87% complete)\\n🔄 IT Infrastructure - Technology metrics (92% complete)\\n⏳ Campus Safety - Annual incident analysis (processing)\\n⏳ Sustainability Office - Environmental impact data (queued)\\n\\n<strong>📈 REPORT SECTIONS AUTO-GENERATING:</strong>\\n\\n<strong>✅ Academic Excellence (COMPLETE)</strong>\\n• Graduation rates: 89.3% (↑2.1% from previous year)\\n• Student-faculty ratio: 14:1 (optimal range maintained)\\n• Research output: 1,247 peer-reviewed publications\\n• Faculty retention: 94.7% (industry leading)',
     timestamp: '2:15 PM',
     documents: [
       {
-        name: 'Previous_Annual_Report_Template.pdf',
-        type: 'pdf' as const,
-        size: '4.2 MB'
+        name: 'Auto_Report_Builder_Status.html',
+        type: 'html' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'Live_Data_Integration_Log.json',
+        type: 'json' as const,
+        size: '456 KB'
       }
     ]
   },

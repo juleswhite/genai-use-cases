@@ -6,10 +6,16 @@ import '../../styles/global.css';
 const researchIntelligenceConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'I need a comprehensive research intelligence platform that can track faculty research performance, identify collaboration opportunities, and automatically generate reports for promotion committees. Can you show me what this system would look like?',
+    sender: 'ai' as const,
+    message: '🔬 <strong>RESEARCH INTELLIGENCE PLATFORM ACTIVE</strong> - I\'ve automatically compiled comprehensive faculty research data from 12 academic databases and university systems. Current research landscape analysis:\n\n<strong>📊 REAL-TIME FACULTY METRICS:</strong>\n\n<strong>Publication Performance (Last 12 Months):</strong>\n• Total publications: 847 (↑23% from previous year)\n• Peer-reviewed articles: 623 across 156 journals\n• High-impact publications (IF >5): 156 articles\n• International collaborations: 34% (↑8%)\n• Open access compliance: 78% (target: 85%)\n\n<strong>💰 GRANT PORTFOLIO STATUS:</strong>\n• Active funding: $12.7M across 89 projects\n• Success rate: 31.2% (above national 28.4% average)\n• New awards secured: $4.1M this fiscal year\n• Pending proposals: 23 submissions ($6.8M requested)\n\n<strong>🚨 AUTOMATED ALERTS GENERATED:</strong>\n• 3 faculty approaching promotion deadlines (dossiers auto-drafted)\n• NSF deadline in 14 days: 4 eligible faculty identified\n• 15 new collaboration opportunities detected via research overlap analysis',
     timestamp: '10:15 AM',
-    documents: []
+    documents: [
+      {
+        name: 'Auto_Research_Intelligence_Report.pdf',
+        type: 'pdf' as const,
+        size: '2.1 MB'
+      }
+    ]
   },
   {
     id: '2',
@@ -51,8 +57,8 @@ const researchIntelligenceConversation = [
 const grantProposalConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'I need to streamline our grant proposal intake and routing process. We receive 200+ proposals per year across multiple funding agencies, each with different requirements. The current manual process is causing delays and inconsistencies. Can you design an intelligent system?',
+    sender: 'ai' as const,
+    message: '📋 <strong>GRANT PROPOSAL AUTOMATION DEPLOYED</strong> - I\'ve detected 8 new grant proposals submitted today and have automatically initiated the intelligent routing system. Current proposal pipeline status:\n\n<strong>⚡ AUTOMATED INTAKE PROCESSING:</strong>\n\n<strong>Today\'s Submissions (8 proposals):</strong>\n• NSF Research Grant: Dr. Chen (Engineering) - $450K\n• NIH R01: Dr. Martinez (Biology) - $1.2M\n• DOE Energy Innovation: Dr. Williams (Physics) - $750K\n• Industry Partnership: Dr. Johnson (Chemistry) - $300K\n• 4 additional proposals auto-classified and routed\n\n<strong>🎯 INTELLIGENT ROUTING COMPLETE:</strong>\n• Compliance checks: 100% automated (IRB, budget, eligibility)\n• Budget analysis: All within institutional guidelines\n• Deadline tracking: Auto-calendar integration activated\n• Review committee assignments: Optimal matches identified\n\n<strong>📊 CURRENT PIPELINE ANALYTICS:</strong>\n• Annual submissions: 200+ proposals ($67M total requested)\n• Processing time: ↓73% (from 12 days to 3.2 days average)\n• Compliance error rate: ↓89% through automated validation\n• Success rate improvement: +15% via AI optimization suggestions',
     timestamp: '9:30 AM',
     documents: [
       {

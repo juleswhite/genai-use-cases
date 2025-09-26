@@ -6,12 +6,12 @@ import '../../styles/global.css';
 const documentPipelineConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'I just received 50+ vendor contracts that need review and approval. Usually this takes our legal team 3-4 weeks to process manually. Can you show me how the automated document pipeline would handle this?',
+    sender: 'ai' as const,
+    message: '🚨 <strong>VENDOR CONTRACT ALERT</strong> - I\'ve detected 52 new contracts uploaded to your vendor folder and initiated automatic processing:\\n\\n<strong>📂 AUTOMATED PIPELINE ACTIVATED:</strong>\\n\\n<strong>Step 1: Intelligent Classification (Completed - 2 minutes)</strong>\\n• Software licenses: 23 contracts\\n• Service agreements: 18 contracts\\n• Purchase orders: 8 contracts\\n• NDAs: 3 contracts\\n\\n<strong>Step 2: Risk Analysis (In Progress)</strong>\\n🔍 Analyzing liability clauses, payment terms, and compliance requirements...\\n\\n<strong>🚨 CRITICAL ISSUES IDENTIFIED:</strong>\\n• HIGH RISK: DataCorp contract - $2.3M, unusual 30-day termination clause\\n• MEDIUM RISK: CloudService Inc - Missing required data breach notification language\\n• URGENT: 3 contracts expire within 30 days - auto-scheduling renewal meetings\\n\\n<strong>⚡ AUTOMATIC ACTIONS TAKEN:</strong>\\n• 31 low-risk contracts → Auto-approved and queued for signature\\n• 15 medium-risk contracts → Routed to legal review with risk summaries\\n• 6 high-risk contracts → Director notification sent with analysis packages',
     timestamp: '9:00 AM',
     documents: [
       {
-        name: 'Contract_Upload_Notification.pdf',
+        name: 'Auto_Processing_Alert.pdf',
         type: 'pdf' as const,
         size: '12 KB'
       }
@@ -19,8 +19,8 @@ const documentPipelineConversation = [
   },
   {
     id: '2',
-    sender: 'ai' as const,
-    message: 'I\'ve detected 52 new contracts in your vendor folder. The AI pipeline is now processing them automatically:\\n\\n<strong>📂 DOCUMENT PIPELINE STATUS:</strong>\\n\\n<strong>Step 1: Intelligent Classification (Completed - 2 minutes)</strong>\\n• Software licenses: 23 contracts\\n• Service agreements: 18 contracts\\n• Purchase orders: 8 contracts\\n• NDAs: 3 contracts\\n\\n<strong>Step 2: Risk Analysis (In Progress - 15 minutes)</strong>\\n🔍 Currently analyzing liability clauses...\\n\\n<strong>🚨 IMMEDIATE ALERTS:</strong>\\n• HIGH RISK: DataCorp contract - $2.3M, unusual termination clause\\n• MEDIUM RISK: CloudService Inc - Missing data breach notification requirements\\n• URGENT: 3 contracts expire this month\\n\\n<strong>Step 3: Auto-Routing</strong>\\n• 31 low-risk contracts → Auto-approved (standard terms)\\n• 15 medium-risk contracts → Legal review queue\\n• 6 high-risk contracts → Director approval required',
+    sender: 'user' as const,
+    message: 'This is incredible - what\'s the status on those high-risk contracts?',
     timestamp: '9:02 AM'
   },
   {
@@ -52,10 +52,16 @@ const documentPipelineConversation = [
 const executiveDashboardConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'I need to prepare for the weekly leadership meeting in 30 minutes. Can you pull together a comprehensive dashboard showing our operational performance across all departments?',
+    sender: 'ai' as const,
+    message: '📊 <strong>WEEKLY LEADERSHIP PREP AUTO-GENERATED</strong> - I\'ve detected your leadership meeting starting in 30 minutes and compiled real-time operational data from 8 campus systems:\\n\\n<strong>🎛️ LIVE OPERATIONS DASHBOARD:</strong>\\n\\n<strong>📈 KEY PERFORMANCE INDICATORS:</strong>\\n\\n<strong>Financial Health (Last 7 Days):</strong>\\n• Budget utilization: 73% (2% ahead of plan)\\n• Vendor payments processed: $1.2M (no delays)\\n• Purchase orders pending: 23 (↓48% from last week)\\n• Cost savings identified: $67K through contract optimization\\n\\n<strong>🎯 DEPARTMENT PERFORMANCE:</strong>\\n• HR satisfaction scores: 87% (↑3 points)\\n• IT project delivery: 89% on-time (↑12% improvement)\\n• Finance processing time: ↓35% due to automation\\n• Facilities work orders: 94% completed within SLA\\n\\n<strong>⚠️ ITEMS REQUIRING IMMEDIATE ATTENTION:</strong>\\n• IT infrastructure upgrade: 2 weeks behind (vendor issue)\\n• Finance analyst position: Open 6 weeks, affecting payment timelines\\n• Student system integration: 94% complete, early launch opportunity',
     timestamp: '1:30 PM',
-    documents: []
+    documents: [
+      {
+        name: 'Auto_Generated_Executive_Dashboard.html',
+        type: 'html' as const,
+        size: '2.1 MB'
+      }
+    ]
   },
   {
     id: '2',
@@ -97,19 +103,14 @@ const executiveDashboardConversation = [
 const calendarCoordinationConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'I need to coordinate a meeting with both Associate Vice Chancellors of Finance and 5 Business of VU Program stakeholders. Can you help me analyze their calendars and suggest optimal times for the next 3 weeks?',
+    sender: 'ai' as const,
+    message: '📅 <strong>CALENDAR OPTIMIZATION ALERT</strong> - I\'ve detected your need to schedule a Business of VU Program meeting and automatically analyzed calendars for both Associate Vice Chancellors of Finance + 5 stakeholders:\\n\\n<strong>🔍 CROSS-CALENDAR ANALYSIS COMPLETE:</strong>\\n\\n<strong>Calendars Processed:</strong>\\n• Associate Vice Chancellor Finance (Campus A): 156 appointments\\n• Associate Vice Chancellor Finance (Campus B): 142 appointments\\n• 5 Business VU stakeholders: 847 total time blocks analyzed\\n\\n<strong>⚡ OPTIMAL WINDOWS IDENTIFIED:</strong>\\n\\n<strong>🎯 RECOMMENDED SLOT:</strong>\\n• <strong>Tuesday 10/29: 2:00-3:30 PM</strong> ✅\\n• Confidence: 100% - All 7 attendees completely free\\n• No travel conflicts detected\\n• Follows preferred meeting patterns (post-lunch productivity peak)\\n\\n<strong>📋 BACKUP OPTIONS:</strong>\\n• Wednesday 11/6: 1:00-2:30 PM (100% availability)\\n• Tuesday 11/12: 3:00-4:30 PM (100% availability)\\n• Thursday 10/31: 10:00-11:30 AM (85% - one soft conflict)',
     timestamp: '9:15 AM',
     documents: [
       {
-        name: 'AVC_Finance_Calendar_Export.ics',
-        type: 'ics' as const,
-        size: '245 KB'
-      },
-      {
-        name: 'Business_VU_Stakeholder_Schedules.xlsx',
+        name: 'Auto_Calendar_Analysis.xlsx',
         type: 'xlsx' as const,
-        size: '178 KB'
+        size: '245 KB'
       }
     ]
   },
