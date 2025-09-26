@@ -1,0 +1,227 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+---
+
+<Layout title="Whiteboard Analysis | Live Knowledge" description="Turn brainstorming sessions into structured notes and action items">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-orange-50 via-slate-50 to-blue-50 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="w-16 h-16 bg-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Whiteboard Analysis
+        </h1>
+        <p class="text-xl text-slate-600 leading-relaxed">
+          Transform brainstorming sessions, meeting notes, and whiteboard sketches into 
+          structured action plans, organized insights, and clear next steps.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Case Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <!-- Scenario -->
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-8">The Scenario</h2>
+          <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8 border border-orange-200">
+            <h3 class="text-xl font-semibold text-orange-900 mb-4">Product Strategy Meeting</h3>
+            <p class="text-orange-800 mb-6">
+              After a 2-hour brainstorming session, your team's whiteboard is covered with ideas, 
+              user personas, feature concepts, and scattered action items. Rather than spending 
+              another hour trying to make sense of the handwritten chaos, you take a photo.
+            </p>
+            
+            <div class="bg-white rounded-xl p-6 border border-orange-200">
+              <div class="flex items-center mb-4">
+                <div class="w-2 h-2 bg-orange-400 rounded-full mr-3"></div>
+                <span class="font-medium text-slate-900">What's on the whiteboard:</span>
+              </div>
+              <ul class="text-slate-700 space-y-2 text-sm">
+                <li>• User personas sketched in different corners</li>
+                <li>• Feature ideas with pros/cons lists</li>
+                <li>• Timeline with key milestones</li>
+                <li>• Action items assigned to different team members</li>
+                <li>• Risk factors circled in red</li>
+                <li>• Revenue projections in a rough table</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern In Action -->
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900 mb-8">Pattern in Action</h2>
+          <ChatConversation 
+            messages={[
+              {
+                type: 'user',
+                content: 'I\'m attaching a photo of our product strategy whiteboard from today\'s brainstorming session. Can you help me organize this into a structured summary with clear action items?',
+                hasAttachment: true,
+                attachmentType: 'image'
+              },
+              {
+                type: 'assistant', 
+                content: `# Product Strategy Session Summary
+
+## Key User Personas Identified
+1. **Tech-Savvy Early Adopter** (Sarah, 28)
+   - Values: Innovation, efficiency, cutting-edge features
+   - Pain points: Current tools too basic
+
+2. **Busy Professional** (Mike, 45) 
+   - Values: Reliability, ease of use, time-saving
+   - Pain points: Complex interfaces, steep learning curve
+
+3. **Budget-Conscious Startup** (Team leads)
+   - Values: Cost-effectiveness, scalability
+   - Pain points: Expensive enterprise solutions
+
+## Prioritized Feature Roadmap
+**Phase 1 (Q1):**
+- Core dashboard functionality
+- Basic reporting features
+- Mobile responsiveness
+
+**Phase 2 (Q2):** 
+- Advanced analytics
+- Third-party integrations
+- Collaboration tools
+
+**Phase 3 (Q3):**
+- AI-powered insights
+- Custom workflows
+- Enterprise features
+
+## Action Items by Owner
+**Sarah (Product):**
+- [ ] Create detailed user research plan (Due: Next Friday)
+- [ ] Validate persona assumptions with 10 customer interviews
+
+**Mike (Engineering):**
+- [ ] Technical feasibility assessment for Phase 1 features
+- [ ] Architecture design document (Due: 2 weeks)
+
+**Jessica (Design):**
+- [ ] Wireframes for core dashboard (Due: 10 days)
+- [ ] User journey mapping for each persona
+
+**David (Marketing):**
+- [ ] Competitive analysis deep-dive 
+- [ ] Go-to-market strategy for early adopters
+
+## Risk Factors to Monitor
+⚠️ **High Priority:**
+- Competitor X launching similar feature in Q2
+- Limited engineering bandwidth for Q1 timeline
+
+⚠️ **Medium Priority:** 
+- User research may invalidate core assumptions
+- Integration complexity higher than estimated
+
+## Revenue Projections
+- Q1: $50K ARR (100 customers @ $500/year)
+- Q2: $200K ARR (400 customers)
+- Q3: $500K ARR (1000 customers)
+
+*Next meeting: Review user research findings and finalize Q1 scope*`
+              }
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Benefits -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Why This Works</h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Instant Organization</h3>
+          <p class="text-slate-600 text-sm">
+            No more spending meeting time transcribing messy notes. Get structured output immediately.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Actionable Output</h3>
+          <p class="text-slate-600 text-sm">
+            Transform scattered ideas into clear action items with owners and deadlines.
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Team Alignment</h3>
+          <p class="text-slate-600 text-sm">
+            Everyone leaves with the same understanding and clear next steps.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pro Tips -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Pro Tips</h2>
+      
+      <div class="space-y-6">
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">1</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Take Multiple Angles</h3>
+            <p class="text-slate-600">Capture photos from different angles if text is hard to read or if there are overlapping elements.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">2</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Provide Context</h3>
+            <p class="text-slate-600">Include meeting purpose, attendees, and any specific organizational preferences in your prompt.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start space-x-4">
+          <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+            <span class="text-sm font-bold">3</span>
+          </div>
+          <div>
+            <h3 class="font-semibold text-slate-900 mb-2">Specify Output Format</h3>
+            <p class="text-slate-600">Ask for specific formats: "organize as a project brief," "create a task list," or "format as meeting minutes."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
