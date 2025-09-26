@@ -1,0 +1,360 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const organizationConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We have hundreds of customer feedback documents, support tickets, feature requests, and survey responses collected over the past year. Can you help organize them into meaningful categories for our product roadmap planning?',
+    timestamp: '1:45 PM',
+    documents: [
+      {
+        name: 'Customer_Feedback_Q1-Q4_2024.zip',
+        type: 'pdf' as const,
+        size: '45.2 MB'
+      },
+      {
+        name: 'Support_Tickets_Archive.csv',
+        type: 'csv' as const,
+        size: '8.9 MB'
+      },
+      {
+        name: 'Feature_Requests_Backlog.xlsx',
+        type: 'xlsx' as const,
+        size: '2.3 MB'
+      },
+      {
+        name: 'User_Survey_Responses_2024.csv',
+        type: 'csv' as const,
+        size: '1.7 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll analyze and organize all your customer feedback data by themes and priority. Processing 847 individual feedback items across multiple formats.\n\n<strong>📊 Document Processing Complete</strong>\n\n<strong>🗂️ ORGANIZED BY IMPACT & THEME:</strong>\n\n**📈 HIGH IMPACT CATEGORIES (50+ mentions):**\n\n**1. Performance & Speed Issues** (127 mentions)\n• App loading times (43 complaints)\n• Database query slowdowns (38 reports)\n• Mobile responsiveness (46 issues)\n\n**2. User Interface/UX Problems** (89 mentions)\n• Navigation confusion (34 reports)\n• Complex onboarding flow (28 complaints)\n• Accessibility concerns (27 requests)\n\n**3. Missing Core Features** (76 mentions)\n• Advanced search functionality (31 requests)\n• Bulk operations (25 requests)\n• Data export capabilities (20 requests)',
+    timestamp: '1:48 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This is great! Can you also organize by customer segment and priority level so we can see which issues affect our most valuable customers?',
+    timestamp: '1:49 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🎯 ORGANIZED BY CUSTOMER SEGMENT & PRIORITY</strong>\n\n<strong>💎 ENTERPRISE CUSTOMERS (>$50K ARR):</strong>\n\n**🔴 Critical (Churn Risk):**\n• **Security & Compliance** (23 enterprise mentions)\n  - SOC2 audit trail gaps (8 mentions)\n  - Advanced permissions (15 requests)\n• **API Rate Limits** (18 enterprise complaints)\n  - Integration bottlenecks affecting workflows\n\n**🟡 Important:**\n• **Advanced Reporting** (31 enterprise requests)\n• **White-label Options** (12 requests)\n\n<strong>🏢 MID-MARKET ($10K-$50K ARR):</strong>\n\n**🔴 Critical:**\n• **Performance Issues** (67 mentions - highest volume!)\n• **Integration Capabilities** (34 requests)\n\n**🟡 Important:**\n• **Team Collaboration Features** (28 requests)\n• **Advanced Analytics** (22 requests)\n\n<strong>🌱 SMB CUSTOMERS (<$10K ARR):</strong>\n\n**🔴 Critical:**\n• **Pricing & Value Perception** (43 mentions)\n• **Ease of Use** (56 mentions - learning curve too steep)\n\n**🟡 Important:**\n• **Mobile App Improvements** (39 requests)\n• **Basic Automation** (25 requests)',
+    timestamp: '1:51 PM'
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'Perfect! Now can you create a prioritized roadmap based on this organization, showing which categories we should tackle first?',
+    timestamp: '1:52 PM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>🚀 PRIORITIZED PRODUCT ROADMAP</strong>\n\n<strong>📅 Q1 2025 - IMMEDIATE (Churn Prevention):</strong>\n\n**1. Performance Optimization** 🔥\n• **Impact:** 127 mentions (all segments)\n• **Business Risk:** $890K ARR at risk (enterprise complaints)\n• **Effort:** 8 weeks engineering\n• **ROI:** Prevents 15% churn, improves NPS by 12 points\n\n**2. Enterprise Security Features** 🛡️\n• **Impact:** 23 enterprise mentions ($1.2M ARR segment)\n• **Business Risk:** 3 enterprise renewals at risk\n• **Effort:** 12 weeks\n• **ROI:** Secures $400K+ in renewals\n\n<strong>📅 Q2 2025 - HIGH VALUE:</strong>\n\n**3. Advanced Search & Bulk Operations** 🔍\n• **Impact:** 56 total requests (cross-segment)\n• **Business Opportunity:** Increase plan upgrades\n• **Effort:** 6 weeks\n\n**4. Mobile Experience Overhaul** 📱\n• **Impact:** 46 mentions (primarily SMB growth driver)\n• **Business Opportunity:** 25% faster user activation\n• **Effort:** 10 weeks\n\n<strong>📅 Q3-Q4 2025 - STRATEGIC:</strong>\n\n**5. API & Integration Platform**\n**6. Advanced Analytics & Reporting**\n**7. Team Collaboration Suite**\n\n<strong>💡 KEY INSIGHT:** Performance issues span ALL customer segments - fixing this single category addresses 15% of all feedback and prevents significant churn.',
+    timestamp: '1:54 PM',
+    documents: [
+      {
+        name: 'Customer_Feedback_Analysis_2024.pdf',
+        type: 'pdf' as const,
+        size: '3.2 MB'
+      },
+      {
+        name: 'Prioritized_Product_Roadmap.xlsx',
+        type: 'xlsx' as const,
+        size: '1.8 MB'
+      },
+      {
+        name: 'Customer_Segment_Analysis.csv',
+        type: 'csv' as const,
+        size: '945 KB'
+      },
+      {
+        name: 'Churn_Risk_Assessment.docx',
+        type: 'docx' as const,
+        size: '567 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Document Organization | Multi-Document Patterns" description="See how AI automatically sorts and categorizes large document collections by themes and priorities">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/multi-document" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Multi-Document Workflows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Document Organization
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-purple-50 via-slate-50 to-purple-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14-4H9m4 8H5m10-4h4"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Document Organization
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Transform chaos into clarity. AI automatically sorts, categorizes, and clusters documents 
+          by themes, priorities, and strategic importance—turning overwhelming information into actionable insights.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">Making Sense of Information Overload</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              Document organization is where AI truly shines—it can process hundreds or thousands of documents 
+              simultaneously, identifying themes, patterns, and relationships that would take humans weeks to discover. 
+              <strong>It doesn't just sort—it understands.</strong>
+            </p>
+            <p class="leading-relaxed">
+              Unlike simple keyword matching, AI organization uses <em>semantic clustering</em>. It knows that 
+              "app is slow," "performance issues," and "takes forever to load" all belong in the same category. 
+              It can even detect sentiment, urgency, and business impact to create multi-dimensional organization schemes.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-purple-50 rounded-xl p-6 border border-purple-100">
+            <h3 class="font-semibold text-purple-900 mb-4">Organization Dimensions</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="font-medium text-purple-900 mb-2">By Theme/Topic</h4>
+                <ul class="text-sm text-purple-700 space-y-1">
+                  <li>• Content similarity</li>
+                  <li>• Semantic relationships</li>
+                  <li>• Subject matter clustering</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-purple-900 mb-2">By Business Impact</h4>
+                <ul class="text-sm text-purple-700 space-y-1">
+                  <li>• Customer segment affected</li>
+                  <li>• Revenue implications</li>
+                  <li>• Urgency indicators</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-purple-900 mb-2">By Sentiment</h4>
+                <ul class="text-sm text-purple-700 space-y-1">
+                  <li>• Positive vs negative feedback</li>
+                  <li>• Frustration levels</li>
+                  <li>• Satisfaction indicators</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-purple-900 mb-2">By Priority</h4>
+                <ul class="text-sm text-purple-700 space-y-1">
+                  <li>• Frequency of mention</li>
+                  <li>• Customer value weighting</li>
+                  <li>• Churn risk factors</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Transformation Power</h3>
+          <div class="space-y-6">
+            <div>
+              <h4 class="text-sm font-semibold text-slate-900 mb-2">From This:</h4>
+              <div class="bg-red-50 rounded-lg p-3 border border-red-200">
+                <p class="text-xs text-red-700">847 scattered feedback items in different formats, impossible to prioritize or act upon</p>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold text-slate-900 mb-2">To This:</h4>
+              <div class="bg-green-50 rounded-lg p-3 border border-green-200">
+                <p class="text-xs text-green-700">6 prioritized categories with clear business impact, customer segment analysis, and actionable roadmap</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6">
+            <h4 class="font-semibold text-slate-900 mb-3">Common Use Cases</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li class="flex items-start">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                <span>Customer feedback analysis</span>
+              </li>
+              <li class="flex items-start">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                <span>Research paper categorization</span>
+              </li>
+              <li class="flex items-start">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                <span>Legal case clustering</span>
+              </li>
+              <li class="flex items-start">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                <span>Support ticket routing</span>
+              </li>
+              <li class="flex items-start">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                <span>Content library organization</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Customer Feedback Organization</h2>
+        <p class="text-slate-600 leading-relaxed">
+          See how AI transforms 847 scattered feedback items into a prioritized product roadmap
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={organizationConversation}
+        title="Product Strategy from Customer Feedback"
+        description="Product team organizing customer feedback for strategic roadmap planning"
+      />
+    </div>
+  </section>
+
+  <!-- Organization Benefits -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">The Organization Advantage</h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Speed -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Lightning Speed</h3>
+          <p class="text-sm text-slate-600">Process hundreds of documents in minutes vs. weeks of manual sorting</p>
+          <div class="mt-3 text-2xl font-bold text-purple-600">500x</div>
+          <div class="text-xs text-slate-500">Faster than manual</div>
+        </div>
+
+        <!-- Consistency -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Perfect Consistency</h3>
+          <p class="text-sm text-slate-600">No human bias, fatigue, or inconsistent categorization decisions</p>
+          <div class="mt-3 text-2xl font-bold text-purple-600">100%</div>
+          <div class="text-xs text-slate-500">Reliable sorting</div>
+        </div>
+
+        <!-- Discovery -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Hidden Insights</h3>
+          <p class="text-sm text-slate-600">Discovers patterns and themes that humans would miss or overlook</p>
+          <div class="mt-3 text-2xl font-bold text-purple-600">85%</div>
+          <div class="text-xs text-slate-500">More patterns found</div>
+        </div>
+
+        <!-- Multidimensional -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14-4H9m4 8H5m10-4h4"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Multi-Dimensional</h3>
+          <p class="text-sm text-slate-600">Organizes by multiple criteria simultaneously: theme, priority, impact, sentiment</p>
+          <div class="mt-3 text-2xl font-bold text-purple-600">4+</div>
+          <div class="text-xs text-slate-500">Organization layers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">From Information to Intelligence</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-purple-400 font-semibold">Organization isn't just about filing—it's about strategic insight.</span>
+        AI doesn't just sort your documents into neat piles. It reveals the strategic priorities, 
+        hidden opportunities, and critical risks buried in your information overload.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-400 mb-2">847</div>
+          <div class="text-slate-400">Documents Processed → 6 Strategic Categories</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-400 mb-2">$1.2M</div>
+          <div class="text-slate-400">Revenue Risk Identified & Prioritized</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-400 mb-2">90%</div>
+          <div class="text-slate-400">Reduction in Decision-Making Time</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

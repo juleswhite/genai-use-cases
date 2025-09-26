@@ -1,0 +1,301 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+---
+
+<Layout title="Computation + Automation | GenAI Patterns" description="See how LLMs become the interface to computation and automated workflows">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-emerald-50 via-slate-50 to-emerald-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <div class="w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Computation + Automation
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Transform LLMs into powerful interfaces for computation, code generation, and workflow orchestration. 
+          This is where conversations evolve into executable, automated systems.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl p-8 border border-emerald-200 shadow-lg">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">The Next Evolution</h2>
+        <p class="text-slate-700 leading-relaxed mb-6">
+          At this level, the LLM becomes more than an analyst—it becomes an <strong>executor</strong>. 
+          It doesn't just understand your data; it writes code to process it, generates scripts to automate tasks, 
+          and orchestrates complex workflows across systems.
+        </p>
+        <div class="bg-emerald-50 rounded-xl p-6 border border-emerald-100">
+          <h3 class="font-semibold text-emerald-900 mb-3">The Transformation</h3>
+          <div class="grid md:grid-cols-3 gap-4 text-emerald-800 text-sm">
+            <div class="text-center">
+              <div class="w-12 h-12 bg-emerald-200 rounded-xl flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+              </div>
+              <span class="font-medium">Conversation</span>
+            </div>
+            <div class="text-center">
+              <div class="w-12 h-12 bg-emerald-200 rounded-xl flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+              <span class="font-medium">Code Generation</span>
+            </div>
+            <div class="text-center">
+              <div class="w-12 h-12 bg-emerald-200 rounded-xl flex items-center justify-center mx-auto mb-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <span class="font-medium">Automated Execution</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patterns Grid -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Four Core Patterns</h2>
+      
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <!-- Pattern 1: Exploratory Analysis -->
+        <div class="group cursor-pointer">
+          <a href="/computation/exploratory-analysis" class="block">
+            <div class="bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 rounded-2xl p-8 transition-all duration-300 h-full">
+              <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-slate-900 mb-4">1. Exploratory Analysis</h3>
+              <p class="text-slate-600 mb-6 leading-relaxed">
+                Analyze raw research results interactively. The AI writes and executes data analysis code in real-time, 
+                uncovering patterns and insights as you ask questions.
+              </p>
+              <div class="space-y-2 mb-6 text-sm text-slate-600">
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                  <span>Interactive statistical analysis</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                  <span>Dynamic visualization generation</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                  <span>Hypothesis testing on-the-fly</span>
+                </div>
+              </div>
+              <div class="flex items-center text-emerald-600 text-sm font-medium">
+                <span>See Interactive Analysis</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 2: Budget & Grant Analysis -->
+        <div class="group cursor-pointer">
+          <a href="/computation/budget-analysis" class="block">
+            <div class="bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 rounded-2xl p-8 transition-all duration-300 h-full">
+              <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-slate-900 mb-4">2. Budget & Grant Analysis</h3>
+              <p class="text-slate-600 mb-6 leading-relaxed">
+                Combine budgets, project burn rates, and forecasting models to identify staffing issues, 
+                budget overruns, and resource allocation problems before they become critical.
+              </p>
+              <div class="space-y-2 mb-6 text-sm text-slate-600">
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+                  <span>Automated burn rate calculations</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+                  <span>Resource allocation optimization</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+                  <span>Risk forecasting models</span>
+                </div>
+              </div>
+              <div class="flex items-center text-emerald-600 text-sm font-medium">
+                <span>See Financial Automation</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 3: Script Generation -->
+        <div class="group cursor-pointer">
+          <a href="/computation/script-generation" class="block">
+            <div class="bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 rounded-2xl p-8 transition-all duration-300 h-full">
+              <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-slate-900 mb-4">3. Script Generation</h3>
+              <p class="text-slate-600 mb-6 leading-relaxed">
+                Build custom scripts to automate repetitive tasks. Convert transcripts to structured reports, 
+                merge weekly updates, and transform data formats—all through conversational requests.
+              </p>
+              <div class="space-y-2 mb-6 text-sm text-slate-600">
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                  <span>Custom automation scripts</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                  <span>Data transformation tools</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                  <span>Report generation systems</span>
+                </div>
+              </div>
+              <div class="flex items-center text-emerald-600 text-sm font-medium">
+                <span>See Code Generation</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pattern 4: Data Pipelines -->
+        <div class="group cursor-pointer">
+          <a href="/computation/data-pipelines" class="block">
+            <div class="bg-slate-50 hover:bg-emerald-50 border border-slate-200 hover:border-emerald-200 rounded-2xl p-8 transition-all duration-300 h-full">
+              <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-6">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-slate-900 mb-4">4. Data Pipelines</h3>
+              <p class="text-slate-600 mb-6 leading-relaxed">
+                Automate the movement and transformation of data across formats and systems. 
+                From vendor quotes to evaluation tables, create sophisticated data workflows through conversation.
+              </p>
+              <div class="space-y-2 mb-6 text-sm text-slate-600">
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                  <span>Automated data ingestion</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                  <span>Cross-system integration</span>
+                </div>
+                <div class="flex items-center">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                  <span>Real-time data processing</span>
+                </div>
+              </div>
+              <div class="flex items-center text-emerald-600 text-sm font-medium">
+                <span>See Pipeline Automation</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Big Picture -->
+  <section class="py-20 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-white mb-6">
+          The Complete Journey
+        </h2>
+        <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+          From simple conversation to automated computation—see how each pattern builds on the foundation of natural language interaction.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <!-- Level 1 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-3">Level 1: Conversation</h3>
+          <p class="text-slate-400 text-sm mb-4">
+            AI reads, analyzes, and provides insights on single documents. The foundation pattern.
+          </p>
+          <div class="text-blue-400 text-xs font-medium">
+            Document + Prompt = Insight
+          </div>
+        </div>
+
+        <!-- Level 2 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="19 11H5m14-4H9m4 8H5m10-4h4"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-3">Level 2: Multi-Document</h3>
+          <p class="text-slate-400 text-sm mb-4">
+            Scale conversations across multiple documents. Find patterns and connections.
+          </p>
+          <div class="text-purple-400 text-xs font-medium">
+            Multiple Conversations = Unified Insights
+          </div>
+        </div>
+
+        <!-- Level 3 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700 ring-2 ring-emerald-500">
+          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-3">Level 3: Computation</h3>
+          <p class="text-slate-400 text-sm mb-4">
+            AI writes code, executes workflows, and automates complex processes through conversation.
+          </p>
+          <div class="text-emerald-400 text-xs font-medium">
+            Conversation + Code = Automation
+          </div>
+        </div>
+      </div>
+
+      <!-- The Ultimate Insight -->
+      <div class="bg-gradient-to-r from-emerald-800 to-slate-800 rounded-2xl p-8 text-center">
+        <h3 class="text-2xl font-bold text-white mb-4">The Ultimate Realization</h3>
+        <p class="text-slate-200 text-lg leading-relaxed max-w-3xl mx-auto">
+          <span class="text-emerald-400 font-semibold">Every advanced AI system is just conversation with better tools.</span>
+          The complexity isn't in the AI—it's in the automation we build around those conversations. 
+          Master this progression, and you master the future of AI applications.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

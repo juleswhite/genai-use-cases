@@ -1,0 +1,713 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const scriptGenerationConversation = [
+  {
+    id: "1",
+    sender: "user" as const,
+    message: "Every week I have to collect status updates from 12 different teams and compile them into a executive summary report. The process is incredibly manual and time-consuming. Can you help me build a script to automate this entire workflow?",
+    timestamp: "4:20 PM",
+    documents: [
+      {
+        name: "Team_Status_Templates.zip",
+        type: "pdf" as const,
+        size: "4.7 MB"
+      },
+      {
+        name: "Executive_Summary_Template.docx",
+        type: "docx" as const,
+        size: "785 KB"
+      },
+      {
+        name: "Team_Email_List.xlsx",
+        type: "xlsx" as const,
+        size: "245 KB"
+      }
+    ]
+  },
+  {
+    id: "2",
+    sender: "ai" as const,
+    message: `I'll help you build a comprehensive automation script for your weekly status reporting workflow. Let me create a Python solution that handles email collection, content parsing, and executive summary generation.
+
+<strong>🤖 AUTOMATED REPORTING SYSTEM</strong>
+
+\`\`\`python
+#!/usr/bin/env python3
+"""
+Weekly Status Report Automation System
+Author: AI Assistant
+Description: Automates collection and compilation of team status updates
+"""
+
+import smtplib
+import imaplib
+import email
+import pandas as pd
+import re
+from datetime import datetime, timedelta
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from docx import Document
+import openai
+import logging
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
+class StatusReportAutomator:
+    def __init__(self, config_file="config.json"):
+        self.config = self.load_config(config_file)
+        self.teams = self.load_team_data()
+        self.status_updates = {}
+        
+    def load_config(self, config_file):
+        """Load email and API configuration"""
+        # Configuration for email server, OpenAI API, etc.
+        return {
+            "email_server": "imap.gmail.com",
+            "smtp_server": "smtp.gmail.com", 
+            "email_user": "your-email@company.com",
+            "email_password": "your-app-password",
+            "openai_api_key": "your-openai-key"
+        }
+    
+    def load_team_data(self):
+        """Load team information from Excel file"""
+        df = pd.read_excel("Team_Email_List.xlsx")
+        return df.to_dict("records")
+\`\`\`
+
+**📧 EMAIL AUTOMATION WORKFLOW:**
+
+**Phase 1: Automated Collection**
+• **Monday 9 AM:** Auto-send status request emails to all 12 teams
+• **Tuesday-Thursday:** Monitor inbox for responses
+• **Friday Morning:** Parse collected updates and flag missing responses
+
+**Phase 2: Content Processing**
+• **Extract key metrics:** Progress percentages, blockers, accomplishments
+• **Categorize updates:** By department, priority level, and status
+• **Identify patterns:** Recurring issues, resource needs, dependencies`,
+    timestamp: "4:22 PM"
+  },
+  {
+    id: "3",
+    sender: "user" as const,
+    message: "This looks great! Can you show me the actual email collection and parsing logic? I want to make sure it can handle different email formats from different teams.",
+    timestamp: "4:23 PM"
+  },
+  {
+    id: "4",
+    sender: "ai" as const,
+    message: `<strong>📬 INTELLIGENT EMAIL PROCESSING ENGINE</strong>
+
+\`\`\`python
+def send_status_requests(self):
+    """Send automated status request emails to all teams"""
+    smtp_server = smtplib.SMTP(self.config["smtp_server"], 587)
+    smtp_server.starttls()
+    smtp_server.login(self.config["email_user"], self.config["email_password"])
+    
+    for team in self.teams:
+        subject = f"Weekly Status Update Request - Week of {datetime.now().strftime('%m/%d/%Y')}"
+        
+        body = f"""
+Hi {team["team_lead"]},
+
+Please provide your weekly status update by Thursday 5 PM. Include:
+
+📊 KEY METRICS:
+• Progress on current sprint/milestones (%)
+• Completed deliverables this week
+• Planned deliverables for next week
+
+⚠️ BLOCKERS & RISKS:
+• Current blockers requiring escalation
+• Upcoming risks or resource needs
+
+🎯 HIGHLIGHTS:
+• Major accomplishments or breakthroughs
+• Team recognition or customer feedback
+
+This email is automated. Reply with your update and it will be processed automatically.
+
+Thanks!
+        """
+        
+        msg = MIMEMultipart()
+        msg["From"] = self.config["email_user"]
+        msg["To"] = team["email"]
+        msg["Subject"] = subject
+        msg.attach(MIMEText(body, "plain"))
+        
+        smtp_server.sendmail(self.config["email_user"], team["email"], msg.as_string())
+        logging.info(f"Status request sent to {team['team_name']}")
+    
+    smtp_server.quit()
+
+def collect_status_updates(self):
+    """Collect and parse status update emails"""
+    mail = imaplib.IMAP4_SSL(self.config["email_server"])
+    mail.login(self.config["email_user"], self.config["email_password"])
+    mail.select("inbox")
+    
+    # Search for status update emails from the last week
+    search_criteria = '(SUBJECT "Weekly Status Update" SINCE "{}")'.format(
+        (datetime.now() - timedelta(days=7)).strftime("%d-%b-%Y")
+    )
+    
+    result, messages = mail.search(None, search_criteria)
+    
+    for msg_num in messages[0].split():
+        result, msg_data = mail.fetch(msg_num, "(RFC822)")
+        email_msg = email.message_from_bytes(msg_data[0][1])
+        
+        sender = email_msg["From"]
+        subject = email_msg["Subject"]
+        body = self.extract_email_body(email_msg)
+        
+        # Parse the update using AI
+        parsed_update = self.parse_status_update(body, sender)
+        
+        # Store parsed update
+        team_name = self.get_team_name_from_email(sender)
+        self.status_updates[team_name] = parsed_update
+        
+        logging.info(f"Processed update from {team_name}")
+    
+    mail.close()
+    mail.logout()
+
+def parse_status_update(self, email_body, sender):
+    """Use AI to extract structured information from free-form status updates"""
+    
+    prompt = f"""
+    Extract structured information from this team status update:
+    
+    Email: {email_body}
+    
+    Please extract and format as JSON:
+    {{
+      "progress_percentage": <number or null>,
+      "completed_deliverables": [<list of completed items>],
+      "planned_deliverables": [<list of planned items>],
+      "blockers": [<list of blockers>],
+      "risks": [<list of risks>],
+      "highlights": [<list of achievements>],
+      "team_morale": <"high"|"medium"|"low" or null>,
+      "resource_requests": [<list of needs>],
+      "dependencies": [<list of dependencies on other teams>]
+    }}
+    
+    Handle variations in format gracefully. Extract intent even from informal updates.
+    """
+    
+    # Call OpenAI API (or similar) to parse the content
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    
+    return json.loads(response.choices[0].message.content)
+\`\`\`
+
+**🎯 INTELLIGENT PARSING FEATURES:**
+
+**Format Flexibility:**
+• **Structured emails:** Parses teams that follow templates perfectly
+• **Bullet points:** Handles informal bullet-point updates
+• **Paragraph format:** Extracts info from narrative-style updates
+• **Mixed formats:** Adapts to each team's communication style
+
+**Smart Extraction:**
+• **Progress indicators:** "75% complete", "nearly done", "behind schedule"
+• **Sentiment analysis:** Detects team morale from tone
+• **Urgency detection:** Flags critical blockers requiring immediate attention
+• **Cross-references:** Identifies dependencies between teams`,
+    timestamp: "4:25 PM"
+  },
+  {
+    id: "5",
+    sender: "user" as const,
+    message: "Excellent! Now can you show me how it generates the executive summary? I need it to be polished and highlight the most important information for leadership.",
+    timestamp: "4:26 PM"
+  },
+  {
+    id: "6",
+    sender: "ai" as const,
+    message: `<strong>📋 EXECUTIVE SUMMARY GENERATION ENGINE</strong>
+
+\`\`\`python
+def generate_executive_summary(self):
+    """Generate polished executive summary from collected updates"""
+    
+    # Analyze all updates for key themes
+    summary_data = self.analyze_portfolio_health()
+    
+    # Generate executive summary using AI
+    prompt = f"""
+    Create a professional executive summary for leadership based on weekly team updates.
+    
+    Data: {summary_data}
+    
+    Format as a polished business document with these sections:
+    
+    📊 PORTFOLIO HEALTH SNAPSHOT
+    • Overall progress indicator
+    • Key metrics and trends
+    • Resource utilization summary
+    
+    🚨 CRITICAL ATTENTION REQUIRED
+    • High-priority blockers needing executive intervention
+    • Resource conflicts or constraints
+    • Timeline risks to key deliverables
+    
+    🎯 MAJOR ACCOMPLISHMENTS
+    • Significant milestones achieved this week
+    • Customer wins or breakthrough innovations
+    • Team recognition highlights
+    
+    📈 WEEK AHEAD PRIORITIES
+    • Critical deliverables due next week
+    • Cross-team dependencies requiring coordination
+    • Executive support needed
+    
+    Use professional business language. Be concise but comprehensive.
+    Highlight items requiring executive attention vs. informational items.
+    """
+    
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    
+    return response.choices[0].message.content
+
+def analyze_portfolio_health(self):
+    """Analyze all team updates for portfolio-level insights"""
+    
+    analysis = {
+        "total_teams": len(self.status_updates),
+        "on_track_teams": 0,
+        "at_risk_teams": 0,
+        "critical_blockers": [],
+        "major_accomplishments": [],
+        "resource_requests": [],
+        "cross_team_dependencies": [],
+        "overall_progress": 0
+    }
+    
+    for team, update in self.status_updates.items():
+        # Assess team health
+        if update.get("progress_percentage", 0) >= 80:
+            analysis["on_track_teams"] += 1
+        elif len(update.get("blockers", [])) > 2:
+            analysis["at_risk_teams"] += 1
+        
+        # Aggregate critical items
+        for blocker in update.get("blockers", []):
+            if "executive" in blocker.lower() or "urgent" in blocker.lower():
+                analysis["critical_blockers"].append(f"{team}: {blocker}")
+        
+        # Collect highlights
+        analysis["major_accomplishments"].extend([
+            f"{team}: {highlight}" for highlight in update.get("highlights", [])
+        ])
+        
+        # Track resource needs
+        analysis["resource_requests"].extend([
+            f"{team}: {request}" for request in update.get("resource_requests", [])
+        ])
+    
+    return analysis
+
+def create_formatted_report(self, summary_text):
+    """Create formatted Word document with executive summary"""
+    
+    doc = Document("Executive_Summary_Template.docx")
+    
+    # Add header with date
+    header = doc.sections[0].header
+    header_para = header.paragraphs[0]
+    header_para.text = f"Weekly Executive Summary - {datetime.now().strftime('%B %d, %Y')}"
+    
+    # Add executive summary content
+    doc.add_heading("Executive Summary", 0)
+    doc.add_paragraph(summary_text)
+    
+    # Add detailed team breakdown
+    doc.add_heading("Detailed Team Status", 1)
+    
+    for team, update in self.status_updates.items():
+        doc.add_heading(team, 2)
+        
+        # Progress
+        progress = update.get("progress_percentage", "Not specified")
+        doc.add_paragraph(f"Progress: {progress}%", style="List Bullet")
+        
+        # Blockers
+        if update.get("blockers"):
+            doc.add_paragraph("Blockers:", style="List Bullet")
+            for blocker in update["blockers"]:
+                doc.add_paragraph(f"  • {blocker}", style="List Bullet 2")
+        
+        # Accomplishments
+        if update.get("highlights"):
+            doc.add_paragraph("Key Accomplishments:", style="List Bullet")
+            for highlight in update["highlights"]:
+                doc.add_paragraph(f"  • {highlight}", style="List Bullet 2")
+    
+    # Save report
+    filename = f"Executive_Summary_{datetime.now().strftime('%Y%m%d')}.docx"
+    doc.save(filename)
+    
+    return filename
+\`\`\`
+
+**📊 SAMPLE GENERATED EXECUTIVE SUMMARY:**
+
+**Portfolio Health Snapshot:**
+• **Overall Status:** 8 of 12 teams on track (67% green status)
+• **Average Progress:** 78% completion of quarterly milestones
+• **Resource Utilization:** 94% capacity with 2 teams requesting additional support
+
+**Critical Attention Required:**
+• **Engineering Team:** Database migration blocker requires vendor escalation by COO
+• **Marketing Team:** Campaign budget approval needed for Q4 launch
+• **Sales Team:** Contract negotiation stalled, needs legal review
+
+**Major Accomplishments:**
+• **Product Team:** Beta testing completed, 94% customer satisfaction
+• **Customer Success:** Achieved 98% retention rate, highest ever
+• **Operations:** Infrastructure upgrade completed 2 weeks early
+
+**📅 AUTOMATED SCHEDULING:**
+• **Monday 9 AM:** Send status requests
+• **Friday 2 PM:** Generate executive summary
+• **Friday 3 PM:** Email report to leadership team
+• **Monthly:** Archive reports and analyze trends`,
+    timestamp: "4:28 PM",
+    documents: [
+      {
+        name: "status_report_automator.py",
+        type: "txt" as const,
+        size: "12.3 KB"
+      },
+      {
+        name: "Executive_Summary_20241115.docx",
+        type: "docx" as const,
+        size: "2.1 MB"
+      },
+      {
+        name: "Automation_Setup_Guide.pdf",
+        type: "pdf" as const,
+        size: "1.8 MB"
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Script Generation | Computation + Automation" description="See how AI creates custom automation scripts for repetitive business workflows">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/computation" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Computation + Automation
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Script Generation
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-yellow-50 via-slate-50 to-yellow-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Script Generation
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Build custom automation scripts for repetitive business workflows. 
+          AI writes production-ready code that handles email processing, data transformation, and report generation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">Custom Workflow Automation</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              This pattern transforms AI into a <strong>workflow engineer</strong>. Rather than using generic 
+              automation tools, AI writes custom scripts tailored to your specific processes, data formats, 
+              and business rules. The result is precision automation that adapts to your exact needs.
+            </p>
+            <p class="leading-relaxed">
+              AI understands both the technical implementation and business context. It handles edge cases, 
+              error conditions, and integration challenges that would trip up template-based solutions. 
+              The scripts it generates are production-ready, maintainable, and designed for long-term reliability.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-yellow-50 rounded-xl p-6 border border-yellow-100">
+            <h3 class="font-semibold text-yellow-900 mb-4">Automation Capabilities</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="font-medium text-yellow-900 mb-2">Data Processing</h4>
+                <ul class="text-sm text-yellow-700 space-y-1">
+                  <li>• Email parsing and extraction</li>
+                  <li>• Document format conversion</li>
+                  <li>• API integration and data sync</li>
+                  <li>• Report generation and formatting</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-yellow-900 mb-2">Workflow Management</h4>
+                <ul class="text-sm text-yellow-700 space-y-1">
+                  <li>• Scheduled task execution</li>
+                  <li>• Error handling and notifications</li>
+                  <li>• Quality assurance checks</li>
+                  <li>• Audit logging and monitoring</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Perfect For</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Weekly/monthly reporting workflows</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Data collection and aggregation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Email processing and routing</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Document format conversions</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>System integration tasks</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Quality assurance automation</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+            <h4 class="font-medium text-yellow-900 mb-2">⚙️ Key Advantage</h4>
+            <p class="text-xs text-yellow-700">
+              AI creates bespoke automation that handles your specific edge cases, 
+              data formats, and business rules—not generic one-size-fits-all solutions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Weekly Reporting Automation</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI build a complete workflow automation system for executive reporting
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={scriptGenerationConversation}
+        title="Custom Workflow Automation Development"
+        description="Operations manager building automated system to collect and compile weekly team status reports"
+      />
+    </div>
+  </section>
+
+  <!-- Value Demonstration -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">The Automation Builder</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Manual Process -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3 text-sm">📧</div>
+            Manual Reporting Process
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+              <ul class="space-y-3 text-sm text-red-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>6 hours every Friday collecting updates manually</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Chasing down missing reports via email and Slack</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Copy-pasting content between 12 different formats</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Manual formatting and error-checking</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Weekend work to meet Monday morning deadline</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-red-600">Weekly Report</div>
+              <div class="text-sm text-red-600">= 8 hours manual effort</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI Script Generation -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mr-3 text-sm">🤖</div>
+            AI-Generated Automation
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
+              <ul class="space-y-3 text-sm text-yellow-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Automated email collection and parsing</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>AI-powered content extraction from any format</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Intelligent summary generation and formatting</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Automatic quality checks and error detection</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Scheduled execution with notification alerts</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-yellow-600">Weekly Report</div>
+              <div class="text-sm text-yellow-600">= 30 minutes oversight</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI Metrics -->
+      <div class="mt-16 grid md:grid-cols-4 gap-6 text-center">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">93%</div>
+          <div class="text-sm text-slate-600 mb-1">Time Savings</div>
+          <div class="text-xs text-slate-500">8 hours → 30 minutes</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">12</div>
+          <div class="text-sm text-slate-600 mb-1">Team Updates</div>
+          <div class="text-xs text-slate-500">processed automatically</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">100%</div>
+          <div class="text-sm text-slate-600 mb-1">Consistency</div>
+          <div class="text-xs text-slate-500">no missed deadlines</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">$2,100</div>
+          <div class="text-sm text-slate-600 mb-1">Monthly Labor Savings</div>
+          <div class="text-xs text-slate-500">32 hours reclaimed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">Beyond Generic Automation</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-yellow-400 font-semibold">AI writes code that understands your specific business context.</span>
+        Instead of forcing your workflow into rigid automation templates, AI creates bespoke solutions 
+        that handle your unique data formats, edge cases, and business rules. It's the difference between 
+        automation that works for everyone and automation that works perfectly for you.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-400 mb-2">67%</div>
+          <div class="text-slate-400">Teams On Track (Auto-calculated)</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-400 mb-2">78%</div>
+          <div class="text-slate-400">Average Progress Across Portfolio</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-400 mb-2">94%</div>
+          <div class="text-slate-400">Resource Utilization Detected</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

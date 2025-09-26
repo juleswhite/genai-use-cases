@@ -1,0 +1,374 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const generateQuestionsConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We received this proposal for our new data center project. Before our next meeting with the vendor, I need to prepare thorough questions that address any gaps or ambiguities in their proposal.',
+    timestamp: '9:45 AM',
+    documents: [
+      {
+        name: 'DataCore_Infrastructure_Proposal_v3.1.pdf',
+        type: 'pdf' as const,
+        size: '4.2 MB'
+      },
+      {
+        name: 'Technical_Requirements_Checklist.xlsx',
+        type: 'xlsx' as const,
+        size: '1.1 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll analyze their proposal against your requirements and generate targeted questions to clarify gaps and ambiguities. Let me identify the critical areas that need follow-up.\\n\\n<strong>📋 PROPOSAL ANALYSIS COMPLETE</strong>\\n\\n**Proposal Summary:**\\n• 500-rack data center with hybrid cloud integration\\n• 18-month build timeline with phased delivery\\n• $12.5M total project cost\\n• 99.99% uptime SLA commitment\\n\\n<strong>⚠️ CRITICAL GAPS IDENTIFIED</strong>\\n\\n**1. POWER & COOLING SPECIFICATIONS**\\n• Missing: Redundancy levels (N+1, N+2)\\n• Missing: Power density per rack (kW capacity)\\n• Vague: "Industry-standard cooling systems"\\n\\n**2. SECURITY & COMPLIANCE**\\n• Missing: Physical security details\\n• Missing: Compliance certifications (SOC 2, HIPAA)\\n• Unclear: Access control and monitoring systems',
+    timestamp: '9:47 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Great start! What about the financial terms and project timeline? I noticed some vague language around change orders and milestone payments.',
+    timestamp: '9:48 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>❓ STRATEGIC QUESTIONS FOR VENDOR MEETING</strong>\\n\\n**🔧 TECHNICAL SPECIFICATIONS:**\\n\\n1. **Power Infrastructure:** "What specific redundancy level (N+1, N+2, 2N) will you implement for power systems, and what is the maximum power density per rack?"\\n\\n2. **Cooling Systems:** "Please provide detailed specifications for your cooling solution, including BTU capacity, redundancy, and efficiency ratings (PUE target)."\\n\\n3. **Network Connectivity:** "What fiber entrance facilities are included, and what are the options for diverse carrier connections?"\\n\\n**🛡️ SECURITY & COMPLIANCE:**\\n\\n4. **Physical Security:** "Describe the multi-factor authentication system, biometric controls, and 24/7 security staffing model."\\n\\n5. **Certifications:** "Which compliance certifications (SOC 2 Type II, SSAE 18, HIPAA) will be maintained, and when will audit reports be available?"\\n\\n6. **Monitoring:** "What real-time environmental and security monitoring systems are included, and how do we access dashboards?"',
+    timestamp: '9:50 AM'
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'Excellent! Now can you generate questions about the commercial terms, timeline, and what happens if we need to scale up or down during the contract?',
+    timestamp: '9:51 AM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>💼 COMMERCIAL & CONTRACTUAL QUESTIONS</strong>\\n\\n**💰 FINANCIAL TERMS:**\\n\\n7. **Change Orders:** "What is your change order process, and what cost protections do we have against scope creep beyond 10% of the original contract value?"\\n\\n8. **Payment Structure:** "Can you provide a detailed milestone payment schedule tied to specific deliverables, with holdback provisions for final acceptance?"\\n\\n9. **Cost Escalation:** "How are material cost increases handled, and what price protection do we have for the 18-month construction period?"\\n\\n**📅 TIMELINE & DELIVERY:**\\n\\n10. **Critical Path:** "What are the top 3 risks to your 18-month timeline, and what contingency plans are in place?"\\n\\n11. **Phased Delivery:** "Can you provide a detailed timeline showing when each 100-rack phase will be operational and ready for our equipment installation?"\\n\\n**📈 SCALABILITY & FLEXIBILITY:**\\n\\n12. **Expansion Rights:** "What expansion space is reserved for our future growth, and what are the terms for adding additional racks?"\\n\\n13. **Downsizing:** "If our needs change, what flexibility do we have to reduce our footprint without penalty after Year 2?"\\n\\n14. **Early Termination:** "Under what circumstances can either party terminate, and what are the associated costs or penalties?"',
+    timestamp: '9:53 AM',
+    documents: [
+      {
+        name: 'Vendor_Meeting_Questions_Checklist.docx',
+        type: 'docx' as const,
+        size: '892 KB'
+      },
+      {
+        name: 'Risk_Assessment_Framework.xlsx',
+        type: 'xlsx' as const,
+        size: '445 KB'
+      },
+      {
+        name: 'Negotiation_Priorities_Summary.pdf',
+        type: 'pdf' as const,
+        size: '678 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Generate Follow-up Questions | Conversation Patterns" description="See how AI creates targeted clarifying questions based on document analysis">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/conversation" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Conversation Patterns
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Generate Follow-up Questions
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-purple-50 via-slate-50 to-purple-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Generate Follow-up Questions
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Create targeted clarifying questions for counterparties based on document analysis. 
+          AI identifies gaps and ambiguities, then drafts specific questions to address them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">Strategic Inquiry Generation</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              This pattern transforms AI into a <strong>strategic questioner</strong>. By analyzing proposals, 
+              contracts, and requirements documents, AI identifies what's missing, unclear, or potentially 
+              problematic—then crafts specific questions to address these gaps.
+            </p>
+            <p class="leading-relaxed">
+              AI understands the difference between surface-level and strategic questions. It generates 
+              inquiries that not only clarify ambiguities but also test assumptions, reveal risks, 
+              and ensure comprehensive coverage of critical business and technical requirements.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-purple-50 rounded-xl p-6 border border-purple-100">
+            <h3 class="font-semibold text-purple-900 mb-4">Question Categories</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <h4 class="font-medium text-purple-900 mb-2">Gap Analysis</h4>
+                <ul class="text-sm text-purple-700 space-y-1">
+                  <li>• Missing technical specifications</li>
+                  <li>• Undefined commercial terms</li>
+                  <li>• Unclear delivery timelines</li>
+                  <li>• Ambiguous responsibilities</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-medium text-purple-900 mb-2">Strategic Testing</h4>
+                <ul class="text-sm text-purple-700 space-y-1">
+                  <li>• Scalability assumptions</li>
+                  <li>• Risk mitigation plans</li>
+                  <li>• Change management processes</li>
+                  <li>• Performance guarantees</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Perfect For</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Vendor proposal evaluations</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Contract negotiation preparation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Due diligence processes</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Requirements validation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Partnership discussions</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Investment evaluations</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6 p-4 bg-purple-50 rounded-lg border border-purple-200">
+            <h4 class="font-medium text-purple-900 mb-2">🎯 Key Advantage</h4>
+            <p class="text-xs text-purple-700">
+              AI creates questions that reveal both obvious gaps and subtle risks, 
+              ensuring comprehensive coverage in critical business discussions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Vendor Proposal Analysis</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI analyze a data center proposal and generate strategic clarifying questions
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={generateQuestionsConversation}
+        title="Strategic Question Development"
+        description="Procurement team preparing for vendor negotiation meeting on data center project"
+      />
+    </div>
+  </section>
+
+  <!-- Value Demonstration -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">The Question Strategist</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Manual Process -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-3 text-sm">🤔</div>
+            Manual Question Development
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+              <ul class="space-y-3 text-sm text-red-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Hours spent reviewing proposals for gaps</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Multiple experts needed for complete coverage</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Risk of missing critical questions</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Inconsistent question quality across deals</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-red-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Delayed negotiations due to poor preparation</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-red-600">Data Center Proposal</div>
+              <div class="text-sm text-red-600">= 6-8 hours of expert review</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- AI Question Generation -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6 flex items-center">
+            <div class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mr-3 text-sm">🎯</div>
+            AI Question Generation
+          </h3>
+          <div class="space-y-4">
+            <div class="bg-purple-50 rounded-xl p-6 border border-purple-200">
+              <ul class="space-y-3 text-sm text-purple-700">
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Comprehensive gap analysis in minutes</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Multi-domain expertise in single analysis</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Strategic questions reveal hidden risks</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Consistent framework across all evaluations</span>
+                </li>
+                <li class="flex items-start">
+                  <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                  <span>Ready-to-use negotiation ammunition</span>
+                </li>
+              </ul>
+            </div>
+            <div class="text-center py-4">
+              <div class="text-2xl font-bold text-purple-600">Data Center Proposal</div>
+              <div class="text-sm text-purple-600">= 20 minutes comprehensive review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROI Metrics -->
+      <div class="mt-16 grid md:grid-cols-4 gap-6 text-center">
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-purple-600 mb-2">88%</div>
+          <div class="text-sm text-slate-600 mb-1">Time Savings</div>
+          <div class="text-xs text-slate-500">8 hours → 1 hour</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-purple-600 mb-2">14</div>
+          <div class="text-sm text-slate-600 mb-1">Strategic Questions</div>
+          <div class="text-xs text-slate-500">across 4 key domains</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-purple-600 mb-2">100%</div>
+          <div class="text-sm text-slate-600 mb-1">Coverage Completeness</div>
+          <div class="text-xs text-slate-500">technical + commercial</div>
+        </div>
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <div class="text-3xl font-bold text-purple-600 mb-2">3x</div>
+          <div class="text-sm text-slate-600 mb-1">Negotiation Leverage</div>
+          <div class="text-xs text-slate-500">stronger position</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">The Art of Strategic Inquiry</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-purple-400 font-semibold">Great questions reveal more than great answers.</span>
+        AI doesn't just identify what's missing—it understands what questions will expose the most 
+        critical risks and opportunities. By generating strategic inquiries, AI helps you enter 
+        negotiations with complete clarity and maximum leverage.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-400 mb-2">$12.5M</div>
+          <div class="text-slate-400">Project Value Under Analysis</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-400 mb-2">18</div>
+          <div class="text-slate-400">Month Timeline Clarified</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-400 mb-2">500</div>
+          <div class="text-slate-400">Rack Data Center Specification</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/global.css';
+---
+
+<Layout title="Generative AI Use Case Patterns" description="Explore how AI transforms from simple conversations to complex automation workflows">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
+          Generative AI
+          <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Use Case Patterns
+          </span>
+        </h1>
+        <p class="text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+          Discover how AI applications evolve from simple conversations to sophisticated automation workflows.
+          Everything starts with a conversation—the rest is just automation around it.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div class="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-full px-6 py-3 text-slate-600">
+            <span class="text-sm font-medium">Start with Conversation</span>
+            <span class="mx-2">→</span>
+            <span class="text-sm font-medium">Scale to Multi-Document</span>
+            <span class="mx-2">→</span>
+            <span class="text-sm font-medium">Extend to Automation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases Grid -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Conversation + Single Document -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="17 8h1a4 4 0 010 8h-1m-3.5-6.5a4 4 0 00-8 0v1a4 4 0 008 0zm-6.5 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Conversation + Single Document</h3>
+            <p class="text-slate-600 mb-6">
+              At the core, everything starts as a conversation with an LLM. Simple yet powerful patterns for document analysis, 
+              review, and transformation.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Contract review & analysis</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Extract structured information</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Transform formats & summaries</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+                <span>Propose edits & questions</span>
+              </div>
+            </div>
+            <a href="/conversation" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+              Explore Patterns
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Multi-Document Workflows -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl border border-purple-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14-4H9m4 8H5m10-4h4"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Multi-Document Workflows</h3>
+            <p class="text-slate-600 mb-6">
+              Scale conversations to work across multiple inputs. Unify, normalize, and compare documents 
+              to create comprehensive insights.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                <span>Fusion of multiple sources</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                <span>Format normalization</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                <span>Cross-document analysis</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+                <span>Unified reporting</span>
+              </div>
+            </div>
+            <a href="/multi-document" class="inline-flex items-center text-purple-600 font-semibold hover:text-purple-700 transition-colors">
+              Explore Workflows
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Computation + Automation -->
+        <div class="group">
+          <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-2xl border border-emerald-200 hover:shadow-xl transition-all duration-300 h-full">
+            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">Computation + Automation</h3>
+            <p class="text-slate-600 mb-6">
+              LLMs become the interface to computation, writing code, executing workflows, 
+              and orchestrating complex automated processes.
+            </p>
+            <div class="space-y-3 mb-8">
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                <span>Interactive data analysis</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                <span>Budget & grant analysis</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                <span>Script generation</span>
+              </div>
+              <div class="flex items-center text-sm text-slate-600">
+                <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+                <span>Automated data pipelines</span>
+              </div>
+            </div>
+            <a href="/computation" class="inline-flex items-center text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+              Explore Automation
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight Section -->
+  <section class="py-20 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-4xl font-bold text-white mb-8">
+        The Core Insight
+      </h2>
+      <p class="text-xl text-slate-300 leading-relaxed">
+        <span class="text-blue-400 font-semibold">Every AI application begins with a conversation.</span>
+        What makes them powerful isn't the complexity of the AI itself, but the automation, 
+        tools, and workflows we build around that fundamental conversational interface.
+      </p>
+      <div class="mt-12 bg-slate-800 rounded-2xl p-8 border border-slate-700">
+        <div class="flex items-center justify-center space-x-4 text-slate-400">
+          <div class="text-center">
+            <div class="w-3 h-3 bg-blue-400 rounded-full mx-auto mb-2"></div>
+            <span class="text-sm">Conversation</span>
+          </div>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5-5 5M6 12h12"></path>
+          </svg>
+          <div class="text-center">
+            <div class="w-3 h-3 bg-purple-400 rounded-full mx-auto mb-2"></div>
+            <span class="text-sm">Scale</span>
+          </div>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5-5 5M6 12h12"></path>
+          </svg>
+          <div class="text-center">
+            <div class="w-3 h-3 bg-emerald-400 rounded-full mx-auto mb-2"></div>
+            <span class="text-sm">Automate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

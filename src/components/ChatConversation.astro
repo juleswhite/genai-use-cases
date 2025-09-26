@@ -1,0 +1,44 @@
+---
+import ChatBubble from './ChatBubble.astro';
+import type { Document } from './ChatBubble.astro';
+
+export interface Message {
+  id: string;
+  message: string;
+  sender: 'user' | 'ai';
+  timestamp?: string;
+  documents?: Document[];
+}
+
+export interface Props {
+  messages: Message[];
+  title?: string;
+  description?: string;
+}
+
+const { messages, title, description } = Astro.props;
+---
+
+<div class="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-6 border border-slate-200">
+  {title && (
+    <div class="mb-6">
+      <h3 class="text-lg font-semibold text-slate-900 mb-2">{title}</h3>
+      {description && (
+        <p class="text-slate-600 text-sm">{description}</p>
+      )}
+    </div>
+  )}
+  
+  <div class="bg-white rounded-xl p-4 max-h-96 overflow-y-auto border border-slate-200">
+    <div class="space-y-1">
+      {messages.map((msg) => (
+        <ChatBubble 
+          message={msg.message}
+          sender={msg.sender}
+          timestamp={msg.timestamp}
+          documents={msg.documents}
+        />
+      ))}
+    </div>
+  </div>
+</div>

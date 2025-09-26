@@ -1,0 +1,345 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const normalizationConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We received 47 candidate résumés for our Senior Software Engineer position. They\'re all in different formats and styles. Can you help me extract key qualifications and organize them into a structured Excel table for easy comparison?',
+    timestamp: '9:30 AM',
+    documents: [
+      {
+        name: 'Candidate_Resumes_Batch_1.zip',
+        type: 'pdf' as const,
+        size: '15.2 MB'
+      },
+      {
+        name: 'Candidate_Resumes_Batch_2.zip', 
+        type: 'pdf' as const,
+        size: '12.8 MB'
+      },
+      {
+        name: 'Job_Requirements_Senior_SWE.docx',
+        type: 'docx' as const,
+        size: '245 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll extract key qualifications from all 47 résumés and organize them into a structured Excel table. Let me process the different resume formats and pull out the essential information.\n\n<strong>📊 Resume Processing Results:</strong>\n\n<strong>Format Variety Detected:</strong>\n• Traditional chronological (23 candidates)\n• Functional/skills-based (12 candidates)  \n• Creative/portfolio style (8 candidates)\n• Academic CV format (4 candidates)\n\n<strong>Standardized Data Fields Extracted:</strong>\n• Contact information & basic details\n• Education background & certifications\n• Years of experience by technology\n• Previous company names & role titles\n• Key project descriptions & achievements\n• Technical skills with context',
+    timestamp: '9:33 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Great! Can you show me a sample of the extracted data organized in a table format? I want to see how the qualifications look when normalized across different resume styles.',
+    timestamp: '9:34 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📋 EXTRACTED QUALIFICATIONS TABLE (Sample Rows)</strong>\n\n**Candidate Qualifications Matrix:**\n\n| Name | Education | Python Experience | Cloud Platforms | Leadership Experience | Key Projects Excerpt |\n|------|-----------|-------------------|------------------|-----------------------|----------------------|\n| **Sarah Kim** | MS Computer Science, Stanford | \"7+ years Python development, Django expert\" | \"AWS Solutions Architect, GCP Professional\" | \"Engineering Manager at Netflix, led 12-person team\" | \"Built recommendation engine serving 200M users\" |\n| **Marcus Chen** | BS Software Engineering, MIT | \"5 years backend Python, Flask specialist\" | \"AWS Certified, Azure DevOps experience\" | \"Tech Lead at Shopify, managed 6 developers\" | \"Designed microservices architecture for e-commerce platform\" |\n| **Elena Rodriguez** | PhD Computer Science, Berkeley | \"6 years Python, expert in data science libraries\" | \"AWS data engineer, Kubernetes deployment\" | \"Senior Developer & Mentor, guided 8 junior devs\" | \"Scaled machine learning pipeline to process 1TB daily\" |\n| **David Park** | Bootcamp Graduate, General Assembly | \"3 years Python web development, FastAPI\" | \"Basic AWS, learning cloud architecture\" | \"Solo freelancer, client project management\" | \"Created inventory management system for 50+ restaurants\" |\n| **Aisha Patel** | MS Data Science, Carnegie Mellon | \"8 years Python, specialized in ML/AI frameworks\" | \"Multi-cloud: AWS, Azure, GCP certified\" | \"Research team lead, coordinated 4 PhD students\" | \"Developed NLP model achieving 94% accuracy for Fortune 500\" |\n\n<strong>📊 Data Extraction Summary:</strong>\n• **47 candidates processed** into standardized format\n• **Consistent field structure** across all resume types\n• **Direct qualification excerpts** preserved for context\n• **Ready for hiring team review** and comparison',
+    timestamp: '9:36 AM',
+    documents: [
+      {
+        name: 'Candidate_Qualifications_Extracted.xlsx',
+        type: 'xlsx' as const,
+        size: '1.2 MB'
+      },
+      {
+        name: 'Full_Candidate_Database.csv',
+        type: 'csv' as const,
+        size: '892 KB'
+      }
+    ]
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'Perfect! This table format makes it so much easier to compare candidates. Can you also add additional columns for contact information and any standout technical specializations you extracted?',
+    timestamp: '9:38 AM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>📧 ENHANCED CANDIDATE TABLE WITH CONTACT INFO</strong>\n\n**Extended Qualifications Matrix:**\n\n| Name | Email | Phone | Location | Years Exp | Technical Specializations | Notable Achievements |\n|------|-------|--------|----------|-----------|---------------------------|---------------------|\n| **Sarah Kim** | sarah.kim@email.com | (555) 123-4567 | San Francisco, CA | 7 years | \"Django, React, AWS Architecture\" | \"Led Netflix recommendation system redesign\" |\n| **Marcus Chen** | m.chen.dev@gmail.com | (555) 234-5678 | Remote (EST) | 5 years | \"Flask, Microservices, Azure DevOps\" | \"Shopify checkout optimization: +15% conversion\" |\n| **Elena Rodriguez** | elena.r.phd@university.edu | (555) 345-6789 | Boston, MA | 6 years | \"Data Science, Kubernetes, MLOps\" | \"Published 12 papers on distributed ML systems\" |\n| **David Park** | davidpark.dev@freelance.co | (555) 456-7890 | Austin, TX | 3 years | \"FastAPI, PostgreSQL, Restaurant Tech\" | \"Built inventory system used by 50+ restaurants\" |\n| **Aisha Patel** | aisha.patel@ai-research.org | (555) 567-8901 | New York, NY | 8 years | \"NLP, Multi-cloud, Research Leadership\" | \"Fortune 500 NLP model: 94% accuracy improvement\" |\n\n<strong>🔍 Additional Extracted Specializations:</strong>\n• **Cybersecurity Focus:** Alex Thompson - \"Fintech security expert, PCI compliance\"\n• **Performance Engineering:** Jordan Williams - \"Cost optimization, reduced AWS spend 40%\"\n• **Mobile + Backend:** Lisa Zhang - \"React Native + Python, 5M+ app downloads\"\n• **DevOps Specialist:** Ryan Kumar - \"CI/CD pipelines, infrastructure as code expert\"\n• **Blockchain Developer:** Maria Santos - \"DeFi protocols, smart contract auditing\"\n\n<strong>📋 Excel File Structure:</strong>\n• **Main Sheet:** All 47 candidates with core qualifications\n• **Contact Sheet:** Email, phone, location, availability\n• **Skills Matrix:** Detailed breakdown by technology\n• **Projects Sheet:** Full project descriptions and achievements',
+    timestamp: '9:40 AM',
+    documents: [
+      {
+        name: 'Complete_Candidate_Database.xlsx',
+        type: 'xlsx' as const,
+        size: '2.1 MB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Document Normalization | Multi-Document Patterns" description="See how AI normalizes different document formats into standardized structures">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/multi-document" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Multi-Document Workflows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Document Normalization
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-green-50 via-slate-50 to-green-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Document Normalization
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Extract and organize information from diverse document formats into structured, searchable tables. 
+          AI finds the signal in the noise, creating organized data from chaotic formats.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">The Normalization Challenge</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              Real-world documents come in endless formats, styles, and structures. A stack of résumés might include 
+              traditional chronological formats, modern creative designs, academic CVs, and functional skill-based layouts. 
+              <strong>Normalization extracts key information into organized, searchable tables.</strong>
+            </p>
+            <p class="leading-relaxed">
+              AI doesn't just extract data—it <em>understands context</em>. It preserves the exact language candidates use 
+              to describe their experience while organizing it into consistent table columns. This maintains the 
+              authenticity of their qualifications while enabling easy comparison and searchability.
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-green-50 rounded-xl p-6 border border-green-100">
+            <h3 class="font-semibold text-green-900 mb-4">The Normalization Process</h3>
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-green-200 text-green-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">1</div>
+                <div>
+                  <h4 class="font-medium text-green-900">Format Recognition</h4>
+                  <p class="text-green-700 text-sm">AI identifies different document structures and layouts automatically</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-green-200 text-green-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">2</div>
+                <div>
+                  <h4 class="font-medium text-green-900">Data Extraction</h4>
+                  <p class="text-green-700 text-sm">Key information extracted regardless of location or presentation style</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-green-200 text-green-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">3</div>
+                <div>
+                  <h4 class="font-medium text-green-900">Standardization</h4>
+                  <p class="text-green-700 text-sm">Information organized into consistent table columns with preserved original language</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-green-200 text-green-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">4</div>
+                <div>
+                  <h4 class="font-medium text-green-900">Structured Output</h4>
+                  <p class="text-green-700 text-sm">Organized Excel files ready for hiring team review and filtering</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Perfect For</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Candidate resume extraction and organization</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Vendor proposal comparison matrices</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Financial report standardization</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Product specification comparisons</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Research paper metadata extraction</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Legal document clause comparison</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Candidate Resume Normalization</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI extract qualifications from 47 different resume formats into organized Excel tables
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={normalizationConversation}
+        title="HR Resume Processing Pipeline"
+        description="Hiring manager extracting candidate qualifications into structured Excel format"
+      />
+    </div>
+  </section>
+
+  <!-- Key Benefits -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">The Normalization Advantage</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Before -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6">❌ Without Normalization</h3>
+          <div class="space-y-4">
+            <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+              <h4 class="font-semibold text-red-900 mb-3">Manual Chaos</h4>
+              <ul class="space-y-2 text-sm text-red-700">
+                <li class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-3"></div>
+                  <span>Hours spent reading each resume individually</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-3"></div>
+                  <span>Inconsistent evaluation criteria across reviewers</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-3"></div>
+                  <span>Difficulty comparing candidates fairly</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-3"></div>
+                  <span>Missing qualified candidates in creative formats</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-red-400 rounded-full mr-3"></div>
+                  <span>Bias toward familiar resume styles</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- After -->
+        <div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-6">✅ With AI Normalization</h3>
+          <div class="space-y-4">
+            <div class="bg-green-50 rounded-xl p-6 border border-green-200">
+              <h4 class="font-semibold text-green-900 mb-3">Systematic Excellence</h4>
+              <ul class="space-y-2 text-sm text-green-700">
+                <li class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>
+                  <span>Process 50+ resumes in minutes, not hours</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>
+                  <span>Consistent evaluation criteria for all candidates</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>
+                  <span>Direct comparison with quantified scores</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>
+                  <span>Discover hidden gems in unconventional formats</span>
+                </li>
+                <li class="flex items-center">
+                  <div class="w-1.5 h-1.5 bg-green-500 rounded-full mr-3"></div>
+                  <span>Format-blind evaluation reduces bias</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">Beyond Format to Insight</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-green-400 font-semibold">Normalization isn't just about making things look the same—it's about making them comparable.</span>
+        AI sees past surface differences to identify underlying patterns, skills, and value that humans might miss in the chaos of varied formats.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-400 mb-2">95%</div>
+          <div class="text-slate-400">Time Savings vs Manual Review</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-400 mb-2">100%</div>
+          <div class="text-slate-400">Consistent Evaluation Criteria</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-green-400 mb-2">3x</div>
+          <div class="text-slate-400">More Qualified Candidates Found</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
