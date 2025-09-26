@@ -71,26 +71,26 @@ function getDocumentIcon(type: string) {
             const docStyle = getDocumentIcon(doc.type);
             return (
               <div class={`flex items-center p-2 rounded-lg border ${docStyle.color} mb-2 last:mb-0 ${
-                isUser ? 'bg-blue-500/20 border-blue-300/50' : ''
+                isUser ? 'bg-white/90 border-white/60' : ''
               }`}>
                 <div class={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                  isUser ? 'bg-white/20' : docStyle.color.split(' ')[2]
+                  isUser ? docStyle.color.split(' ')[1] : docStyle.color.split(' ')[2]
                 }`}>
                   <svg class={`w-4 h-4 ${
-                    isUser ? 'text-white' : docStyle.color.split(' ')[0]
+                    isUser ? docStyle.color.split(' ')[0] : docStyle.color.split(' ')[0]
                   }`} fill="currentColor" viewBox="0 0 24 24">
                     <path d={docStyle.icon} />
                   </svg>
                 </div>
                 <div class="flex-1 min-w-0">
-                  <p class={`text-sm font-medium truncate ${
-                    isUser ? 'text-white' : 'text-slate-900'
+                  <p class={`text-sm font-semibold truncate ${
+                    isUser ? 'text-slate-800' : 'text-slate-800'
                   }`}>
                     {doc.name}
                   </p>
                   {doc.size && (
-                    <p class={`text-xs ${
-                      isUser ? 'text-blue-100' : 'text-slate-500'
+                    <p class={`text-xs font-medium ${
+                      isUser ? 'text-slate-600' : 'text-slate-700'
                     }`}>
                       {doc.size}
                     </p>

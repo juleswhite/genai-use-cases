@@ -1,0 +1,339 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const crossAnalysisConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We have contracts with three major vendors and I\'m concerned about inconsistencies in terms, especially around liability, payment, and termination clauses. Can you perform a cross-document analysis?',
+    timestamp: '11:15 AM',
+    documents: [
+      {
+        name: 'CloudTech_Services_Agreement_2024.pdf',
+        type: 'pdf' as const,
+        size: '3.1 MB'
+      },
+      {
+        name: 'DataFlow_Master_Services_Contract.pdf',
+        type: 'pdf' as const,
+        size: '2.8 MB'
+      },
+      {
+        name: 'SecureOps_Professional_Services.pdf',
+        type: 'pdf' as const,
+        size: '2.2 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll analyze all three vendor contracts for inconsistencies and potential risks. Scanning for liability terms, payment conditions, termination clauses, and other critical provisions.\n\n<strong>🔍 Cross-Document Analysis Complete</strong>\n\n<strong>📊 Contract Overview:</strong>\n• **CloudTech:** $2.4M annual, Cloud infrastructure services\n• **DataFlow:** $1.8M annual, Data processing and analytics  \n• **SecureOps:** $950K annual, Security monitoring services\n\n<strong>⚠️ CRITICAL INCONSISTENCIES DETECTED:</strong>\n\n**1. Liability Caps - MAJOR VARIANCE**\n• CloudTech: **No liability cap** (unlimited exposure!)\n• DataFlow: **$500K cap** (reasonable)\n• SecureOps: **$2M cap** (excessive for service size)',
+    timestamp: '11:18 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'That unlimited liability with CloudTech is concerning! What other major discrepancies did you find?',
+    timestamp: '11:19 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🚨 ADDITIONAL CRITICAL DISCREPANCIES:</strong>\n\n**2. Payment Terms - CASH FLOW IMPACT**\n• CloudTech: **Net 15 days** (aggressive)\n• DataFlow: **Net 45 days** (standard)\n• SecureOps: **Net 60 days** (favorable to us)\n\n**3. Termination Rights - MAJOR IMBALANCE**\n• CloudTech: **90-day notice required** + penalty fees\n• DataFlow: **30-day notice** (mutual)\n• SecureOps: **Immediate termination** for cause allowed\n\n**4. Data Ownership - CONFLICTING TERMS**\n• CloudTech: Vendor retains **rights to derived insights** 😱\n• DataFlow: **Customer owns all data** ✅\n• SecureOps: **Unclear ownership** of security logs\n\n**5. Auto-Renewal Mechanisms**\n• CloudTech: **Auto-renews for 2 years** unless 120-day notice\n• DataFlow: **Annual auto-renewal** with 60-day notice\n• SecureOps: **Month-to-month** after initial term',
+    timestamp: '11:21 AM'
+  },
+  {
+    id: '5',
+    sender: 'user' as const,
+    message: 'This is eye-opening! Can you create a risk matrix and suggest which contracts need immediate attention?',
+    timestamp: '11:22 AM'
+  },
+  {
+    id: '6',
+    sender: 'ai' as const,
+    message: '<strong>🎯 RISK PRIORITIZATION MATRIX</strong>\n\n**🔴 IMMEDIATE ACTION REQUIRED:**\n\n**CloudTech Contract - HIGH RISK**\n• **Risk Score: 9.2/10** ⚠️\n• **Issues:** Unlimited liability + aggressive terms\n• **Financial Exposure:** Potentially unlimited\n• **Action:** Negotiate liability cap IMMEDIATELY\n\n**🟡 MEDIUM PRIORITY:**\n\n**SecureOps Contract - MEDIUM RISK** \n• **Risk Score: 6.1/10**\n• **Issues:** Unclear data ownership + excessive liability cap\n• **Action:** Clarify data rights within 30 days\n\n**🟢 LOW RISK:**\n\n**DataFlow Contract - LOW RISK**\n• **Risk Score: 2.8/10** ✅\n• **Issues:** Minor - mostly favorable terms\n• **Action:** Use as template for future contracts\n\n<strong>💡 STRATEGIC RECOMMENDATIONS:</strong>\n1. **Standardize liability caps** across all vendors (suggest $1M max)\n2. **Harmonize payment terms** to Net 30-45 days\n3. **Implement consistent data ownership** clauses\n4. **Create master vendor agreement template** based on DataFlow terms',
+    timestamp: '11:24 AM',
+    documents: [
+      {
+        name: 'Vendor_Contract_Risk_Analysis.xlsx',
+        type: 'xlsx' as const,
+        size: '1.4 MB'
+      },
+      {
+        name: 'Contract_Discrepancy_Report.pdf',
+        type: 'pdf' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'Recommended_Contract_Standards.docx',
+        type: 'docx' as const,
+        size: '567 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Cross-Document Analysis | Multi-Document Patterns" description="See how AI detects discrepancies and patterns across multiple related documents">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/multi-document" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Multi-Document Workflows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Cross-Document Analysis
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-yellow-50 via-slate-50 to-yellow-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Cross-Document Analysis
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Uncover hidden discrepancies, contradictions, and patterns across multiple documents. 
+          AI sees what humans miss when comparing complex documents side-by-side.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pattern Overview -->
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-6">The Detective Work AI Does Best</h2>
+          <div class="space-y-4 text-slate-700">
+            <p class="leading-relaxed">
+              Cross-document analysis is like having a perfect detective that never gets tired, never misses details, 
+              and can hold dozens of documents in memory simultaneously. <strong>It finds the needles in the haystack</strong> 
+              that human reviewers inevitably miss.
+            </p>
+            <p class="leading-relaxed">
+              The AI doesn't just compare text—it understands <em>semantic relationships</em>. It knows that "Net 15" 
+              and "Payment due within fifteen days" mean the same thing, and can spot when Contract A's "unlimited liability" 
+              creates a massive inconsistency with Contract B's "$500K cap."
+            </p>
+          </div>
+          
+          <div class="mt-8 bg-yellow-50 rounded-xl p-6 border border-yellow-100">
+            <h3 class="font-semibold text-yellow-900 mb-4">Analysis Techniques</h3>
+            <div class="space-y-3">
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-yellow-200 text-yellow-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">1</div>
+                <div>
+                  <h4 class="font-medium text-yellow-900">Semantic Mapping</h4>
+                  <p class="text-yellow-700 text-sm">AI identifies equivalent terms across different phrasings and contexts</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-yellow-200 text-yellow-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">2</div>
+                <div>
+                  <h4 class="font-medium text-yellow-900">Contradiction Detection</h4>
+                  <p class="text-yellow-700 text-sm">Automatic flagging of conflicting terms and incompatible clauses</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-yellow-200 text-yellow-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">3</div>
+                <div>
+                  <h4 class="font-medium text-yellow-900">Pattern Recognition</h4>
+                  <p class="text-yellow-700 text-sm">Identifies systematic differences in risk, terms, and obligations</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-6 h-6 bg-yellow-200 text-yellow-800 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">4</div>
+                <div>
+                  <h4 class="font-medium text-yellow-900">Risk Quantification</h4>
+                  <p class="text-yellow-700 text-sm">Converts qualitative differences into quantified risk assessments</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+          <h3 class="font-semibold text-slate-900 mb-4">Ideal Applications</h3>
+          <ul class="space-y-3 text-sm text-slate-600">
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Multi-vendor contract comparison</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Policy consistency audits</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Financial statement reconciliation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Regulatory compliance checking</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Technical specification validation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Legal precedent analysis</span>
+            </li>
+          </ul>
+          
+          <div class="mt-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+            <h4 class="font-medium text-yellow-900 mb-2">💡 Pro Tip</h4>
+            <p class="text-xs text-yellow-700">
+              Cross-analysis works best with 3-10 related documents. Too few and there's nothing to compare; 
+              too many and patterns get diluted.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conversation Example -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Vendor Contract Risk Analysis</h2>
+        <p class="text-slate-600 leading-relaxed">
+          See how AI uncovers dangerous inconsistencies across three major vendor contracts
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={crossAnalysisConversation}
+        title="Multi-Vendor Contract Analysis"
+        description="Legal team discovering critical discrepancies in vendor agreement terms"
+      />
+    </div>
+  </section>
+
+  <!-- Analysis Results -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">What Cross-Analysis Reveals</h2>
+      
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Hidden Risks -->
+        <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+          <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-3">Hidden Risks</h3>
+          <p class="text-slate-600 text-sm mb-4">
+            Discovers dangerous outliers like unlimited liability clauses or unfavorable termination terms 
+            that create asymmetric business risk.
+          </p>
+          <div class="bg-white rounded-lg p-3 border border-red-200">
+            <p class="text-xs text-red-700 font-medium">Example: CloudTech's unlimited liability = potential $millions in exposure</p>
+          </div>
+        </div>
+
+        <!-- Inconsistent Standards -->
+        <div class="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
+          <div class="w-12 h-12 bg-yellow-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-3">Inconsistent Standards</h3>
+          <p class="text-slate-600 text-sm mb-4">
+            Reveals where your organization lacks consistent negotiation standards, 
+            leading to different terms for similar services.
+          </p>
+          <div class="bg-white rounded-lg p-3 border border-yellow-200">
+            <p class="text-xs text-yellow-700 font-medium">Example: Payment terms ranging from Net 15 to Net 60 days</p>
+          </div>
+        </div>
+
+        <!-- Strategic Opportunities -->
+        <div class="bg-green-50 rounded-xl p-6 border border-green-200">
+          <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-3">Strategic Opportunities</h3>
+          <p class="text-slate-600 text-sm mb-4">
+            Identifies your strongest contracts as templates for future negotiations 
+            and highlights vendor relationships to prioritize.
+          </p>
+          <div class="bg-white rounded-lg p-3 border border-green-200">
+            <p class="text-xs text-green-700 font-medium">Example: DataFlow contract terms as gold standard template</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Insight -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-6">The Power of Perspective</h2>
+      <p class="text-xl text-slate-300 leading-relaxed mb-8">
+        <span class="text-yellow-400 font-semibold">Humans see documents one at a time. AI sees the forest AND the trees.</span>
+        Cross-document analysis reveals systemic issues, hidden patterns, and strategic opportunities 
+        that only become visible when you can hold multiple complex documents in perfect memory simultaneously.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-400 mb-2">98%</div>
+          <div class="text-slate-400">Discrepancies Found vs Manual Review</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-400 mb-2">15min</div>
+          <div class="text-slate-400">Analysis Time vs 8+ Hours Manual</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-400 mb-2">$2M</div>
+          <div class="text-slate-400">Average Risk Exposure Identified</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
