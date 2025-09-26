@@ -6,10 +6,16 @@ import '../../styles/global.css';
 const financialIntelligenceConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'I need a complete financial intelligence dashboard that can analyze spend patterns, predict budget variances, and automatically generate reports from our Oracle ERP, PeopleSoft HR, and procurement systems. Can you show me what this looks like?',
+    sender: 'ai' as const,
+    message: '💰 <strong>FINANCIAL INTELLIGENCE SYSTEM ACTIVE</strong> - I\'ve automatically synchronized data from Oracle ERP, PeopleSoft HR, and procurement systems. Real-time financial analysis is now running:\n\n<strong>📊 LIVE FINANCIAL DASHBOARD:</strong>\n\n<strong>Budget Performance (FY2024):</strong>\n• Overall utilization: 76.3% (optimal trajectory)\n• Departments over budget: 3 of 24 (IT, Facilities, Marketing)\n• Projected variance: +2.1% (within 5% tolerance)\n• Cash flow forecast: Strong liquidity through Q4\n\n<strong>🚨 PREDICTIVE ALERTS GENERATED:</strong>\n• IT Department: 87% confidence of 12% overspend by March\n• Facilities maintenance: 8% cost trend increase detected\n• Research grants: $340K underspend risk identified\n• Vendor consolidation opportunity: $67K potential savings\n\n<strong>⚡ AUTOMATED ACTIONS INITIATED:</strong>\n• Budget reallocation recommendations generated (4 departments)\n• Vendor renegotiation analysis complete (15 contracts)\n• Duplicate payment scan: 2 risks flagged for review\n• Department alerts sent to budget managers',
     timestamp: '9:30 AM',
-    documents: []
+    documents: [
+      {
+        name: 'Auto_Financial_Intelligence_Report.pdf',
+        type: 'pdf' as const,
+        size: '2.8 MB'
+      }
+    ]
   },
   {
     id: '2',
@@ -51,8 +57,8 @@ const financialIntelligenceConversation = [
 const invoiceProcessingConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'Our team reviews 400+ invoices monthly from various vendors. Each needs validation against POs, rate checking, and duplicate detection. The manual process is overwhelming and error-prone. Can you design an AI agent that integrates with our Oracle ERP to automate this?',
+    sender: 'ai' as const,
+    message: '📋 <strong>INVOICE AUTOMATION AGENT ACTIVE</strong> - I\'ve detected 27 new invoices in the processing queue and have automatically initiated validation against Oracle ERP data. Current processing status:\n\n<strong>⚡ AUTOMATED INVOICE PROCESSING:</strong>\n\n<strong>Today\'s Processing (27 invoices):</strong>\n• Auto-approved: 19 invoices ($89,450 total)\n• Flagged for review: 6 invoices (rate discrepancies)\n• Duplicate detection: 2 invoices blocked\n• PO validation: 100% success rate\n\n<strong>🎯 VALIDATION RESULTS:</strong>\n• Rate checking: 23 invoices within contract terms\n• Budget verification: All approved items have funding\n• Three-way matching: PO + Receipt + Invoice ✓\n• Vendor verification: All active, approved suppliers\n\n<strong>🚨 EXCEPTIONS REQUIRING ATTENTION:</strong>\n• DataCorp invoice: 15% rate increase (no contract amendment)\n• Office supplies: Duplicate invoice from last month detected\n• IT services: Missing purchase order approval workflow\n\n<strong>📊 MONTHLY PERFORMANCE METRICS:</strong>\n• Processing time: →78% (from 5 days to 1.1 days average)\n• Error reduction: →91% through automated validation\n• Invoice volume: 400+ monthly (all processed automatically)',
     timestamp: '10:15 AM',
     documents: [
       {

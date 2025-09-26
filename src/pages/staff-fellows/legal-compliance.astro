@@ -6,14 +6,19 @@ import '../../styles/global.css';
 const complianceMonitoringConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'We just received a major regulatory update that affects 40+ university policies. Can you show me how our automated compliance monitoring system would handle this update across all departments?',
+    sender: 'ai' as const,
+    message: '🚨 <strong>REGULATORY ALERT - COMPLIANCE CASCADE INITIATED</strong> - I\'ve detected a major federal regulation update affecting university operations. Automated compliance analysis is now active across all systems:\\n\\n<strong>⚡ IMMEDIATE ASSESSMENT COMPLETE:</strong>\\n\\n<strong>Impact Analysis:</strong>\\n• Policies requiring updates: 47 of 347 total\\n• Departments affected: 12 across campus\\n• Critical compliance gaps: 8 policies (URGENT)\\n• Implementation deadline: 30 days\\n\\n<strong>🎯 AFFECTED POLICY AREAS:</strong>\\n• Student Privacy (FERPA updates): 12 policies\\n• Research Ethics & Data Handling: 8 policies\\n• Employment & HR Compliance: 15 policies\\n• Financial Aid Regulations: 7 policies\\n• Campus Safety Requirements: 5 policies\\n\\n<strong>🚨 PRIORITY ACTIONS AUTO-TRIGGERED:</strong>\\n• Department heads notified via emergency alert\\n• Legal team briefing scheduled (today 10 AM)\\n• Compliance committee activated\\n• Risk assessment matrices generated\\n• Implementation roadmap created',
     timestamp: '8:30 AM',
     documents: [
       {
-        name: 'Federal_Regulation_Update_Notice.pdf',
+        name: 'Auto_Compliance_Alert.pdf',
         type: 'pdf' as const,
         size: '234 KB'
+      },
+      {
+        name: 'Regulatory_Impact_Analysis.xlsx',
+        type: 'xlsx' as const,
+        size: '789 KB'
       }
     ]
   },
@@ -57,10 +62,21 @@ const complianceMonitoringConversation = [
 const legalWebAppConversation = [
   {
     id: '1',
-    sender: 'user' as const,
-    message: 'I need a comprehensive legal operations web application that can handle contract reviews, compliance tracking, and risk assessment in one platform. Can you show me what this would look like?',
+    sender: 'ai' as const,
+    message: '⚖️ <strong>LEGAL OPERATIONS HUB ACTIVE</strong> - Your integrated legal management platform is processing real-time data from all university systems. Current operational status:\\n\\n<strong>📊 LIVE LEGAL DASHBOARD:</strong>\\n\\n<strong>Contract Portfolio Status:</strong>\\n• Active contracts: 347 (value: $12.3M)\\n• Contracts expiring in 30 days: 15 (auto-renewal analysis complete)\\n• High-risk contracts flagged: 6 (requiring immediate review)\\n• Average contract processing time: 3.2 days (↓67% from manual)\\n\\n<strong>🚨 COMPLIANCE MONITORING:</strong>\\n• Policy compliance score: 94.2% (↑2.3% this month)\\n• Regulatory updates pending: 3 (auto-prioritized by impact)\\n• Audit readiness status: 87/100 (GREEN)\\n• Staff training compliance: 89% complete\\n\\n<strong>⚡ AUTOMATED ACTIONS IN PROGRESS:</strong>\\n• Processing DataTech contract (risk score: 67/100)\\n• Generating compliance reports for 3 departments\\n• Monitoring 23 active legal matters\\n• Tracking $287K YTD legal spend vs budget',
     timestamp: '1:45 PM',
-    documents: []
+    documents: [
+      {
+        name: 'Legal_Operations_Dashboard.html',
+        type: 'html' as const,
+        size: '2.8 MB'
+      },
+      {
+        name: 'Real_Time_Risk_Assessment.pdf',
+        type: 'pdf' as const,
+        size: '1.2 MB'
+      }
+    ]
   },
   {
     id: '2',
