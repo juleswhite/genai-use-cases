@@ -1,0 +1,653 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const aiAnalystConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to investigate why our student retention rates dropped 4% this semester. Can the AI analyst help me pull data from multiple systems and identify the root causes?',
+    timestamp: '10:00 AM',
+    documents: []
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'m connecting to multiple campus systems to investigate the retention drop. Let me pull comprehensive data:\\n\\n<strong>🔍 MULTI-SYSTEM DATA COLLECTION:</strong>\\n\\n<strong>Systems Connected:</strong>\\n• Student Information System: 15,247 student records\\n• Financial Aid Database: Aid status & changes\\n• Learning Management System: Course engagement\\n• Campus Housing: Residence & meal plan data\\n• Counseling Services: Support interactions\\n• Academic Success Center: Tutoring & interventions\\n\\n<strong>📊 INITIAL DATA ANALYSIS:</strong>\\n\\n<strong>Retention Rate Breakdown:</strong>\\n• Fall 2024: 87.2% (↓4.1% from Fall 2023: 91.3%)\\n• Most affected: First-year students (↓6.8%)\\n• Least affected: Upperclassmen (↓1.2%)\\n\\n<strong>🚨 CORRELATION PATTERNS DETECTED:</strong>\\n• Financial aid delays correlated with 23% of departures\\n• Course engagement scores 34% lower in departed students\\n• Housing satisfaction scores significantly down\\n\\n<strong>⚡ AI HYPOTHESIS GENERATION:</strong>\\n1. Financial aid processing delays (new system implementation)\\n2. Reduced in-person engagement post-COVID adjustments\\n3. Housing assignment algorithm changes\\n4. Academic support service capacity constraints',
+    timestamp: '10:02 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Can you drill deeper into the financial aid hypothesis? And what specific interventions should we consider?',
+    timestamp: '10:03 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>💰 FINANCIAL AID DEEP DIVE ANALYSIS:</strong>\\n\\n<strong>Aid Processing Timeline Impact:</strong>\\n• Average processing delay: 18 days (vs 7 days last year)\\n• Students with delayed aid: 34% more likely to leave\\n• Peak departure timing: 3-4 weeks after aid delay\\n• Financial stress indicators: 67% increase in emergency fund requests\\n\\n<strong>📈 PREDICTIVE MODEL RESULTS:</strong>\\n\\nHigh-Risk Students Identified: 247 currently enrolled\\n• Aid delayed >14 days: 89 students\\n• Below 2.5 GPA + aid issues: 43 students\\n• First-generation + financial stress: 78 students\\n• Multiple risk factors: 37 students (CRITICAL)\\n\\n<strong>🎯 RECOMMENDED INTERVENTIONS:</strong>\\n\\n<strong>Immediate (This Week):</strong>\\n• Contact 37 critical-risk students personally\\n• Fast-track remaining delayed aid applications\\n• Deploy emergency micro-grants ($500-1500) for 89 students\\n\\n<strong>Short-term (Next Month):</strong>\\n• Implement AI-powered aid application triage\\n• Create proactive outreach system for at-risk students\\n• Expand emergency financial assistance program\\n\\n<strong>Long-term (Next Semester):</strong>\\n• Redesign aid processing workflow (target: 5-day turnaround)\\n• Develop real-time retention risk dashboard\\n• Integrate early warning systems across all platforms\\n\\n<strong>📊 PROJECTED IMPACT:</strong>\\n• Estimated retention recovery: 2.8 percentage points\\n• Student intervention success rate: 73% (historical data)\\n• ROI on interventions: $2.40 per $1 invested\\n• Implementation timeline: 2-4 weeks for full deployment',
+    timestamp: '10:05 AM',
+    documents: [
+      {
+        name: 'Retention_Analysis_Report.pdf',
+        type: 'pdf' as const,
+        size: '2.3 MB'
+      },
+      {
+        name: 'High_Risk_Students_List.xlsx',
+        type: 'xlsx' as const,
+        size: '67 KB'
+      },
+      {
+        name: 'Intervention_Strategy_Plan.docx',
+        type: 'docx' as const,
+        size: '245 KB'
+      }
+    ]
+  }
+];
+
+const dataFusionAppConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to create our annual institutional research report. Can you help me build a web application that automatically pulls data from all our key systems and generates the comprehensive report?',
+    timestamp: '2:15 PM',
+    documents: [
+      {
+        name: 'Previous_Annual_Report_Template.pdf',
+        type: 'pdf' as const,
+        size: '4.2 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll build a comprehensive data fusion web application for your annual report. Let me show you the real-time interface:\\n\\n<strong>🌐 ANNUAL REPORT DATA FUSION APP</strong>\\n\\n<strong>Live Data Sources Connected (12 systems):</strong>\\n✅ Student Information System - 15,247 records\\n✅ Financial Systems - Budget & expenditure data\\n✅ HR Information System - Faculty & staff metrics\\n✅ Research Administration - Grant & publication data\\n✅ Alumni Database - Engagement & giving data\\n✅ Facilities Management - Space utilization\\n✅ Library Systems - Resource usage statistics\\n✅ IT Infrastructure - Technology metrics\\n✅ Campus Safety - Incident & security data\\n✅ Sustainability Office - Environmental metrics\\n\\n<strong>📊 REPORT SECTIONS AUTO-GENERATED:</strong>\\n\\n<strong>1. Academic Excellence (COMPLETE)</strong>\\n• Graduation rates: 89.3% (↑2.1%)\\n• Student-faculty ratio: 14:1\\n• Average class size: 23 students\\n• Faculty publications: 1,247 peer-reviewed\\n\\n<strong>2. Financial Health (IN PROGRESS)</strong>\\n🔄 Processing endowment performance data...\\n• Operating budget: $284M\\n• Research funding: $67M (↑15%)\\n• Tuition revenue efficiency: 94.2%',
+    timestamp: '2:17 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This looks fantastic! Can you show me the interactive dashboard and how I can customize the report sections?',
+    timestamp: '2:18 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🎛️ INTERACTIVE REPORT BUILDER DASHBOARD</strong>\\n\\n<strong>Real-Time Report Status:</strong>\\n• Data collection: 94% complete (11/12 systems)\\n• Report generation: 78% complete\\n• Quality validation: 89% pass rate\\n• Estimated completion: 23 minutes\\n\\n<strong>📋 CUSTOMIZABLE REPORT MODULES:</strong>\\n\\n<strong>✅ Completed Sections:</strong>\\n• Student Success Metrics (Charts + narrative)\\n• Faculty Excellence Overview (Research metrics)\\n• Financial Performance Summary (5-year trends)\\n• Campus Life & Engagement (Survey data integration)\\n• Infrastructure & Technology (Capacity metrics)\\n\\n<strong>🔄 In Progress:</strong>\\n• Alumni Success Stories (Processing 2,847 records)\\n• Research Impact Analysis (Citation data syncing)\\n\\n<strong>🎨 CUSTOMIZATION OPTIONS:</strong>\\n\\n<strong>Visual Themes:</strong>\\n• Executive Summary (8-page highlight version)\\n• Comprehensive Report (45-page detailed version)\\n• Board Presentation (20-slide PowerPoint auto-generated)\\n• Web Dashboard (Interactive online version)\\n\\n<strong>⚡ INTERACTIVE FEATURES:</strong>\\n\\n<strong>Drill-Down Capabilities:</strong>\\n• Click any metric → See underlying data\\n• Filter by department, year, or demographic\\n• Real-time "what-if" scenario modeling\\n• Automated peer institution comparisons\\n\\n<strong>📤 EXPORT OPTIONS:</strong>\\n• PDF Report (formatted & print-ready)\\n• Excel Data Workbook (all source data)\\n• PowerPoint Presentation (auto-generated slides)\\n• Interactive Web Portal (stakeholder access)\\n\\n<strong>🔄 AUTOMATED UPDATES:</strong>\\n• Monthly data refresh capabilities\\n• Quarterly trend analysis updates\\n• Annual report regeneration (1-click process)\\n• Stakeholder notification system\\n\\n<em>🎯 Report will be ready in 19 minutes with all visualizations, narratives, and appendices complete!</em>',
+    timestamp: '2:20 PM',
+    documents: [
+      {
+        name: 'Report_Builder_Dashboard.html',
+        type: 'html' as const,
+        size: '3.1 MB'
+      },
+      {
+        name: 'Live_Data_Feeds.json',
+        type: 'json' as const,
+        size: '890 KB'
+      },
+      {
+        name: 'Custom_Report_Templates.zip',
+        type: 'zip' as const,
+        size: '12.4 MB'
+      }
+    ]
+  }
+];
+
+const apiDocumentationConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to understand this new campus API for our data integration project, but the documentation is 200+ pages. Can you help me parse it and create flexible API calls for our common use cases?',
+    timestamp: '10:15 AM',
+    documents: [
+      {
+        name: 'Campus_Student_Information_API_v2.3.pdf',
+        type: 'pdf' as const,
+        size: '3.2 MB'
+      },
+      {
+        name: 'API_Authentication_Guide.pdf',
+        type: 'pdf' as const,
+        size: '890 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve analyzed the entire API documentation. Here\'s what you need to know:\n\n<strong>🔑 KEY ENDPOINTS FOR YOUR PROJECT:</strong>\n\n<strong>Student Data:</strong>\n• `/api/v2/students` - Main student records\n• `/api/v2/enrollments` - Course enrollment data\n• `/api/v2/grades` - Academic performance\n• `/api/v2/demographics` - Student demographics\n\n<strong>📋 AUTHENTICATION REQUIREMENTS:</strong>\n• OAuth 2.0 with campus credentials\n• Rate limit: 1000 requests/hour\n• Required scopes: `student.read`, `enrollment.read`\n\n<strong>⚡ MOST USEFUL PATTERNS IDENTIFIED:</strong>\n1. Bulk student data retrieval\n2. Term-specific enrollment analysis\n3. Cross-system identity matching\n4. Real-time enrollment status checks',
+    timestamp: '10:16 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Perfect! Can you create Python functions for our most common use cases? We need to pull enrollment data for specific terms and match it with our internal student IDs.',
+    timestamp: '10:17 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🐍 CUSTOM API FUNCTIONS CREATED:</strong>\n\n```python\nclass CampusAPI:\n    def __init__(self, client_id, client_secret, base_url):\n        self.auth_token = self._get_access_token(client_id, client_secret)\n        self.base_url = base_url\n    \n    def get_term_enrollments(self, term_code, program_codes=None):\n        """Get all enrollments for a specific term\n        Args:\n            term_code (str): e.g., \"202401\" for Spring 2024\n            program_codes (list): Optional filter by programs\n        Returns:\n            pandas.DataFrame: Enrollment data with student IDs\n        """\n        \n    def match_internal_ids(self, campus_ids, internal_mapping):\n        """Match campus student IDs with internal system IDs\n        Args:\n            campus_ids (list): Campus student ID numbers\n            internal_mapping (dict): Your internal ID mapping\n        Returns:\n            dict: Matched ID pairs with confidence scores\n        """\n        \n    def bulk_student_data(self, student_ids, include_grades=True):\n        """Efficient bulk retrieval of student information\n        Handles API rate limits automatically\n        """\n```\n\n<strong>✨ SMART FEATURES ADDED:</strong>\n• Automatic rate limit handling\n• Error retry logic\n• Data caching for repeated requests\n• Pandas DataFrame output for easy analysis',
+    timestamp: '10:19 AM',
+    documents: [
+      {
+        name: 'campus_api_toolkit.py',
+        type: 'py' as const,
+        size: '15 KB'
+      },
+      {
+        name: 'api_usage_examples.ipynb',
+        type: 'ipynb' as const,
+        size: '67 KB'
+      }
+    ]
+  }
+];
+
+
+const snowflakeDataPipelineConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We have 15+ different campus systems that need to feed data into our Snowflake warehouse. Each has different formats, schedules, and requirements. Can you help us create an intelligent ingestion system that can adapt to changes automatically?',
+    timestamp: '2:30 PM',
+    documents: [
+      {
+        name: 'Campus_Systems_Inventory.xlsx',
+        type: 'xlsx' as const,
+        size: '445 KB'
+      },
+      {
+        name: 'Current_ETL_Processes.pdf',
+        type: 'pdf' as const,
+        size: '1.2 MB'
+      },
+      {
+        name: 'Snowflake_Schema_Documentation.pdf',
+        type: 'pdf' as const,
+        size: '890 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve analyzed all your systems and current processes. Here\'s an intelligent solution:\n\n<strong>🏗️ SMART DATA INGESTION ARCHITECTURE:</strong>\n\n<strong>System Categories Identified:</strong>\n• <strong>Real-time:</strong> Student Information, Course Registration (4 systems)\n• <strong>Daily batch:</strong> Financial, HR, Library (6 systems)\n• <strong>Weekly:</strong> Research, Alumni, Facilities (3 systems)\n• <strong>Ad-hoc:</strong> Survey, Assessment tools (2 systems)\n\n<strong>🤖 INTELLIGENT FEATURES:</strong>\n\n<strong>1. Auto-Discovery Pipeline:</strong>\n• Monitors source system APIs for schema changes\n• Detects new data fields automatically\n• Suggests mapping to Snowflake tables\n\n<strong>2. Smart Transformation Engine:</strong>\n• ML-powered data type detection\n• Automatic format standardization\n• Conflict resolution rules\n\n<strong>3. Change Management System:</strong>\n• Version control for data schemas\n• Rollback capabilities\n• Impact analysis for changes',
+    timestamp: '2:32 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This sounds exactly like what we need! Can you show me how it would handle our biggest challenge - the student system that changes its export format every semester?',
+    timestamp: '2:33 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📊 ADAPTIVE STUDENT SYSTEM HANDLER:</strong>\n\n<strong>Problem Solved:</strong> Student Information System format changes\n\n<strong>🔄 INTELLIGENT ADAPTATION PROCESS:</strong>\n\n<strong>Step 1: Change Detection</strong>\n```python\ndef detect_schema_changes(new_file_path, reference_schema):\n    # Compare column names, data types, positions\n    changes = {\n        \'new_columns\': [\'middle_initial\', \'preferred_pronouns\'],\n        \'removed_columns\': [\'legacy_id\'],\n        \'type_changes\': {\'gpa\': \'varchar→decimal\'}\n    }\n    return changes\n```\n\n<strong>Step 2: Smart Mapping</strong>\n```python\ndef suggest_column_mapping(changes, historical_patterns):\n    # Uses ML to suggest likely mappings\n    suggestions = {\n        \'middle_initial\': \'STUDENT.MIDDLE_NAME\',\n        \'preferred_pronouns\': \'STUDENT.PRONOUNS (NEW)\'\n    }\n    return suggestions\n```\n\n<strong>Step 3: Automated Pipeline Update</strong>\n• Creates new Snowflake columns if needed\n• Updates transformation logic\n• Maintains backward compatibility\n• Sends admin notification for approval\n\n<strong>💡 RESULT:</strong> Zero downtime, automatic adaptation, full audit trail',
+    timestamp: '2:35 PM',
+    documents: [
+      {
+        name: 'Adaptive_Pipeline_Framework.py',
+        type: 'py' as const,
+        size: '89 KB'
+      },
+      {
+        name: 'Student_System_Handler.sql',
+        type: 'sql' as const,
+        size: '23 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Data & Analytics Use Cases | Staff Fellows" description="AI applications for data analysts, system integrators, and reporting specialists">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/staff-fellows" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Staff Fellows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Data & Analytics
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-emerald-50 via-slate-50 to-emerald-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Data & Analytics Use Cases
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Transform how you work with campus data systems. From API documentation parsing to intelligent 
+          data pipelines, AI amplifies your technical expertise to create seamless, automated data flows.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Challenges -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Your Biggest Data Challenges, Solved</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-8 mb-16">
+        <!-- API Integration -->
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200">
+          <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">API Documentation Intelligence</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            Stop spending hours parsing complex API documentation. AI reads the entire documentation, 
+            understands the endpoints, and creates custom functions for your specific use cases.
+          </p>
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Instant endpoint discovery</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Custom function generation</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Authentication handling</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Rate limit management</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Pipeline Automation -->
+        <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-2xl border border-emerald-200">
+          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Adaptive Data Pipelines</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            Build Snowflake pipelines that adapt automatically to changing data sources. 
+            When campus systems change formats, your pipeline evolves without breaking.
+          </p>
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Auto-schema detection</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Smart data transformation</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Change impact analysis</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Zero-downtime updates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Capabilities -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-purple-50 rounded-xl p-6 border border-purple-200">
+          <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Unstructured Data Analysis</h3>
+          <p class="text-slate-600 text-sm">
+            Transform messy, unstructured data from various departments into clean, analyzable datasets 
+            ready for Snowflake ingestion.
+          </p>
+        </div>
+
+        <div class="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
+          <div class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V9a2 2 0 112 0v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Automated Reporting</h3>
+          <p class="text-slate-600 text-sm">
+            Create intelligent reporting systems that adapt to different audiences and automatically 
+            generate insights for non-technical stakeholders.
+          </p>
+        </div>
+
+        <div class="bg-teal-50 rounded-xl p-6 border border-teal-200">
+          <div class="w-10 h-10 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Cross-System Integration</h3>
+          <p class="text-slate-600 text-sm">
+            Build bridges between disconnected campus systems, creating unified data views 
+            that enable comprehensive analytics across departments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End AI Applications -->
+  <section class="py-16 bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-900 mb-6">AI-Powered Analytics Applications</h2>
+        <p class="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          Experience complete analytical workflows: an AI assistant that investigates complex data problems 
+          across multiple systems, and a comprehensive web application that automatically generates 
+          institutional research reports from 12+ data sources.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End Application 1: AI Data Analyst -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Interactive AI Data Analyst</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch an AI agent investigate complex institutional problems by pulling data from multiple 
+          systems, generating hypotheses, and recommending specific interventions
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={aiAnalystConversation}
+        title="Multi-System Problem Investigation"
+        description="AI analyst: data collection → hypothesis generation → intervention recommendations"
+      />
+    </div>
+  </section>
+
+  <!-- End-to-End Application 2: Data Fusion Report Builder -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Automated Report Generation Platform</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Experience a web application that connects to 12+ campus systems and automatically 
+          generates comprehensive institutional research reports with interactive dashboards
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={dataFusionAppConversation}
+        title="Multi-System Report Generation"
+        description="Web application: system integration → data fusion → automated report creation"
+      />
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-br from-emerald-50 to-teal-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">Application Capabilities</h2>
+      <div class="grid md:grid-cols-2 gap-8 mt-12">
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">🧠 AI Data Analyst Agent</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Cross-system data collection</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Automated hypothesis generation</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Predictive risk modeling</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Intervention recommendations</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Real-time problem investigation</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">📊 Report Generation Platform</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>12+ system integrations</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Automated data fusion</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Interactive web dashboard</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Multi-format export options</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-teal-400 rounded-full mr-3"></div>
+              <span>Customizable report templates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Example 1: API Documentation -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">API Documentation Intelligence</h2>
+        <p class="text-slate-600 leading-relaxed">
+          See how AI transforms complex API documentation into working code for your specific integration needs
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={apiDocumentationConversation}
+        title="Campus API Integration Project"
+        description="Data analyst creating flexible API integration for student information system"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 2: Adaptive Pipeline -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Adaptive Snowflake Pipeline</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI create an intelligent data pipeline that automatically adapts to changing source systems
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={snowflakeDataPipelineConversation}
+        title="Multi-System Data Integration"
+        description="Senior data analyst building resilient campus-wide data pipelines"
+      />
+    </div>
+  </section>
+
+  <!-- Technical Implementation -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white mb-6">Technical Implementation Roadmap</h2>
+        <p class="text-slate-300 max-w-3xl mx-auto">
+          Build on your existing data expertise with AI-powered tools that integrate seamlessly 
+          into your current workflows and technology stack.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Phase 1 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-6">
+            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <span class="text-white font-bold">1</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Discovery Phase</h3>
+            <p class="text-slate-400 text-sm">Weeks 1-2</p>
+          </div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Inventory existing APIs and data sources</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Identify documentation parsing opportunities</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Map current Snowflake schema dependencies</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-6">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <span class="text-white font-bold">2</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Pilot Implementation</h3>
+            <p class="text-slate-400 text-sm">Weeks 3-6</p>
+          </div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Deploy AI API parsing for 2-3 key systems</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Build adaptive pipeline prototype</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Create change detection monitoring</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-6">
+            <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <span class="text-white font-bold">3</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Scale & Optimize</h3>
+            <p class="text-slate-400 text-sm">Weeks 7+</p>
+          </div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Expand to all campus data sources</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Implement intelligent reporting layers</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Deploy self-healing data pipelines</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Metrics -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">The Data Advantage</h2>
+      <p class="text-xl text-slate-600 leading-relaxed mb-8">
+        <span class="text-emerald-600 font-semibold">Your analytical expertise + AI automation = Campus-wide data transformation.</span>
+        You understand the complexities of university data systems. AI amplifies that expertise to create 
+        intelligent, self-managing data infrastructure that scales with institutional needs.
+      </p>
+      
+      <div class="grid md:grid-cols-4 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-emerald-600 mb-2">90%</div>
+          <div class="text-slate-600 text-sm">Less API Integration Time</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-emerald-600 mb-2">Zero</div>
+          <div class="text-slate-600 text-sm">Pipeline Breaks from Schema Changes</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-emerald-600 mb-2">15+</div>
+          <div class="text-slate-600 text-sm">Systems Unified Automatically</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-emerald-600 mb-2">24/7</div>
+          <div class="text-slate-600 text-sm">Intelligent Monitoring</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

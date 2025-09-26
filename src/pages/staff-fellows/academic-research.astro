@@ -1,0 +1,565 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const researchIntelligenceConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need a comprehensive research intelligence platform that can track faculty research performance, identify collaboration opportunities, and automatically generate reports for promotion committees. Can you show me what this system would look like?',
+    timestamp: '10:15 AM',
+    documents: []
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve built a complete Research Intelligence Platform that aggregates data from multiple sources. Here\'s the live dashboard:\\n\\n<strong>🔬 RESEARCH INTELLIGENCE HUB</strong>\\n\\n<strong>📊 FACULTY RESEARCH OVERVIEW:</strong>\\n\\n<strong>Publication Metrics (Last 12 months):</strong>\\n• Total publications: 847 (↑23% from previous year)\\n• Peer-reviewed articles: 623\\n• High-impact journals (IF >5): 156\\n• International collaborations: 34%\\n• Open access compliance: 78%\\n\\n<strong>Grant Performance:</strong>\\n• Active grants: $12.7M across 89 projects\\n• Success rate: 31.2% (above national average)\\n• New awards this year: $4.1M\\n• Pending proposals: 23 ($6.8M requested)\\n\\n<strong>⚡ AI-POWERED INSIGHTS:</strong>\\n\\n<strong>Collaboration Opportunities Identified:</strong>\\n• Dr. Martinez (Chemistry) + Dr. Chen (Engineering): Shared nanomaterials interest\\n• Dr. Johnson (Psychology) + Dr. Williams (Computer Science): AI ethics overlap\\n• Cross-department potential: 15 new partnerships suggested\\n\\n<strong>🚨 PRIORITY ALERTS:</strong>\\n• 3 faculty approaching promotion deadline need documentation\\n• NSF proposal deadline in 2 weeks: 4 faculty eligible\\n• Research misconduct training: 12 faculty overdue',
+    timestamp: '10:17 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Excellent! Can you show me how the automated promotion dossier generation works?',
+    timestamp: '10:18 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📋 AUTOMATED PROMOTION DOSSIER SYSTEM</strong>\\n\\n<strong>Case Study: Dr. Sarah Martinez - Associate to Full Professor</strong>\\n\\n<strong>⚡ AUTO-GENERATED RESEARCH PORTFOLIO:</strong>\\n\\n<strong>Publication Analysis (2019-2024):</strong>\\n• Total publications: 34 peer-reviewed articles\\n• Citation impact: 1,247 citations (h-index: 18)\\n• Journal quality: 67% in Q1 journals\\n• Research trajectory: 15% annual increase in citations\\n• International reach: Published in 12 countries\\n\\n<strong>Grant Success Record:</strong>\\n• Total funding secured: $2.8M as PI, $1.4M as Co-PI\\n• Success rate: 42% (significantly above discipline average)\\n• Funding agencies: NSF (3), NIH (2), Industry (4)\\n• Project leadership: 6 multi-PI grants coordinated\\n\\n<strong>🎯 COMPARATIVE BENCHMARKING:</strong>\\n\\n<strong>Peer Institution Analysis:</strong>\\n• Publications vs peers: 89th percentile\\n• Citation impact vs field: 91st percentile\\n• Grant funding vs discipline: 85th percentile\\n• Teaching evaluation: 4.7/5.0 (top 15%)\\n\\n<strong>📊 AUTO-COMPILED EVIDENCE:</strong>\\n\\n<strong>Research Excellence Documentation:</strong>\\n✅ Bibliography auto-formatted (34 publications)\\n✅ Citation report generated with trends\\n✅ Grant timeline with impact statements\\n✅ Collaboration network visualization\\n✅ Media coverage compilation (8 articles)\\n\\n<strong>Service & Leadership:</strong>\\n✅ Editorial board memberships (3 journals)\\n✅ Conference organization roles\\n✅ Peer review activity (47 manuscripts)\\n✅ University committee service record\\n\\n<strong>🤖 AI-GENERATED NARRATIVE:</strong>\\n\\n<em>"Dr. Martinez has established herself as a leading researcher in sustainable chemistry, with a publication record that places her in the top 10% of researchers in her field. Her research program has attracted $2.8M in external funding and produced breakthrough discoveries in green catalysis that have been cited 1,247 times..."</em>\\n\\n<strong>📋 PROMOTION COMMITTEE PACKAGE:</strong>\\n• Executive summary (2 pages)\\n• Detailed CV with impact metrics\\n• Research narrative with trajectory analysis\\n• External letter writer suggestions (AI-recommended)\\n• Comparative analysis with successful cases\\n• Timeline and next steps checklist\\n\\n<strong>⏱️ GENERATION TIME:</strong> 23 minutes vs 6-8 weeks manual compilation\\n\\n<em>💡 All data verified against original sources. Committee can drill down into any metric for detailed supporting evidence.</em>',
+    timestamp: '10:20 AM',
+    documents: [
+      {
+        name: 'Martinez_Promotion_Dossier.pdf',
+        type: 'pdf' as const,
+        size: '4.2 MB'
+      },
+      {
+        name: 'Research_Intelligence_Dashboard.html',
+        type: 'html' as const,
+        size: '2.8 MB'
+      },
+      {
+        name: 'Faculty_Performance_Analytics.xlsx',
+        type: 'xlsx' as const,
+        size: '1.1 MB'
+      }
+    ]
+  }
+];
+
+const grantProposalConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to streamline our grant proposal intake and routing process. We receive 200+ proposals per year across multiple funding agencies, each with different requirements. The current manual process is causing delays and inconsistencies. Can you design an intelligent system?',
+    timestamp: '9:30 AM',
+    documents: [
+      {
+        name: 'Grant_Proposals_2024_Analysis.xlsx',
+        type: 'xlsx' as const,
+        size: '1.2 MB'
+      },
+      {
+        name: 'Funding_Agency_Requirements.pdf',
+        type: 'pdf' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'Current_Review_Process.docx',
+        type: 'docx' as const,
+        size: '445 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve analyzed your grant proposal workflow and identified major optimization opportunities:\n\n<strong>📊 CURRENT STATE ANALYSIS:</strong>\n\n<strong>Proposal Volume & Trends:</strong>\n• 234 proposals in 2024 (up 18% from 2023)\n• Average award value: $247K\n• Success rate: 31% (industry avg: 28%)\n• Top agencies: NSF (67), NIH (45), DOE (38), NASA (29)\n\n<strong>⏱️ PROCESS BOTTLENECKS:</strong>\n• Initial routing: 3-7 days (should be <24 hours)\n• Compliance check: 5-12 days (should be 2 days)\n• Budget review: 4-8 days (should be 1-2 days)\n• Final assembly: 2-5 days (should be same day)\n\n<strong>🤖 INTELLIGENT PROPOSAL SYSTEM:</strong>\n\n<strong>1. Smart Intake & Classification</strong>\n• Auto-detect funding agency from proposal text\n• Extract key metadata (PI, department, budget, duration)\n• Classify research area and compliance requirements\n• Generate automatic routing recommendations',
+    timestamp: '9:32 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This analysis is spot on! Can you show me how the AI would handle the complex compliance requirements? Each agency has different formats, budget categories, and documentation needs.',
+    timestamp: '9:33 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>⚡ INTELLIGENT COMPLIANCE ENGINE:</strong>\n\n<strong>Agency-Specific Automation:</strong>\n\n<strong>NSF Proposals:</strong>\n• Auto-format budget using NSF categories\n• Generate required budget justification sections\n• Check for required broader impacts language\n• Validate 15-page project description limit\n• Auto-populate FastLane system fields\n\n<strong>NIH Proposals:</strong>\n• Format budget according to modular/detailed requirements\n• Generate required research strategy sections\n• Check human subjects/animal protocols\n• Validate biosketch format compliance\n• Auto-create multiple PD/PI leadership plan if needed\n\n<strong>🔍 SMART COMPLIANCE CHECKING:</strong>\n\n<strong>Real-Time Validation:</strong>\n```python\nclass ProposalValidator:\n    def validate_nsf_proposal(self, proposal):\n        checks = {\n            \'page_limits\': self.check_page_limits(proposal),\n            \'budget_format\': self.validate_nsf_budget(proposal),\n            \'broader_impacts\': self.check_broader_impacts(proposal),\n            \'required_sections\': self.check_required_sections(proposal)\n        }\n        return self.generate_compliance_report(checks)\n```\n\n<strong>📋 AUTOMATED DELIVERABLES:</strong>\n• Compliance checklist with traffic light status\n• Missing document alerts with templates\n• Budget validation with auto-corrections\n• Deadline tracking with milestone reminders\n• Pre-populated agency submission forms\n\n<strong>💡 INTELLIGENCE FEATURES:</strong>\n• Historical success pattern analysis\n• Similar proposal identification\n• Budget optimization suggestions\n• Reviewer matching recommendations',
+    timestamp: '9:35 AM',
+    documents: [
+      {
+        name: 'Smart_Proposal_System_Design.pdf',
+        type: 'pdf' as const,
+        size: '789 KB'
+      },
+      {
+        name: 'Compliance_Engine_Code.py',
+        type: 'py' as const,
+        size: '34 KB'
+      }
+    ]
+  }
+];
+
+const facultyEvaluationConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'For our annual faculty review and promotion process, I need to synthesize massive amounts of data: teaching evaluations, research metrics, service contributions, and peer assessments. Creating comprehensive evaluation packets for 150+ faculty is overwhelming. How can AI help create fair, thorough evaluations?',
+    timestamp: '2:15 PM',
+    documents: [
+      {
+        name: 'Faculty_Teaching_Evaluations_2024.xlsx',
+        type: 'xlsx' as const,
+        size: '3.4 MB'
+      },
+      {
+        name: 'Research_Productivity_Metrics.csv',
+        type: 'csv' as const,
+        size: '1.8 MB'
+      },
+      {
+        name: 'Service_Contributions_Database.xlsx',
+        type: 'xlsx' as const,
+        size: '967 KB'
+      },
+      {
+        name: 'Peer_Review_Letters_2024.pdf',
+        type: 'pdf' as const,
+        size: '4.2 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll help you create a comprehensive faculty evaluation system that ensures fairness and thoroughness:\n\n<strong>📈 FACULTY DATA SYNTHESIS:</strong>\n\n<strong>Teaching Excellence Analysis:</strong>\n• 150 faculty across 12 departments\n• 47,000+ student evaluations processed\n• Average teaching score: 4.2/5.0\n• Identified 23 faculty with exceptional innovation\n• Course improvement trends tracked across 3 years\n\n<strong>Research Impact Assessment:</strong>\n• Total publications: 1,247 (peer-reviewed)\n• Citation analysis: H-index trends by discipline\n• Grant funding: $23.4M total active awards\n• Collaboration networks mapped\n• Emerging research area identification\n\n<strong>🎯 COMPREHENSIVE EVALUATION FRAMEWORK:</strong>\n\n<strong>Multi-Dimensional Scoring:</strong>\n• Teaching (40%): Student evaluations + innovation + mentoring\n• Research (40%): Publications + citations + grants + impact\n• Service (20%): Committee work + editorial + professional service\n\n<strong>⚖️ FAIRNESS ALGORITHMS:</strong>\n• Discipline-specific benchmarking\n• Career stage normalization\n• Bias detection in evaluation patterns\n• Peer comparison within similar profiles',
+    timestamp: '2:17 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Excellent framework! Can you show me how this would work for a specific faculty member going up for tenure? I need to see how all the data comes together into a compelling narrative.',
+    timestamp: '2:18 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🎓 TENURE CASE STUDY: DR. MARIA RODRIGUEZ</strong>\n<em>Assistant Professor, Computer Science (6th year review)</em>\n\n<strong>📊 COMPREHENSIVE PERFORMANCE PROFILE:</strong>\n\n<strong>TEACHING EXCELLENCE (Score: 87/100)</strong>\n• Student evaluations: 4.6/5.0 (dept avg: 4.1)\n• Course innovation: Developed 2 new AI curriculum modules\n• Mentoring impact: 12 undergraduate researchers, 4 PhD students\n• Teaching awards: 2024 Outstanding Educator Recognition\n• Trend analysis: Consistent improvement over 6 years\n\n<strong>RESEARCH DISTINCTION (Score: 92/100)</strong>\n• Publications: 23 peer-reviewed (field benchmark: 15-20)\n• Citation impact: H-index 14 (excellent for career stage)\n• Funding success: $1.2M as PI, $800K as Co-PI\n• Collaboration: 5 international partnerships\n• Innovation: 3 patents filed, 2 pending\n\n<strong>SERVICE CONTRIBUTION (Score: 78/100)</strong>\n• Committee work: Graduate admissions (3 years), curriculum (2 years)\n• Editorial service: Review board for 2 top-tier journals\n• Professional service: Conference organizing, NSF panel reviewer\n• Mentoring: Formal mentor to 3 junior faculty\n\n<strong>✨ AI-GENERATED TENURE NARRATIVE:</strong>\n\n"Dr. Rodriguez demonstrates exceptional promise as a scholar-educator. Her research trajectory shows consistent upward momentum with high-impact publications and successful funding acquisition. Teaching evaluations reveal not only excellence in delivery but genuine innovation in curriculum development. Service contributions exceed expectations for career stage, particularly her leadership in graduate admissions reform.\n\nPeer comparisons within computer science show Dr. Rodriguez ranking in the top 15% of assistant professors nationally in research productivity and top 10% in teaching effectiveness. Her interdisciplinary collaborations and patent portfolio indicate strong potential for continued impact.\n\n<strong>RECOMMENDATION:</strong> Strong support for tenure based on documented excellence across all evaluation criteria."',
+    timestamp: '2:20 PM',
+    documents: [
+      {
+        name: 'Rodriguez_Tenure_Portfolio_Complete.pdf',
+        type: 'pdf' as const,
+        size: '1.4 MB'
+      },
+      {
+        name: 'Faculty_Evaluation_Analytics_Dashboard.html',
+        type: 'html' as const,
+        size: '234 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Academic & Research Use Cases | Staff Fellows" description="AI applications for research administration, faculty evaluation, and academic operations">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/staff-fellows" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Staff Fellows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Academic & Research
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-purple-50 via-slate-50 to-purple-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Academic & Research Use Cases
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Transform research administration and faculty evaluation with intelligent automation. 
+          From grant proposal routing to comprehensive faculty assessment, AI amplifies your academic expertise.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Applications -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Academic Excellence Through Intelligence</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-8 mb-16">
+        <!-- Research Administration -->
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200">
+          <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Grant & Research Administration</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            Intelligent proposal routing, automated compliance checking, and streamlined grant management 
+            from submission through close-out. Transform manual processes into efficient workflows.
+          </p>
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Smart proposal intake & routing</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Automated compliance validation</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Grant close-out automation</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Funding opportunity matching</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Faculty Evaluation -->
+        <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-2xl border border-emerald-200">
+          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V9a2 2 0 112 0v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Faculty Evaluation & Assessment</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            Comprehensive faculty assessment combining teaching evaluations, research metrics, and service contributions 
+            into fair, thorough evaluation packages with bias detection and peer benchmarking.
+          </p>
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Multi-dimensional performance synthesis</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Bias detection & fairness algorithms</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Peer benchmarking & comparisons</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Narrative generation for committees</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Capabilities -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
+          <div class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Accreditation Reports</h3>
+          <p class="text-slate-600 text-sm">
+            Automated generation of SACSCOC reports, substantive change filings, and periodic 
+            accreditation documentation with data synthesis from multiple sources.
+          </p>
+        </div>
+
+        <div class="bg-teal-50 rounded-xl p-6 border border-teal-200">
+          <div class="w-10 h-10 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Faculty Recruiting</h3>
+          <p class="text-slate-600 text-sm">
+            Streamlined search processes with intelligent candidate matching, interview coordination, 
+            travel management, and feedback synthesis for hiring committees.
+          </p>
+        </div>
+
+        <div class="bg-indigo-50 rounded-xl p-6 border border-indigo-200">
+          <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Program Assessment</h3>
+          <p class="text-slate-600 text-sm">
+            Comprehensive analysis of academic program effectiveness, learning outcomes assessment, 
+            and data-driven recommendations for curriculum improvements.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End AI Application: Research Intelligence Platform -->
+  <section class="py-16 bg-gradient-to-br from-purple-50 via-white to-indigo-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-900 mb-6">Research Intelligence Platform</h2>
+        <p class="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          Experience a comprehensive research intelligence system that tracks faculty performance, 
+          identifies collaboration opportunities, and automatically generates promotion dossiers 
+          by analyzing publications, grants, and impact metrics.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">AI-Powered Faculty Analytics Hub</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch an intelligent platform analyze research data, identify collaboration opportunities, 
+          and automatically generate comprehensive promotion documentation
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={researchIntelligenceConversation}
+        title="Research Intelligence & Analytics"
+        description="Research platform: data aggregation → performance analysis → automated documentation"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 1: Grant Administration -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Intelligent Grant Proposal System</h2>
+        <p class="text-slate-600 leading-relaxed">
+          See how AI transforms grant administration from manual routing to intelligent, automated compliance checking
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={grantProposalConversation}
+        title="Research Administration Optimization"
+        description="Assistant dean streamlining grant proposal intake and compliance"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 2: Faculty Evaluation -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Comprehensive Faculty Assessment</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI synthesize teaching, research, and service data into fair, thorough evaluation packages
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={facultyEvaluationConversation}
+        title="Faculty Review & Promotion Process"
+        description="Academic affairs director creating comprehensive faculty evaluations"
+      />
+    </div>
+  </section>
+
+  <!-- Academic Excellence Framework -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white mb-6">Academic AI Implementation Strategy</h2>
+        <p class="text-slate-300 max-w-3xl mx-auto">
+          A systematic approach to implementing AI in academic operations while maintaining 
+          the integrity and values of higher education.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Foundation -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Foundation</h3>
+            <p class="text-slate-400 text-xs">Month 1</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Data audit & mapping</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Process documentation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Stakeholder alignment</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Pilot -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Pilot Programs</h3>
+            <p class="text-slate-400 text-xs">Months 2-4</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Grant routing automation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Faculty data synthesis</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Quality validation</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Scale -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Scale & Integration</h3>
+            <p class="text-slate-400 text-xs">Months 5-8</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Full system deployment</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Cross-department integration</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Training & adoption</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Excellence -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-10 h-10 bg-yellow-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Excellence & Innovation</h3>
+            <p class="text-slate-400 text-xs">Ongoing</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Predictive analytics</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Innovation identification</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-yellow-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Strategic insights</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact & Excellence -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">Academic Excellence Amplified</h2>
+      <p class="text-xl text-slate-600 leading-relaxed mb-8">
+        <span class="text-purple-600 font-semibold">Your academic expertise + AI intelligence = Institutional transformation.</span>
+        You understand the complexities of academic administration and faculty development. AI amplifies that expertise 
+        to create fair, efficient, and comprehensive systems that support academic excellence at scale.
+      </p>
+      
+      <div class="grid md:grid-cols-4 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-600 mb-2">80%</div>
+          <div class="text-slate-600 text-sm">Faster Grant Processing</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-600 mb-2">95%</div>
+          <div class="text-slate-600 text-sm">Compliance Accuracy</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-600 mb-2">150+</div>
+          <div class="text-slate-600 text-sm">Faculty Evaluated Consistently</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-purple-600 mb-2">100%</div>
+          <div class="text-slate-600 text-sm">Bias Detection Coverage</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

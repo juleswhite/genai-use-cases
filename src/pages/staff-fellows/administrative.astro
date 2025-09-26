@@ -1,0 +1,714 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
+import '../../styles/global.css';
+
+const documentPipelineConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I just received 50+ vendor contracts that need review and approval. Usually this takes our legal team 3-4 weeks to process manually. Can you show me how the automated document pipeline would handle this?',
+    timestamp: '9:00 AM',
+    documents: [
+      {
+        name: 'Contract_Upload_Notification.pdf',
+        type: 'pdf' as const,
+        size: '12 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve detected 52 new contracts in your vendor folder. The AI pipeline is now processing them automatically:\\n\\n<strong>📂 DOCUMENT PIPELINE STATUS:</strong>\\n\\n<strong>Step 1: Intelligent Classification (Completed - 2 minutes)</strong>\\n• Software licenses: 23 contracts\\n• Service agreements: 18 contracts\\n• Purchase orders: 8 contracts\\n• NDAs: 3 contracts\\n\\n<strong>Step 2: Risk Analysis (In Progress - 15 minutes)</strong>\\n🔍 Currently analyzing liability clauses...\\n\\n<strong>🚨 IMMEDIATE ALERTS:</strong>\\n• HIGH RISK: DataCorp contract - $2.3M, unusual termination clause\\n• MEDIUM RISK: CloudService Inc - Missing data breach notification requirements\\n• URGENT: 3 contracts expire this month\\n\\n<strong>Step 3: Auto-Routing</strong>\\n• 31 low-risk contracts → Auto-approved (standard terms)\\n• 15 medium-risk contracts → Legal review queue\\n• 6 high-risk contracts → Director approval required',
+    timestamp: '9:02 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Amazing! What happens next with the high-risk contracts that need director approval?',
+    timestamp: '9:03 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🎯 HIGH-RISK CONTRACT AUTOMATION:</strong>\\n\\n<strong>Director Notification Sent:</strong>\\n• Email with risk summary and recommendations\\n• Calendar block created for review meeting tomorrow 2 PM\\n• Comparison analysis with similar past contracts\\n\\n<strong>📋 AUTO-GENERATED REVIEW PACKAGE:</strong>\\n\\n<strong>DataCorp Contract Analysis:</strong>\\n• Risk Score: 85/100\\n• Key Issues: Unusual 30-day termination without cause\\n• Financial Impact: $2.3M annually\\n• Recommended Action: Negotiate standard 90-day terms\\n• Similar Cases: 3 previous negotiations (successful)\\n\\n<strong>⚡ NEXT STEPS AUTOMATED:</strong>\\n• Draft negotiation points created\\n• Legal precedent research compiled\\n• Vendor contact information prepared\\n• Meeting agenda auto-generated\\n\\n<strong>📊 PIPELINE EFFICIENCY:</strong>\\n• Total processing time: 47 minutes vs 3-4 weeks\\n• Auto-approved: 31 contracts (ready for signature)\\n• Director review needed: 6 contracts (streamlined packets ready)\\n• Estimated time savings: 89% reduction\\n\\n<strong>🔄 CONTINUOUS MONITORING:</strong>\\n• Vendor performance tracking activated\\n• Contract milestone reminders set\\n• Renewal notifications scheduled\\n• Compliance monitoring initiated',
+    timestamp: '9:05 AM',
+    documents: [
+      {
+        name: 'Director_Review_Package.pdf',
+        type: 'pdf' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'Auto_Approved_Contracts_Summary.xlsx',
+        type: 'xlsx' as const,
+        size: '456 KB'
+      }
+    ]
+  }
+];
+
+const executiveDashboardConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to prepare for the weekly leadership meeting in 30 minutes. Can you pull together a comprehensive dashboard showing our operational performance across all departments?',
+    timestamp: '1:30 PM',
+    documents: []
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve generated your real-time executive dashboard by pulling data from 8 campus systems:\\n\\n<strong>🎛️ LIVE OPERATIONS DASHBOARD</strong>\\n\\n<strong>📊 KEY METRICS (Last 7 Days):</strong>\\n\\n<strong>Financial Performance:</strong>\\n• Budget utilization: 73% (on track)\\n• Vendor payments processed: $1.2M\\n• Purchase orders pending: 23 (down from 45)\\n• Cost savings identified: $67K\\n\\n<strong>HR & Staffing:</strong>\\n• Employee satisfaction: 87% (↑3%)\\n• Open positions: 12 (critical: 2)\\n• Training completion rate: 94%\\n• Time-off coverage: 98% staffed\\n\\n<strong>Project Portfolio:</strong>\\n• On-time delivery: 89% (↑12%)\\n• Budget variance: +2.1% (within range)\\n• Risk items requiring attention: 4\\n• Milestone completions: 15 this week',
+    timestamp: '1:32 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Perfect! Can you identify the top 3 items that need leadership attention and prepare talking points?',
+    timestamp: '1:33 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🚨 TOP 3 LEADERSHIP PRIORITIES:</strong>\\n\\n<strong>1. IT Infrastructure Upgrade (CRITICAL)</strong>\\n• Status: 2 weeks behind schedule\\n• Impact: May delay 3 other projects worth $890K\\n• Root cause: Vendor delivery issues\\n• Recommended action: Activate backup vendor by Friday\\n• Talking points: "Need approval for $45K expedite fee to get back on track"\\n\\n<strong>2. Finance Department Staffing Gap</strong>\\n• Status: Senior analyst position open 6 weeks\\n• Impact: Manual processes causing 3-day payment delays\\n• Current mitigation: Contractor covering 60% capacity\\n• Recommended action: Approve salary increase to attract talent\\n• Talking points: "Recommend 8% salary bump - will save $2K/month vs contractor"\\n\\n<strong>3. Student Information System Integration</strong>\\n• Status: 94% complete, final testing phase\\n• Opportunity: Early launch could save $15K in legacy system costs\\n• Risk: Rushing could cause registration issues\\n• Recommended action: Proceed with planned December launch\\n• Talking points: "On track for major win - stay the course for December"\\n\\n<strong>📈 SUCCESS HIGHLIGHTS TO MENTION:</strong>\\n• Contract processing time reduced 89%\\n• Employee satisfaction up 3 points\\n• Project delivery improvements exceeding goals\\n• Cost savings ahead of annual target by $67K\\n\\n<strong>📋 PRE-MEETING ACTIONS COMPLETED:</strong>\\n• Vendor backup quotes obtained\\n• HR salary analysis prepared\\n• Project timeline scenarios modeled\\n• Financial impact calculations verified',
+    timestamp: '1:35 PM',
+    documents: [
+      {
+        name: 'Executive_Dashboard_Live.html',
+        type: 'html' as const,
+        size: '1.8 MB'
+      },
+      {
+        name: 'Leadership_Talking_Points.docx',
+        type: 'docx' as const,
+        size: '89 KB'
+      },
+      {
+        name: 'Priority_Action_Items.pdf',
+        type: 'pdf' as const,
+        size: '234 KB'
+      }
+    ]
+  }
+];
+
+const calendarCoordinationConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to coordinate a meeting with both Associate Vice Chancellors of Finance and 5 Business of VU Program stakeholders. Can you help me analyze their calendars and suggest optimal times for the next 3 weeks?',
+    timestamp: '9:15 AM',
+    documents: [
+      {
+        name: 'AVC_Finance_Calendar_Export.ics',
+        type: 'ics' as const,
+        size: '245 KB'
+      },
+      {
+        name: 'Business_VU_Stakeholder_Schedules.xlsx',
+        type: 'xlsx' as const,
+        size: '178 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve analyzed all the calendar data and found several coordination opportunities:\n\n<strong>📅 Optimal Meeting Windows:</strong>\n\n<strong>Week 1 (Oct 28-Nov 1):</strong>\n• Tuesday 10/29: 2:00-3:30 PM ✅ (All 7 attendees free)\n• Thursday 10/31: 10:00-11:30 AM ✅ (6/7 free, Sarah has soft conflict)\n\n<strong>Week 2 (Nov 4-8):</strong>\n• Wednesday 11/6: 1:00-2:30 PM ✅ (All attendees available)\n• Friday 11/8: 9:00-10:30 AM ⚠️ (One AVC has travel conflict)\n\n<strong>Week 3 (Nov 11-15):</strong>\n• Tuesday 11/12: 3:00-4:30 PM ✅ (Perfect availability)\n\n<strong>🎯 Recommended:</strong> Tuesday 10/29 at 2:00 PM - highest confidence, no conflicts detected.',
+    timestamp: '9:16 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Great! Can you also generate the meeting invitation with agenda items specific to The Business of VU Program improvements?',
+    timestamp: '9:17 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📧 MEETING INVITATION DRAFT</strong>\n\n<strong>Subject:</strong> Business of VU Program Enhancement Strategy Session\n\n<strong>Date:</strong> Tuesday, October 29, 2024\n<strong>Time:</strong> 2:00 PM - 3:30 PM CT\n<strong>Location:</strong> [Conference Room TBD]\n\n<strong>Attendees:</strong> Both Associate Vice Chancellors + 5 Business VU stakeholders\n\n<strong>📋 AGENDA:</strong>\n\n<strong>1. Program Innovation & Relevance (30 min)</strong>\n   • Current engagement metrics review\n   • Student/faculty/staff feedback analysis\n   • Fresh content ideas for sustainability\n\n<strong>2. Process Improvements (30 min)</strong>\n   • Administrative efficiency opportunities\n   • Technology integration possibilities\n   • Resource allocation optimization\n\n<strong>3. Strategic Planning (25 min)</strong>\n   • Long-term vision alignment\n   • Success metrics definition\n   • Next steps & ownership\n\n<strong>4. Action Items (5 min)</strong>\n   • Immediate priorities\n   • Follow-up timeline\n\n<em>Pre-read materials will be sent 24 hours in advance.</em>',
+    timestamp: '9:18 AM',
+    documents: [
+      {
+        name: 'Meeting_Invitation_Draft.msg',
+        type: 'msg' as const,
+        size: '12 KB'
+      }
+    ]
+  }
+];
+
+const mondayProjectConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I manage 15 different projects across 6 departments using Monday.com, but I\'m spending hours each week manually updating status reports for leadership. Can AI help me automate this by pulling data directly from Monday and creating executive summaries?',
+    timestamp: '3:45 PM',
+    documents: [
+      {
+        name: 'Monday_API_Credentials.json',
+        type: 'json' as const,
+        size: '2 KB'
+      },
+      {
+        name: 'Executive_Report_Template.docx',
+        type: 'docx' as const,
+        size: '234 KB'
+      },
+      {
+        name: 'Department_Project_List.xlsx',
+        type: 'xlsx' as const,
+        size: '89 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll create an automated system that pulls data directly from your Monday.com workspace and generates executive summaries automatically:\\n\\n<strong>🔌 MONDAY.COM INTEGRATION AGENT:</strong>\\n\\n<strong>Real-Time Data Collection:</strong>\\n• Connected to 15 active project boards\\n• Monitoring 127 active tasks across departments\\n• Tracking 6 different project types\\n• Auto-sync every 2 hours for live updates\\n\\n<strong>📊 CURRENT PROJECT SNAPSHOT:</strong>\\n\\n<strong>By Status:</strong>\\n• ✅ Completed this week: 23 tasks\\n• 🟡 In Progress: 45 tasks\\n• 🔴 Overdue: 8 tasks (3 critical)\\n• ⏳ Due next week: 31 tasks\\n\\n<strong>By Department:</strong>\\n• Finance: 89% on track (2 projects)\\n• IT: 67% on track (4 projects, 1 delayed)\\n• HR: 92% on track (3 projects)\\n• Facilities: 78% on track (2 projects)\\n• Marketing: 85% on track (2 projects)\\n• Academic Affairs: 71% on track (2 projects)',
+    timestamp: '3:47 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Great! Can you show me what the automated executive summary would look like for this week\'s leadership meeting?',
+    timestamp: '3:48 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📋 WEEKLY PROJECT EXECUTIVE SUMMARY</strong>\\n\\n<strong>Week of October 28, 2024</strong>\\n<strong>Auto-Generated from Monday.com Data</strong>\\n\\n<strong>🎯 KEY HIGHLIGHTS:</strong>\\n\\n<strong>✅ Major Completions:</strong>\\n• Finance: Q4 Budget Analysis Tool (3 weeks ahead of schedule)\\n• HR: New Employee Onboarding System (launched successfully)\\n• IT: Security Compliance Audit (100% complete)\\n\\n<strong>⚠️ ATTENTION REQUIRED:</strong>\\n\\n<strong>1. IT Infrastructure Upgrade (Behind Schedule)</strong>\\n• Status: 2 weeks delayed\\n• Issue: Vendor delivery delay\\n• Action: Meeting scheduled with vendor tomorrow\\n• Impact: May affect 2 other projects\\n\\n<strong>2. Marketing Website Redesign (Resource Constraint)</strong>\\n• Status: Designer availability limited\\n• Recommendation: Consider external contractor\\n• Budget impact: +$15K\\n\\n<strong>📈 DEPARTMENT PERFORMANCE:</strong>\\n• 🏆 Top Performer: HR (100% on-time delivery)\\n• 📊 Overall Portfolio: 82% on track\\n• 🚀 Efficiency Gain: +23% vs last quarter\\n\\n<strong>🔄 NEXT WEEK PRIORITIES:</strong>\\n• Resolve IT vendor issues\\n• Marketing resource planning\\n• Q1 project pipeline review\\n\\n<em>This report auto-updates from Monday.com. Next update: Tomorrow 9 AM</em>',
+    timestamp: '3:50 PM',
+    documents: [
+      {
+        name: 'Weekly_Executive_Summary_Oct28.pdf',
+        type: 'pdf' as const,
+        size: '445 KB'
+      },
+      {
+        name: 'Monday_Data_Export_Details.json',
+        type: 'json' as const,
+        size: '67 KB'
+      }
+    ]
+  }
+];
+
+const documentWorkflowConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I have a travel exception request that needs approval from Finance, but the current process involves 5 different people and takes 2-3 weeks. Can you help me design a more efficient workflow?',
+    timestamp: '11:30 AM',
+    documents: [
+      {
+        name: 'Current_Travel_Exception_Process.pdf',
+        type: 'pdf' as const,
+        size: '890 KB'
+      },
+      {
+        name: 'Sample_Exception_Requests.xlsx',
+        type: 'xlsx' as const,
+        size: '445 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ve analyzed your current process and found significant improvement opportunities:\n\n<strong>🔍 Current Issues Identified:</strong>\n\n<strong>Bottlenecks:</strong>\n• Sequential approvals (not parallel)\n• Manual routing decisions\n• Duplicate information requests\n• No automated status updates\n\n<strong>⚡ PROPOSED STREAMLINED WORKFLOW:</strong>\n\n<strong>Phase 1: Smart Intake (Day 1)</strong>\n• AI-powered form that pre-validates requirements\n• Automatic risk categorization (Low/Medium/High)\n• Instant routing to appropriate approval track\n\n<strong>Phase 2: Parallel Processing (Days 2-5)</strong>\n• Simultaneous review by Finance & Department Head\n• AI drafts approval language based on request type\n• Automated compliance checking\n\n<strong>Phase 3: Expedited Approval (Days 6-7)</strong>\n• Final sign-off with pre-populated justifications\n• Automatic notification to all stakeholders\n• Integration with travel booking systems\n\n<strong>📊 Projected Impact:</strong> 2-3 weeks → 5-7 days (70% reduction)',
+    timestamp: '11:32 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This looks excellent! Can you create the smart intake form template and the routing logic?',
+    timestamp: '11:33 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🤖 SMART TRAVEL EXCEPTION INTAKE FORM</strong>\n\n<strong>Section A: Basic Information</strong>\n• Traveler details (auto-populate from directory)\n• Destination & dates\n• Business justification (required)\n\n<strong>Section B: Exception Details</strong>\n• Exception type: [Airfare/Hotel/Per Diem/Other]\n• Amount over policy: $______\n• Vendor preference reason\n• Cost comparison data\n\n<strong>Section C: AI Risk Assessment</strong>\n✅ <em>Low Risk</em>: <$500 over, routine business travel\n⚠️ <em>Medium Risk</em>: $500-2000 over, special circumstances\n🚨 <em>High Risk</em>: >$2000 over, requires additional justification\n\n<strong>📋 AUTOMATIC ROUTING LOGIC:</strong>\n\n<strong>Low Risk:</strong> → Department Head → Finance Analyst → Approved\n<strong>Medium Risk:</strong> → Department Head + Finance Manager (parallel) → Final Review\n<strong>High Risk:</strong> → Full Committee Review + Additional Documentation\n\n<strong>💡 Smart Features:</strong>\n• Policy compliance checker\n• Historical approval pattern analysis\n• Automatic vendor alternative suggestions\n• Real-time status tracking for requester',
+    timestamp: '11:35 AM',
+    documents: [
+      {
+        name: 'Smart_Travel_Exception_Form_Template.docx',
+        type: 'docx' as const,
+        size: '67 KB'
+      },
+      {
+        name: 'Workflow_Logic_Diagram.pdf',
+        type: 'pdf' as const,
+        size: '234 KB'
+      }
+    ]
+  }
+];
+---
+
+<Layout title="Administrative & Operations Use Cases | Staff Fellows" description="AI applications for administrative coordinators, operations managers, and process improvement">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/staff-fellows" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Staff Fellows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Administrative & Operations
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-blue-50 via-slate-50 to-blue-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          Administrative & Operations Use Cases
+        </h1>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+          Transform your daily administrative work with AI-powered automation. From complex calendar coordination 
+          to streamlined approval workflows, see how AI amplifies your organizational expertise.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Use Cases -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Your Daily Challenges, Solved</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-8 mb-16">
+        <!-- Calendar Management -->
+        <div class="bg-blue-50 rounded-2xl p-6 border border-blue-200">
+          <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="8 7V3a4 4 0 118 0v4m-4 8a4 4 0 11-8 0v-1h8v1z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-3">Smart Calendar Coordination</h3>
+          <p class="text-slate-600 text-sm mb-4">
+            Coordinate complex meetings across multiple VIPs' schedules. AI analyzes availability patterns 
+            and suggests optimal times automatically.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></div>
+              <span>Multi-calendar analysis</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></div>
+              <span>Conflict resolution suggestions</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></div>
+              <span>Automated meeting prep</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Monday.com Integration -->
+        <div class="bg-orange-50 rounded-2xl p-6 border border-orange-200">
+          <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-3">Monday.com Project Intelligence</h3>
+          <p class="text-slate-600 text-sm mb-4">
+            Automatically pull data from Monday.com to generate executive summaries, track department performance, 
+            and identify project risks before they become critical.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-orange-400 rounded-full mr-2"></div>
+              <span>Real-time project dashboard</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-orange-400 rounded-full mr-2"></div>
+              <span>Automated status reports</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-orange-400 rounded-full mr-2"></div>
+              <span>Risk prediction alerts</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8 mb-16">
+        <!-- Document Workflows -->
+        <div class="bg-green-50 rounded-2xl p-6 border border-green-200">
+          <div class="w-10 h-10 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-3">Approval Workflow Automation</h3>
+          <p class="text-slate-600 text-sm mb-4">
+            Transform slow, manual approval processes into fast, intelligent workflows. 
+            Reduce travel exceptions from weeks to days.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></div>
+              <span>Smart routing logic</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></div>
+              <span>Risk-based approvals</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></div>
+              <span>Status tracking automation</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Event Planning -->
+        <div class="bg-purple-50 rounded-2xl p-6 border border-purple-200">
+          <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-3">Program Enhancement Strategy</h3>
+          <p class="text-slate-600 text-sm mb-4">
+            Keep programs like Business of VU fresh and engaging. Generate new ideas, 
+            track engagement metrics, and plan improvements.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></div>
+              <span>Content innovation ideas</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></div>
+              <span>Engagement analytics</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-purple-400 rounded-full mr-2"></div>
+              <span>Strategic planning support</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End AI Applications -->
+  <section class="py-16 bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-slate-900 mb-6">Complete AI Applications</h2>
+        <p class="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          See full end-to-end AI systems in action: automated document pipelines that process contracts 
+          from upload to approval, and real-time executive dashboards that pull data from multiple 
+          campus systems to prepare leadership briefings.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- End-to-End Application 1: Document Pipeline -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Automated Contract Processing Pipeline</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch a complete document workflow: from 50+ vendor contracts dropped in a folder 
+          to automated classification, risk analysis, and intelligent routing in under an hour
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={documentPipelineConversation}
+        title="Document-Triggered AI Pipeline"
+        description="End-to-end contract processing: folder upload → AI analysis → automated routing → director briefing"
+      />
+    </div>
+  </section>
+
+  <!-- End-to-End Application 2: Executive Dashboard -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Real-Time Executive Operations Dashboard</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Experience an AI-powered web application that pulls live data from 8+ campus systems 
+          to generate executive summaries and leadership talking points in minutes
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={executiveDashboardConversation}
+        title="Multi-System Executive Intelligence"
+        description="Live dashboard application: data fusion → priority analysis → leadership brief generation"
+      />
+    </div>
+  </section>
+
+  <section class="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">Application Architecture</h2>
+      <div class="grid md:grid-cols-2 gap-8 mt-12">
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">📂 Document Pipeline System</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Folder monitoring triggers</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Multi-format document processing</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Risk scoring algorithms</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Intelligent workflow routing</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Automated notifications & follow-ups</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-lg">
+          <h3 class="text-xl font-bold text-slate-900 mb-4">🎛️ Executive Dashboard App</h3>
+          <div class="text-left space-y-3 text-slate-600">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Real-time API integrations</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Cross-system data fusion</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Priority ranking algorithms</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Automated brief generation</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-purple-400 rounded-full mr-3"></div>
+              <span>Interactive web interface</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Example 1: Calendar Coordination -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Multi-VIP Calendar Coordination</h2>
+        <p class="text-slate-600 leading-relaxed">
+          See how AI analyzes complex schedules and finds optimal meeting times for your most challenging coordination tasks
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={calendarCoordinationConversation}
+        title="Complex Meeting Coordination"
+        description="Administrative coordinator scheduling critical Business of VU stakeholder meeting"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 2: Monday.com Integration -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Monday.com Executive Reporting</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Automatically pull project data from Monday.com and generate executive summaries for leadership meetings
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={mondayProjectConversation}
+        title="Automated Project Intelligence"
+        description="Operations manager creating executive dashboards from Monday.com data"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 3: Process Improvement -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Travel Exception Workflow Redesign</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Transform a 2-3 week manual process into an intelligent 5-7 day automated workflow
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={documentWorkflowConversation}
+        title="Process Optimization Project"
+        description="Finance department coordinator streamlining approval workflows"
+      />
+    </div>
+  </section>
+
+  <!-- Implementation Roadmap -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white mb-6">Getting Started in Your Role</h2>
+        <p class="text-slate-300 max-w-3xl mx-auto">
+          You don't need to transform everything at once. Start with these high-impact, 
+          low-risk applications that build on your existing expertise.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Week 1-2 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <span class="text-white font-bold">1-2</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Weeks 1-2</h3>
+            <p class="text-slate-400 text-sm">Low-Risk Quick Wins</p>
+          </div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Use AI for meeting agenda creation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Analyze email patterns for scheduling optimization</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Create smart email templates for common requests</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Week 3-6 -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <span class="text-white font-bold">3-6</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Weeks 3-6</h3>
+            <p class="text-slate-400 text-sm">Process Integration</p>
+          </div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Implement smart calendar coordination for regular meetings</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Create approval workflow templates</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-purple-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Build program improvement idea generation system</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Week 7+ -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <span class="text-white font-bold">7+</span>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Week 7+</h3>
+            <p class="text-slate-400 text-sm">Advanced Automation</p>
+          </div>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Deploy full workflow automation systems</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Create predictive scheduling algorithms</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1.5 h-1.5 bg-emerald-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+              <span>Build cross-departmental process optimization</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Stories -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">The Administrative Advantage</h2>
+      <p class="text-xl text-slate-600 leading-relaxed mb-8">
+        <span class="text-blue-600 font-semibold">Your coordination expertise + AI efficiency = Unprecedented organizational impact.</span>
+        You already understand the complexities of managing multiple stakeholders, schedules, and processes. 
+        AI amplifies that expertise to create seamless, intelligent administrative systems.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-600 mb-2">75%</div>
+          <div class="text-slate-600">Time Saved on Coordination</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-600 mb-2">90%</div>
+          <div class="text-slate-600">Faster Approval Processes</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-600 mb-2">Zero</div>
+          <div class="text-slate-600">Scheduling Conflicts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
