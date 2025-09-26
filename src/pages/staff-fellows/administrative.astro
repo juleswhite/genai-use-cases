@@ -49,6 +49,62 @@ const calendarCoordinationConversation = [
   }
 ];
 
+const mondayProjectConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I manage 15 different projects across 6 departments using Monday.com, but I\'m spending hours each week manually updating status reports for leadership. Can AI help me automate this by pulling data directly from Monday and creating executive summaries?',
+    timestamp: '3:45 PM',
+    documents: [
+      {
+        name: 'Monday_API_Credentials.json',
+        type: 'json' as const,
+        size: '2 KB'
+      },
+      {
+        name: 'Executive_Report_Template.docx',
+        type: 'docx' as const,
+        size: '234 KB'
+      },
+      {
+        name: 'Department_Project_List.xlsx',
+        type: 'xlsx' as const,
+        size: '89 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll create an automated system that pulls data directly from your Monday.com workspace and generates executive summaries automatically:\\n\\n<strong>🔌 MONDAY.COM INTEGRATION AGENT:</strong>\\n\\n<strong>Real-Time Data Collection:</strong>\\n• Connected to 15 active project boards\\n• Monitoring 127 active tasks across departments\\n• Tracking 6 different project types\\n• Auto-sync every 2 hours for live updates\\n\\n<strong>📊 CURRENT PROJECT SNAPSHOT:</strong>\\n\\n<strong>By Status:</strong>\\n• ✅ Completed this week: 23 tasks\\n• 🟡 In Progress: 45 tasks\\n• 🔴 Overdue: 8 tasks (3 critical)\\n• ⏳ Due next week: 31 tasks\\n\\n<strong>By Department:</strong>\\n• Finance: 89% on track (2 projects)\\n• IT: 67% on track (4 projects, 1 delayed)\\n• HR: 92% on track (3 projects)\\n• Facilities: 78% on track (2 projects)\\n• Marketing: 85% on track (2 projects)\\n• Academic Affairs: 71% on track (2 projects)',
+    timestamp: '3:47 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Great! Can you show me what the automated executive summary would look like for this week\'s leadership meeting?',
+    timestamp: '3:48 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📋 WEEKLY PROJECT EXECUTIVE SUMMARY</strong>\\n\\n<strong>Week of October 28, 2024</strong>\\n<strong>Auto-Generated from Monday.com Data</strong>\\n\\n<strong>🎯 KEY HIGHLIGHTS:</strong>\\n\\n<strong>✅ Major Completions:</strong>\\n• Finance: Q4 Budget Analysis Tool (3 weeks ahead of schedule)\\n• HR: New Employee Onboarding System (launched successfully)\\n• IT: Security Compliance Audit (100% complete)\\n\\n<strong>⚠️ ATTENTION REQUIRED:</strong>\\n\\n<strong>1. IT Infrastructure Upgrade (Behind Schedule)</strong>\\n• Status: 2 weeks delayed\\n• Issue: Vendor delivery delay\\n• Action: Meeting scheduled with vendor tomorrow\\n• Impact: May affect 2 other projects\\n\\n<strong>2. Marketing Website Redesign (Resource Constraint)</strong>\\n• Status: Designer availability limited\\n• Recommendation: Consider external contractor\\n• Budget impact: +$15K\\n\\n<strong>📈 DEPARTMENT PERFORMANCE:</strong>\\n• 🏆 Top Performer: HR (100% on-time delivery)\\n• 📊 Overall Portfolio: 82% on track\\n• 🚀 Efficiency Gain: +23% vs last quarter\\n\\n<strong>🔄 NEXT WEEK PRIORITIES:</strong>\\n• Resolve IT vendor issues\\n• Marketing resource planning\\n• Q1 project pipeline review\\n\\n<em>This report auto-updates from Monday.com. Next update: Tomorrow 9 AM</em>',
+    timestamp: '3:50 PM',
+    documents: [
+      {
+        name: 'Weekly_Executive_Summary_Oct28.pdf',
+        type: 'pdf' as const,
+        size: '445 KB'
+      },
+      {
+        name: 'Monday_Data_Export_Details.json',
+        type: 'json' as const,
+        size: '67 KB'
+      }
+    ]
+  }
+];
+
 const documentWorkflowConversation = [
   {
     id: '1',
@@ -166,7 +222,7 @@ const documentWorkflowConversation = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Your Daily Challenges, Solved</h2>
       
-      <div class="grid lg:grid-cols-3 gap-8 mb-16">
+      <div class="grid lg:grid-cols-2 gap-8 mb-16">
         <!-- Calendar Management -->
         <div class="bg-blue-50 rounded-2xl p-6 border border-blue-200">
           <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4">
@@ -195,6 +251,36 @@ const documentWorkflowConversation = [
           </ul>
         </div>
 
+        <!-- Monday.com Integration -->
+        <div class="bg-orange-50 rounded-2xl p-6 border border-orange-200">
+          <div class="w-10 h-10 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-3">Monday.com Project Intelligence</h3>
+          <p class="text-slate-600 text-sm mb-4">
+            Automatically pull data from Monday.com to generate executive summaries, track department performance, 
+            and identify project risks before they become critical.
+          </p>
+          <ul class="space-y-2 text-xs text-slate-600">
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-orange-400 rounded-full mr-2"></div>
+              <span>Real-time project dashboard</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-orange-400 rounded-full mr-2"></div>
+              <span>Automated status reports</span>
+            </li>
+            <li class="flex items-center">
+              <div class="w-1.5 h-1.5 bg-orange-400 rounded-full mr-2"></div>
+              <span>Risk prediction alerts</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8 mb-16">
         <!-- Document Workflows -->
         <div class="bg-green-50 rounded-2xl p-6 border border-green-200">
           <div class="w-10 h-10 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-4">
@@ -272,8 +358,26 @@ const documentWorkflowConversation = [
     </div>
   </section>
 
-  <!-- Interactive Example 2: Process Improvement -->
+  <!-- Interactive Example 2: Monday.com Integration -->
   <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Monday.com Executive Reporting</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Automatically pull project data from Monday.com and generate executive summaries for leadership meetings
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={mondayProjectConversation}
+        title="Automated Project Intelligence"
+        description="Operations manager creating executive dashboards from Monday.com data"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 3: Process Improvement -->
+  <section class="py-16 bg-slate-50">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-slate-900 mb-4">Travel Exception Workflow Redesign</h2>

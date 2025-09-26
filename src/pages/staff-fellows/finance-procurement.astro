@@ -1,17 +1,222 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
 import '../../styles/global.css';
 
-// Helper function to create proper URLs that work with GitHub Pages base path
-const getUrl = (path: string) => {
-  const base = import.meta.env.BASE_URL || '/';
-  const normalizedBase = base.endsWith('/') ? base : base + '/';
-  const normalizedPath = path.replace(/^\//, '');
-  return normalizedBase + normalizedPath;
-};
+const invoiceProcessingConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'Our team reviews 400+ invoices monthly from various vendors. Each needs validation against POs, rate checking, and duplicate detection. The manual process is overwhelming and error-prone. Can you design an AI agent that integrates with our Oracle ERP to automate this?',
+    timestamp: '10:15 AM',
+    documents: [
+      {
+        name: 'Monthly_Invoice_Volume_Analysis.xlsx',
+        type: 'xlsx' as const,
+        size: '2.3 MB'
+      },
+      {
+        name: 'Oracle_ERP_Integration_Specs.pdf',
+        type: 'pdf' as const,
+        size: '1.4 MB'
+      },
+      {
+        name: 'Common_Invoice_Errors_Report.pdf',
+        type: 'pdf' as const,
+        size: '890 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll design an intelligent invoice processing agent that integrates directly with your Oracle ERP system:\n\n<strong>📊 CURRENT CHALLENGE ANALYSIS:</strong>\n\n<strong>Invoice Volume & Complexity:</strong>\n• 447 invoices processed last month\n• Average processing time: 23 minutes per invoice\n• Error rate: 12% (mostly rate/PO mismatches)\n• Manual duplicate checking: 85% of processing time\n• Peak processing: End of month (180 invoices/week)\n\n<strong>🤖 AI INVOICE AGENT ARCHITECTURE:</strong>\n\n<strong>Agent 1: Document Intelligence</strong>\n• OCR + AI text extraction from PDFs/scanned invoices\n• Vendor identification and classification\n• Line item extraction with confidence scoring\n• Currency and tax calculation validation\n\n<strong>Agent 2: Oracle ERP Integration</strong>\n• Real-time PO lookup and matching\n• Rate validation against contract terms\n• Approval workflow routing based on amount/department\n• Automatic GL coding suggestions',
+    timestamp: '10:17 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This sounds perfect! Can you show me exactly how the agent would handle a complex scenario - like a facilities invoice with multiple line items, partial deliveries, and rate changes?',
+    timestamp: '10:18 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🔄 LIVE AGENT EXECUTION EXAMPLE:</strong>\n\n<strong>Incoming Invoice: Facilities Maintenance Contract</strong>\n• Vendor: Campus Services Inc\n• Invoice Total: $12,847.50\n• Line Items: 8 (HVAC repair, landscaping, cleaning)\n• Date Range: September 1-30, 2024\n\n<strong>⚡ AGENT PROCESSING SEQUENCE:</strong>\n\n<strong>Step 1: Document Analysis (2 seconds)</strong>\n```\nAgent extracts:\n- Vendor: Campus Services Inc (matched to Oracle vendor ID: 10847)\n- PO References: PO-2024-7823, PO-2024-8901\n- Line items with quantities and rates\n- Service dates and delivery confirmations\n```\n\n<strong>Step 2: Oracle ERP Validation (3 seconds)</strong>\n```python\n# Agent queries Oracle ERP\noracle_agent.validate_invoice({\n    \"vendor_id\": \"10847\",\n    \"po_numbers\": [\"PO-2024-7823\", \"PO-2024-8901\"],\n    \"line_items\": extracted_items,\n    \"total_amount\": 12847.50\n})\n\n# Results:\nvalidation_results = {\n    \"po_match\": True,\n    \"rate_variance\": {\n        \"hvac_repair\": \"Within 2% tolerance\",\n        \"landscaping\": \"Rate increased 5% - requires approval\"\n    },\n    \"delivery_status\": \"Partial - 85% complete\",\n    \"duplicate_check\": \"No duplicates found\"\n}\n```\n\n<strong>Step 3: Intelligent Decision Making (1 second)</strong>\n• ✅ HVAC repair: Auto-approved (rate within tolerance)\n• ⚠️ Landscaping: Flagged for manager review (rate variance)\n• ✅ Cleaning services: Auto-approved (matches contract)\n• 📋 Action: Route to Facilities Manager for partial approval\n\n<strong>📧 AUTOMATED OUTPUTS:</strong>\n• Approval request email to Facilities Manager\n• Exception report with rate variance explanation\n• Oracle ERP entry ready for final approval\n• Audit trail with all validation steps\n\n<strong>⏱️ TOTAL PROCESSING TIME: 6 seconds vs 23 minutes manual</strong>',
+    timestamp: '10:20 AM',
+    documents: [
+      {
+        name: 'Oracle_Invoice_Agent_Integration.py',
+        type: 'py' as const,
+        size: '45 KB'
+      },
+      {
+        name: 'Facilities_Invoice_Processing_Demo.mp4',
+        type: 'mp4' as const,
+        size: '23 MB'
+      }
+    ]
+  }
+];
+
+const budgetAnalysisConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'I need to create monthly budget burn rate reports for 47 departments using data from Oracle Financials and PeopleSoft HR. Currently takes 2 weeks to compile manually. Can an AI agent pull this data automatically and generate executive dashboards?',
+    timestamp: '2:30 PM',
+    documents: [
+      {
+        name: 'Oracle_Financials_Schema.pdf',
+        type: 'pdf' as const,
+        size: '3.4 MB'
+      },
+      {
+        name: 'PeopleSoft_HR_API_Documentation.pdf',
+        type: 'pdf' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'Department_Budget_Template.xlsx',
+        type: 'xlsx' as const,
+        size: '1.7 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll create an intelligent budget analysis agent that integrates with both Oracle Financials and PeopleSoft HR:\n\n<strong>🎯 AUTOMATED BUDGET AGENT SYSTEM:</strong>\n\n<strong>Data Integration Layer:</strong>\n• Oracle Financials: Real-time expense data, encumbrances, commitments\n• PeopleSoft HR: Salary projections, benefit costs, position changes\n• Additional sources: Travel systems, procurement, grants management\n\n<strong>🤖 MULTI-AGENT ARCHITECTURE:</strong>\n\n<strong>Agent 1: Data Collection</strong>\n• Scheduled daily pulls from Oracle GL, AP, Budget modules\n• PeopleSoft payroll and position data extraction\n• Real-time expense transaction monitoring\n• Grant fund balance updates\n\n<strong>Agent 2: Analysis & Forecasting</strong>\n• Burn rate calculations by department and fund\n• Trend analysis and projection modeling\n• Variance detection and anomaly flagging\n• Cash flow forecasting through fiscal year end',
+    timestamp: '2:32 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Perfect! Can you show me how this would work for a specific department - like Engineering - that has multiple funding sources, grant money, and variable staffing?',
+    timestamp: '2:33 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📊 LIVE BUDGET AGENT: ENGINEERING DEPARTMENT</strong>\n\n<strong>🔄 REAL-TIME DATA INTEGRATION:</strong>\n\n<strong>Oracle Financials Query (executed at 2:30 PM):</strong>\n```sql\n-- Agent pulls current fiscal data\nSELECT dept_code, fund_source, budget_amount, \n       actual_expenditures, encumbrances, available_balance\nFROM gl_budget_summary \nWHERE dept_code = \'ENG\' \nAND fiscal_year = 2024\n```\n\n<strong>PeopleSoft HR Integration:</strong>\n```python\n# Real-time staff cost projection\nhr_agent.get_department_costs(\'ENG\', {\n    \"include\": [\"salaries\", \"benefits\", \"temporary_staff\"],\n    \"projection_months\": 12,\n    \"include_planned_hires\": True\n})\n```\n\n<strong>📈 INTELLIGENT ANALYSIS RESULTS:</strong>\n\n<strong>Engineering Department - Budget Status (Real-time)</strong>\n\n<strong>💰 FUNDING SOURCES ANALYSIS:</strong>\n• State Appropriation: $2.1M (73% spent, on track)\n• NSF Grant #1847392: $847K (89% spent, accelerated burn)\n• Industry Partnership: $445K (45% spent, underspending)\n• Equipment Fund: $290K (12% spent, delayed purchases)\n\n<strong>⚠️ PREDICTIVE ALERTS GENERATED:</strong>\n\n<strong>1. NSF Grant Concern:</strong>\n\"Grant #1847392 burning 15% faster than planned. Current trajectory suggests fund depletion by March 15 (vs planned June 30). Recommend immediate PI consultation.\"\n\n<strong>2. Staffing Opportunity:</strong>\n\"Industry Partnership fund underspending by $200K. Opportunity to hire 2 graduate researchers without impacting other funds.\"\n\n<strong>3. Equipment Budget Risk:</strong>\n\"Equipment purchases delayed. $250K unspent with 4 months remaining. Risk of fund forfeiture if not committed by April 1.\"\n\n<strong>📧 AUTOMATED ACTIONS TAKEN:</strong>\n• Email alert sent to Department Chair\n• Calendar invite created for budget review meeting\n• Draft reallocation proposal generated\n• Compliance check scheduled for NSF grant\n\n<strong>⏱️ REPORT GENERATION: 3 minutes vs 2 weeks manual</strong>',
+    timestamp: '2:35 PM',
+    documents: [
+      {
+        name: 'Engineering_Budget_Dashboard_Live.html',
+        type: 'html' as const,
+        size: '234 KB'
+      },
+      {
+        name: 'Multi_System_Integration_Agent.py',
+        type: 'py' as const,
+        size: '78 KB'
+      }
+    ]
+  }
+];
+
+const vendorEvaluationConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We need to evaluate 15 competing vendors for a new campus-wide software system. Each proposal is 100+ pages with different pricing models, technical specs, and implementation timelines. Can AI help create an objective comparison and scoring system?',
+    timestamp: '11:00 AM',
+    documents: [
+      {
+        name: 'Vendor_RFP_Responses_Bundle.zip',
+        type: 'zip' as const,
+        size: '47 MB'
+      },
+      {
+        name: 'Evaluation_Criteria_Matrix.xlsx',
+        type: 'xlsx' as const,
+        size: '445 KB'
+      },
+      {
+        name: 'University_Requirements_Specification.pdf',
+        type: 'pdf' as const,
+        size: '2.8 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll create an intelligent vendor evaluation agent that provides objective, comprehensive analysis:\n\n<strong>📋 VENDOR EVALUATION AGENT SYSTEM:</strong>\n\n<strong>Document Analysis Results:</strong>\n• 15 vendor proposals processed (1,847 total pages)\n• 23 evaluation criteria identified\n• 156 technical requirements mapped\n• 47 pricing components standardized\n\n<strong>🎯 INTELLIGENT SCORING FRAMEWORK:</strong>\n\n<strong>Technical Capability (40% weight):</strong>\n• Functional requirements coverage: 156 items checked\n• Integration capabilities with existing systems\n• Scalability and performance benchmarks\n• Security and compliance certifications\n\n<strong>Financial Analysis (30% weight):</strong>\n• Total cost of ownership (5-year projection)\n• Implementation and training costs\n• Ongoing maintenance and support fees\n• Hidden costs and change order risks\n\n<strong>Implementation Risk (20% weight):</strong>\n• Vendor stability and track record\n• Reference customer feedback\n• Implementation timeline feasibility\n• Change management requirements',
+    timestamp: '11:02 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Excellent! Can you show me the top 3 recommendations with specific justifications? I need to present this to the selection committee next week.',
+    timestamp: '11:03 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🏆 TOP 3 VENDOR RECOMMENDATIONS</strong>\n\n<strong>🥇 RANK 1: TechSolutions Enterprise (Score: 87.4/100)</strong>\n\n<strong>✅ Key Strengths:</strong>\n• <strong>Technical Excellence:</strong> 94% requirements coverage (147/156)\n• <strong>Proven Track Record:</strong> 12 successful higher-ed implementations\n• <strong>Cost Efficiency:</strong> $1.2M total 5-year cost (2nd lowest)\n• <strong>Integration Ready:</strong> Native Oracle/PeopleSoft connectors\n\n<strong>⚠️ Considerations:</strong>\n• Implementation timeline: 14 months (2 months longer than desired)\n• Custom reporting requires additional licensing\n\n<strong>💰 Financial Summary:</strong>\n• Year 1: $480K (implementation + licensing)\n• Years 2-5: $180K annually (support + hosting)\n• ROI Break-even: 18 months\n\n---\n\n<strong>🥈 RANK 2: CampusCore Solutions (Score: 83.1/100)</strong>\n\n<strong>✅ Key Strengths:</strong>\n• <strong>Rapid Implementation:</strong> 8-month deployment timeline\n• <strong>University Focus:</strong> Built specifically for higher education\n• <strong>Strong References:</strong> 4.8/5 customer satisfaction\n• <strong>Local Support:</strong> Regional office 50 miles from campus\n\n<strong>⚠️ Considerations:</strong>\n• Higher ongoing costs: $240K annually after year 1\n• Limited mobile functionality (68% of requirements)\n\n---\n\n<strong>🥉 RANK 3: GlobalSoft University (Score: 79.8/100)</strong>\n\n<strong>✅ Key Strengths:</strong>\n• <strong>Market Leader:</strong> 400+ university installations\n• <strong>Comprehensive Platform:</strong> 89% requirements coverage\n• <strong>Advanced Analytics:</strong> Best-in-class reporting capabilities\n• <strong>Scalability:</strong> Supports up to 100K users\n\n<strong>⚠️ Considerations:</strong>\n• Highest total cost: $1.8M over 5 years\n• Complex customization requirements\n• 18-month implementation timeline\n\n<strong>📊 COMMITTEE RECOMMENDATION:</strong>\n\n\"Based on objective analysis of all proposals, <strong>TechSolutions Enterprise</strong> offers the optimal balance of technical capability, cost-effectiveness, and implementation risk. Recommend proceeding with contract negotiations while maintaining CampusCore Solutions as backup option.\"',
+    timestamp: '11:05 AM',
+    documents: [
+      {
+        name: 'Vendor_Analysis_Executive_Summary.pdf',
+        type: 'pdf' as const,
+        size: '1.2 MB'
+      },
+      {
+        name: 'Detailed_Scoring_Matrix_All_Vendors.xlsx',
+        type: 'xlsx' as const,
+        size: '2.4 MB'
+      },
+      {
+        name: 'Committee_Presentation_Slides.pptx',
+        type: 'pptx' as const,
+        size: '8.7 MB'
+      }
+    ]
+  }
+];
 ---
 
 <Layout title="Finance & Procurement Use Cases | Staff Fellows" description="AI applications for finance, procurement, and budget management">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/staff-fellows" class="ml-4 text-sm font-medium text-slate-500 hover:text-slash-700 transition-colors">
+                Staff Fellows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Finance & Procurement
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-br from-yellow-50 via-slate-50 to-yellow-100 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,66 +230,331 @@ const getUrl = (path: string) => {
           Finance & Procurement Use Cases
         </h1>
         <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-          Streamline financial operations with intelligent invoice processing, automated budget analysis, 
-          and smart vendor evaluation. Transform manual workflows into efficient, accurate systems.
+          Transform financial operations with intelligent agents that integrate directly with Oracle, PeopleSoft, and other campus systems. 
+          Automate invoice processing, budget analysis, and vendor evaluation while maintaining accuracy and compliance.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Coming Soon -->
-  <section class="py-20 bg-white">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="bg-yellow-50 rounded-2xl p-12 border border-yellow-200">
-        <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-        </div>
-        <h2 class="text-3xl font-bold text-slate-900 mb-4">Coming Soon</h2>
-        <p class="text-lg text-slate-600 mb-6">
-          Comprehensive use cases for finance and procurement roles are being developed based on staff fellow feedback.
-        </p>
-        <div class="text-slate-600">
-          <p class="mb-4"><strong>Focus Areas Include:</strong></p>
-          <div class="grid md:grid-cols-2 gap-4 text-left">
-            <ul class="space-y-2">
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
-                <span>Invoice scanning & validation automation</span>
-              </li>
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
-                <span>Budget burn rate analysis & forecasting</span>
-              </li>
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
-                <span>Vendor quote comparison & evaluation</span>
-              </li>
-            </ul>
-            <ul class="space-y-2">
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
-                <span>Travel exception workflow optimization</span>
-              </li>
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
-                <span>Procurement process automation</span>
-              </li>
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></div>
-                <span>UNSPSC code generation</span>
-              </li>
-            </ul>
+  <!-- Core Applications -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Financial Intelligence & Automation</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-8 mb-16">
+        <!-- Oracle ERP Integration -->
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200">
+          <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Intelligent Invoice Processing</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            AI agents that integrate directly with Oracle ERP to automate invoice validation, PO matching, 
+            and exception handling. Process hundreds of invoices in minutes, not weeks.
+          </p>
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Real-time Oracle ERP integration</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Automated PO matching & validation</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Duplicate detection & rate checking</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Exception workflow automation</span>
+            </div>
           </div>
         </div>
-        <div class="mt-8">
-          <a href={getUrl('/staff-fellows')} class="inline-flex items-center px-6 py-3 border border-yellow-300 rounded-lg text-yellow-700 bg-yellow-100 hover:bg-yellow-200 transition-colors">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+
+        <!-- Multi-System Budget Analysis -->
+        <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-2xl border border-emerald-200">
+          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V9a2 2 0 112 0v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
             </svg>
-            Back to All Roles
-          </a>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Cross-System Budget Intelligence</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            Automated agents that pull data from Oracle Financials and PeopleSoft HR to generate 
+            real-time budget reports, burn rate analysis, and predictive forecasting.
+          </p>
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Oracle + PeopleSoft integration</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Real-time burn rate analysis</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Predictive budget forecasting</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Automated alert generation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Capabilities -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-purple-50 rounded-xl p-6 border border-purple-200">
+          <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Intelligent Vendor Evaluation</h3>
+          <p class="text-slate-600 text-sm">
+            AI-powered analysis of vendor proposals, automatic scoring against criteria, 
+            and objective recommendation generation for procurement decisions.
+          </p>
+        </div>
+
+        <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+          <div class="w-10 h-10 bg-red-100 text-red-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Fraud & Risk Detection</h3>
+          <p class="text-slate-600 text-sm">
+            Continuous monitoring of financial transactions with pattern recognition 
+            to identify potential fraud, policy violations, and financial risks.
+          </p>
+        </div>
+
+        <div class="bg-teal-50 rounded-xl p-6 border border-teal-200">
+          <div class="w-10 h-10 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Travel & Expense Automation</h3>
+          <p class="text-slate-600 text-sm">
+            Streamlined travel exception processing with intelligent policy checking, 
+            automatic approvals, and integration with booking systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Example 1: Invoice Processing -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Oracle ERP Invoice Automation</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch an AI agent process a complex facilities invoice with multiple line items and system validation
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={invoiceProcessingConversation}
+        title="Automated Invoice Processing"
+        description="Procurement analyst implementing Oracle ERP-integrated invoice automation"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 2: Budget Analysis -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Multi-System Budget Intelligence</h2>
+        <p class="text-slate-600 leading-relaxed">
+          See AI agents pull data from Oracle Financials and PeopleSoft HR to generate real-time budget analysis
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={budgetAnalysisConversation}
+        title="Cross-System Budget Analysis"
+        description="Financial analyst automating department budget reporting"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 3: Vendor Evaluation -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">AI-Powered Vendor Selection</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Experience intelligent analysis of complex vendor proposals with objective scoring and recommendations
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={vendorEvaluationConversation}
+        title="Vendor Proposal Analysis"
+        description="Procurement manager evaluating enterprise software vendors"
+      />
+    </div>
+  </section>
+
+  <!-- System Integration Architecture -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white mb-6">Enterprise System Integration</h2>
+        <p class="text-slate-300 max-w-3xl mx-auto">
+          Our AI agents integrate seamlessly with your existing financial systems, 
+          creating intelligent automation without disrupting current workflows.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Oracle Integration -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Oracle ERP</h3>
+            <p class="text-slate-400 text-sm">Financials, Procurement, AP</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-red-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Real-time GL queries</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-red-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Invoice & PO matching</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-red-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Automated approvals</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- PeopleSoft Integration -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">PeopleSoft HR</h3>
+            <p class="text-slate-400 text-sm">Payroll, Benefits, Positions</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Salary projections</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Position costing</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Benefit calculations</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Document Systems -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Document Systems</h3>
+            <p class="text-slate-400 text-sm">Vera, SharePoint, Email</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Invoice extraction</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Contract analysis</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Approval workflows</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Analytics & Reporting -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V9a2 2 0 112 0v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Analytics Platform</h3>
+            <p class="text-slate-400 text-sm">Dashboards, Reports, Alerts</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Executive dashboards</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Predictive alerts</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Compliance reporting</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Proposition -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">Financial Operations Excellence</h2>
+      <p class="text-xl text-slate-600 leading-relaxed mb-8">
+        <span class="text-yellow-600 font-semibold">Your financial expertise + AI automation = Unprecedented efficiency and accuracy.</span>
+        You understand the complexities of university financial operations. AI amplifies that expertise 
+        to create intelligent, integrated systems that handle routine tasks while you focus on strategic decisions.
+      </p>
+      
+      <div class="grid md:grid-cols-4 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">95%</div>
+          <div class="text-slate-600 text-sm">Faster Invoice Processing</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">2 weeks</div>
+          <div class="text-slate-600 text-sm">to 3 Minutes Reporting</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">99.8%</div>
+          <div class="text-slate-600 text-sm">Accuracy Rate</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-yellow-600 mb-2">24/7</div>
+          <div class="text-slate-600 text-sm">Continuous Monitoring</div>
         </div>
       </div>
     </div>

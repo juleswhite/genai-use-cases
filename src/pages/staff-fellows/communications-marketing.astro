@@ -1,17 +1,227 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ChatConversation from '../../components/ChatConversation.astro';
 import '../../styles/global.css';
 
-// Helper function to create proper URLs that work with GitHub Pages base path
-const getUrl = (path: string) => {
-  const base = import.meta.env.BASE_URL || '/';
-  const normalizedBase = base.endsWith('/') ? base : base + '/';
-  const normalizedPath = path.replace(/^\//, '');
-  return normalizedBase + normalizedPath;
-};
+const websiteAuditConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'We have 2,300+ faculty and staff websites across campus, each built using different templates and standards. I need to audit all of them for brand compliance, SEO optimization, and accessibility issues. This would take months manually. Can AI agents help automate this audit process?',
+    timestamp: '9:30 AM',
+    documents: [
+      {
+        name: 'Campus_Website_Inventory.xlsx',
+        type: 'xlsx' as const,
+        size: '1.8 MB'
+      },
+      {
+        name: 'Brand_Guidelines_2024.pdf',
+        type: 'pdf' as const,
+        size: '3.2 MB'
+      },
+      {
+        name: 'SEO_Standards_Checklist.pdf',
+        type: 'pdf' as const,
+        size: '945 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll create an intelligent website audit system that can scan your entire campus web presence automatically:\n\n<strong>🌐 CAMPUS WEBSITE AUDIT AGENT:</strong>\n\n<strong>Scope Analysis:</strong>\n• 2,347 active websites identified\n• 47 different template variations detected\n• 156 departments with web presence\n• 12 different CMS platforms in use\n\n<strong>🤖 MULTI-AGENT AUDIT SYSTEM:</strong>\n\n<strong>Agent 1: Brand Compliance Scanner</strong>\n• Logo usage verification (size, placement, colors)\n• Font consistency checking\n• Color palette compliance validation\n• Photography style guide adherence\n• Contact information standardization\n\n<strong>Agent 2: SEO & Accessibility Auditor</strong>\n• Meta title and description analysis\n• Header structure validation (H1, H2, H3)\n• Alt text coverage for images\n• Page load speed assessment\n• WCAG 2.1 accessibility compliance\n• Mobile responsiveness testing',
+    timestamp: '9:32 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This sounds perfect! Can you show me what the audit results would look like for a specific department - maybe one that has multiple issues so I can see how the system prioritizes and recommends fixes?',
+    timestamp: '9:33 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>📊 LIVE AUDIT RESULTS: CHEMISTRY DEPARTMENT</strong>\n\n<strong>🔍 WEBSITE: chemistry.vanderbilt.edu</strong>\n\n<strong>⚠️ BRAND COMPLIANCE ISSUES (Score: 64/100):</strong>\n\n<strong>Critical Issues:</strong>\n• <strong>Logo Violation:</strong> Using outdated VU logo (2019 version)\n• <strong>Color Non-compliance:</strong> Custom blue (#1a5f8c) instead of official Vanderbilt Gold (#cfb991)\n• <strong>Typography Error:</strong> Using Arial instead of specified Proxima Nova font\n• <strong>Photography:</strong> 3 images don\'t follow style guide (outdated lab photos)\n\n<strong>📱 SEO & ACCESSIBILITY AUDIT (Score: 71/100):</strong>\n\n<strong>SEO Issues Found:</strong>\n• Missing meta descriptions on 23 pages\n• 67 images without alt text\n• Page titles not optimized (too generic)\n• Sitemap last updated 2021\n\n<strong>Accessibility Violations:</strong>\n• Color contrast ratio fails on navigation (3.2:1, needs 4.5:1)\n• Missing skip-to-content links\n• Form labels not properly associated\n• 12 PDF documents not accessible\n\n<strong>🚀 AUTOMATED RECOMMENDATIONS:</strong>\n\n<strong>High Priority (Fix First):</strong>\n1. <strong>Replace Logo:</strong> \"Update to 2024 VU logo - [download link provided]\"\n2. <strong>Color Correction:</strong> \"Change #1a5f8c to #cfb991 in CSS line 47\"\n3. <strong>Contrast Fix:</strong> \"Navigation text should be #ffffff for proper contrast\"\n\n<strong>Medium Priority:</strong>\n4. <strong>Meta Tags:</strong> \"Auto-generated suggestions for 23 missing descriptions\"\n5. <strong>Alt Text:</strong> \"AI-generated alt text for 67 images [review required]\"\n\n<strong>⚡ AUTOMATED FIXES AVAILABLE:</strong>\n• Logo replacement: Can be automated via CMS API\n• Color updates: CSS injection ready\n• Meta descriptions: AI-generated content ready for approval\n• Alt text: Computer vision generated suggestions\n\n<strong>📈 PROJECTED IMPROVEMENT:</strong>\n• Brand compliance: 64 → 92 (28-point increase)\n• SEO score: 71 → 89 (18-point increase)\n• Accessibility: 58 → 94 (36-point increase)\n\n<strong>⏱️ ESTIMATED FIX TIME:</strong> 2 hours (vs 3 days manual)',
+    timestamp: '9:35 AM',
+    documents: [
+      {
+        name: 'Chemistry_Website_Audit_Report.pdf',
+        type: 'pdf' as const,
+        size: '1.4 MB'
+      },
+      {
+        name: 'Automated_Fix_Recommendations.json',
+        type: 'json' as const,
+        size: '67 KB'
+      }
+    ]
+  }
+];
+
+const componentLibraryConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'Faculty and staff constantly request help building new web pages, but they don\'t know our component library and design system. I spend hours creating layouts manually. Can AI create an agent that builds pages automatically using our existing components and helps users design better websites?',
+    timestamp: '1:45 PM',
+    documents: [
+      {
+        name: 'VU_Design_System_Components.json',
+        type: 'json' as const,
+        size: '234 KB'
+      },
+      {
+        name: 'Component_Usage_Guidelines.pdf',
+        type: 'pdf' as const,
+        size: '1.7 MB'
+      },
+      {
+        name: 'Page_Layout_Templates.zip',
+        type: 'zip' as const,
+        size: '4.2 MB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll create an intelligent page building agent that understands your design system and helps users create professional pages:\n\n<strong>🎨 COMPONENT LIBRARY ANALYSIS:</strong>\n\n<strong>Design System Inventory:</strong>\n• 47 reusable components identified\n• 12 layout templates available\n• 8 content types defined\n• 23 pre-approved color combinations\n• 156 icon assets cataloged\n\n<strong>🤖 AI PAGE BUILDER AGENT:</strong>\n\n<strong>Agent 1: Content Understanding</strong>\n• Natural language processing of page requirements\n• Content type classification (news, events, faculty bio, etc.)\n• Target audience identification\n• Accessibility requirement assessment\n\n<strong>Agent 2: Component Selection</strong>\n• Intelligent component matching based on content needs\n• Layout optimization for content hierarchy\n• Brand compliance validation\n• Responsive design considerations\n• SEO best practice integration',
+    timestamp: '1:47 PM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'Perfect! Can you show me how this would work if a faculty member asked for help creating a page for their new research lab? They want to showcase projects, team members, and publications.',
+    timestamp: '1:48 PM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>🧪 AI PAGE BUILDER: RESEARCH LAB PAGE</strong>\n\n<strong>📝 USER REQUEST ANALYSIS:</strong>\n\"I need a page for my new Computational Biology Lab. I want to show our research projects, team members, recent publications, and how students can get involved.\"\n\n<strong>🎯 AGENT RECOMMENDATIONS:</strong>\n\n<strong>Page Type Detected:</strong> Research Lab/Faculty Page\n<strong>Target Audience:</strong> Prospective students, collaborators, funding agencies\n<strong>Content Priority:</strong> Research focus, team credentials, publications\n\n<strong>🏗️ RECOMMENDED COMPONENT STRUCTURE:</strong>\n\n<strong>Header Section:</strong>\n```\n- Hero Banner Component: Lab name + key research image\n- Breadcrumb Navigation: School > Department > Lab\n- Contact Information Widget: PI details, location, email\n```\n\n<strong>Main Content Layout:</strong>\n```\n1. Research Overview Card\n   - Mission statement (2-3 sentences)\n   - Key research areas (tag component)\n   - Funding acknowledgments\n\n2. Team Members Grid\n   - Faculty bio cards (with photos)\n   - Graduate student profiles\n   - Postdoc researcher tiles\n\n3. Active Projects Showcase\n   - Project summary cards\n   - Publication links integration\n   - Funding source badges\n\n4. Recent Publications Feed\n   - Auto-updated from faculty CV system\n   - Citation formatting (APA/MLA)\n   - PDF download links\n\n5. Student Opportunities Section\n   - Research assistant positions\n   - Volunteer opportunities\n   - Application process\n```\n\n<strong>⚡ AUTO-GENERATED PAGE CODE:</strong>\n\n```html\n<!-- AI-Generated Lab Page -->\n<div class=\"vu-page-container\">\n  <section class=\"vu-hero-banner\">\n    <h1 class=\"vu-heading-primary\">Computational Biology Lab</h1>\n    <p class=\"vu-subtitle\">Advancing personalized medicine through AI</p>\n    <img src=\"lab-hero.jpg\" alt=\"Lab team working on computational analysis\">\n  </section>\n  \n  <section class=\"vu-content-grid\">\n    <div class=\"vu-card vu-card-research\">\n      <h2>Our Research Focus</h2>\n      <p>We develop machine learning algorithms to analyze...</p>\n      <div class=\"vu-tags\">\n        <span class=\"vu-tag\">Genomics</span>\n        <span class=\"vu-tag\">Machine Learning</span>\n        <span class=\"vu-tag\">Drug Discovery</span>\n      </div>\n    </div>\n  </section>\n</div>\n```\n\n<strong>📊 AUTOMATED OPTIMIZATIONS:</strong>\n• SEO: Auto-generated meta tags based on research keywords\n• Accessibility: Proper heading hierarchy, alt text, ARIA labels\n• Performance: Optimized images, lazy loading\n• Brand: VU color scheme, typography, spacing applied\n• Mobile: Responsive grid system automatically applied\n\n<strong>🎨 DESIGN RECOMMENDATIONS:</strong>\n• \"Use research image as hero - high impact for grants\"\n• \"Publications feed should be prominent - shows productivity\"\n• \"Student opportunities at bottom - clear call-to-action\"\n• \"Consider adding collaboration section for networking\"\n\n<strong>⏱️ PAGE CREATION TIME:</strong> 15 minutes (vs 4 hours manual)\n\n<strong>📧 NEXT STEPS:</strong>\n• Preview generated in staging environment\n• Content approval workflow initiated\n• SEO scan scheduled post-publish\n• Analytics tracking configured',
+    timestamp: '1:50 PM',
+    documents: [
+      {
+        name: 'Generated_Lab_Page_Code.html',
+        type: 'html' as const,
+        size: '89 KB'
+      },
+      {
+        name: 'Page_Preview_Screenshots.pdf',
+        type: 'pdf' as const,
+        size: '2.1 MB'
+      },
+      {
+        name: 'SEO_Optimization_Report.pdf',
+        type: 'pdf' as const,
+        size: '445 KB'
+      }
+    ]
+  }
+];
+
+const digitalStrategiesConversation = [
+  {
+    id: '1',
+    sender: 'user' as const,
+    message: 'Our distributed web editors constantly submit help tickets for basic questions about SEO, accessibility, content strategy, and design best practices. We need an intelligent assistant that can provide immediate guidance and reduce ticket volume. Can you help build this?',
+    timestamp: '11:15 AM',
+    documents: [
+      {
+        name: 'Help_Ticket_Analysis_2024.xlsx',
+        type: 'xlsx' as const,
+        size: '2.7 MB'
+      },
+      {
+        name: 'Web_Editor_Guidelines.pdf',
+        type: 'pdf' as const,
+        size: '1.9 MB'
+      },
+      {
+        name: 'Common_Questions_FAQ.docx',
+        type: 'docx' as const,
+        size: '567 KB'
+      }
+    ]
+  },
+  {
+    id: '2',
+    sender: 'ai' as const,
+    message: 'I\'ll create an intelligent digital strategies assistant that provides instant, expert-level guidance to your web editors:\n\n<strong>🎯 HELP TICKET ANALYSIS:</strong>\n\n<strong>Current Support Volume:</strong>\n• 1,247 tickets in 2024 (up 23% from 2023)\n• Average response time: 3.2 days\n• Top categories: SEO (34%), Design (28%), Content (22%), Technical (16%)\n• 67% of tickets are repetitive/basic questions\n• Peak times: Start of semester, event seasons\n\n<strong>🤖 DIGITAL STRATEGIES AI ASSISTANT:</strong>\n\n<strong>Knowledge Base Integration:</strong>\n• University brand guidelines\n• SEO best practices for higher education\n• Accessibility standards (WCAG 2.1)\n• Content strategy frameworks\n• Design system documentation\n• Legal compliance requirements\n\n<strong>Intelligent Capabilities:</strong>\n• Real-time website analysis and recommendations\n• Content optimization suggestions\n• Design critique with specific improvements\n• SEO audit with actionable steps\n• Accessibility scanning and remediation\n• Brand compliance checking',
+    timestamp: '11:17 AM'
+  },
+  {
+    id: '3',
+    sender: 'user' as const,
+    message: 'This sounds exactly what we need! Can you show me how the assistant would handle a common scenario - like when an editor asks for help improving their department\'s news page for better engagement and SEO?',
+    timestamp: '11:18 AM'
+  },
+  {
+    id: '4',
+    sender: 'ai' as const,
+    message: '<strong>💬 DIGITAL STRATEGIES ASSISTANT IN ACTION</strong>\n\n<strong>📧 EDITOR QUESTION:</strong>\n\"Hi! Our department news page isn\'t getting much traffic and engagement is low. Can you help me improve it for better SEO and user experience? The page is: biology.vanderbilt.edu/news\"\n\n<strong>🔍 AI ASSISTANT RESPONSE:</strong>\n\n\"I\'ve analyzed your Biology Department news page. Here\'s what I found and my recommendations:\n\n<strong>🚦 CURRENT PERFORMANCE ANALYSIS:</strong>\n\n<strong>SEO Issues Found:</strong>\n• ❌ Meta description missing on main news page\n• ❌ Article titles not optimized (too generic)\n• ❌ No structured data markup for articles\n• ❌ Internal linking opportunities missed (23 potential links)\n• ✅ Page load speed is good (2.1 seconds)\n\n<strong>Content & Engagement Issues:</strong>\n• ❌ No featured article section (users don\'t know where to start)\n• ❌ Articles lack compelling preview text\n• ❌ No author bylines or publication dates visible\n• ❌ No social sharing buttons\n• ❌ No related articles suggestions\n\n<strong>🎯 IMMEDIATE ACTION PLAN:</strong>\n\n<strong>Quick Wins (30 minutes):</strong>\n1. <strong>Add Meta Description:</strong>\n   \'Stay updated with the latest Biology Department research, faculty achievements, and student news at Vanderbilt University.\'\n   \n2. <strong>Improve Article Headlines:</strong>\n   - Change: \'Faculty News\' → \'Dr. Smith Receives NIH Grant for Cancer Research\'\n   - Change: \'Student Update\' → \'Biology PhD Student Wins National Research Award\'\n\n3. <strong>Add Publication Dates:</strong>\n   - Include clear timestamps on all articles\n   - Use schema markup for better search visibility\n\n<strong>Medium Priority (2 hours):</strong>\n4. <strong>Create Featured Article Section:</strong>\n   - Highlight your most important/recent news\n   - Use large image + compelling excerpt\n   - Include \'Read More\' call-to-action\n\n5. <strong>Implement Social Sharing:</strong>\n   - Add Twitter, LinkedIn, Facebook buttons\n   - Include department social handles\n\n6. <strong>Internal Linking Strategy:</strong>\n   - Link to faculty pages in news articles\n   - Connect related research topics\n   - Reference relevant academic programs\n\n<strong>📈 EXPECTED IMPROVEMENTS:</strong>\n• SEO Score: 34 → 78 (44-point increase)\n• Time on Page: +65% (better content discovery)\n• Social Shares: +120% (easier sharing)\n• Internal Traffic: +45% (improved navigation)\n\n<strong>🎨 DESIGN SUGGESTIONS:</strong>\n• Use grid layout instead of simple list\n• Add category tags (Research, Awards, Events)\n• Include faculty photos in relevant articles\n• Consider news archive/search functionality\n\n<strong>📱 MOBILE OPTIMIZATION:</strong>\n• Current mobile score: 67/100\n• Recommendation: Reduce image sizes, improve touch targets\n• Test on iOS Safari and Android Chrome\n\n<strong>⚡ READY-TO-USE CODE:</strong>\nI\'ve generated the updated HTML/CSS for your featured article section. You can copy-paste this into your CMS.\n\n<strong>📊 TRACKING SETUP:</strong>\nI\'ll help you set up Google Analytics events to measure:\n• Article click-through rates\n• Social sharing performance\n• Time spent on news articles\n• Search traffic improvements\n\n**Need help implementing any of these changes? I can provide step-by-step instructions or generate the code for you!**\"\n\n<strong>🎯 ASSISTANT FOLLOW-UP OPTIONS:</strong>\n• \"Show me the code for featured articles\"\n• \"Help me write better headlines\"\n• \"Audit another page\"\n• \"Set up analytics tracking\"\n• \"Check brand compliance\"',
+    timestamp: '11:20 AM',
+    documents: [
+      {
+        name: 'News_Page_Analysis_Report.pdf',
+        type: 'pdf' as const,
+        size: '1.1 MB'
+      },
+      {
+        name: 'Ready_To_Use_Code_Updates.html',
+        type: 'html' as const,
+        size: '23 KB'
+      },
+      {
+        name: 'SEO_Improvement_Checklist.pdf',
+        type: 'pdf' as const,
+        size: '289 KB'
+      }
+    ]
+  }
+];
 ---
 
 <Layout title="Communications & Marketing Use Cases | Staff Fellows" description="AI applications for marketing, communications, and digital strategy">
+  <!-- Breadcrumb -->
+  <div class="bg-slate-50 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-4">
+          <li>
+            <div>
+              <a href="/" class="text-slate-400 hover:text-slate-500 transition-colors">
+                <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                </svg>
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <a href="/staff-fellows" class="ml-4 text-sm font-medium text-slate-500 hover:text-slate-700 transition-colors">
+                Staff Fellows
+              </a>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="flex-shrink-0 h-5 w-5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-4 text-sm font-medium text-slate-900">
+                Communications & Marketing
+              </span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
   <!-- Hero Section -->
   <section class="bg-gradient-to-br from-teal-50 via-slate-50 to-teal-100 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,66 +235,332 @@ const getUrl = (path: string) => {
           Communications & Marketing Use Cases
         </h1>
         <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-          Transform digital strategy with AI-powered content auditing, SEO optimization, and automated 
-          website development. Build systems that scale communications across the entire university.
+          Transform digital strategy with AI-powered campus website management, automated design systems, 
+          and intelligent content optimization. Scale communications excellence across the entire university.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Coming Soon -->
-  <section class="py-20 bg-white">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="bg-teal-50 rounded-2xl p-12 border border-teal-200">
-        <div class="w-16 h-16 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-        </div>
-        <h2 class="text-3xl font-bold text-slate-900 mb-4">Coming Soon</h2>
-        <p class="text-lg text-slate-600 mb-6">
-          Comprehensive use cases for communications and marketing roles are being developed based on staff fellow feedback.
-        </p>
-        <div class="text-slate-600">
-          <p class="mb-4"><strong>Focus Areas Include:</strong></p>
-          <div class="grid md:grid-cols-2 gap-4 text-left">
-            <ul class="space-y-2">
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
-                <span>Website content auditing & optimization</span>
-              </li>
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
-                <span>SEO & brand compliance agents</span>
-              </li>
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
-                <span>Design prototype QA automation</span>
-              </li>
-            </ul>
-            <ul class="space-y-2">
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
-                <span>Component library page builders</span>
-              </li>
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
-                <span>Digital strategies assistant</span>
-              </li>
-              <li class="flex items-center">
-                <div class="w-2 h-2 bg-teal-500 rounded-full mr-3"></div>
-                <span>Multi-platform content distribution</span>
-              </li>
-            </ul>
+  <!-- Core Applications -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">Digital Excellence & Brand Consistency</h2>
+      
+      <div class="grid lg:grid-cols-2 gap-8 mb-16">
+        <!-- Website Audit Automation -->
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200">
+          <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Automated Website Auditing</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            AI agents that continuously monitor 2,300+ campus websites for brand compliance, SEO optimization, 
+            and accessibility issues. Transform months of manual auditing into automated, real-time monitoring.
+          </p>
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Brand compliance scanning</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>SEO & accessibility auditing</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Automated fix recommendations</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span>Priority-based action plans</span>
+            </div>
           </div>
         </div>
-        <div class="mt-8">
-          <a href={getUrl('/staff-fellows')} class="inline-flex items-center px-6 py-3 border border-teal-300 rounded-lg text-teal-700 bg-teal-100 hover:bg-teal-200 transition-colors">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+
+        <!-- Component Library Automation -->
+        <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 p-8 rounded-2xl border border-emerald-200">
+          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
             </svg>
-            Back to All Roles
-          </a>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Intelligent Page Builder</h3>
+          <p class="text-slate-600 mb-6 leading-relaxed">
+            AI-powered page construction using your design system components. Automatically generates 
+            professional, brand-compliant pages based on content requirements and user intent.
+          </p>
+          <div class="space-y-3 mb-6">
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Component library integration</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Natural language page requests</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Automatic SEO optimization</span>
+            </div>
+            <div class="flex items-center text-sm text-slate-600">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full mr-3"></div>
+              <span>Responsive design generation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Capabilities -->
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-purple-50 rounded-xl p-6 border border-purple-200">
+          <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Digital Strategies Assistant</h3>
+          <p class="text-slate-600 text-sm">
+            AI-powered help desk that provides instant guidance on SEO, design, content strategy, 
+            and best practices to reduce ticket volume and improve user experience.
+          </p>
+        </div>
+
+        <div class="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
+          <div class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Design Prototype QA</h3>
+          <p class="text-slate-600 text-sm">
+            Automated quality assurance for design prototypes, checking brand compliance, 
+            accessibility standards, and usability best practices before deployment.
+          </p>
+        </div>
+
+        <div class="bg-indigo-50 rounded-xl p-6 border border-indigo-200">
+          <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-900 mb-2">Multi-Platform Distribution</h3>
+          <p class="text-slate-600 text-sm">
+            Intelligent content distribution across web, social media, and digital channels 
+            with automatic formatting and optimization for each platform.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Example 1: Website Auditing -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Campus-Wide Website Auditing</h2>
+        <p class="text-slate-600 leading-relaxed">
+          See how AI agents automatically audit thousands of campus websites for brand compliance and optimization
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={websiteAuditConversation}
+        title="Automated Website Audit System"
+        description="Marketing technology director implementing campus-wide website monitoring"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 2: Component Library -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">AI-Powered Page Builder</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Watch AI automatically create professional web pages using design system components and best practices
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={componentLibraryConversation}
+        title="Intelligent Component Library System"
+        description="Web designer creating automated page building tools for faculty and staff"
+      />
+    </div>
+  </section>
+
+  <!-- Interactive Example 3: Digital Assistant -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Digital Strategies Assistant</h2>
+        <p class="text-slate-600 leading-relaxed">
+          Experience an AI assistant that provides instant, expert-level guidance for web optimization and strategy
+        </p>
+      </div>
+      
+      <ChatConversation 
+        messages={digitalStrategiesConversation}
+        title="AI-Powered Digital Help Desk"
+        description="Communications team deploying intelligent assistant for distributed web editors"
+      />
+    </div>
+  </section>
+
+  <!-- Technology Integration -->
+  <section class="py-16 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-white mb-6">Digital Infrastructure Integration</h2>
+        <p class="text-slate-300 max-w-3xl mx-auto">
+          Our AI agents integrate with your existing digital marketing and content management systems 
+          to create seamless, automated workflows.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- CMS Integration -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-teal-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Content Management</h3>
+            <p class="text-slate-400 text-sm">WordPress, Drupal, Custom CMS</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-teal-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Automated content updates</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-teal-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Template deployment</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-teal-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>SEO optimization</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Analytics & Monitoring -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V9a2 2 0 112 0v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Analytics Platform</h3>
+            <p class="text-slate-400 text-sm">Google Analytics, Adobe, Custom</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Performance monitoring</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>User behavior analysis</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-purple-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Conversion tracking</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Design Systems -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Design Systems</h3>
+            <p class="text-slate-400 text-sm">Figma, Sketch, Component Libraries</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Component automation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Brand compliance</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-blue-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Design token sync</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Social & Distribution -->
+        <div class="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+          <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="7 16a4 4 0 002.83 2.83l4.34-4.34a4 4 0 00-2.83-2.83l-4.34 4.34zM17 8l-8 8M7 8l8 8"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Distribution Channels</h3>
+            <p class="text-slate-400 text-sm">Social Media, Email, Mobile</p>
+          </div>
+          <ul class="space-y-2 text-xs text-slate-300">
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Multi-platform publishing</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Content adaptation</span>
+            </li>
+            <li class="flex items-start">
+              <div class="w-1 h-1 bg-emerald-400 rounded-full mt-1.5 mr-2 flex-shrink-0"></div>
+              <span>Engagement tracking</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Metrics -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-6">Digital Communications Excellence</h2>
+      <p class="text-xl text-slate-600 leading-relaxed mb-8">
+        <span class="text-teal-600 font-semibold">Your marketing expertise + AI automation = Campus-wide digital transformation.</span>
+        You understand the complexities of university communications and brand management. AI amplifies that expertise 
+        to create scalable, consistent digital experiences that engage and inform your entire campus community.
+      </p>
+      
+      <div class="grid md:grid-cols-4 gap-6 mt-12">
+        <div class="text-center">
+          <div class="text-3xl font-bold text-teal-600 mb-2">2,300+</div>
+          <div class="text-slate-600 text-sm">Websites Monitored Automatically</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-teal-600 mb-2">85%</div>
+          <div class="text-slate-600 text-sm">Reduction in Help Tickets</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-teal-600 mb-2">90%</div>
+          <div class="text-slate-600 text-sm">Brand Compliance Rate</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-teal-600 mb-2">15 min</div>
+          <div class="text-slate-600 text-sm">vs 4 Hours Page Creation</div>
         </div>
       </div>
     </div>
